@@ -1,0 +1,11 @@
+version: '2'
+services:
+    elibrary-postgresql:
+        image: postgres:9.6.5
+        # volumes:
+        #     - ~/volumes/jhipster/eLibrary/postgresql/:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_USER=eLibrary
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432
