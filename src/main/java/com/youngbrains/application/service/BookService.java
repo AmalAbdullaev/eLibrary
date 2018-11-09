@@ -133,7 +133,6 @@ public class BookService {
         } catch (IOException e) {
             throw new FileSystemException("Could not store file " + fileName);
         }
-        return bookDTO;
+        return save(bookDTO);
     }
-
 }
