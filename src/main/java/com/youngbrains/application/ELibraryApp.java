@@ -1,6 +1,7 @@
 package com.youngbrains.application;
 
 import com.youngbrains.application.config.ApplicationProperties;
+import com.youngbrains.application.config.BookStorageProperties;
 import com.youngbrains.application.config.DefaultProfileUtil;
 
 import io.github.jhipster.config.JHipsterConstants;
@@ -23,7 +24,7 @@ import java.util.Collection;
 
 @ComponentScan
 @EnableAutoConfiguration(exclude = {MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class})
-@EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
+@EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class, BookStorageProperties.class})
 public class ELibraryApp {
 
     private static final Logger log = LoggerFactory.getLogger(ELibraryApp.class);
