@@ -1,0 +1,62 @@
+<div>
+    <h2 data-translate="eLibraryApp.readBook.home.title">Read Books</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="read-book.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="eLibraryApp.readBook.home.createLabel">
+                        Create new Read Book
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span data-translate="global.field.id">ID</span></th>
+                    <th><span data-translate="eLibraryApp.readBook.book">Book</span></th>
+                    <th><span data-translate="eLibraryApp.readBook.profile">Profile</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="readBook in vm.readBooks track by readBook.id">
+                    <td><a ui-sref="read-book-detail({id:readBook.id})">{{readBook.id}}</a></td>
+                    <td>
+                        <a ui-sref="book-detail({id:readBook.bookId})">{{readBook.bookId}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="profile-detail({id:readBook.profileId})">{{readBook.profileId}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="read-book-detail({id:readBook.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="read-book.edit({id:readBook.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="read-book.delete({id:readBook.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

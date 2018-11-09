@@ -1,0 +1,32 @@
+
+{
+    "eLibraryApp": {
+        "book" : {
+            "home": {
+                "title": "Books",
+                "createLabel": "Создать новый Book",
+                "createOrEditLabel": "Создать или отредактировать Book"
+            },
+            "created": "Новый Book создан с идентификатором {{ param }}",
+            "updated": "Book обновлен с идентификатором {{ param }}",
+            "deleted": "Book удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Book {{ id }}?"
+            },
+            "detail": {
+                "title": "Book"
+            },
+            "title": "Title",
+            "description": "Description",
+            "pages": "Pages",
+            "approved": "Approved",
+            "path": "Path",
+            "coverPath": "Cover Path",
+            "yearOfPublishing": "Year Of Publishing",
+            "authorFirstName": "Author First Name",
+            "authorLastName": "Author Last Name",
+            "profile": "Profile",
+            "genre": "Genre"
+        }
+    }
+}
