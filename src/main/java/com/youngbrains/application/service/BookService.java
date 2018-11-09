@@ -8,6 +8,8 @@ import com.youngbrains.application.service.mapper.BookMapper;
 import io.undertow.util.BadRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.*;
 
 
@@ -108,7 +111,6 @@ public class BookService {
      * @return DTO of the uploaded book
      * @throws BadRequestException if the "type" parameter is incorrect
      */
-
     public BookDTO uploadBook(MultipartFile file, Long id, String type) throws BadRequestException, FileSystemException {
         Book book = bookRepository.getOne(id);
         BookDTO bookDTO = bookMapper.toDto(book);
@@ -134,5 +136,20 @@ public class BookService {
             throw new FileSystemException("Could not store file " + fileName);
         }
         return save(bookDTO);
+    }
+
+    /**
+     * Loads the file located on the path "path"
+     * @param path location of a book
+     * @return resource corresponding to the requested book
+     * @throws MalformedURLException if file is not found
+     */
+    public Resource loadBookAsResource(String path) throws MalformedURLException {
+        Path bookPath = Paths.get(path);
+        Resource resource = new UrlResource(bookPath.toUri());
+        if (resource.exists())
+            return resource;
+        else
+            throw new MalformedURLException("File not found: " + path);
     }
 }

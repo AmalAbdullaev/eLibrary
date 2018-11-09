@@ -12,15 +12,20 @@ import io.github.jhipster.web.util.ResponseUtil;
 import io.undertow.util.BadRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -70,8 +75,9 @@ public class BookResource {
 
     /**
      * POST  /books/upload : Upload a new book
+     *
      * @param file file containing a book
-     * @param id the id of the book
+     * @param id   the id of the book
      * @param type type of upload operation: "book" or "cover"
      * @return the ResponseEntity with status 200 (OK) and with body the uploaded bookDTO,
      * or with status 400 (Bad Request) if file could not be stored or type parameter is incorrect
@@ -139,6 +145,40 @@ public class BookResource {
         log.debug("REST request to get Book : {}", id);
         BookDTO bookDTO = bookService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(bookDTO));
+    }
+
+    /**
+     * GET /books/:id/download : download the "id" book
+     *
+     * @param id the id of the bookDTO to retrieve
+     * @return resource corresponding to the requested book
+     */
+    @GetMapping("/books/{id}/download")
+    public ResponseEntity<Resource> downloadBook(@PathVariable Long id, HttpServletRequest request) {
+        log.debug("REST request to download Book : {}", id);
+        BookDTO bookDTO = bookService.findOne(id);
+
+        Resource bookResource = null;
+        try {
+            bookResource = bookService.loadBookAsResource(bookDTO.getPath());
+        } catch (MalformedURLException e) {
+            return ResponseEntity.notFound().build();
+        }
+
+        String contentType = null;
+        try {
+            contentType = request.getServletContext().getMimeType(bookResource.getFile().getAbsolutePath());
+        } catch (IOException e) {
+            log.info("Could not determine file type.");
+        }
+        if (contentType == null)
+            contentType = "application/octet-stream";
+
+        return ResponseEntity.ok()
+            .contentType(MediaType.parseMediaType(contentType))
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""
+                + bookResource.getFilename() + "\"")
+            .body(bookResource);
     }
 
     /**
