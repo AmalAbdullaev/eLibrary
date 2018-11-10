@@ -1,0 +1,36 @@
+
+{
+    "eLibraryApp": {
+        "book" : {
+            "home": {
+                "title": "Books",
+                "createLabel": "Create a new Book",
+                "createOrEditLabel": "Create or edit a Book"
+            },
+            "created": "A new Book is created with identifier {{ param }}",
+            "updated": "A Book is updated with identifier {{ param }}",
+            "deleted": "A Book is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Book {{ id }}?"
+            },
+            "detail": {
+                "title": "Book"
+            },
+            "title": "Title",
+            "description": "Description",
+            "pages": "Pages",
+            "approved": "Approved",
+            "path": "Path",
+            "coverPath": "Cover Path",
+            "createdBy": "Created By",
+            "createdDate": "Created Date",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifiedDate": "Last Modified Date",
+            "yearOfPublishing": "Year Of Publishing",
+            "authorFirstName": "Author First Name",
+            "authorLastName": "Author Last Name",
+            "profile": "Profile",
+            "genre": "Genre"
+        }
+    }
+}

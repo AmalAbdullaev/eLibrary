@@ -1,0 +1,23 @@
+
+{
+    "eLibraryApp": {
+        "favoriteBook" : {
+            "home": {
+                "title": "Favorite Books",
+                "createLabel": "Создать новый Favorite Book",
+                "createOrEditLabel": "Создать или отредактировать Favorite Book"
+            },
+            "created": "Новый Favorite Book создан с идентификатором {{ param }}",
+            "updated": "Favorite Book обновлен с идентификатором {{ param }}",
+            "deleted": "Favorite Book удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Favorite Book {{ id }}?"
+            },
+            "detail": {
+                "title": "Favorite Book"
+            },
+            "book": "Book",
+            "profile": "Profile"
+        }
+    }
+}
