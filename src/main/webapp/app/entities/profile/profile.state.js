@@ -11,7 +11,7 @@
         $stateProvider
         .state('profile', {
             parent: 'entity',
-            url: '/profile',
+            url: '/profiles',
             data: {
                 authorities: ['ROLE_USER'],
                 pageTitle: 'eLibraryApp.profile.home.title'
@@ -33,7 +33,7 @@
         })
         .state('profile-detail', {
             parent: 'profile',
-            url: '/profile/{id}',
+            url: '/{id}',
             data: {
                 authorities: ['ROLE_USER'],
                 pageTitle: 'eLibraryApp.profile.detail.title'

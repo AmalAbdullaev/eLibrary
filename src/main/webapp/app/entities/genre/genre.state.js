@@ -11,7 +11,7 @@
         $stateProvider
         .state('genre', {
             parent: 'entity',
-            url: '/genre',
+            url: '/genres',
             data: {
                 authorities: ['ROLE_USER'],
                 pageTitle: 'eLibraryApp.genre.home.title'
@@ -33,7 +33,7 @@
         })
         .state('genre-detail', {
             parent: 'genre',
-            url: '/genre/{id}',
+            url: '/{id}',
             data: {
                 authorities: ['ROLE_USER'],
                 pageTitle: 'eLibraryApp.genre.detail.title'

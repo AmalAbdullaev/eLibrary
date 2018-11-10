@@ -11,7 +11,7 @@
         $stateProvider
         .state('favorite-book', {
             parent: 'entity',
-            url: '/favorite-book',
+            url: '/favorite-books',
             data: {
                 authorities: ['ROLE_USER'],
                 pageTitle: 'eLibraryApp.favoriteBook.home.title'
@@ -33,7 +33,7 @@
         })
         .state('favorite-book-detail', {
             parent: 'favorite-book',
-            url: '/favorite-book/{id}',
+            url: '/{id}',
             data: {
                 authorities: ['ROLE_USER'],
                 pageTitle: 'eLibraryApp.favoriteBook.detail.title'
