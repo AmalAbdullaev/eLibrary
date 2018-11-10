@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -191,6 +192,16 @@ public class BookResource {
     @Timed
     public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
         log.debug("REST request to delete Book : {}", id);
+        BookDTO bookDTO = bookService.findOne(id);
+        File bookFile = new File(bookDTO.getPath());
+        boolean deleted = bookFile.delete();
+        if (deleted)
+            log.debug("Book " + bookFile.getName() + " successfully deleted");
+        File coverFile = new File(bookDTO.getCoverPath());
+        deleted = coverFile.delete();
+        if (deleted)
+            log.debug("Cover " + coverFile.getName() + " successfully deleted");
+
         bookService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
