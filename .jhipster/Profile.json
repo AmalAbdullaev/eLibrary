@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "profile"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "trusted",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "banned",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20181109172818",
+    "entityTableName": "profile",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false
+}

@@ -1,0 +1,24 @@
+
+{
+    "eLibraryApp": {
+        "profile" : {
+            "home": {
+                "title": "Profiles",
+                "createLabel": "Создать новый Profile",
+                "createOrEditLabel": "Создать или отредактировать Profile"
+            },
+            "created": "Новый Profile создан с идентификатором {{ param }}",
+            "updated": "Profile обновлен с идентификатором {{ param }}",
+            "deleted": "Profile удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Profile {{ id }}?"
+            },
+            "detail": {
+                "title": "Profile"
+            },
+            "trusted": "Trusted",
+            "banned": "Banned",
+            "user": "User"
+        }
+    }
+}
