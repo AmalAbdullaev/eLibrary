@@ -4,9 +4,9 @@
         .module('eLibraryApp')
         .factory('Book', Book);
 
-    Book.$inject = ['$resource'];
+    Book.$inject = ['$resource', 'DateUtils'];
 
-    function Book ($resource) {
+    function Book ($resource, DateUtils) {
         var resourceUrl =  'api/books/:id';
 
         return $resource(resourceUrl, {}, {
@@ -16,6 +16,8 @@
                 transformResponse: function (data) {
                     if (data) {
                         data = angular.fromJson(data);
+                        data.createdDate = DateUtils.convertDateTimeFromServer(data.createdDate);
+                        data.lastModifiedDate = DateUtils.convertDateTimeFromServer(data.lastModifiedDate);
                     }
                     return data;
                 }

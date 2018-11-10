@@ -25,6 +25,10 @@
                     <th jh-sort-by="approved"><span data-translate="eLibraryApp.book.approved">Approved</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="path"><span data-translate="eLibraryApp.book.path">Path</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="coverPath"><span data-translate="eLibraryApp.book.coverPath">Cover Path</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span data-translate="eLibraryApp.book.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="eLibraryApp.book.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="eLibraryApp.book.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span data-translate="eLibraryApp.book.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="yearOfPublishing"><span data-translate="eLibraryApp.book.yearOfPublishing">Year Of Publishing</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="authorFirstName"><span data-translate="eLibraryApp.book.authorFirstName">Author First Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="authorLastName"><span data-translate="eLibraryApp.book.authorLastName">Author Last Name</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -42,6 +46,10 @@
                     <td>{{book.approved}}</td>
                     <td>{{book.path}}</td>
                     <td>{{book.coverPath}}</td>
+                    <td>{{book.createdBy}}</td>
+                    <td>{{book.createdDate | date:'medium'}}</td>
+                    <td>{{book.lastModifiedBy}}</td>
+                    <td>{{book.lastModifiedDate | date:'medium'}}</td>
                     <td>{{book.yearOfPublishing}}</td>
                     <td>{{book.authorFirstName}}</td>
                     <td>{{book.authorLastName}}</td>

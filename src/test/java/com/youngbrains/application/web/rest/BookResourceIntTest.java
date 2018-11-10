@@ -29,6 +29,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static com.youngbrains.application.web.rest.TestUtil.createFormattingConversionService;
@@ -63,6 +65,18 @@ public class BookResourceIntTest {
 
     private static final String DEFAULT_COVER_PATH = "AAAAAAAAAA";
     private static final String UPDATED_COVER_PATH = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final Integer DEFAULT_YEAR_OF_PUBLISHING = 1;
     private static final Integer UPDATED_YEAR_OF_PUBLISHING = 2;
@@ -126,6 +140,10 @@ public class BookResourceIntTest {
             .approved(DEFAULT_APPROVED)
             .path(DEFAULT_PATH)
             .coverPath(DEFAULT_COVER_PATH)
+            .createdBy(DEFAULT_CREATED_BY)
+            .createdDate(DEFAULT_CREATED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
             .yearOfPublishing(DEFAULT_YEAR_OF_PUBLISHING)
             .authorFirstName(DEFAULT_AUTHOR_FIRST_NAME)
             .authorLastName(DEFAULT_AUTHOR_LAST_NAME);
@@ -159,6 +177,10 @@ public class BookResourceIntTest {
         assertThat(testBook.isApproved()).isEqualTo(DEFAULT_APPROVED);
         assertThat(testBook.getPath()).isEqualTo(DEFAULT_PATH);
         assertThat(testBook.getCoverPath()).isEqualTo(DEFAULT_COVER_PATH);
+        assertThat(testBook.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
+        assertThat(testBook.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
+        assertThat(testBook.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
+        assertThat(testBook.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
         assertThat(testBook.getYearOfPublishing()).isEqualTo(DEFAULT_YEAR_OF_PUBLISHING);
         assertThat(testBook.getAuthorFirstName()).isEqualTo(DEFAULT_AUTHOR_FIRST_NAME);
         assertThat(testBook.getAuthorLastName()).isEqualTo(DEFAULT_AUTHOR_LAST_NAME);
@@ -296,6 +318,10 @@ public class BookResourceIntTest {
             .andExpect(jsonPath("$.[*].approved").value(hasItem(DEFAULT_APPROVED.booleanValue())))
             .andExpect(jsonPath("$.[*].path").value(hasItem(DEFAULT_PATH.toString())))
             .andExpect(jsonPath("$.[*].coverPath").value(hasItem(DEFAULT_COVER_PATH.toString())))
+            .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
             .andExpect(jsonPath("$.[*].yearOfPublishing").value(hasItem(DEFAULT_YEAR_OF_PUBLISHING)))
             .andExpect(jsonPath("$.[*].authorFirstName").value(hasItem(DEFAULT_AUTHOR_FIRST_NAME.toString())))
             .andExpect(jsonPath("$.[*].authorLastName").value(hasItem(DEFAULT_AUTHOR_LAST_NAME.toString())));
@@ -318,6 +344,10 @@ public class BookResourceIntTest {
             .andExpect(jsonPath("$.approved").value(DEFAULT_APPROVED.booleanValue()))
             .andExpect(jsonPath("$.path").value(DEFAULT_PATH.toString()))
             .andExpect(jsonPath("$.coverPath").value(DEFAULT_COVER_PATH.toString()))
+            .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY.toString()))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY.toString()))
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()))
             .andExpect(jsonPath("$.yearOfPublishing").value(DEFAULT_YEAR_OF_PUBLISHING))
             .andExpect(jsonPath("$.authorFirstName").value(DEFAULT_AUTHOR_FIRST_NAME.toString()))
             .andExpect(jsonPath("$.authorLastName").value(DEFAULT_AUTHOR_LAST_NAME.toString()));
@@ -547,6 +577,162 @@ public class BookResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllBooksByCreatedByIsEqualToSomething() throws Exception {
+        // Initialize the database
+        bookRepository.saveAndFlush(book);
+
+        // Get all the bookList where createdBy equals to DEFAULT_CREATED_BY
+        defaultBookShouldBeFound("createdBy.equals=" + DEFAULT_CREATED_BY);
+
+        // Get all the bookList where createdBy equals to UPDATED_CREATED_BY
+        defaultBookShouldNotBeFound("createdBy.equals=" + UPDATED_CREATED_BY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBooksByCreatedByIsInShouldWork() throws Exception {
+        // Initialize the database
+        bookRepository.saveAndFlush(book);
+
+        // Get all the bookList where createdBy in DEFAULT_CREATED_BY or UPDATED_CREATED_BY
+        defaultBookShouldBeFound("createdBy.in=" + DEFAULT_CREATED_BY + "," + UPDATED_CREATED_BY);
+
+        // Get all the bookList where createdBy equals to UPDATED_CREATED_BY
+        defaultBookShouldNotBeFound("createdBy.in=" + UPDATED_CREATED_BY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBooksByCreatedByIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        bookRepository.saveAndFlush(book);
+
+        // Get all the bookList where createdBy is not null
+        defaultBookShouldBeFound("createdBy.specified=true");
+
+        // Get all the bookList where createdBy is null
+        defaultBookShouldNotBeFound("createdBy.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllBooksByCreatedDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        bookRepository.saveAndFlush(book);
+
+        // Get all the bookList where createdDate equals to DEFAULT_CREATED_DATE
+        defaultBookShouldBeFound("createdDate.equals=" + DEFAULT_CREATED_DATE);
+
+        // Get all the bookList where createdDate equals to UPDATED_CREATED_DATE
+        defaultBookShouldNotBeFound("createdDate.equals=" + UPDATED_CREATED_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBooksByCreatedDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        bookRepository.saveAndFlush(book);
+
+        // Get all the bookList where createdDate in DEFAULT_CREATED_DATE or UPDATED_CREATED_DATE
+        defaultBookShouldBeFound("createdDate.in=" + DEFAULT_CREATED_DATE + "," + UPDATED_CREATED_DATE);
+
+        // Get all the bookList where createdDate equals to UPDATED_CREATED_DATE
+        defaultBookShouldNotBeFound("createdDate.in=" + UPDATED_CREATED_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBooksByCreatedDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        bookRepository.saveAndFlush(book);
+
+        // Get all the bookList where createdDate is not null
+        defaultBookShouldBeFound("createdDate.specified=true");
+
+        // Get all the bookList where createdDate is null
+        defaultBookShouldNotBeFound("createdDate.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllBooksByLastModifiedByIsEqualToSomething() throws Exception {
+        // Initialize the database
+        bookRepository.saveAndFlush(book);
+
+        // Get all the bookList where lastModifiedBy equals to DEFAULT_LAST_MODIFIED_BY
+        defaultBookShouldBeFound("lastModifiedBy.equals=" + DEFAULT_LAST_MODIFIED_BY);
+
+        // Get all the bookList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultBookShouldNotBeFound("lastModifiedBy.equals=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBooksByLastModifiedByIsInShouldWork() throws Exception {
+        // Initialize the database
+        bookRepository.saveAndFlush(book);
+
+        // Get all the bookList where lastModifiedBy in DEFAULT_LAST_MODIFIED_BY or UPDATED_LAST_MODIFIED_BY
+        defaultBookShouldBeFound("lastModifiedBy.in=" + DEFAULT_LAST_MODIFIED_BY + "," + UPDATED_LAST_MODIFIED_BY);
+
+        // Get all the bookList where lastModifiedBy equals to UPDATED_LAST_MODIFIED_BY
+        defaultBookShouldNotBeFound("lastModifiedBy.in=" + UPDATED_LAST_MODIFIED_BY);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBooksByLastModifiedByIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        bookRepository.saveAndFlush(book);
+
+        // Get all the bookList where lastModifiedBy is not null
+        defaultBookShouldBeFound("lastModifiedBy.specified=true");
+
+        // Get all the bookList where lastModifiedBy is null
+        defaultBookShouldNotBeFound("lastModifiedBy.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllBooksByLastModifiedDateIsEqualToSomething() throws Exception {
+        // Initialize the database
+        bookRepository.saveAndFlush(book);
+
+        // Get all the bookList where lastModifiedDate equals to DEFAULT_LAST_MODIFIED_DATE
+        defaultBookShouldBeFound("lastModifiedDate.equals=" + DEFAULT_LAST_MODIFIED_DATE);
+
+        // Get all the bookList where lastModifiedDate equals to UPDATED_LAST_MODIFIED_DATE
+        defaultBookShouldNotBeFound("lastModifiedDate.equals=" + UPDATED_LAST_MODIFIED_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBooksByLastModifiedDateIsInShouldWork() throws Exception {
+        // Initialize the database
+        bookRepository.saveAndFlush(book);
+
+        // Get all the bookList where lastModifiedDate in DEFAULT_LAST_MODIFIED_DATE or UPDATED_LAST_MODIFIED_DATE
+        defaultBookShouldBeFound("lastModifiedDate.in=" + DEFAULT_LAST_MODIFIED_DATE + "," + UPDATED_LAST_MODIFIED_DATE);
+
+        // Get all the bookList where lastModifiedDate equals to UPDATED_LAST_MODIFIED_DATE
+        defaultBookShouldNotBeFound("lastModifiedDate.in=" + UPDATED_LAST_MODIFIED_DATE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllBooksByLastModifiedDateIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        bookRepository.saveAndFlush(book);
+
+        // Get all the bookList where lastModifiedDate is not null
+        defaultBookShouldBeFound("lastModifiedDate.specified=true");
+
+        // Get all the bookList where lastModifiedDate is null
+        defaultBookShouldNotBeFound("lastModifiedDate.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllBooksByYearOfPublishingIsEqualToSomething() throws Exception {
         // Initialize the database
         bookRepository.saveAndFlush(book);
@@ -740,6 +926,10 @@ public class BookResourceIntTest {
             .andExpect(jsonPath("$.[*].approved").value(hasItem(DEFAULT_APPROVED.booleanValue())))
             .andExpect(jsonPath("$.[*].path").value(hasItem(DEFAULT_PATH.toString())))
             .andExpect(jsonPath("$.[*].coverPath").value(hasItem(DEFAULT_COVER_PATH.toString())))
+            .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
             .andExpect(jsonPath("$.[*].yearOfPublishing").value(hasItem(DEFAULT_YEAR_OF_PUBLISHING)))
             .andExpect(jsonPath("$.[*].authorFirstName").value(hasItem(DEFAULT_AUTHOR_FIRST_NAME.toString())))
             .andExpect(jsonPath("$.[*].authorLastName").value(hasItem(DEFAULT_AUTHOR_LAST_NAME.toString())));
@@ -783,6 +973,10 @@ public class BookResourceIntTest {
             .approved(UPDATED_APPROVED)
             .path(UPDATED_PATH)
             .coverPath(UPDATED_COVER_PATH)
+            .createdBy(UPDATED_CREATED_BY)
+            .createdDate(UPDATED_CREATED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
             .yearOfPublishing(UPDATED_YEAR_OF_PUBLISHING)
             .authorFirstName(UPDATED_AUTHOR_FIRST_NAME)
             .authorLastName(UPDATED_AUTHOR_LAST_NAME);
@@ -803,6 +997,10 @@ public class BookResourceIntTest {
         assertThat(testBook.isApproved()).isEqualTo(UPDATED_APPROVED);
         assertThat(testBook.getPath()).isEqualTo(UPDATED_PATH);
         assertThat(testBook.getCoverPath()).isEqualTo(UPDATED_COVER_PATH);
+        assertThat(testBook.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
+        assertThat(testBook.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
+        assertThat(testBook.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
+        assertThat(testBook.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
         assertThat(testBook.getYearOfPublishing()).isEqualTo(UPDATED_YEAR_OF_PUBLISHING);
         assertThat(testBook.getAuthorFirstName()).isEqualTo(UPDATED_AUTHOR_FIRST_NAME);
         assertThat(testBook.getAuthorLastName()).isEqualTo(UPDATED_AUTHOR_LAST_NAME);

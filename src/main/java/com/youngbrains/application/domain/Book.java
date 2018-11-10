@@ -1,5 +1,13 @@
 package com.youngbrains.application.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -7,12 +15,14 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
 /**
  * A Book.
  */
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "book")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Book implements Serializable {
@@ -44,6 +54,26 @@ public class Book implements Serializable {
 
     @Column(name = "cover_path")
     private String coverPath;
+
+    @Column(name = "created_by")
+    @CreatedBy
+    @JsonIgnore
+    private String createdBy;
+
+    @Column(name = "created_date")
+    @CreatedDate
+    @JsonIgnore
+    private Instant createdDate;
+
+    @Column(name = "last_modified_by")
+    @LastModifiedBy
+    @JsonIgnore
+    private String lastModifiedBy;
+
+    @Column(name = "last_modified_date")
+    @LastModifiedDate
+    @JsonIgnore
+    private Instant lastModifiedDate;
 
     @NotNull
     @Column(name = "year_of_publishing", nullable = false)
@@ -150,6 +180,58 @@ public class Book implements Serializable {
         this.coverPath = coverPath;
     }
 
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public Book createdBy(String createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Instant getCreatedDate() {
+        return createdDate;
+    }
+
+    public Book createdDate(Instant createdDate) {
+        this.createdDate = createdDate;
+        return this;
+    }
+
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public Book lastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+        return this;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public Book lastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+        return this;
+    }
+
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
     public Integer getYearOfPublishing() {
         return yearOfPublishing;
     }
@@ -246,6 +328,10 @@ public class Book implements Serializable {
             ", approved='" + isApproved() + "'" +
             ", path='" + getPath() + "'" +
             ", coverPath='" + getCoverPath() + "'" +
+            ", createdBy='" + getCreatedBy() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
             ", yearOfPublishing=" + getYearOfPublishing() +
             ", authorFirstName='" + getAuthorFirstName() + "'" +
             ", authorLastName='" + getAuthorLastName() + "'" +

@@ -10,7 +10,7 @@
             ]
         }
     ],
-    "changelogDate": "20181109172817",
+    "changelogDate": "20181110125141",
     "entityTableName": "genre",
     "dto": "mapstruct",
     "pagination": "no",

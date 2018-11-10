@@ -93,6 +93,18 @@ public class BookQueryService extends QueryService<Book> {
             if (criteria.getCoverPath() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getCoverPath(), Book_.coverPath));
             }
+            if (criteria.getCreatedBy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getCreatedBy(), Book_.createdBy));
+            }
+            if (criteria.getCreatedDate() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getCreatedDate(), Book_.createdDate));
+            }
+            if (criteria.getLastModifiedBy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), Book_.lastModifiedBy));
+            }
+            if (criteria.getLastModifiedDate() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLastModifiedDate(), Book_.lastModifiedDate));
+            }
             if (criteria.getYearOfPublishing() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getYearOfPublishing(), Book_.yearOfPublishing));
             }

@@ -15,7 +15,7 @@
         }
     ],
     "fields": [],
-    "changelogDate": "20181109172815",
+    "changelogDate": "20181110125139",
     "entityTableName": "read_book",
     "dto": "mapstruct",
     "pagination": "no",

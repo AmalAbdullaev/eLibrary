@@ -1,6 +1,7 @@
 package com.youngbrains.application.service.dto;
 
 
+import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -29,6 +30,14 @@ public class BookDTO implements Serializable {
     private String path;
 
     private String coverPath;
+
+    private String createdBy;
+
+    private Instant createdDate;
+
+    private String lastModifiedBy;
+
+    private Instant lastModifiedDate;
 
     @NotNull
     private Integer yearOfPublishing;
@@ -99,6 +108,38 @@ public class BookDTO implements Serializable {
 
     public void setCoverPath(String coverPath) {
         this.coverPath = coverPath;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Instant getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
     public Integer getYearOfPublishing() {
@@ -180,6 +221,10 @@ public class BookDTO implements Serializable {
             ", approved='" + isApproved() + "'" +
             ", path='" + getPath() + "'" +
             ", coverPath='" + getCoverPath() + "'" +
+            ", createdBy='" + getCreatedBy() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
             ", yearOfPublishing=" + getYearOfPublishing() +
             ", authorFirstName='" + getAuthorFirstName() + "'" +
             ", authorLastName='" + getAuthorLastName() + "'" +

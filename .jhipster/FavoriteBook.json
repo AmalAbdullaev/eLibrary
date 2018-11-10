@@ -15,7 +15,7 @@
         }
     ],
     "fields": [],
-    "changelogDate": "20181109172816",
+    "changelogDate": "20181110125140",
     "entityTableName": "favorite_book",
     "dto": "mapstruct",
     "pagination": "no",

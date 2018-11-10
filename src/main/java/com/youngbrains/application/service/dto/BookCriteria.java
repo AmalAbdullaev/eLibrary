@@ -9,7 +9,7 @@ import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
 
-
+import io.github.jhipster.service.filter.InstantFilter;
 
 
 
@@ -37,6 +37,14 @@ public class BookCriteria implements Serializable {
     private StringFilter path;
 
     private StringFilter coverPath;
+
+    private StringFilter createdBy;
+
+    private InstantFilter createdDate;
+
+    private StringFilter lastModifiedBy;
+
+    private InstantFilter lastModifiedDate;
 
     private IntegerFilter yearOfPublishing;
 
@@ -99,6 +107,38 @@ public class BookCriteria implements Serializable {
         this.coverPath = coverPath;
     }
 
+    public StringFilter getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(StringFilter createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public InstantFilter getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(InstantFilter createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public StringFilter getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(StringFilter lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
+    public InstantFilter getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(InstantFilter lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
     public IntegerFilter getYearOfPublishing() {
         return yearOfPublishing;
     }
@@ -148,6 +188,10 @@ public class BookCriteria implements Serializable {
                 (approved != null ? "approved=" + approved + ", " : "") +
                 (path != null ? "path=" + path + ", " : "") +
                 (coverPath != null ? "coverPath=" + coverPath + ", " : "") +
+                (createdBy != null ? "createdBy=" + createdBy + ", " : "") +
+                (createdDate != null ? "createdDate=" + createdDate + ", " : "") +
+                (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
+                (lastModifiedDate != null ? "lastModifiedDate=" + lastModifiedDate + ", " : "") +
                 (yearOfPublishing != null ? "yearOfPublishing=" + yearOfPublishing + ", " : "") +
                 (authorFirstName != null ? "authorFirstName=" + authorFirstName + ", " : "") +
                 (authorLastName != null ? "authorLastName=" + authorLastName + ", " : "") +
