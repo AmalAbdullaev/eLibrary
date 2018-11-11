@@ -6,12 +6,11 @@ import com.youngbrains.application.domain.Book;
 import com.youngbrains.application.domain.Profile;
 import com.youngbrains.application.domain.Genre;
 import com.youngbrains.application.repository.BookRepository;
-import com.youngbrains.application.service.BookService;
+import com.youngbrains.application.repository.UserRepository;
+import com.youngbrains.application.service.*;
 import com.youngbrains.application.service.dto.BookDTO;
 import com.youngbrains.application.service.mapper.BookMapper;
 import com.youngbrains.application.web.rest.errors.ExceptionTranslator;
-import com.youngbrains.application.service.dto.BookCriteria;
-import com.youngbrains.application.service.BookQueryService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +25,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 
 import javax.persistence.EntityManager;
 import java.time.Instant;
@@ -97,6 +95,18 @@ public class BookResourceIntTest {
     private BookService bookService;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private  UserService userService;
+
+    @Autowired
+    private ProfileService profileService;
+
+    @Autowired
+    private MailService mailService;
+
+    @Autowired
     private BookQueryService bookQueryService;
 
     @Autowired
@@ -118,7 +128,7 @@ public class BookResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final BookResource bookResource = new BookResource(bookService, bookQueryService);
+        final BookResource bookResource = new BookResource(bookService, bookMapper, userService, profileService, mailService, bookQueryService);
         this.restBookMockMvc = MockMvcBuilders.standaloneSetup(bookResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

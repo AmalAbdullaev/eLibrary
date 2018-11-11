@@ -1,5 +1,6 @@
 package com.youngbrains.application.service;
 
+import com.youngbrains.application.domain.Book;
 import com.youngbrains.application.domain.User;
 
 import io.github.jhipster.config.JHipsterProperties;
@@ -30,6 +31,10 @@ public class MailService {
 
     private static final String USER = "user";
 
+    private static final String BOOK = "book";
+
+    private static final String REASON = "reason";
+
     private static final String BASE_URL = "baseUrl";
 
     private final JHipsterProperties jHipsterProperties;
@@ -41,7 +46,7 @@ public class MailService {
     private final SpringTemplateEngine templateEngine;
 
     public MailService(JHipsterProperties jHipsterProperties, JavaMailSender javaMailSender,
-            MessageSource messageSource, SpringTemplateEngine templateEngine) {
+                       MessageSource messageSource, SpringTemplateEngine templateEngine) {
 
         this.jHipsterProperties = jHipsterProperties;
         this.javaMailSender = javaMailSender;
@@ -89,6 +94,25 @@ public class MailService {
     public void sendActivationEmail(User user) {
         log.debug("Sending activation email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "activationEmail", "email.activation.title");
+    }
+
+    public String getMessageTitle(String content) {
+        int startIndex = content.indexOf("<title>");
+        int endIndex = content.indexOf("</title>");
+        return content.substring(startIndex + 7, endIndex);
+    }
+
+    @Async
+    public void sendDeletionEmail(User user, Book book, String reason, String templateName) {
+        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Context context = new Context(locale);
+        context.setVariable(USER, user);
+        context.setVariable(BOOK, book);
+        context.setVariable(REASON, reason);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        String content = templateEngine.process(templateName, context);
+        String subject = getMessageTitle(content);
+        sendEmail(user.getEmail(), subject, content, false, true);
     }
 
     @Async

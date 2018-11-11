@@ -1,13 +1,16 @@
 package com.youngbrains.application.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.youngbrains.application.service.BookService;
+import com.youngbrains.application.domain.Book;
+import com.youngbrains.application.domain.User;
+import com.youngbrains.application.repository.UserRepository;
+import com.youngbrains.application.service.*;
+import com.youngbrains.application.service.mapper.BookMapper;
 import com.youngbrains.application.web.rest.errors.BadRequestAlertException;
 import com.youngbrains.application.web.rest.util.HeaderUtil;
 import com.youngbrains.application.web.rest.util.PaginationUtil;
 import com.youngbrains.application.service.dto.BookDTO;
 import com.youngbrains.application.service.dto.BookCriteria;
-import com.youngbrains.application.service.BookQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.undertow.util.BadRequestException;
 import org.slf4j.Logger;
@@ -47,10 +50,22 @@ public class BookResource {
 
     private final BookService bookService;
 
+    private final BookMapper bookMapper;
+
+    private final UserService userService;
+
+    private final ProfileService profileService;
+
+    private final MailService mailService;
+
     private final BookQueryService bookQueryService;
 
-    public BookResource(BookService bookService, BookQueryService bookQueryService) {
+    public BookResource(BookService bookService, BookMapper bookMapper, UserService userService, ProfileService profileService, MailService mailService, BookQueryService bookQueryService) {
         this.bookService = bookService;
+        this.bookMapper = bookMapper;
+        this.userService = userService;
+        this.profileService = profileService;
+        this.mailService = mailService;
         this.bookQueryService = bookQueryService;
     }
 
@@ -159,7 +174,7 @@ public class BookResource {
         log.debug("REST request to download Book : {}", id);
         BookDTO bookDTO = bookService.findOne(id);
 
-        Resource bookResource = null;
+        Resource bookResource;
         try {
             bookResource = bookService.loadBookAsResource(bookDTO.getPath());
         } catch (MalformedURLException e) {
@@ -190,19 +205,37 @@ public class BookResource {
      */
     @DeleteMapping("/books/{id}")
     @Timed
-    public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteBook(@PathVariable Long id, @RequestParam String reason) {
         log.debug("REST request to delete Book : {}", id);
         BookDTO bookDTO = bookService.findOne(id);
-        File bookFile = new File(bookDTO.getPath());
-        boolean deleted = bookFile.delete();
-        if (deleted)
-            log.debug("Book " + bookFile.getName() + " successfully deleted");
-        File coverFile = new File(bookDTO.getCoverPath());
-        deleted = coverFile.delete();
-        if (deleted)
-            log.debug("Cover " + coverFile.getName() + " successfully deleted");
-
-        bookService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        if (bookDTO != null) {
+            if (bookDTO.getPath() != null) {
+                try {
+                    File bookFile = new File(bookDTO.getPath());
+                    boolean deleted = bookFile.delete();
+                    if (deleted)
+                        log.debug("Book " + bookFile.getName() + " successfully deleted");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (bookDTO.getCoverPath() != null) {
+                try {
+                    File coverFile = new File(bookDTO.getCoverPath());
+                    boolean deleted = coverFile.delete();
+                    if (deleted)
+                        log.debug("Cover " + coverFile.getName() + " successfully deleted");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            Long userId = profileService.findOne(bookDTO.getProfileId()).getUserId();
+            User user = userService.getUserWithAuthorities(userId).orElse(null);
+            Book book = bookMapper.toEntity(bookDTO);
+            mailService.sendDeletionEmail(user, book, reason, "deletionEmail");
+            bookService.delete(id);
+            return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 }
