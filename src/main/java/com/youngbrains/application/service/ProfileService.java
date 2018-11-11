@@ -70,6 +70,13 @@ public class ProfileService {
         return profileMapper.toDto(profile);
     }
 
+
+    @Transactional(readOnly = true)
+    public ProfileDTO findOneByLogin(String login) {
+        log.debug("Request to get Profile : {}", login);
+        Profile profile = profileRepository.findProfileByUser_Login(login);
+        return profileMapper.toDto(profile);
+    }
     /**
      * Delete the profile by id.
      *

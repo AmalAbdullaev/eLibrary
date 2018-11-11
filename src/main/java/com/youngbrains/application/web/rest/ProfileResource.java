@@ -1,6 +1,7 @@
 package com.youngbrains.application.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.youngbrains.application.config.Constants;
 import com.youngbrains.application.service.ProfileService;
 import com.youngbrains.application.web.rest.errors.BadRequestAlertException;
 import com.youngbrains.application.web.rest.util.HeaderUtil;
@@ -102,6 +103,13 @@ public class ProfileResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(profileDTO));
     }
 
+    @GetMapping("/profile/{login:" + Constants.LOGIN_REGEX + "}")
+    @Timed
+    public ResponseEntity<ProfileDTO> getProfileByLogin(@PathVariable String login) {
+        log.debug("REST request to get Profile : {}", login);
+        ProfileDTO profileDTO = profileService.findOneByLogin(login);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(profileDTO));
+    }
     /**
      * DELETE  /profiles/:id : delete the "id" profile.
      *
