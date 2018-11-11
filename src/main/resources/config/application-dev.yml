@@ -31,10 +31,10 @@ spring:
     jackson:
         serialization.indent_output: true
     datasource:
-        type: com.zaxxer.hikari.HikariDataSource
+        type: com.zaxxer.hikari.HikariDataSource        
         url: jdbc:postgresql://localhost:5432/elibrary
         username: postgres
-        password: root
+        password:
     jpa:
         database-platform: io.github.jhipster.domain.util.FixedPostgreSQL82Dialect
         database: POSTGRESQL
