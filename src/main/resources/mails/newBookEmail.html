@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{email.new_book.title(${user.login})}">New book</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+</head>
+<body>
+<p th:text="#{email.new_book.text1(${user.login},${book.title})}">
+    User has uploaded a new book
+</p>
+<p>
+    <div th:text="#{email.new_book.text2}">More info</div>
+    <a th:href="@{|${baseUrl}/#/book/book/${book.id}|}"
+       th:text="@{|${baseUrl}/#/book/book/${book.id}|}">Book Link</a>
+</p>
+<p>
+    <span th:text="#{email.activation.text2}">Regards, </span>
+    <br/>
+    <em th:text="#{email.signature}">JHipster.</em>
+</p>
+</body>
+</html>

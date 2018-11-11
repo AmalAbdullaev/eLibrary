@@ -105,8 +105,14 @@ public class BookResource {
         log.debug("REST request to upload Book : {}:", id);
         try {
             bookDTO = bookService.uploadBook(file, id, type);
+            if (type != null && type.equals("book"))
+            {
+                User user = userService.getUserWithAuthoritiesByLogin("admin").orElse(null);
+                Book book = bookMapper.toEntity(bookDTO);
+                mailService.sendNewBookEmail(user, book, "newBookEmail");
+            }
         } catch (FileSystemException | BadRequestException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok().body(bookDTO);
     }
