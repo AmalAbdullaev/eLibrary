@@ -120,7 +120,6 @@ public class UserService {
         Profile profile = new Profile();
         profile.setBanned(false);
         profile.setTrusted(false);
-
         profile.setUser(newUser);
         profileRepository.save(profile);
         cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(newUser.getLogin());

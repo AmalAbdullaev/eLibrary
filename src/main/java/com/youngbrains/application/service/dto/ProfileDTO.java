@@ -57,7 +57,6 @@ public class ProfileDTO implements Serializable {
         this.userId = userId;
     }
 
-
     public String getUserFirstName() {
         return userFirstName;
     }
