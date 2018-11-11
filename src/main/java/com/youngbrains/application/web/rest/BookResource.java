@@ -105,8 +105,7 @@ public class BookResource {
         log.debug("REST request to upload Book : {}:", id);
         try {
             bookDTO = bookService.uploadBook(file, id, type);
-            if (type != null && type.equals("book"))
-            {
+            if (type != null && type.equals("book")) {
                 User user = userService.getUserWithAuthoritiesByLogin("admin").orElse(null);
                 Book book = bookMapper.toEntity(bookDTO);
                 mailService.sendNewBookEmail(user, book, "newBookEmail");
@@ -211,7 +210,8 @@ public class BookResource {
      */
     @DeleteMapping("/books/{id}")
     @Timed
-    public ResponseEntity<Void> deleteBook(@PathVariable Long id, @RequestParam String reason) {
+    public ResponseEntity<Void> deleteBook(@PathVariable Long id,
+                                           @RequestParam(value = "reason", required = false) String reason) {
         log.debug("REST request to delete Book : {}", id);
         BookDTO bookDTO = bookService.findOne(id);
         if (bookDTO != null) {
@@ -235,10 +235,12 @@ public class BookResource {
                     e.printStackTrace();
                 }
             }
-            Long userId = profileService.findOne(bookDTO.getProfileId()).getUserId();
-            User user = userService.getUserWithAuthorities(userId).orElse(null);
-            Book book = bookMapper.toEntity(bookDTO);
-            mailService.sendDeletionEmail(user, book, reason, "deletionEmail");
+            if (reason != null) {
+                Long userId = profileService.findOne(bookDTO.getProfileId()).getUserId();
+                User user = userService.getUserWithAuthorities(userId).orElse(null);
+                Book book = bookMapper.toEntity(bookDTO);
+                mailService.sendDeletionEmail(user, book, reason, "deletionEmail");
+            }
             bookService.delete(id);
             return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
         }
