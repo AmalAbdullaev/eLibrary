@@ -9,6 +9,7 @@ import com.youngbrains.application.repository.ProfileRepository;
 import com.youngbrains.application.repository.UserRepository;
 import com.youngbrains.application.security.AuthoritiesConstants;
 import com.youngbrains.application.security.SecurityUtils;
+import com.youngbrains.application.service.dto.ProfileDTO;
 import com.youngbrains.application.service.util.RandomUtil;
 import com.youngbrains.application.service.dto.UserDTO;
 
@@ -119,6 +120,7 @@ public class UserService {
         Profile profile = new Profile();
         profile.setBanned(false);
         profile.setTrusted(false);
+
         profile.setUser(newUser);
         profileRepository.save(profile);
         cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(newUser.getLogin());

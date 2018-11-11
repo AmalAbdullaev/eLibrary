@@ -12,10 +12,17 @@ import org.mapstruct.*;
 public interface ProfileMapper extends EntityMapper<ProfileDTO, Profile> {
 
     @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "user.firstName", target = "userFirstName")
+    @Mapping(source = "user.lastName", target = "userLastName")
+    @Mapping(source = "user.email", target = "userEmail")
     ProfileDTO toDto(Profile profile);
 
     @Mapping(source = "userId", target = "user")
+    @Mapping(source = "userFirstName", target = "user.firstName")
+    @Mapping(source = "userLastName", target = "user.lastName")
+    @Mapping(source = "userEmail", target = "user.email")
     Profile toEntity(ProfileDTO profileDTO);
+
 
     default Profile fromId(Long id) {
         if (id == null) {
