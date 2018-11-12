@@ -4,7 +4,7 @@
     angular
         .module('eLibraryApp')
         .constant('VERSION', "0.0.1-SNAPSHOT")
-        .constant('DEBUG_INFO_ENABLED', false)
-        .constant('BUILD_TIMESTAMP', 1541933631471)
+        .constant('DEBUG_INFO_ENABLED', true)
+        .constant('BUILD_TIMESTAMP', "")
 ;
 })();

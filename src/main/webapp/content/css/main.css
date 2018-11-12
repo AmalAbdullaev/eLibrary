@@ -1,7 +1,52 @@
 body {
-    background: #fafafa;
+    background: #faf8ff;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
+    height: 100%; 
+}
+
+
+#wrapper {
+    width: 100%;
+    outline: 1px solid #787274;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+#sidebar {
+    height: 100%;
+    background-color: #d65600;
+    width: 100px;
+    float: left;
+    position: absolute;
+}
+#header {
+    height: 100px;
+    background: #faf8ff;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .1);
+}
+
+#info {
+    margin-top: 5px;
+    height: 100%;
+    background: #faf8ff;
+    width: 90%;
+}
+
+.icobox {
+    height: 100px;
+    width: 100px;
+    background-color: none;
+}
+
+.icobox:hover {
+    background:#e49159;
+}
+
+.container {
+    margin-left: 100px;
+    padding-left: 5px;
+    width: 90%;
 }
 
 /* ==========================================================================
@@ -12,54 +57,15 @@ Hide ng-cloak on page load, https://docs.angularjs.org/api/ng/directive/ngCloak
 }
 
 /* ==========================================================================
-Development Ribbon
-========================================================================== */
-.ribbon {
-    background-color: #a00;
-    box-shadow: 0 0 10px #888;
-    left: -3.5em;
-    moz-box-shadow: 0 0 10px #888;
-    moz-transform: rotate(-45deg);
-    ms-transform: rotate(-45deg);
-    o-transform: rotate(-45deg);
-    overflow: hidden;
-    position: absolute;
-    top: 40px;
-    transform: rotate(-45deg);
-    webkit-box-shadow: 0 0 10px #888;
-    webkit-transform: rotate(-45deg);
-    white-space: nowrap;
-    width: 15em;
-    z-index: 9999;
-    pointer-events: none;
-}
-
-.ribbon a {
-    border: 1px solid #faa;
-    color: #fff;
-    display: block;
-    font: bold 81.25% 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    margin: 1px 0;
-    padding: 10px 50px;
-    text-align: center;
-    text-decoration: none;
-    text-shadow: 0 0 5px #444;
-    pointer-events: none;
-}
-
-/* ==========================================================================
-Version number in navbar
-========================================================================== */
-.navbar-version {
-    font-size: 10px;
-    color: #444;
-}
-
-/* ==========================================================================
 navbar text
 ========================================================================== */
 .navbar-default .navbar-brand {
     color: #444;
+}
+
+.navbar-collapse {
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
 /* ==========================================================================
@@ -82,6 +88,16 @@ Logo styles
 .logo .logo-img {
     height: 45px;
     display: inline-block;
+}
+
+/* ==========================================================================
+Navbar vertical
+========================================================================== */
+
+.navmenu {
+    width: 100px;
+    padding: auto;
+    margin: auto;
 }
 
 /* ==========================================================================

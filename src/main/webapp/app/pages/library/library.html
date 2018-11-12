@@ -4,7 +4,7 @@
             <span class="hipster img-responsive img-rounded"></span>
         </div>
         <div class="col-md-8">
-            <h1 data-translate="home.title">Welcome, Java Hipster!</h1>
+            <h1 data-translate="home.title">Библиотека</h1>
             <p class="lead" data-translate="home.subtitle">This is your homepage</p>
 
             <div ng-switch="vm.isAuthenticated()">
@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="alert alert-warning" ng-switch-when="false" data-translate="global.messages.info.authenticated" translate-compile>
-                    aaaaaaaaaaIf you want to <a class="alert-link" href="" ng-click="vm.login()">sign in</a>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").
+                    If you want to <a class="alert-link" href="" ng-click="vm.login()">sign in</a>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").
                 </div>
 
                 <div class="alert alert-warning" ng-switch-when="false" data-translate="global.messages.info.register" translate-compile>
