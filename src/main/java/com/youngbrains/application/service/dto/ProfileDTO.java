@@ -19,13 +19,6 @@ public class ProfileDTO implements Serializable {
 
     private Long userId;
 
-    private  String userFirstName;
-
-    private  String userLastName;
-
-    private String userLogin;
-
-    private String userEmail;
 
     public Long getId() {
         return id;
@@ -59,37 +52,6 @@ public class ProfileDTO implements Serializable {
         this.userId = userId;
     }
 
-    public String getUserFirstName() {
-        return userFirstName;
-    }
-
-    public void setUserFirstName(String userFirstName) {
-        this.userFirstName = userFirstName;
-    }
-
-    public String getUserLastName() {
-        return userLastName;
-    }
-
-    public void setUserLastName(String userLastName) {
-        this.userLastName = userLastName;
-    }
-
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public String getUserLogin() {
-        return userLogin;
-    }
-
-    public void setUserLogin(String userLogin) {
-        this.userLogin = userLogin;
-    }
 
     @Override
     public String toString() {
@@ -98,10 +60,6 @@ public class ProfileDTO implements Serializable {
             ", trusted=" + trusted +
             ", banned=" + banned +
             ", userId=" + userId +
-            ", userFirstName='" + userFirstName + '\'' +
-            ", userLastName='" + userLastName + '\'' +
-            ", userLogin='" + userLogin + '\'' +
-            ", userEmail='" + userEmail + '\'' +
             '}';
     }
 

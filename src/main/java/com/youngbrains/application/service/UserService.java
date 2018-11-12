@@ -214,7 +214,7 @@ public class UserService {
 
     public void deleteUser(String login) {
         userRepository.findOneByLogin(login).ifPresent(user -> {
-            Profile profile = profileRepository.findProfileByUser_Login(login);
+            Profile profile = profileRepository.findProfileByUserId(user.getId());
             profileRepository.delete(profile);
             userRepository.delete(user);
             cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(user.getLogin());
