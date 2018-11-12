@@ -1,13 +1,15 @@
 package com.youngbrains.application.service;
 
-import com.youngbrains.application.config.CacheConfiguration;
 import com.youngbrains.application.domain.Authority;
+import com.youngbrains.application.domain.Profile;
 import com.youngbrains.application.domain.User;
 import com.youngbrains.application.repository.AuthorityRepository;
 import com.youngbrains.application.config.Constants;
+import com.youngbrains.application.repository.ProfileRepository;
 import com.youngbrains.application.repository.UserRepository;
 import com.youngbrains.application.security.AuthoritiesConstants;
 import com.youngbrains.application.security.SecurityUtils;
+import com.youngbrains.application.service.dto.ProfileDTO;
 import com.youngbrains.application.service.util.RandomUtil;
 import com.youngbrains.application.service.dto.UserDTO;
 
@@ -37,14 +39,17 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final ProfileRepository profileRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    public UserService(UserRepository userRepository, ProfileRepository profileRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
         this.userRepository = userRepository;
+        this.profileRepository = profileRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
@@ -112,6 +117,11 @@ public class UserService {
         authorities.add(authority);
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
+        Profile profile = new Profile();
+        profile.setBanned(false);
+        profile.setTrusted(false);
+        profile.setUser(newUser);
+        profileRepository.save(profile);
         cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(newUser.getLogin());
         cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).evict(newUser.getEmail());
         log.debug("Created Information for User: {}", newUser);
@@ -204,6 +214,8 @@ public class UserService {
 
     public void deleteUser(String login) {
         userRepository.findOneByLogin(login).ifPresent(user -> {
+            Profile profile = profileRepository.findProfileByUserId(user.getId());
+            profileRepository.delete(profile);
             userRepository.delete(user);
             cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).evict(user.getLogin());
             cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).evict(user.getEmail());

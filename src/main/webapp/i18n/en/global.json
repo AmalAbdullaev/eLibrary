@@ -7,6 +7,11 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entities",
+                "book": "Book",
+                "readBook": "Read Book",
+                "favoriteBook": "Favorite Book",
+                "genre": "Genre",
+                "profile": "Profile",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -36,6 +41,10 @@
         "form": {
             "username": "Username",
             "username.placeholder": "Your username",
+            "firstName": "First name",
+            "firstName.placeholder": "First name",
+            "lastName": "Last name",
+            "lastName.placeholder": "Last name",
             "newpassword": "New password",
             "newpassword.placeholder": "New password",
             "confirmpassword": "New password confirmation",
@@ -87,6 +96,7 @@
             "cancel": "Cancel",
             "delete": "Delete",
             "edit": "Edit",
+            "download": "Download",
             "open": "Open",
             "save": "Save",
             "view": "View"

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{email.deletion.title(${book.title})}">eLibrary book deletion</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+</head>
+<body>
+<p th:text="#{email.deletion.greeting(${user.login})}">
+    Dear
+</p>
+<p th:text="#{email.deletion.text1(${book.title},${reason})}">
+    Your book was discontinued for the following reason
+</p>
+<p>
+    <span th:text="#{email.activation.text2}">Regards, </span>
+    <br/>
+    <em th:text="#{email.signature}">eLibrary.</em>
+</p>
+</body>
+</html>

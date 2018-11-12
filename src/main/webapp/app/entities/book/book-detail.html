@@ -1,0 +1,83 @@
+
+<div>
+    <h2><span data-translate="eLibraryApp.book.detail.title">Book</span> {{vm.book.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="eLibraryApp.book.title">Title</span></dt>
+        <dd>
+            <span>{{vm.book.title}}</span>
+        </dd>
+        <dt><span data-translate="eLibraryApp.book.description">Description</span></dt>
+        <dd>
+            <span>{{vm.book.description}}</span>
+        </dd>
+        <dt><span data-translate="eLibraryApp.book.pages">Pages</span></dt>
+        <dd>
+            <span>{{vm.book.pages}}</span>
+        </dd>
+        <dt><span data-translate="eLibraryApp.book.approved">Approved</span></dt>
+        <dd>
+            <span>{{vm.book.approved}}</span>
+        </dd>
+        <dt><span data-translate="eLibraryApp.book.path">Path</span></dt>
+        <dd>
+            <span>{{vm.book.path}}</span>
+        </dd>
+        <dt><span data-translate="eLibraryApp.book.coverPath">Cover Path</span></dt>
+        <dd>
+            <span>{{vm.book.coverPath}}</span>
+        </dd>
+        <dt><span data-translate="eLibraryApp.book.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.book.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="eLibraryApp.book.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.book.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="eLibraryApp.book.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.book.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="eLibraryApp.book.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.book.lastModifiedDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="eLibraryApp.book.yearOfPublishing">Year Of Publishing</span></dt>
+        <dd>
+            <span>{{vm.book.yearOfPublishing}}</span>
+        </dd>
+        <dt><span data-translate="eLibraryApp.book.authorFirstName">Author First Name</span></dt>
+        <dd>
+            <span>{{vm.book.authorFirstName}}</span>
+        </dd>
+        <dt><span data-translate="eLibraryApp.book.authorLastName">Author Last Name</span></dt>
+        <dd>
+            <span>{{vm.book.authorLastName}}</span>
+        </dd>
+        <dt><span data-translate="eLibraryApp.book.profile">Profile</span></dt>
+        <dd>
+            <a ui-sref="profile-detail({id:vm.book.profileId})">{{vm.book.profileId}}</a>
+        </dd>
+        <dt><span data-translate="eLibraryApp.book.genre">Genre</span></dt>
+        <dd>
+            <a ui-sref="genre-detail({id:vm.book.genreId})">{{vm.book.genreName}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="book-detail.edit({id:vm.book.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+
+    <button type="button" class="btn btn-primary" ng-click="download()">
+        <span class="hidden-sm-down" data-translate="entity.action.download">Download</span>
+    </button>
+</div>

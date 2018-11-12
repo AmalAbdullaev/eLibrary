@@ -1,0 +1,23 @@
+
+{
+    "eLibraryApp": {
+        "readBook" : {
+            "home": {
+                "title": "Read Books",
+                "createLabel": "Создать новый Read Book",
+                "createOrEditLabel": "Создать или отредактировать Read Book"
+            },
+            "created": "Новый Read Book создан с идентификатором {{ param }}",
+            "updated": "Read Book обновлен с идентификатором {{ param }}",
+            "deleted": "Read Book удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Read Book {{ id }}?"
+            },
+            "detail": {
+                "title": "Read Book"
+            },
+            "book": "Book",
+            "profile": "Profile"
+        }
+    }
+}

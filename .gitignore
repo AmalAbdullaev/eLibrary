@@ -4,6 +4,7 @@
 /target/www/**
 /src/test/javascript/coverage/
 /src/test/javascript/PhantomJS*/
+/src/main/resources/config/application-dev.yml
 
 ######################
 # Node
@@ -113,6 +114,7 @@ Desktop.ini
 ######################
 /bin/
 /deploy/
+/files/
 
 ######################
 # Logs
