@@ -196,7 +196,7 @@ public class BookResource {
         }
         if (contentType == null)
             contentType = "application/octet-stream";
-
+        log.debug("Resource filename: {}", bookResource.getFilename());
         return ResponseEntity.ok()
             .contentType(MediaType.parseMediaType(contentType))
             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""

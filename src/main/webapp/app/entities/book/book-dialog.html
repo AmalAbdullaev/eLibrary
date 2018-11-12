@@ -47,25 +47,25 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-hide="true">
             <label class="control-label" data-translate="eLibraryApp.book.path" for="field_path">Path</label>
             <input type="text" class="form-control" name="path" id="field_path"
                     ng-model="vm.book.path"
                     />
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-hide="true">
             <label class="control-label" data-translate="eLibraryApp.book.coverPath" for="field_coverPath">Cover Path</label>
             <input type="text" class="form-control" name="coverPath" id="field_coverPath"
                     ng-model="vm.book.coverPath"
                     />
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-hide="true">
             <label class="control-label" data-translate="eLibraryApp.book.createdBy" for="field_createdBy">Created By</label>
             <input type="text" class="form-control" name="createdBy" id="field_createdBy"
                     ng-model="vm.book.createdBy"
                     />
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-hide="true">
             <label class="control-label" data-translate="eLibraryApp.book.createdDate" for="field_createdDate">Created Date</label>
                 <div class="input-group">
                     <input id="field_createdDate" type="text" class="form-control" name="createdDate" datetime-picker="{{dateformat}}" ng-model="vm.book.createdDate" is-open="vm.datePickerOpenStatus.createdDate"
@@ -75,13 +75,13 @@
                     </span>
                 </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-hide="true">
             <label class="control-label" data-translate="eLibraryApp.book.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
             <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
                     ng-model="vm.book.lastModifiedBy"
                     />
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-hide="true">
             <label class="control-label" data-translate="eLibraryApp.book.lastModifiedDate" for="field_lastModifiedDate">Last Modified Date</label>
                 <div class="input-group">
                     <input id="field_lastModifiedDate" type="text" class="form-control" name="lastModifiedDate" datetime-picker="{{dateformat}}" ng-model="vm.book.lastModifiedDate" is-open="vm.datePickerOpenStatus.lastModifiedDate"

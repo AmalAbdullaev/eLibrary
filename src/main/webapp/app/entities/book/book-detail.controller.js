@@ -31,7 +31,7 @@
                 var disposition = headers('Content-Disposition');
                 var startPos = disposition.indexOf('\"') + 1;
                 var endPos = disposition.indexOf('\"', startPos);
-                var filename = decodeURI(disposition.substring(startPos, endPos));
+                var filename = disposition.substring(startPos, endPos);
                 var file = new Blob([data], {type: contentType});
                 var objectUrl = URL.createObjectURL(file);
                 var a = document.createElement('a');
