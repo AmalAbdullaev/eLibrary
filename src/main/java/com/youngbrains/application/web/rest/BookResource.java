@@ -3,14 +3,14 @@ package com.youngbrains.application.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.youngbrains.application.domain.Book;
 import com.youngbrains.application.domain.User;
-import com.youngbrains.application.repository.UserRepository;
 import com.youngbrains.application.service.*;
+import com.youngbrains.application.service.dto.BookCriteria;
+import com.youngbrains.application.service.dto.BookDTO;
+import com.youngbrains.application.service.dto.ProfileDTO;
 import com.youngbrains.application.service.mapper.BookMapper;
 import com.youngbrains.application.web.rest.errors.BadRequestAlertException;
 import com.youngbrains.application.web.rest.util.HeaderUtil;
 import com.youngbrains.application.web.rest.util.PaginationUtil;
-import com.youngbrains.application.service.dto.BookDTO;
-import com.youngbrains.application.service.dto.BookCriteria;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.undertow.util.BadRequestException;
 import org.slf4j.Logger;
@@ -32,7 +32,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.nio.file.FileSystemException;
 import java.util.List;
 import java.util.Optional;
@@ -105,11 +104,13 @@ public class BookResource {
         log.debug("REST request to upload Book : {}:", id);
         try {
             bookDTO = bookService.uploadBook(file, id, type);
-            if (type != null && type.equals("book"))
-            {
-                User user = userService.getUserWithAuthoritiesByLogin("admin").orElse(null);
-                Book book = bookMapper.toEntity(bookDTO);
-                mailService.sendNewBookEmail(user, book, "newBookEmail");
+            ProfileDTO profile = profileService.findOne(bookService.findOne(id).getProfileId());
+            if (!profile.isTrusted()) {
+                if (type != null && type.equals("book")) {
+                    User user = userService.getUserWithAuthoritiesByLogin("admin").orElse(null);
+                    Book book = bookMapper.toEntity(bookDTO);
+                    mailService.sendNewBookEmail(user, book, "newBookEmail");
+                }
             }
         } catch (FileSystemException | BadRequestException e) {
             return ResponseEntity.badRequest().build();
@@ -195,7 +196,7 @@ public class BookResource {
         }
         if (contentType == null)
             contentType = "application/octet-stream";
-
+        log.debug("Resource filename: {}", bookResource.getFilename());
         return ResponseEntity.ok()
             .contentType(MediaType.parseMediaType(contentType))
             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""
@@ -211,7 +212,8 @@ public class BookResource {
      */
     @DeleteMapping("/books/{id}")
     @Timed
-    public ResponseEntity<Void> deleteBook(@PathVariable Long id, @RequestParam String reason) {
+    public ResponseEntity<Void> deleteBook(@PathVariable Long id,
+                                           @RequestParam(value = "reason", required = false) String reason) {
         log.debug("REST request to delete Book : {}", id);
         BookDTO bookDTO = bookService.findOne(id);
         if (bookDTO != null) {
@@ -235,10 +237,12 @@ public class BookResource {
                     e.printStackTrace();
                 }
             }
-            Long userId = profileService.findOne(bookDTO.getProfileId()).getUserId();
-            User user = userService.getUserWithAuthorities(userId).orElse(null);
-            Book book = bookMapper.toEntity(bookDTO);
-            mailService.sendDeletionEmail(user, book, reason, "deletionEmail");
+            if (reason != null) {
+                Long userId = profileService.findOne(bookDTO.getProfileId()).getUserId();
+                User user = userService.getUserWithAuthorities(userId).orElse(null);
+                Book book = bookMapper.toEntity(bookDTO);
+                mailService.sendDeletionEmail(user, book, reason, "deletionEmail");
+            }
             bookService.delete(id);
             return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
         }

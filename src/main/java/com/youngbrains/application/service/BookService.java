@@ -114,7 +114,11 @@ public class BookService {
     public BookDTO uploadBook(MultipartFile file, Long id, String type) throws BadRequestException, FileSystemException {
         Book book = bookRepository.getOne(id);
         BookDTO bookDTO = bookMapper.toDto(book);
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        String extension = "";
+        int start = file.getOriginalFilename().lastIndexOf('.');
+        if (start != -1)
+            extension = file.getOriginalFilename().substring(start).trim();
+        String fileName = StringUtils.cleanPath(bookDTO.getTitle() + extension);
         Path targetLocation;
         switch (type) {
             case "book": {
@@ -140,6 +144,7 @@ public class BookService {
 
     /**
      * Loads the file located on the path "path"
+     *
      * @param path location of a book
      * @return resource corresponding to the requested book
      * @throws MalformedURLException if file is not found

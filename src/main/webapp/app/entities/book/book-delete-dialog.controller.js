@@ -18,8 +18,8 @@
             $uibModalInstance.dismiss('cancel');
         }
 
-        function confirmDelete (id) {
-            Book.delete({id: id},
+        function confirmDelete (id, reason) {
+            Book.delete({id: id, reason: reason},
                 function () {
                     $uibModalInstance.close(true);
                 });
