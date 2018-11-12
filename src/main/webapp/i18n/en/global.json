@@ -41,6 +41,10 @@
         "form": {
             "username": "Username",
             "username.placeholder": "Your username",
+            "firstName": "First name",
+            "firstName.placeholder": "First name",
+            "lastName": "Last name",
+            "lastName.placeholder": "Last name",
             "newpassword": "New password",
             "newpassword.placeholder": "New password",
             "confirmpassword": "New password confirmation",

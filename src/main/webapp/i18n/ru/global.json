@@ -41,6 +41,10 @@
         "form": {
             "username": "Логин",
             "username.placeholder": "Ваш логин",
+            "firstName": "Выше имя",
+            "firstName.placeholder": "Ваше имя",
+            "lastName": "Ваша фамилия",
+            "lastName.placeholder": "Ваша фамилия",
             "newpassword": "Новый пароль",
             "newpassword.placeholder": "Новый пароль",
             "confirmpassword": "Подтверждение нового пароля",
