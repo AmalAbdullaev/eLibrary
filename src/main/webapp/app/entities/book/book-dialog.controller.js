@@ -29,10 +29,9 @@
                 url: '/api/books/upload',
                 data: {file: file, id: id, type: type}
             }).then(function (resp) {
-                console.log('Success ' + resp.config.data.file.name + 'uploaded');
-                $scope.$emit('eLibraryApp:bookUpdate', resp);
-                if (vm.currentFile === 'book')
-                    upload(vm.coverFile, vm.book.id, 'cover');
+                console.log('Success ' + resp.config.data.file.name + ' uploaded');
+                $scope.$emit('eLibraryApp:bookUpdate', result);
+                uploadCover();
             }, function (resp) {
                 console.log('Error status: ' + resp.status);
             }, function (evt) {
@@ -53,11 +52,16 @@
             }
         }
 
+        function uploadCover() {
+            upload(vm.coverFile, vm.book.id, 'cover');
+            $scope.$emit('eLibraryApp:bookUpdate', result);
+        }
+
         function onSaveSuccess(result) {
             $scope.$emit('eLibraryApp:bookUpdate', result);
             vm.book.id = result.id;
-            vm.currentFile = 'book';
             upload(vm.bookFile, vm.book.id, 'book');
+            upload(vm.coverFile, vm.book.id, 'cover');
             $uibModalInstance.close(result);
             vm.isSaving = false;
         }
