@@ -71,6 +71,7 @@ public class ProfileResource {
         if (profileDTO.getId() == null) {
             return createProfile(profileDTO);
         }
+        System.out.println("UPDATE");
         ProfileDTO result = profileService.save(profileDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, profileDTO.getId().toString()))
