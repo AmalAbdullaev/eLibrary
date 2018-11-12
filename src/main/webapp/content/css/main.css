@@ -43,6 +43,11 @@ body {
     background:#e49159;
 }
 
+.container {
+    margin-left: 100px;
+    padding-left: 5px;
+    width: 90%;
+}
 
 /* ==========================================================================
 Hide ng-cloak on page load, https://docs.angularjs.org/api/ng/directive/ngCloak
