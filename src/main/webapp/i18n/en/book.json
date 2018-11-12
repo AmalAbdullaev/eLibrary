@@ -13,6 +13,9 @@
             "delete": {
                 "question": "Are you sure you want to delete Book {{ id }}?"
             },
+            "reason": "Enter the reason of deletion",
+            "bookFile": "Add file",
+            "coverFile": "Add cover",
             "detail": {
                 "title": "Book"
             },

@@ -5,9 +5,9 @@
         .module('eLibraryApp')
         .controller('BookDialogController', BookDialogController);
 
-    BookDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Book', 'Profile', 'Genre'];
+    BookDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Book', 'Profile', 'Genre', 'Upload'];
 
-    function BookDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Book, Profile, Genre) {
+    function BookDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Book, Profile, Genre, Upload) {
         var vm = this;
 
         vm.book = entity;
@@ -23,6 +23,20 @@
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
+        
+        function upload(file, id, type) {
+            Upload.upload({
+                url: '/api/books/upload',
+                data: {file: file, id: id, type: type}
+            }).then(function (resp) {
+                console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+            }, function (resp) {
+                console.log('Error status: ' + resp.status);
+            }, function (evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            });
+        }
 
         function clear () {
             $uibModalInstance.dismiss('cancel');
@@ -39,6 +53,10 @@
 
         function onSaveSuccess (result) {
             $scope.$emit('eLibraryApp:bookUpdate', result);
+            vm.book.id = result.id;
+            upload(vm.bookFile, vm.book.id, 'book');
+            upload(vm.coverFile, vm.book.id, 'cover');
+            console.log('id: ' + vm.book.id);
             $uibModalInstance.close(result);
             vm.isSaving = false;
         }
