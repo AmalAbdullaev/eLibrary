@@ -21,13 +21,13 @@
                     
                     <!-- Библиотека -->
                     <li class="icobox">
-                        <a ui-sref="library" ng-click="vm.collapseNavbar()">
+                        <a ui-sref="book" ng-click="vm.collapseNavbar()">
                             <img src="content/images/ico/library.png">
                         </a>
                     </li>
 
                     <!-- Избранное -->
-                    <li class="icobox">
+                    <li class="icobox" ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true">
                         <a ui-sref="favorite-book" ng-click="vm.collapseNavbar()">
                             <img src="content/images/ico/favorites.png">
                         </a>
@@ -49,52 +49,10 @@
                     
                     <!-- Админ: Уведомления -->
                     <li class="icobox"><img src="content/images/ico/notice.png"></li>
-                    
-                    <!-- Профиль -->
-                        <li class="icobox" ng-class="{active: vm.$state.includes('account')}" uib-dropdown class="dropdown pointer">
-                            <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
-                                <img src="content/images/ico/profile.png">
-                            </a>
-                            <ul class="dropdown-menu" uib-dropdown-menu>
-                                <li ui-sref-active="active" ng-switch-when="true">
-                                    <a ui-sref="settings" ng-click="vm.collapseNavbar()">
-                                        <span class="glyphicon glyphicon-wrench"></span>&nbsp;
-                                        <span data-translate="global.menu.account.settings">Settings</span>
-                                    </a>
-                                </li>
-                                <li ui-sref-active="active" ng-switch-when="true">
-                                    <a ui-sref="password" ng-click="vm.collapseNavbar()">
-                                        <span class="glyphicon glyphicon-lock"></span>&nbsp;
-                                        <span data-translate="global.menu.account.password">Password</span>
-                                    </a>
-                                </li>
-                                <li ui-sref-active="active" ng-switch-when="true">
-                                    <a href="" ng-click="vm.logout()" id="logout">
-                                        <span class="glyphicon glyphicon-log-out"></span>&nbsp;
-                                        <span data-translate="global.menu.account.logout">Sign out</span>
-                                    </a>
-                                </li>
-                                <li ui-sref-active="active" ng-switch-when="false">
-                                    <a href="" ng-click="vm.login()" id="login">
-                                        <span class="glyphicon glyphicon-log-in"></span>&nbsp;
-                                        <span data-translate="global.menu.account.login">Sign in</span>
-                                    </a>
-                                </li>
-                                <li ui-sref-active="active" ng-switch-when="false">
-                                    <a ui-sref="register" ng-click="vm.collapseNavbar()">
-                                        <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;
-                                        <span data-translate="global.menu.account.register">Register</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </li>
 
                     <!-- Справка -->
                     <li class="icobox"><img src="content/images/ico/help.png"></li>
 
-
-                    
                     <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
                     <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer">
                         <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
@@ -117,12 +75,6 @@
                                     <a ui-sref="read-book" ng-click="vm.collapseNavbar()">
                                         <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                         <span data-translate="global.menu.entities.readBook">Read Book</span>
-                                    </a>
-                                </li>
-                            <li ui-sref-active="active">
-                                    <a ui-sref="favorite-book" ng-click="vm.collapseNavbar()">
-                                        <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                        <span data-translate="global.menu.entities.favoriteBook">Favorite Book</span>
                                     </a>
                                 </li>
                             <li ui-sref-active="active">
