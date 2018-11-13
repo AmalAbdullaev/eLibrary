@@ -24,21 +24,24 @@
             angular.element('.form-group:eq(1)>input').focus();
         });
 
-        function upload(file, id, type) {
-            Upload.upload({
-                url: '/api/books/upload',
-                data: {file: file, id: id, type: type}
-            }).then(function (resp) {
-                console.log('Success ' + resp.config.data.file.name + 'uploaded');
-                $scope.$emit('eLibraryApp:bookUpdate', resp);
-                if (vm.currentFile === 'book')
-                    upload(vm.coverFile, vm.book.id, 'cover');
-            }, function (resp) {
-                console.log('Error status: ' + resp.status);
-            }, function (evt) {
-                $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            });
-        }
+        // function upload(file, id, type) {
+        //     Upload.upload({
+        //         url: '/api/books/upload',
+        //         data: {file: file, id: id, type: type}
+        //     }).then(function (resp) {
+        //         console.log('Success ' + resp.config.data.file.name + ' uploaded');
+        //         if(book.path == null)
+        //             vm.book.path = resp.path;
+        //         else
+        //             vm.book.coverPath = resp.coverPath;
+        //         $scope.$emit('eLibraryApp:bookUpdate', resp);
+        //         uploadCover();
+        //     }, function (resp) {
+        //         console.log('Error status: ' + resp.status);
+        //     }, function (evt) {
+        //         $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        //     });
+        // }
 
         function clear() {
             $uibModalInstance.dismiss('cancel');
@@ -53,11 +56,37 @@
             }
         }
 
+        // function uploadCover() {
+        //     upload(vm.coverFile, vm.book.id, 'cover');
+        // }
+
         function onSaveSuccess(result) {
             $scope.$emit('eLibraryApp:bookUpdate', result);
             vm.book.id = result.id;
-            vm.currentFile = 'book';
-            upload(vm.bookFile, vm.book.id, 'book');
+            Upload.upload({
+                url: '/api/books/upload',
+                data: {file: vm.bookFile, id: vm.book.id, type: 'book'}
+            }).then(function (resp) {
+                console.log('Success ' + resp.config.data.file.name + ' uploaded');
+                $scope.$emit('eLibraryApp:bookUpdate', resp);
+                Upload.upload({
+                    url: '/api/books/upload',
+                    data: {file: vm.coverFile, id: vm.book.id, type: 'cover'}
+                }).then(function (resp) {
+                    console.log('Success ' + resp.config.data.file.name + ' uploaded');
+                    $scope.$emit('eLibraryApp:bookUpdate', resp);
+                }, function (resp) {
+                    console.log('Error status: ' + resp.status);
+                }, function (evt) {
+                    $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                });
+            }, function (resp) {
+                console.log('Error status: ' + resp.status);
+            }, function (evt) {
+                $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            });
+            // upload(vm.bookFile, vm.book.id, 'book');
+            // upload(vm.coverFile, vm.book.id, 'cover');
             $uibModalInstance.close(result);
             vm.isSaving = false;
         }

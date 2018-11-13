@@ -14,5 +14,5 @@ import java.util.Optional;
 @SuppressWarnings("unused")
 @Repository
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
-    Profile findProfileByUser_Login(String login);
+    Profile findProfileByUserId(Long userId);
 }

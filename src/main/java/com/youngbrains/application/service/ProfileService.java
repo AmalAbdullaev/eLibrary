@@ -39,8 +39,10 @@ public class ProfileService {
      */
     public ProfileDTO save(ProfileDTO profileDTO) {
         log.debug("Request to save Profile : {}", profileDTO);
+
         Profile profile = profileMapper.toEntity(profileDTO);
         profile = profileRepository.save(profile);
+
         return profileMapper.toDto(profile);
     }
 
@@ -72,9 +74,9 @@ public class ProfileService {
 
 
     @Transactional(readOnly = true)
-    public ProfileDTO findOneByLogin(String login) {
-        log.debug("Request to get Profile : {}", login);
-        Profile profile = profileRepository.findProfileByUser_Login(login);
+    public ProfileDTO findOneByUserId(Long userId) {
+        log.debug("Request to get Profile : {}", userId);
+        Profile profile = profileRepository.findProfileByUserId(userId);
         return profileMapper.toDto(profile);
     }
     /**

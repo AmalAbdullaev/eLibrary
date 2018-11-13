@@ -71,6 +71,7 @@ public class ProfileResource {
         if (profileDTO.getId() == null) {
             return createProfile(profileDTO);
         }
+        System.out.println("UPDATE");
         ProfileDTO result = profileService.save(profileDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, profileDTO.getId().toString()))
@@ -103,11 +104,11 @@ public class ProfileResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(profileDTO));
     }
 
-    @GetMapping("/profile/{login:" + Constants.LOGIN_REGEX + "}")
+    @GetMapping("/profile/{userId}")
     @Timed
-    public ResponseEntity<ProfileDTO> getProfileByLogin(@PathVariable String login) {
-        log.debug("REST request to get Profile : {}", login);
-        ProfileDTO profileDTO = profileService.findOneByLogin(login);
+    public ResponseEntity<ProfileDTO> getProfileByUserId(@PathVariable  Long userId) {
+        log.debug("REST request to get Profile : {}", userId);
+        ProfileDTO profileDTO = profileService.findOneByUserId(userId);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(profileDTO));
     }
     /**
