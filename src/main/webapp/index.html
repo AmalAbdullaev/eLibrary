@@ -27,19 +27,31 @@
     <![endif]-->
     
     <div class="wrapper">
-            
+       
         <div id="sidebar">
             <div ui-view="navbar" ng-cloak></div>
         </div>
-
+    
         <div id="header">
-            111
-        </div>
-
-        <div id="info">
             <div class="container">
-                <div class="well" ui-view="content">
-                    <!-- Angular views -->
+                <div class="rowhead">
+                    <div ui-view="header" ng-cloak>
+                        <!-- Angular views -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="rowcontent">
+            <div class="col-md-2"></div>
+            
+            <div class="col-md-10">
+                <div id="info">
+                    <div class="container">
+                        <div class="well" ui-view="content">
+                            <!-- Angular views -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -116,6 +128,7 @@
     <script src="app/services/auth/account.service.js"></script>
     <script src="app/layouts/navbar/navbar.controller.js"></script>
     <script src="app/layouts/navbar/active-menu.directive.js"></script>
+    <script src="app/layouts/header/header.controller.js"></script>
     <script src="app/layouts/error/error.state.js"></script>
     <script src="app/home/home.state.js"></script>
     <script src="app/home/home.controller.js"></script>

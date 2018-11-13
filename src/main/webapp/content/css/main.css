@@ -21,16 +21,19 @@ body {
     position: absolute;
 }
 #header {
+    padding-left: 24px;
+    padding-top: 24px;
     height: 100px;
+    width: 100%;
     background: #faf8ff;
     box-shadow: 0 2px 2px rgba(0, 0, 0, .1);
 }
 
 #info {
-    margin-top: 5px;
+    margin: 55px;
     height: 100%;
     background: #faf8ff;
-    width: 90%;
+    width: 100%;
 }
 
 .icobox {
@@ -44,9 +47,79 @@ body {
 }
 
 .container {
-    margin-left: 100px;
-    padding-left: 5px;
-    width: 90%;
+    padding: 0px;
+    width: 100%;
+    /* width: 100%; */
+}
+
+.col-md-1 {
+    width: 100px;
+}
+
+.col-md-10 {
+    width: 100%;
+    padding-left: 0px;
+}
+
+.row {
+    /* padding-left: 100px; */
+    padding-left: 0px;
+    width: 100%;
+}
+
+.rowhead {
+    padding-left: 100px;
+}
+
+.rowcontent {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+/* ==========================================================================
+header search area form
+========================================================================== */
+
+form {
+    display: inline-block;
+    vertical-align: auto;
+    position: relative;
+}
+input[type="search"] {
+    outline: none;
+    border: 2px solid #dededf;
+    padding: 5px 20px 5px 60px;
+    display: block;
+    width: 500px;
+    height: 55px;
+    font-size: 20pt;
+    color: #dadada;
+    background: #fff;
+    border-radius: 25px;
+    -webkit-border-radius: 265px;
+    -moz-border-radius: 265px;
+    border-radius: 265px;
+    background-color: transparent;
+}
+button[type="search-submit"] {
+    position: absolute; left: 20px; top: 7px; right: 10px;
+    z-index: 9;
+    outline: none;
+    border: none;
+    display: inline-block;
+    background: url(/content/images/ico/searchico.png) no-repeat 50% 50%;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 10px;
+    border-radius: 25px;
+    cursor: pointer;
+}   
+button[type="search-submit"]:hover {
+    background-color: transparent;
+}
+::placeholder { 
+    color:#dadada;
 }
 
 /* ==========================================================================

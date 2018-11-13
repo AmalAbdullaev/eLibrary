@@ -13,7 +13,9 @@
             parent: 'entity',
             url: '/book',
             data: {
-                authorities: ['ROLE_USER'],
+                // authorities: ['ROLE_ANONYMOUS'],
+                // authorities: ['ROLE_USER'],
+                authorities: [],
                 pageTitle: 'eLibraryApp.book.home.title'
             },
             views: {
@@ -35,7 +37,9 @@
             parent: 'book',
             url: '/book/{id}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: [],
+                // authorities: ['ROLE_USER'],
+                // authorities: ['ROLE_ANONYMOUS'],
                 pageTitle: 'eLibraryApp.book.detail.title'
             },
             views: {
