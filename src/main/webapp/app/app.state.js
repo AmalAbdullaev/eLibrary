@@ -20,7 +20,7 @@
                     templateUrl: 'app/layouts/header/header.html',
                     controller: 'HeaderController',
                     controllerAs: 'vm'
-                }
+                },
             },
             resolve: {
                 authorize: ['Auth',
