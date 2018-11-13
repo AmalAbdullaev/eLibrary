@@ -14,6 +14,7 @@
             </a> -->
 
             <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">   
+            <!-- <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" >    -->
                 <ul class="nav navmenu-nav">
                     
                     <!-- Главная -->
@@ -21,6 +22,7 @@
                     
                     <!-- Библиотека -->
                     <li class="icobox">
+                        <!-- <a ui-sref="book" ng-click="vm.collapseNavbar()" has-authority="ROLE_ANONYMOUS"> -->
                         <a ui-sref="book" ng-click="vm.collapseNavbar()">
                             <img src="content/images/ico/library.png">
                         </a>
