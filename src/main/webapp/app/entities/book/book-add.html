@@ -1,36 +1,35 @@
 <div class="container">
 <h2>Предложить книгу</h2>
     <div class="addBook">
+
         <!-- Добавление книги/обложки/отправка -->
         <div class="addBookCover">
             <!-- Обложка -->
-            <div class="file_upload_cover">
-                <input type='file'>
+            <div class="file_upload_cover" for="file_upload_cover">
+                <input type='file' ngf-select ng-model="vm.coverFile" required>
+
             </div> 
             <!-- Загрузка книги -->
-            <div class="file_upload_book">
-                <input type='file'>
+            <div class="file_upload_book" for="field_bookFile">
+                <input type='file'  ngf-select ng-model="vm.bookFile" required>
             </div> 
             <!-- Кнопка "Публикации" -->
-            <button class="file_publication"></button>
+            <button class="file_publication" type="submit" ng-disabled="editForm.$invalid || vm.isSaving" ng-click="vm.save()"></button>
         </div>
 
         <!-- Поля ввода информации о книге -->
         <div class="addBookView">
-            <input type="addBookName" placeholder="Название книги">
-            <input type="addBookAuthorName" placeholder="Имя автора">
-            <input type="addBookAuthorSurname" placeholder="Фамилия">
+            <input type="addBookName" placeholder="Название книги" ng-model="vm.book.title">
+            <input type="addBookAuthorName" placeholder="Имя автора" ng-model="vm.book.authorFirstName">
+            <input type="addBookAuthorSurname" placeholder="Фамилия"   ng-model="vm.book.authorLastName">
 
-            <select type="addBookGenre" class="browser-default custom-select" placeholder="Автор книги">
-                <option selected>Жанр</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <select type="addBookGenre" class="browser-default custom-select" placeholder="Автор книги" ng-model="vm.book.genreId" ng-options="genre.id as genre.name for genre in vm.genres">
+
             </select>
-            <input type="addBookOther" placeholder="Год">        
-            <input type="addBookOther" placeholder="Страниц">      
+            <input type="addBookOther" placeholder="Год"  ng-model="vm.book.yearOfPublishing">
+            <input type="addBookOther" placeholder="Страниц"  ng-model="vm.book.pages">
 
-            <textarea name="addBookDescription" placeholder="Описание"></textarea>
+            <textarea name="addBookDescription" placeholder="Описание" ng-model="vm.book.description"></textarea>
         </div>
 
         <!-- Книги, ожидающие проверки -->
@@ -261,7 +260,7 @@
 </div>
 
 
-<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+<!-- <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
         <div class="modal-body">
             <jhi-alert-error></jhi-alert-error>
             <div class="form-group" ng-show="vm.book.id">
@@ -402,4 +401,3 @@
             </button>
         </div>
     </form>
-    

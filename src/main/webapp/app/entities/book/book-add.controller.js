@@ -3,11 +3,11 @@
 
     angular
         .module('eLibraryApp')
-        .controller('BookDialogController', BookDialogController);
+        .controller('BookAddController', BookAddController);
 
-    BookDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Book', 'Profile', 'Genre', 'Upload'];
+    BookAddController.$inject = ['$timeout', '$scope', '$stateParams',  'DataUtils', 'entity', 'Book', 'Profile', 'Genre', 'Upload'];
 
-    function BookDialogController($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Book, Profile, Genre, Upload) {
+    function BookAddController($timeout, $scope, $stateParams,DataUtils, entity, Book, Profile, Genre, Upload) {
         var vm = this;
 
         vm.book = entity;
@@ -24,24 +24,6 @@
             angular.element('.form-group:eq(1)>input').focus();
         });
 
-        // function upload(file, id, type) {
-        //     Upload.upload({
-        //         url: '/api/books/upload',
-        //         data: {file: file, id: id, type: type}
-        //     }).then(function (resp) {
-        //         console.log('Success ' + resp.config.data.file.name + ' uploaded');
-        //         if(book.path == null)
-        //             vm.book.path = resp.path;
-        //         else
-        //             vm.book.coverPath = resp.coverPath;
-        //         $scope.$emit('eLibraryApp:bookUpdate', resp);
-        //         uploadCover();
-        //     }, function (resp) {
-        //         console.log('Error status: ' + resp.status);
-        //     }, function (evt) {
-        //         $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-        //     });
-        // }
 
         function clear() {
             $uibModalInstance.dismiss('cancel');
