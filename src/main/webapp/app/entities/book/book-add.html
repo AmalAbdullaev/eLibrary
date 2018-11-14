@@ -18,7 +18,8 @@
         <!-- Поля ввода информации о книге -->
         <div class="addBookView">
             <input type="addBookName" placeholder="Название книги">
-            <input type="addBookAuthor" placeholder="Автор книги">
+            <input type="addBookAuthorName" placeholder="Имя автора">
+            <input type="addBookAuthorSurname" placeholder="Фамилия">
 
             <select type="addBookGenre" class="browser-default custom-select" placeholder="Автор книги">
                 <option selected>Жанр</option>
@@ -258,3 +259,147 @@
         </div>
     </div>
 </div>
+
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+        <div class="modal-body">
+            <jhi-alert-error></jhi-alert-error>
+            <div class="form-group" ng-show="vm.book.id">
+                <label for="id" data-translate="global.field.id">ID</label>
+                <input type="text" class="form-control" id="id" name="id"
+                        ng-model="vm.book.id" readonly />
+            </div>
+            <div class="form-group">
+                <label class="control-label" data-translate="eLibraryApp.book.title" for="field_title">Title</label>
+                <input type="text" class="form-control" name="title" id="field_title" ng-model="vm.book.title" required/>
+                <div ng-show="editForm.title.$invalid">
+                    <p class="help-block" ng-show="editForm.title.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" data-translate="eLibraryApp.book.description" for="field_description">Description</label>
+                    <textarea class="form-control" name="description" id="field_description" ng-model="vm.book.description" ></textarea>
+            </div>
+            <div class="form-group">
+                <label class="control-label" data-translate="eLibraryApp.book.pages" for="field_pages">Pages</label>
+                <input type="number" class="form-control" name="pages" id="field_pages" ng-model="vm.book.pages" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" data-translate="eLibraryApp.book.approved" for="field_approved">Approved</label>
+                    <input type="checkbox" name="approved" id="field_approved"
+                              ng-model="vm.book.approved"/>
+                <div ng-show="editForm.approved.$invalid">
+                    <p class="help-block"
+                        ng-show="editForm.approved.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                </div>
+            </div>
+            <div class="form-group" ng-hide="true">
+                <label class="control-label" data-translate="eLibraryApp.book.path" for="field_path">Path</label>
+                <input type="text" class="form-control" name="path" id="field_path" ng-model="vm.book.path"/>
+            </div>
+            <div class="form-group" ng-hide="true">
+                <label class="control-label" data-translate="eLibraryApp.book.coverPath" for="field_coverPath">Cover Path</label>
+                <input type="text" class="form-control" name="coverPath" id="field_coverPath" ng-model="vm.book.coverPath" />
+            </div>
+            <div class="form-group" ng-hide="true">
+                <label class="control-label" data-translate="eLibraryApp.book.createdBy" for="field_createdBy">Created By</label>
+                <input type="text" class="form-control" name="createdBy" id="field_createdBy" ng-model="vm.book.createdBy"/>
+            </div>
+            <div class="form-group" ng-hide="true">
+                <label class="control-label" data-translate="eLibraryApp.book.createdDate" for="field_createdDate">Created Date</label>
+                    <div class="input-group">
+                        <input id="field_createdDate" type="text" class="form-control" name="createdDate" datetime-picker="{{dateformat}}" ng-model="vm.book.createdDate" is-open="vm.datePickerOpenStatus.createdDate" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="vm.openCalendar('createdDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </div>
+            </div>
+            <div class="form-group" ng-hide="true">
+                <label class="control-label" data-translate="eLibraryApp.book.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
+                <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy" ng-model="vm.book.lastModifiedBy" />
+            </div>
+            <div class="form-group" ng-hide="true">
+                <label class="control-label" data-translate="eLibraryApp.book.lastModifiedDate" for="field_lastModifiedDate">Last Modified Date</label>
+                    <div class="input-group">
+                        <input id="field_lastModifiedDate" type="text" class="form-control" name="lastModifiedDate" datetime-picker="{{dateformat}}" ng-model="vm.book.lastModifiedDate" is-open="vm.datePickerOpenStatus.lastModifiedDate" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="vm.openCalendar('lastModifiedDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" data-translate="eLibraryApp.book.yearOfPublishing" for="field_yearOfPublishing">Year Of Publishing</label>
+                <input type="number" class="form-control" name="yearOfPublishing" id="field_yearOfPublishing"
+                        ng-model="vm.book.yearOfPublishing"
+                        required/>
+                <div ng-show="editForm.yearOfPublishing.$invalid">
+                    <p class="help-block"
+                        ng-show="editForm.yearOfPublishing.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                    <p class="help-block"
+                        ng-show="editForm.yearOfPublishing.$error.number" data-translate="entity.validation.number">
+                        This field should be a number.
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" data-translate="eLibraryApp.book.authorFirstName" for="field_authorFirstName">Author First Name</label>
+                <input type="text" class="form-control" name="authorFirstName" id="field_authorFirstName"
+                        ng-model="vm.book.authorFirstName"
+                        required/>
+                <div ng-show="editForm.authorFirstName.$invalid">
+                    <p class="help-block"
+                        ng-show="editForm.authorFirstName.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" data-translate="eLibraryApp.book.authorLastName" for="field_authorLastName">Author Last Name</label>
+                <input type="text" class="form-control" name="authorLastName" id="field_authorLastName"
+                        ng-model="vm.book.authorLastName"
+                        required/>
+                <div ng-show="editForm.authorLastName.$invalid">
+                    <p class="help-block"
+                        ng-show="editForm.authorLastName.$error.required" data-translate="entity.validation.required">
+                        This field is required.
+                    </p>
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <label data-translate="eLibraryApp.book.profile" for="field_profile">Profile</label>
+                <select class="form-control" id="field_profile" name="profile" ng-model="vm.book.profileId" ng-options="profile.id as profile.id for profile in vm.profiles"            >
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label data-translate="eLibraryApp.book.genre" for="field_genre">Genre</label>
+                <select class="form-control" id="field_genre" name="genre" ng-model="vm.book.genreId" ng-options="genre.id as genre.name for genre in vm.genres"            >
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label" data-translate="eLibraryApp.book.bookFile" for="field_bookFile">Add file</label>
+                <input type="file" class="form-control" ngf-select ng-model="vm.bookFile" name="bookFile" id="field_bookFile" required/>
+            </div>
+            <div class="form-group">
+                <label class="control-label" data-translate="eLibraryApp.book.coverFile" for="field_coverFile">Add cover</label>
+                <input type="file" class="form-control" ngf-select ng-model="vm.coverFile" name="vm.coverFile" id="field_coverFile" required/>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+                <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+            </button>
+            <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+                <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+            </button>
+        </div>
+    </form>
+    

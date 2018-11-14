@@ -148,11 +148,28 @@ textarea[name="addBookDescription"] {
     
 }
 
-input[type="addBookAuthor"] {
+input[type="addBookAuthorName"] {
     outline: none;
     border: 1px solid #dededf;
     display: block;
-    width: 41%;
+    width: 19%;
+    height: 55px;
+    font-size: 16pt;
+    color: #dadada;
+    background: #fff;
+    border-radius: 5px;
+    background-color: transparent;
+    float:left;
+    margin-right: 16px;
+    margin-bottom: 15px;
+    padding-left: 15px;
+}
+
+input[type="addBookAuthorSurname"] {
+    outline: none;
+    border: 1px solid #dededf;
+    display: block;
+    width: 19%;
     height: 55px;
     font-size: 16pt;
     color: #dadada;
@@ -169,7 +186,7 @@ select[type="addBookGenre"] {
     outline: none;
     border: 1px solid #dededf;
     display: block;
-    width: 24%;
+    width: 19%;
     height: 55px;
     font-size: 16pt;
     color: #dadada;
