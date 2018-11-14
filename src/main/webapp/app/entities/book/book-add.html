@@ -1,0 +1,260 @@
+<div class="container">
+<h2>Предложить книгу</h2>
+    <div class="addBook">
+        <!-- Добавление книги/обложки/отправка -->
+        <div class="addBookCover">
+            <!-- Обложка -->
+            <div class="file_upload_cover">
+                <input type='file'>
+            </div> 
+            <!-- Загрузка книги -->
+            <div class="file_upload_book">
+                <input type='file'>
+            </div> 
+            <!-- Кнопка "Публикации" -->
+            <button class="file_publication"></button>
+        </div>
+
+        <!-- Поля ввода информации о книге -->
+        <div class="addBookView">
+            <input type="addBookName" placeholder="Название книги">
+            <input type="addBookAuthor" placeholder="Автор книги">
+
+            <select type="addBookGenre" class="browser-default custom-select" placeholder="Автор книги">
+                <option selected>Жанр</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+            <input type="addBookOther" placeholder="Год">        
+            <input type="addBookOther" placeholder="Страниц">      
+
+            <textarea name="addBookDescription" placeholder="Описание"></textarea>
+        </div>
+
+        <!-- Книги, ожидающие проверки -->
+        <div class="addBookWait">
+            <div class="addWaitBook">
+                
+                <div class="waitBooksTitle">
+                    <h3>Ожидают проверки</h3>
+                </div>
+
+                <div class="waitBooksScroll">
+                    
+                    <div class="singleBookWait">
+                        <div class="singleBookWCover">
+                            <img src="/content/images/ico/testbook.png" width="100%">
+                        </div>
+                        <div class="singleBookWInfo">
+                            
+                        <div class="divv">
+                            <textarea name="Название книги" readonly>Название книги</textarea>
+                        </div>
+                        <div class="divv">
+                            <textarea name="Имя автора" readonly>Имя автора</textarea>
+                        </div>
+
+                        </div>
+                        <button class="btnDetail">Изменить</button>
+                    </div>
+
+                    <div class="singleBookWait">
+                        <div class="singleBookWCover">
+                            <img src="/content/images/ico/testbook.png" width="100%">
+                        </div>
+                        <div class="singleBookWInfo">
+                            
+                        <div class="divv">
+                            <textarea name="Название книги" readonly>Название книги</textarea>
+                        </div>
+                        <div class="divv">
+                            <textarea name="Имя автора" readonly>Имя автора</textarea>
+                        </div>
+
+                        </div>
+                        <button class="btnDetail">Изменить</button>
+                    </div>
+
+                    <div class="singleBookWait">
+                        <div class="singleBookWCover">
+                            <img src="/content/images/ico/testbook.png" width="100%">
+                        </div>
+                        <div class="singleBookWInfo">
+                            
+                        <div class="divv">
+                            <textarea name="Название книги" readonly>Название книги</textarea>
+                        </div>
+                        <div class="divv">
+                            <textarea name="Имя автора" readonly>Имя автора</textarea>
+                        </div>
+
+                        </div>
+                        <button class="btnDetail">Изменить</button>
+                    </div>
+
+                    <div class="singleBookWait">
+                        <div class="singleBookWCover">
+                            <img src="/content/images/ico/testbook.png" width="100%">
+                        </div>
+                        <div class="singleBookWInfo">
+                            
+                        <div class="divv">
+                            <textarea name="Название книги" readonly>Название книги</textarea>
+                        </div>
+                        <div class="divv">
+                            <textarea name="Имя автора" readonly>Имя автора</textarea>
+                        </div>
+
+                        </div>
+                        <button class="btnDetail">Изменить</button>
+                    </div>
+
+                    <div class="singleBookWait">
+                        <div class="singleBookWCover">
+                            <img src="/content/images/ico/testbook.png" width="100%">
+                        </div>
+                        <div class="singleBookWInfo">
+                            
+                        <div class="divv">
+                            <textarea name="Название книги" readonly>Название книги</textarea>
+                        </div>
+                        <div class="divv">
+                            <textarea name="Имя автора" readonly>Имя автора</textarea>
+                        </div>
+
+                        </div>
+                        <button class="btnDetail">Изменить</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Мои книги -->
+    <div class="myBooks">
+        <div class="myBooksTitle">
+            <h3>Мои книги</h3>
+        </div>
+
+        <select type="myBookSort" class="browser-default custom-select" placeholder="Сортировка">
+            <option selected>По убыванию</option>
+            <option value="1">По возрастанию</option>
+            <option value="2">Сначала новые</option>
+            <option value="3">Сначала старые</option>
+        </select>
+        
+        <div class="bookSection">
+            
+            <div class="singleBook">
+                <div class="singleBookCover">
+                    <img src="/content/images/ico/testbook.png" width="100%">
+                </div>
+                <div class="singleBookInfo">
+                    <div class="divv">
+                        <textarea name="Опубликовал" readonly>Andrew DD</textarea>
+                    </div>
+                    <div class="divv">
+                        <textarea name="Название книги" readonly>Название книги</textarea>
+                    </div>
+                    <div class="divv">
+                        <textarea name="Имя автора" readonly>Имя автора</textarea>
+                    </div>
+                </div>
+                <button class="btnDetail">Подробнее</button>
+            </div>
+            
+            <div class="singleBook">
+                <div class="singleBookCover">
+                    <img src="/content/images/ico/testbook.png" width="100%">
+                </div>
+                <div class="singleBookInfo">
+                    <div class="divv">
+                        <textarea name="Опубликовал" readonly>Andrew DD</textarea>
+                    </div>
+                    <div class="divv">
+                        <textarea name="Название книги" readonly>Название книги</textarea>
+                    </div>
+                    <div class="divv">
+                        <textarea name="Имя автора" readonly>Имя автора</textarea>
+                    </div>
+                </div>
+                <button class="btnDetail">Подробнее</button>
+            </div>
+
+            <div class="singleBook">
+                <div class="singleBookCover">
+                    <img src="/content/images/ico/testbook.png" width="100%">
+                </div>
+                <div class="singleBookInfo">
+                    <div class="divv">
+                        <textarea name="Опубликовал" readonly>Andrew DD</textarea>
+                    </div>
+                    <div class="divv">
+                        <textarea name="Название книги" readonly>Название книги</textarea>
+                    </div>
+                    <div class="divv">
+                        <textarea name="Имя автора" readonly>Имя автора</textarea>
+                    </div>
+                </div>
+                <button class="btnDetail">Подробнее</button>
+            </div>
+
+            <div class="singleBook">
+                <div class="singleBookCover">
+                    <img src="/content/images/ico/testbook.png" width="100%">
+                </div>
+                <div class="singleBookInfo">
+                    <div class="divv">
+                        <textarea name="Опубликовал" readonly>Andrew DD</textarea>
+                    </div>
+                    <div class="divv">
+                        <textarea name="Название книги" readonly>Название книги</textarea>
+                    </div>
+                    <div class="divv">
+                        <textarea name="Имя автора" readonly>Имя автора</textarea>
+                    </div>
+                </div>
+                <button class="btnDetail">Подробнее</button>
+            </div>
+
+            <div class="singleBook">
+                <div class="singleBookCover">
+                    <img src="/content/images/ico/testbook.png" width="100%">
+                </div>
+                <div class="singleBookInfo">
+                    <div class="divv">
+                        <textarea name="Опубликовал" readonly>Andrew DD</textarea>
+                    </div>
+                    <div class="divv">
+                        <textarea name="Название книги" readonly>Название книги</textarea>
+                    </div>
+                    <div class="divv">
+                        <textarea name="Имя автора" readonly>Имя автора</textarea>
+                    </div>
+                </div>
+                <button class="btnDetail">Подробнее</button>
+            </div>
+
+            <div class="singleBook">
+                <div class="singleBookCover">
+                    <img src="/content/images/ico/testbook.png" width="100%">
+                </div>
+                <div class="singleBookInfo">
+                    <div class="divv">
+                        <textarea name="Опубликовал" readonly>Andrew DD</textarea>
+                    </div>
+                    <div class="divv">
+                        <textarea name="Название книги" readonly>Название книги</textarea>
+                    </div>
+                    <div class="divv">
+                        <textarea name="Имя автора" readonly>Имя автора</textarea>
+                    </div>
+                </div>
+                <button class="btnDetail">Подробнее</button>
+            </div>
+
+        </div>
+    </div>
+</div>

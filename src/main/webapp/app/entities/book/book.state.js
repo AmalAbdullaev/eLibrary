@@ -33,6 +33,29 @@
                 }]
             }
         })
+
+        .state('book.new', {
+            parent: 'book',
+            url: '/new',
+            data: {
+                authorities: ['ROLE_USER']
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/entities/book/book-add.html',
+                    controller: 'BookController',
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('book');
+                    $translatePartialLoader.addPart('global');
+                    return $translate.refresh();
+                }]
+            }
+        })
+
         .state('book-detail', {
             parent: 'book',
             url: '/book/{id}',
@@ -92,55 +115,58 @@
                 });
             }]
         })
-        .state('book.new', {
-            parent: 'book',
-            url: '/new',
-            data: {
-                authorities: ['ROLE_USER']
-            },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
-                    templateUrl: 'app/entities/book/book-dialog.html',
-                    controller: 'BookDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: function () {
-                            return {
-                                title: null,
-                                description: null,
-                                pages: null,
-                                approved: false,
-                                path: null,
-                                coverPath: null,
-                                createdBy: null,
-                                createdDate: null,
-                                lastModifiedBy: null,
-                                lastModifiedDate: null,
-                                yearOfPublishing: null,
-                                authorFirstName: null,
-                                authorLastName: null,
-                                id: null
-                            };
-                        }
-                    }
-                }).result.then(function() {
-                    $state.go('book', null, { reload: 'book' });
-                }, function() {
-                    $state.go('book');
-                });
-            }]
-        })
+        // .state('book.new', {
+        //     parent: 'book',
+        //     url: '/new',
+        //     data: {
+        //         authorities: ['ROLE_USER']
+        //     },
+            
+        //     onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {              
+        //         $uibModal.open({
+        //             // templateUrl: 'app/entities/book/book-dialog.html',
+        //             templateUrl: 'app/entities/book/book-add.html',
+        //             controller: 'BookDialogController',
+        //             controllerAs: 'vm',
+        //             backdrop: 'static',
+        //             size: 'lg',
+        //             resolve: {
+        //                 entity: function () {
+        //                     return {
+        //                         title: null,
+        //                         description: null,
+        //                         pages: null,
+        //                         approved: false,
+        //                         path: null,
+        //                         coverPath: null,
+        //                         createdBy: null,
+        //                         createdDate: null,
+        //                         lastModifiedBy: null,
+        //                         lastModifiedDate: null,
+        //                         yearOfPublishing: null,
+        //                         authorFirstName: null,
+        //                         authorLastName: null,
+        //                         id: null
+        //                     };
+        //                 }
+        //             }
+        //         }).result.then(function() {
+        //             $state.go('book', null, { reload: 'book' });
+        //         }, function() {
+        //             $state.go('book');
+        //         });
+        //     }]
+        // })
         .state('book.edit', {
             parent: 'book',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+            onEnter: ['$stateParams', '$state', 'm', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/book/book-dialog.html',
+                    templateUrl: 'app/entities/book/book-add.html',
+                    // templateUrl: 'app/entities/book/book-dialog.html',
                     controller: 'BookDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
