@@ -104,7 +104,7 @@ public class ProfileResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(profileDTO));
     }
 
-    @GetMapping("/profile/{userId}")
+    @GetMapping("/profiles/user/{userId}")
     @Timed
     public ResponseEntity<ProfileDTO> getProfileByUserId(@PathVariable  Long userId) {
         log.debug("REST request to get Profile : {}", userId);
