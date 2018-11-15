@@ -29,7 +29,7 @@
             vm.foundBooks = [];
             $http({
                 method: 'GET',
-                url: '/api/books?search=' + $scope.searchText
+                url: '/api/books?approved.equals=true&search=' + $scope.searchText
             }).success(function (data) {
                 vm.foundBooks = data;
             });
