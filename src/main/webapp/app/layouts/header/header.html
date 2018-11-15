@@ -1,20 +1,30 @@
 <div ng-cloak>
-    <style>button[type="search-submit"] {background: url(/content/images/ico/searchico.png) no-repeat 50% 50%;}</style>
+    <style>
+        button[type="search-submit"] {
+            background: url(/content/images/ico/searchico.png) no-repeat 50% 50%;
+        }
+    </style>
 
     <div class="row">
         <div class="col-md-11">
-            <form action="#">
-                    <button type="search-submit"></button>
-                    <input type="search" placeholder="Поиск по книгам">
-            </form>
+            <span uib-dropdown on-toggle="toggled()">
+                <button id="simple-dropdown" type="search-submit" uib-dropdown-toggle></button>
+                <input id="search-dropdown" type="search" placeholder="Поиск по книгам" ng-model="searchText">
+                <ul class="dropdown-menu" uib-dropdown-menu>
+                    <li ng-repeat="book in vm.foundBooks">
+                        <a ui-sref="book-detail({id: book.id})">{{book.title}}
+                            | {{book.authorFirstName}} {{book.authorLastName}}</a>
+                    </li>
+                </ul>
+            </span>
         </div>
 
         <div class="col-md-1">
-            <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">   
+            <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">
                 <!-- Иконка аккаунта пользователя -->
                 <div ng-class="{active: vm.$state.includes('account')}" uib-dropdown class="dropdown pointer">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
-                        <img src="content/images/ico/profile.png">
+                        <img src="/content/images/ico/profile.png">
                     </a>
                     <ul class="dropdown-menu pull-right" uib-dropdown-menu>
                         <li ui-sref-active="active" ng-switch-when="true">

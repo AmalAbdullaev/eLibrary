@@ -24,6 +24,7 @@
             "pages": "Количество страниц",
             "approved": "Одобрена",
             "path": "Путь к файлу",
+            "page": "Страница {{ pageNum }} / {{ numPages }}",
             "coverPath": "Путь к обложке",
             "createdBy": "Добавил",
             "createdDate": "Дата добавления",
