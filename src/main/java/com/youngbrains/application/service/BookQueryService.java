@@ -78,10 +78,6 @@ public class BookQueryService extends QueryService<Book> {
         log.debug("find by search text : {}, page: {}", searchText, page);
         BookCriteria criteria = new BookCriteria();
 
-        BooleanFilter approvedFilter = new BooleanFilter();
-        approvedFilter.setEquals(true);
-        criteria.setApproved(approvedFilter);
-
         StringFilter firstNameFilter = new StringFilter();
         firstNameFilter.setContains(searchText);
         criteria.setAuthorFirstName(firstNameFilter);
@@ -157,9 +153,6 @@ public class BookQueryService extends QueryService<Book> {
     private Specifications<Book> createDisjunctiveSpecification(BookCriteria criteria) {
         Specifications<Book> specification = Specifications.where(null);
         if (criteria != null) {
-            if (criteria.getApproved() != null) {
-                specification = specification.and(buildSpecification(criteria.getApproved(), Book_.approved));
-            }
             if (criteria.getTitle() != null) {
                 specification = specification.or(buildStringSpecification(criteria.getTitle(), Book_.title));
             }
