@@ -17,8 +17,6 @@
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
         vm.save = save;
-        //vm.profiles = Profile.query();
-        vm.profile = Profile.getProfile({userId:951})
         vm.account = null;
         vm.genres = Genre.query();
 
@@ -26,8 +24,7 @@
 
         $timeout(function () {
             angular.element('.form-group:eq(1)>input').focus();
-            console.log(vm.account.id);
-            console.log(vm.profile);
+
         });
 
 
@@ -36,11 +33,16 @@
         }
 
 
-        Principal.identity().then(function(account) {
-             vm.account = account;
+        Principal.identity().then(function(user) {
+            if(user.id === 1 || user.id === 2 ||  user.id === 3)
+                return;
+            Profile.getProfile({userId:user.id},onSuccess);
         });
 
-
+        function onSuccess(result) {
+            vm.book.profileId = result.id;
+            console.log( vm.book.profileId );
+        }
 
         function save() {
             vm.isSaving = true;
@@ -82,7 +84,7 @@
             });
             // upload(vm.bookFile, vm.book.id, 'book');
             // upload(vm.coverFile, vm.book.id, 'cover');
-            $uibModalInstance.close(result);
+            //$uibModalInstance.close(result);
             vm.isSaving = false;
         }
 
