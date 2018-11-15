@@ -57,7 +57,7 @@
                 <span>{{vm.book.coverPath}}</span>
             </div>
 
-            <button type="button" class="btn btn-primary" ng-click="download()">
+            <button type="button" class="btn btn-primary" ng-click="download()" has-authority="ROLE_USER">
                 <span class="hidden-sm-down" data-translate="entity.action.download">Download</span>
             </button>
 

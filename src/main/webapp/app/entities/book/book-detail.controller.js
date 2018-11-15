@@ -5,9 +5,9 @@
             .module('eLibraryApp')
             .controller('BookDetailController', BookDetailController);
 
-        BookDetailController.$inject = ['$scope', '$http', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Book', 'ReadBook', 'Profile', 'Genre'];
+        BookDetailController.$inject = ['$scope', '$http', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Principal', 'Book', 'ReadBook', 'Profile', 'Genre'];
 
-        function BookDetailController($scope, $http, $rootScope, $stateParams, previousState, DataUtils, entity, Book, ReadBook, Profile, Genre) {
+        function BookDetailController($scope, $http, $rootScope, $stateParams, previousState, DataUtils, entity, Principal, Book, ReadBook, Profile, Genre) {
             var vm = this;
 
             vm.book = entity;
@@ -69,7 +69,7 @@
             }
 
             function markAsRead() {
-                if (!vm.isRead) {
+                if (Principal.isAuthenticated() && !vm.isRead) {
                     $http({
                         method: 'GET',
                         url: '/api/read-books'
