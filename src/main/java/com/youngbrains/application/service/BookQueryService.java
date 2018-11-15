@@ -3,6 +3,7 @@ package com.youngbrains.application.service;
 
 import java.util.List;
 
+import io.github.jhipster.service.filter.StringFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -45,6 +46,7 @@ public class BookQueryService extends QueryService<Book> {
 
     /**
      * Return a {@link List} of {@link BookDTO} which matches the criteria from the database
+     *
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -57,14 +59,37 @@ public class BookQueryService extends QueryService<Book> {
 
     /**
      * Return a {@link Page} of {@link BookDTO} which matches the criteria from the database
+     *
      * @param criteria The object which holds all the filters, which the entities should match.
-     * @param page The page, which should be returned.
+     * @param page     The page, which should be returned.
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
     public Page<BookDTO> findByCriteria(BookCriteria criteria, Pageable page) {
         log.debug("find by criteria : {}, page: {}", criteria, page);
         final Specifications<Book> specification = createSpecification(criteria);
+        final Page<Book> result = bookRepository.findAll(specification, page);
+        return result.map(bookMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<BookDTO> findByTitleOrAuthor(String searchText, Pageable page) {
+        log.debug("find by search text : {}, page: {}", searchText, page);
+        BookCriteria criteria = new BookCriteria();
+
+        StringFilter firstNameFilter = new StringFilter();
+        firstNameFilter.setContains(searchText);
+        criteria.setAuthorFirstName(firstNameFilter);
+
+        StringFilter lastNameFilter = new StringFilter();
+        lastNameFilter.setContains(searchText);
+        criteria.setAuthorLastName(lastNameFilter);
+
+        StringFilter titleFilter = new StringFilter();
+        titleFilter.setContains(searchText);
+        criteria.setTitle(titleFilter);
+
+        final Specifications<Book> specification = createDisjunctiveSpecification(criteria);
         final Page<Book> result = bookRepository.findAll(specification, page);
         return result.map(bookMapper::toDto);
     }
@@ -119,6 +144,22 @@ public class BookQueryService extends QueryService<Book> {
             }
             if (criteria.getGenreId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getGenreId(), Book_.genre, Genre_.id));
+            }
+        }
+        return specification;
+    }
+
+    private Specifications<Book> createDisjunctiveSpecification(BookCriteria criteria) {
+        Specifications<Book> specification = Specifications.where(null);
+        if (criteria != null) {
+            if (criteria.getTitle() != null) {
+                specification = specification.or(buildStringSpecification(criteria.getTitle(), Book_.title));
+            }
+            if (criteria.getAuthorFirstName() != null) {
+                specification = specification.or(buildStringSpecification(criteria.getAuthorFirstName(), Book_.authorFirstName));
+            }
+            if (criteria.getAuthorLastName() != null) {
+                specification = specification.or(buildStringSpecification(criteria.getAuthorLastName(), Book_.authorLastName));
             }
         }
         return specification;

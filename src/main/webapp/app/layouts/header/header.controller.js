@@ -23,37 +23,15 @@
         vm.toggleNavbar = toggleNavbar;
         vm.collapseNavbar = collapseNavbar;
         vm.$state = $state;
-        vm.books = null;
-        vm.booksRecieved = false;
         vm.foundBooks = [];
 
-        function getAllBooks() {
+        function search() {
             vm.foundBooks = [];
             $http({
                 method: 'GET',
-                url: '/api/books?approved.equals=true'
+                url: '/api/books?search=' + $scope.searchText
             }).success(function (data) {
-                filter(data);
-            });
-            console.log(vm.foundBooks);
-        }
-
-        function search() {
-            getAllBooks();
-        }
-
-        function filter(data) {
-            vm.books = data;
-            vm.booksRecieved = true;
-            vm.books.forEach(function (book) {
-                var title = book.title.toLowerCase();
-                var authorFirstName = book.authorFirstName.toLowerCase();
-                var authorLastName = book.authorLastName.toLowerCase();
-                var s = $scope.searchText.toLowerCase();
-                if (title.indexOf(s) !== -1
-                    || authorFirstName.indexOf(s) !== -1
-                    || authorLastName.indexOf(s) !== -1)
-                    vm.foundBooks.push(book);
+                vm.foundBooks = data;
             });
         }
 
