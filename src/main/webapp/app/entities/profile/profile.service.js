@@ -7,10 +7,12 @@
     Profile.$inject = ['$resource'];
 
     function Profile ($resource) {
-        var resourceUrl =  'api/profiles/:id';
+        var resourceUrl =  'api/profiles/:id/:userId';
+
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
+            'getProfile':{method:'GET',params: {id:'user',userId:'userId'}},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

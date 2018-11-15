@@ -3,11 +3,11 @@
 
     angular
         .module('eLibraryApp')
-        .controller('BookDialogController', BookDialogController);
+        .controller('BookAddController', BookAddController);
 
-    BookDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Book', 'Profile', 'Genre', 'Upload'];
+    BookAddController.$inject = ['$timeout', '$scope', '$stateParams',  'DataUtils', 'entity', 'Book', 'Profile', 'Genre', 'Upload','Principal'];
 
-    function BookDialogController($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Book, Profile, Genre, Upload) {
+    function BookAddController($timeout, $scope, $stateParams,DataUtils, entity, Book, Profile, Genre, Upload,Principal) {
         var vm = this;
 
         vm.book = entity;
@@ -17,35 +17,30 @@
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
         vm.save = save;
-        vm.profiles = Profile.query();
+        //vm.profiles = Profile.query();
+        vm.profile = Profile.getProfile({userId:951})
+        vm.account = null;
         vm.genres = Genre.query();
+
+
 
         $timeout(function () {
             angular.element('.form-group:eq(1)>input').focus();
+            console.log(vm.account.id);
+            console.log(vm.profile);
         });
 
-        // function upload(file, id, type) {
-        //     Upload.upload({
-        //         url: '/api/books/upload',
-        //         data: {file: file, id: id, type: type}
-        //     }).then(function (resp) {
-        //         console.log('Success ' + resp.config.data.file.name + ' uploaded');
-        //         if(book.path == null)
-        //             vm.book.path = resp.path;
-        //         else
-        //             vm.book.coverPath = resp.coverPath;
-        //         $scope.$emit('eLibraryApp:bookUpdate', resp);
-        //         uploadCover();
-        //     }, function (resp) {
-        //         console.log('Error status: ' + resp.status);
-        //     }, function (evt) {
-        //         $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-        //     });
-        // }
 
         function clear() {
-            $uibModalInstance.dismiss('cancel');
+          //  $uibModalInstance.dismiss('cancel');
         }
+
+
+        Principal.identity().then(function(account) {
+             vm.account = account;
+        });
+
+
 
         function save() {
             vm.isSaving = true;
