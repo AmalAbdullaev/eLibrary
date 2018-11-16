@@ -58,14 +58,16 @@
                         <div class="bookReaded2">Прочитано</div>
                         <div class="bookTitle" ui-sref="book-detail({id:book.id})">{{book.title}}</div>
                         <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
-                        
                         <div class="bookButtons">
                             <a ui-sref="book-detail({id:book.path})"><button class="btnLibReadBook2">Читать</button></a>
+                            <button class="btnLibDeleteBook" type="submit" ui-sref="book.delete({id:book.id})" has-authority="ROLE_ADMIN">
+                            </button>
                             <button class="btnLibFavoriteBook"></button>
                         </div>
                     </div>
                 </div>
 
+                
                 <div class="libBook">Еще книга</div>
                 <div class="libBook">Еще книга</div>
                 <div class="libBook">Еще книга</div>
@@ -77,7 +79,9 @@
 </div>
 
 
-<!-- <div>
+
+<!--
+<div>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
@@ -162,4 +166,5 @@
             </tbody>
         </table>
     </div>
-</div> -->
+</div>
+-->

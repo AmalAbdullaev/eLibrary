@@ -34,7 +34,6 @@
             }
         })
 
-
         .state('book-detail', {
             parent: 'book',
             url: '/book/{id}',
@@ -70,40 +69,37 @@
             }
         })
 
-            .state('book.new', {
-                parent: 'book',
-                url: '/new',
-                views: {
-                    'content@': {
-                        templateUrl: 'app/entities/book/book-add.html',
-                        controller: 'BookAddController',
-                        controllerAs: 'vm'
-                    }
-                },
-                resolve: {
-                    entity: ["$stateParams", 'Book', function($stateParams,Book) {
-                        return {
-                            title: null,
-                            description: null,
-                            pages: null,
-                            approved: false,
-                            path: null,
-                            coverPath: null,
-                            createdBy: null,
-                            createdDate: null,
-                            lastModifiedBy: null,
-                            lastModifiedDate: null,
-                            yearOfPublishing: null,
-                            authorFirstName: null,
-                            authorLastName: null,
-                            id: null
-                        };
-                    }]
+        .state('book.new', {
+            parent: 'book',
+            url: '/new',
+            views: {
+                'content@': {
+                    templateUrl: 'app/entities/book/book-add.html',
+                    controller: 'BookAddController',
+                    controllerAs: 'vm'
                 }
-           })
-
-
-
+            },
+            resolve: {
+                entity: ["$stateParams", 'Book', function($stateParams,Book) {
+                    return {
+                        title: null,
+                        description: null,
+                        pages: null,
+                        approved: false,
+                        path: null,
+                        coverPath: null,
+                        createdBy: null,
+                        createdDate: null,
+                        lastModifiedBy: null,
+                        lastModifiedDate: null,
+                        yearOfPublishing: null,
+                        authorFirstName: null,
+                        authorLastName: null,
+                        id: null
+                    };
+                }]
+            }
+        })
 
         .state('book-detail.edit', {
             parent: 'book-detail',
@@ -131,8 +127,6 @@
             }]
         })
 
-
-
         .state('book.edit', {
             parent: 'book',
             url: '/{id}/edit',
@@ -159,6 +153,7 @@
                 });
             }]
         })
+
         .state('book.delete', {
             parent: 'book',
             url: '/{id}/delete',

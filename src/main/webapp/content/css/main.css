@@ -689,6 +689,7 @@ select[type="myBookLibSort"] {
     color: #000;
     font-size: 11pt;
     font-weight: bold;
+    width: 100%;
 }
 
 .bookAuthor {
@@ -697,6 +698,7 @@ select[type="myBookLibSort"] {
     margin-bottom: 2%;
     color: #525252;
     font-size: 10pt;
+    width: 100%;
 }
 
 .bookButtons {
@@ -753,6 +755,20 @@ select[type="myBookLibSort"] {
     background: url(/content/images/ico/favoriteBookHover.png) no-repeat 50% 50%;
 }
 
+
+.btnLibDeleteBook {
+    border: 0;
+    border-radius: 5px;
+    background: url(/content/images/ico/deleteBookNoHover.png) no-repeat 50% 50%;
+    float: right;
+    margin-right: 5px;
+    height: 30px;
+    width: 30px;
+}
+
+.btnLibDeleteBook:hover {
+    background: url(/content/images/ico/deleteBookHover.png) no-repeat 50% 50%;
+}
 
 
 
