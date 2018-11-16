@@ -755,7 +755,6 @@ select[type="myBookLibSort"] {
     background: url(/content/images/ico/favoriteBookHover.png) no-repeat 50% 50%;
 }
 
-
 .btnLibDeleteBook {
     border: 0;
     border-radius: 5px;
@@ -770,7 +769,178 @@ select[type="myBookLibSort"] {
     background: url(/content/images/ico/deleteBookHover.png) no-repeat 50% 50%;
 }
 
+/* ==========================================================================
+Админ - управление пользователями
+========================================================================== */
 
+.userManagementList {
+    width: 50%;
+    height: 100%;
+    float: left;
+    border-radius: 5px;
+    margin-right: 2%;
+    padding: 2%;
+
+    background-color: #fff;
+}
+
+.AllBookCounter {
+    width: 18%;
+    height: 100%;
+    float: left;
+    border-radius: 5px;
+    margin-right: 2%;
+    padding: 3%;
+
+    background-color: #fff;
+}
+
+.AllUserCounter {
+    width: 18%;
+    height: 100%;
+    float: left;
+    border-radius: 5px;
+    margin-right: 2%;
+    padding: 3%;
+
+    background-color: #fff;
+}
+
+.userManagementViewUser {
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    border-radius: 5px;
+    float: left;
+    margin-bottom: 2%;
+    padding: 2%;
+}
+
+.userManagementViewUser:hover {
+    box-shadow: 0 0 2px 2px rgb(0, 0, 0, 0.1);
+}
+
+.userManagementPhoto {
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+
+.userManagementAvatar {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    background-image: url(/content/images/ico/sailor.jpg);
+}
+
+.userManagementName {
+    width: 30%;
+    border-radius: 5px;
+    float: left;
+    font-weight: bold;
+    font-size: 14pt;
+    padding-left: 1%;
+    margin-left: 1%;
+}
+
+.userManagementEmail {
+    width: 30%;
+    border-radius: 5px;
+    float: left;
+    font-size: 9pt;
+    padding-left: 1%;
+    margin-left: 1%;
+}
+
+.userManagementLogin {
+    width: 30%;
+    border-radius: 5px;
+    float: left;
+    padding-left: 1%;
+    margin-left: 1%;
+}
+.userManagementBtns {
+    width: 27%;
+    border-radius: 5px;
+    float: right;
+}
+
+.counterNum {
+    font-size: 24pt;
+    font-weight: bold;
+    text-align: center;
+}
+
+.counterName {
+    font-size: 14pt;
+    text-align: center;
+}
+
+IMG.AllImgCenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10%;
+}
+
+.btnUserEdit {
+    border: 0;
+    border-radius: 5px;
+    background: url(/content/images/ico/userEditNoHover.png) no-repeat 50% 50%;
+    float: right;
+    margin-right: 1px;
+    height: 30px;
+    width: 30px;
+}
+
+.btnUserEdit:hover {
+    background: url(/content/images/ico/userEditHover.png) no-repeat 50% 50%;
+}
+
+.btnUserDelete {
+    border: 0;
+    border-radius: 5px;
+    background: url(/content/images/ico/userDeleteNoHover.png) no-repeat 50% 50%;
+    float: right;
+    margin-right: 1px;
+    height: 30px;
+    width: 30px;
+}
+
+.btnUserDelete:hover {
+    background: url(/content/images/ico/userDeleteHover.png) no-repeat 50% 50%;
+}
+
+.btnUserTrust {
+    border: 0;
+    border-radius: 5px;
+    background: url(/content/images/ico/userTrustNoHover.png) no-repeat 50% 50%;
+    float: right;
+    margin-right: 1px;
+    height: 30px;
+    width: 30px;
+}
+
+.btnUserTrust:hover {
+    background: url(/content/images/ico/userTrustHover.png) no-repeat 50% 50%;
+}
+
+.btnUserBlocked {
+    border: 0;
+    border-radius: 5px;
+    background: url(/content/images/ico/userBlockedNoHover.png) no-repeat 50% 50%;
+    float: right;
+    margin-right: 1px;
+    height: 30px;
+    width: 30px;
+}
+
+.btnUserBlocked:hover {
+    background: url(/content/images/ico/userBlockedHover.png) no-repeat 50% 50%;
+}
 
 /* ==========================================================================
 header search area form
