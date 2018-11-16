@@ -2,20 +2,22 @@
     <h2 data-translate="userManagement.home.title">Users</h2>
     <jhi-alert></jhi-alert>
     <div class="row">
-        <div class="row col-md-4" uib-dropdown dropdown-append-to-body on-toggle="toggled()">
+        <div class="row col-md-4">
             <button class="btn btn-primary" ui-sref="user-management.new">
-                <span class="glyphicon glyphicon-flash"></span> <span data-translate="userManagement.home.createLabel">Create a new User</span>
+                <span class="glyphicon glyphicon-flash"></span>
+                <span data-translate="userManagement.home.createLabel">Create a new User</span>
             </button>
-            <button id="simple-dropdown" class="btn btn-primary" uib-dropdown-toggle>Поиск</button>
-            <input type="text" class="form-control col-md-5" id="search-dropdown"
-                   placeholder="Введите логин, имя или фамилию"
-                   ng-model="searchText">
-            <ul class="dropdown-menu" uib-dropdown-menu>
-                <li ng-repeat="user in vm.foundUsers">
-                    <a ui-sref="book-detail({id: book.id})">{{user.login}}
-                        | {{user.firstName}} {{user.lastName}}</a>
-                </li>
-            </ul>
+            <span uib-dropdown on-toggle="toggled()">
+                <input type="text" class="form-control" style="display: inline; width: 30%;" id="search-dropdown"
+                       placeholder="Введите логин, email, имя или фамилию" ng-model="searchText">
+                <button id="simple-dropdown" class="btn btn-primary" uib-dropdown-toggle>Поиск</button>
+                <ul class="dropdown-menu" style="width: 83%;" uib-dropdown-menu>
+                    <li ng-repeat="user in vm.foundUsers">
+                        <a ui-sref="user-management-detail({login: user.login})">{{user.login}}
+                            | {{user.firstName}} {{user.lastName}}</a>
+                    </li>
+                </ul>
+            </span>
         </div>
     </div>
     <div class="table-responsive">
