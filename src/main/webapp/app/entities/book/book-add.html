@@ -1,18 +1,23 @@
 <div class="container">
 <h2>Предложить книгу</h2>
     <div class="addBook">
-
+        <div uib-alert ng-class="success" close="closeAlert()" ng-show="isAlertVisible">{{alert.message}}</div>
         <!-- Добавление книги/обложки/отправка -->
         <div class="addBookCover">
             <!-- Обложка -->
             <div class="file_upload_cover" for="file_upload_cover">
                 <input type='file' ngf-select ng-model="vm.coverFile" required>
-
-            </div> 
+            </div>
+            <div>
+                <uib-progressbar animate="true" value="bookProgressPercentage" ng-show="isCoverUploading"
+                                 type="success"><b>{{coverProgressPercentage}}%</b></uib-progressbar>
+            </div>
             <!-- Загрузка книги -->
             <div class="file_upload_book" for="field_bookFile">
                 <input type='file'  ngf-select ng-model="vm.bookFile" required>
-            </div> 
+            </div>
+            <uib-progressbar animate="false" value="bookProgressPercentage" ng-show="isBookUploading"
+                             type="success"><b>{{bookProgressPercentage}}%</b></uib-progressbar>
             <!-- Кнопка "Публикации" -->
             <button class="file_publication" type="submit" ng-disabled="editForm.$invalid || vm.isSaving" ng-click="vm.save()"></button>
         </div>

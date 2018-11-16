@@ -6,6 +6,7 @@ import com.youngbrains.application.domain.User;
 import com.youngbrains.application.repository.UserRepository;
 import com.youngbrains.application.security.AuthoritiesConstants;
 import com.youngbrains.application.service.MailService;
+import com.youngbrains.application.service.UserQueryService;
 import com.youngbrains.application.service.UserService;
 import com.youngbrains.application.service.dto.UserDTO;
 import com.youngbrains.application.web.rest.errors.BadRequestAlertException;
@@ -64,12 +65,15 @@ public class UserResource {
 
     private final UserService userService;
 
+    private final UserQueryService userQueryService;
+
     private final MailService mailService;
 
-    public UserResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    public UserResource(UserRepository userRepository, UserService userService, UserQueryService userQueryService, MailService mailService) {
 
         this.userRepository = userRepository;
         this.userService = userService;
+        this.userQueryService = userQueryService;
         this.mailService = mailService;
     }
 
@@ -82,7 +86,7 @@ public class UserResource {
      *
      * @param userDTO the user to create
      * @return the ResponseEntity with status 201 (Created) and with body the new user, or with status 400 (Bad Request) if the login or email is already in use
-     * @throws URISyntaxException if the Location URI syntax is incorrect
+     * @throws URISyntaxException       if the Location URI syntax is incorrect
      * @throws BadRequestAlertException 400 (Bad Request) if the login or email is already in use
      */
     @PostMapping("/users")
@@ -102,7 +106,7 @@ public class UserResource {
             User newUser = userService.createUser(userDTO);
             mailService.sendCreationEmail(newUser);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
-                .headers(HeaderUtil.createAlert( "userManagement.created", newUser.getLogin()))
+                .headers(HeaderUtil.createAlert("userManagement.created", newUser.getLogin()))
                 .body(newUser);
         }
     }
@@ -142,8 +146,13 @@ public class UserResource {
      */
     @GetMapping("/users")
     @Timed
-    public ResponseEntity<List<UserDTO>> getAllUsers(Pageable pageable) {
-        final Page<UserDTO> page = userService.getAllManagedUsers(pageable);
+    public ResponseEntity<List<UserDTO>> getAllUsers(@RequestParam(value = "search", required = false) String searchText,
+                                                     Pageable pageable) {
+        Page<UserDTO> page;
+        if (searchText != null)
+            page = userQueryService.findByLoginOrName(searchText, pageable);
+        else
+            page = userService.getAllManagedUsers(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -185,6 +194,6 @@ public class UserResource {
     public ResponseEntity<Void> deleteUser(@PathVariable String login) {
         log.debug("REST request to delete User: {}", login);
         userService.deleteUser(login);
-        return ResponseEntity.ok().headers(HeaderUtil.createAlert( "userManagement.deleted", login)).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createAlert("userManagement.deleted", login)).build();
     }
 }

@@ -5,9 +5,9 @@
         .module('eLibraryApp')
         .controller('UserManagementController', UserManagementController);
 
-    UserManagementController.$inject = ['Principal', 'User', 'ParseLinks', 'AlertService', '$state', 'pagingParams', 'paginationConstants', 'JhiLanguageService'];
+    UserManagementController.$inject = ['$scope', '$http', 'Principal', 'User', 'ParseLinks', 'AlertService', '$state', 'pagingParams', 'paginationConstants', 'JhiLanguageService'];
 
-    function UserManagementController(Principal, User, ParseLinks, AlertService, $state, pagingParams, paginationConstants, JhiLanguageService) {
+    function UserManagementController($scope, $http, Principal, User, ParseLinks, AlertService, $state, pagingParams, paginationConstants, JhiLanguageService) {
         var vm = this;
 
         vm.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
@@ -25,6 +25,21 @@
         vm.reverse = pagingParams.ascending;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.transition = transition;
+        vm.foundUsers = [];
+
+        function search() {
+            vm.foundUsers = [];
+            $http({
+                method: 'GET',
+                url: '/api/users?search=' + $scope.searchText
+            }).success(function (data) {
+                vm.foundUsers = data;
+            });
+        }
+
+        $scope.toggled = function () {
+            search();
+        };
 
         vm.loadAll();
         JhiLanguageService.getAll().then(function (languages) {

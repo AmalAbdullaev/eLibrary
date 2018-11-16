@@ -20,22 +20,37 @@
         vm.account = null;
         vm.genres = Genre.query();
 
+        $scope.isCoverUploading = false;
+        $scope.isBookUploading = false;
+        $scope.isAlertVisible = false;
+        $scope.alert = {
+            type: null,
+            message: null
+        };
 
+        $scope.closeAlert = function() {
+            $scope.alert.type = null;
+            $scope.alert.message = null;
+            $scope.isAlertVisible = false;
+        };
 
         $timeout(function () {
             angular.element('.form-group:eq(1)>input').focus();
 
         });
 
+        function showAlert(type, message) {
+            $scope.alert.type = type;
+            $scope.alert.message = message;
+            $scope.isAlertVisible = true;
+        }
 
         function clear() {
           //  $uibModalInstance.dismiss('cancel');
         }
 
-
         Principal.identity().then(function(user) {
-            if(user.id === 1 || user.id === 2 ||  user.id === 3)
-                return;
+            if (!(user.id in [1, 2, 3, 4]))
             Profile.getProfile({userId:user.id},onSuccess);
         });
 
@@ -64,23 +79,32 @@
                 url: '/api/books/upload',
                 data: {file: vm.bookFile, id: vm.book.id, type: 'book'}
             }).then(function (resp) {
+                $scope.isBookUploading = false;
                 console.log('Success ' + resp.config.data.file.name + ' uploaded');
                 $scope.$emit('eLibraryApp:bookUpdate', resp);
                 Upload.upload({
                     url: '/api/books/upload',
                     data: {file: vm.coverFile, id: vm.book.id, type: 'cover'}
                 }).then(function (resp) {
+                    $scope.isCoverUploading = false;
                     console.log('Success ' + resp.config.data.file.name + ' uploaded');
                     $scope.$emit('eLibraryApp:bookUpdate', resp);
+                    showAlert('success', 'Книга ' + vm.book.title + ' успешно загружена');
                 }, function (resp) {
+                    showAlert('success', 'Не удалось загрузить книгу '
+                        + vm.book.title + '. Статус: ' + resp.status);
                     console.log('Error status: ' + resp.status);
                 }, function (evt) {
-                    $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    $scope.isCoverUploading = true;
+                    $scope.coverProgressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                 });
             }, function (resp) {
+                showAlert('success', 'Не удалось загрузить книгу '
+                    + vm.book.title + '. Статус: ' + resp.status);
                 console.log('Error status: ' + resp.status);
             }, function (evt) {
-                $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                $scope.isBookUploading = true;
+                $scope.bookProgressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             });
             // upload(vm.bookFile, vm.book.id, 'book');
             // upload(vm.coverFile, vm.book.id, 'cover');
