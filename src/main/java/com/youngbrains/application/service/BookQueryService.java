@@ -78,6 +78,10 @@ public class BookQueryService extends QueryService<Book> {
         log.debug("find by search text : {}, page: {}", searchText, page);
         BookCriteria criteria = new BookCriteria();
 
+        BooleanFilter approvedFilter = new BooleanFilter();
+        approvedFilter.setEquals(true);
+        criteria.setApproved(approvedFilter);
+
         StringFilter firstNameFilter = new StringFilter();
         firstNameFilter.setContains(searchText);
         criteria.setAuthorFirstName(firstNameFilter);
@@ -161,6 +165,9 @@ public class BookQueryService extends QueryService<Book> {
             }
             if (criteria.getAuthorLastName() != null) {
                 specification = specification.or(buildStringSpecification(criteria.getAuthorLastName(), Book_.authorLastName));
+            }
+            if (criteria.getApproved() != null) {
+                specification = specification.and(buildSpecification(criteria.getApproved(), Book_.approved));
             }
         }
         return specification;

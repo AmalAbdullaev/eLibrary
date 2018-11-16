@@ -1,7 +1,7 @@
 <div class="container">
 <h2>Предложить книгу</h2>
     <div class="addBook">
-        <div uib-alert ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert()" ng-show="isAlertVisible">{{alert.message}}</div>
+        <div uib-alert ng-class="success" close="closeAlert()" ng-show="isAlertVisible">{{alert.message}}</div>
         <!-- Добавление книги/обложки/отправка -->
         <div class="addBookCover">
             <!-- Обложка -->
@@ -9,7 +9,7 @@
                 <input type='file' ngf-select ng-model="vm.coverFile" required>
             </div>
             <div>
-                <uib-progressbar animate="false" value="bookProgressPercentage" ng-show="isCoverUploading"
+                <uib-progressbar animate="true" value="bookProgressPercentage" ng-show="isCoverUploading"
                                  type="success"><b>{{coverProgressPercentage}}%</b></uib-progressbar>
             </div>
             <!-- Загрузка книги -->
