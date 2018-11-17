@@ -149,9 +149,15 @@ public class BookResource {
      */
     @GetMapping("/books")
     @Timed
-    public ResponseEntity<List<BookDTO>> getAllBooks(BookCriteria criteria, Pageable pageable) {
+    public ResponseEntity<List<BookDTO>> getAllBooks(BookCriteria criteria,
+                                                     @RequestParam(value = "search", required = false) String searchText,
+                                                     Pageable pageable) {
         log.debug("REST request to get Books by criteria: {}", criteria);
-        Page<BookDTO> page = bookQueryService.findByCriteria(criteria, pageable);
+        Page<BookDTO> page;
+        if (searchText != null)
+            page = bookQueryService.findByTitleOrAuthor(searchText, pageable);
+        else
+            page = bookQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/books");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

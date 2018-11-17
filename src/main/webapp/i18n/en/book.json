@@ -24,6 +24,7 @@
             "pages": "Pages",
             "approved": "Approved",
             "path": "Path",
+            "page": "Page {0} / {1}",
             "coverPath": "Cover Path",
             "createdBy": "Created By",
             "createdDate": "Created Date",

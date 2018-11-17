@@ -1,7 +1,992 @@
 body {
-    background: #fafafa;
+    background: #faf8ff;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
+    height: 100%; 
+}
+
+#wrapper {
+    width: 100%;
+    outline: 1px solid #787274;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+#sidebar {
+    height: 150%;
+    background-color: #d65600;
+    width: 100px;
+    float: left;
+    position: absolute;
+}
+#header {
+    padding-left: 24px;
+    padding-top: 24px;
+    height: 100px;
+    width: 100%;
+    background: #faf8ff;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .1);
+}
+
+#info {
+    margin: 55px;
+    height: 100%;
+    background: #faf8ff;
+    width: 100%;
+}
+
+.icobox {
+    height: 100px;
+    width: 100px;
+    background-color: none;
+}
+
+.icobox:hover {
+    background:#e49159;
+}
+
+.container {
+    padding: 0px;
+    width: 100%;
+}
+
+.col-md-1 {
+    width: 100px;
+}
+
+.col-md-10 {
+    width: 100%;
+    padding-left: 0px;
+}
+
+.row {
+    /* padding-left: 100px; */
+    padding-left: 0px;
+    width: 100%;
+}
+
+.rowhead {
+    padding-left: 100px;
+}
+
+.rowcontent {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.aColor {
+    text:white;
+}
+
+/* ==========================================================================
+Предложить книгу
+========================================================================== */
+
+
+.addBook {
+    background-color: #FF9900;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.addBookCover {
+    background-color: #fff;
+    width: 17%;
+    padding: 15px;
+    margin-right: 1%;
+    float:left;
+    border-radius: 5px;
+}
+.addBookView {
+    background-color: #fff;
+    width: 62%;
+    float:left;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.addBookWait {
+    background-color: #fff;
+    width: 17%;
+    height: 100%;
+    margin-left: 1%;
+    float:left;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.addWaitBook {
+    width: 100%;
+    height: 400px;
+    border-radius: 5px;
+}
+
+input[type="addBookName"] {
+    outline: none;
+    border: 1px solid #dededf;
+    display: block;
+    width: 100%;
+    height: 55px;
+    font-size: 16pt;
+    color: #dadada;
+    background: #fff;
+    border-radius: 5px;
+    background-color: transparent;
+    margin-bottom: 15px;
+    padding-left: 15px;
+}
+
+textarea[name="addBookDescription"] {
+    outline: none;
+    border: 1px solid #dededf;
+    display: block;
+    width: 100%;
+    height: 400px;
+    font-size: 16pt;
+    color: #dadada;
+    background: #fff;
+    border-radius: 5px;
+    background-color: transparent;
+    padding-left: 15px;
+    padding-top: 10px;
+    
+}
+
+input[type="addBookAuthorName"] {
+    outline: none;
+    border: 1px solid #dededf;
+    display: block;
+    width: 19%;
+    height: 55px;
+    font-size: 16pt;
+    color: #dadada;
+    background: #fff;
+    border-radius: 5px;
+    background-color: transparent;
+    float:left;
+    margin-right: 16px;
+    margin-bottom: 15px;
+    padding-left: 15px;
+}
+
+input[type="addBookAuthorSurname"] {
+    outline: none;
+    border: 1px solid #dededf;
+    display: block;
+    width: 19%;
+    height: 55px;
+    font-size: 16pt;
+    color: #dadada;
+    background: #fff;
+    border-radius: 5px;
+    background-color: transparent;
+    float:left;
+    margin-right: 16px;
+    margin-bottom: 15px;
+    padding-left: 15px;
+}
+
+select[type="addBookGenre"] {
+    outline: none;
+    border: 1px solid #dededf;
+    display: block;
+    width: 19%;
+    height: 55px;
+    font-size: 16pt;
+    color: #dadada;
+    background: #fff;
+    border-radius: 5px;
+    background-color: transparent;
+    float:left;
+    padding-left: 10px;
+}
+
+input[type="addBookOther"] {
+    outline: none;
+    border: 1px solid #dededf;
+    display: block;
+    width: 15%;
+    height: 55px;
+    font-size: 16pt;
+    color: #dadada;
+    background: #fff;
+    border-radius: 5px;
+    background-color: transparent;
+    float:left;
+    margin-left: 15px;
+    padding-left: 15px;
+}
+
+.file_upload_cover {
+    margin-bottom: 15px;
+    background-image: url(/content/images/ico/addcover.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 320px;
+}
+
+.file_upload_cover:hover {
+    background: url(/content/images/ico/addcoverafter.png) no-repeat 50% 50%;
+    border-radius: 5px;
+}
+
+.file_upload_book {
+    background-color: white;
+    margin-bottom: 15px;
+    background: url(/content/images/ico/btnUploadBook.png) no-repeat 50% 50%;
+    width: 100%;
+    height: 50px;
+}
+
+.file_upload_book:hover {
+    background: url(/content/images/ico/btnUploadBookAfter.png) no-repeat 50% 50%;
+    border-radius: 5px;
+}
+
+.file_publication {
+    background-color: white;
+    background: url(/content/images/ico/btnPublishBook.png) no-repeat 50% 50%;
+    width: 100%;
+    height: 50px;
+    border: none;
+}
+
+.file_publication:hover {
+    background: url(/content/images/ico/btnPublishBookAfter.png) no-repeat 50% 50%;
+    border-radius: 5px;
+}
+
+input[type='file'] {
+    width:100%;
+    height: 100%;
+    opacity:0;
+}
+
+.myBooks {
+    background-color: #fff;
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 1%;
+    float:left;
+}
+
+.bookSection {
+    width: 98%;
+    border-radius: 5px;
+    margin: 1%;
+    float:left;
+}
+
+.singleBook {
+    background-color: #fff;
+    width: 19%;
+    border-radius: 5px;
+    margin-bottom: 1%;
+    margin-right: 1%;
+    float:left;
+}
+
+.singleBook:hover {
+    box-shadow: 0 0 10px rgba(172, 172, 172, 0.3);
+    border-radius: 5px;
+}
+
+.singleBookWait {
+    background-color: #fff;
+    width: 95%;
+    border-radius: 5px;
+    margin-bottom: 5%;
+    margin-right: 1%;
+    float:left;
+}
+
+.singleBookWait:hover {
+    box-shadow: 0 0 10px rgba(172, 172, 172, 0.3);
+    border-radius: 5px;
+}
+
+.singleBookWCover {
+    background-color: red;
+    width: 30%;
+    border-radius: 5px;
+    margin-right: 10px;
+    float:left;
+}
+
+.singleBookWInfo {
+    width: 65%;
+    height: 100%;
+    border-radius: 5px;
+    float:left;
+}
+
+.singleBookCover {
+    background-color: red;
+    width: 30%;
+    border-radius: 5px;
+    margin-right: 10px;
+    float:left;
+}
+
+.singleBookInfo {
+    width: 66%;
+    height: 100%;
+    border-radius: 5px;
+    float:left;
+}
+
+.label {
+    width: 100%;
+    display: block;
+    float: left;
+}
+
+textarea
+{
+    width: 100%;
+    height: 30px;
+    border: 0;
+    font-size: 12px;
+    outline: none;
+    background: none;
+    resize:none;
+    overflow: auto;
+}
+
+.btnDetail {
+    background-color: #dfdfdf;
+    color: white;
+    width: 35%;
+    height: 25px;
+    font-size: 14px;
+    border: none;
+    vertical-align: bottom;
+    border-radius: 5px;
+    float: right;
+    margin-right: 10px;
+}
+
+.btnDetail:hover {
+    color: white;
+    background-color: #d65600;
+    border-radius: 5px;
+}
+
+.myBooksTitle {
+    background-color: #fff;
+    width: 60%;
+    border-radius: 5px;
+    margin-top: 1%;
+    float:left;
+}
+
+.waitBooksTitle {
+    background-color: #fff;
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 1%;
+    float:left;
+}
+
+.waitBooksScroll {
+    width: 100%;
+    height: 90%;    
+    overflow-y: scroll;
+    overflow: auto;
+}
+
+select[type="myBookSort"] {
+    outline: none;
+    border: 1px solid #dededf;
+    display: block;
+    width: 15%;
+    height: 40px;
+    font-size: 14pt;
+    color: #dadada;
+    background: #fff;
+    border-radius: 5px;
+    background-color: transparent;
+    float:right;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+h2 {
+    margin-top: 0px;
+    margin-bottom: 15px;
+    font-size: 40px;
+}
+
+h3 {
+    margin-left: 15px;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.well {
+    background-color: #faf8ff;
+    box-shadow: none;
+    border: 0;
+}
+
+.divv {
+    width: 100%;
+    height: 20px;
+}
+
+/* ==========================================================================
+Подробнее о книге
+========================================================================== */
+
+.h7 {
+    margin: 0px;
+    margin-bottom: 10px;
+    font-size: 40px;
+}
+
+.h8 {
+    margin: 0px;
+    font-size: 20px;
+}
+
+.h9 {
+    margin: 0px;
+    font-size: 16px;
+}
+
+.bookDetailCover {
+    background-color: #fff;
+    width: 20%;
+    height: 500px;
+    float: left;
+    margin-right: 2%;
+    border-radius: 5px;
+    padding: 25px;
+
+}
+
+.bookCover {
+    background-color: orange;
+    width: 100%;
+    height: 85%;
+    float: left;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.bookDetailName {
+    background-color: #fff;
+    width: 78%;
+    float: right;
+    border-radius: 5px;
+    margin-bottom: 2%;
+    padding: 35px;
+}
+
+.bookDetailInfo {
+    background-color: #fff;
+    width: 23%;
+    float: left;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    border-radius: 5px;
+    padding: 35px;
+}
+
+.bookDetailAdmin {
+    background-color: #fff;
+    width: 23%;
+    float: left;
+    margin-right: 2%;
+    border-radius: 5px;
+    padding: 35px;
+}
+
+.bookDetailDescription {
+    background-color: #fff;
+    width: 52%;
+    float: right;
+    border-radius: 5px;
+    padding: 35px;
+    margin: 0;
+    text-align: justify;
+}
+
+/* ==========================================================================
+библиотека
+========================================================================== */
+
+.libraryGenre {
+    width: 18%;
+    float: right;
+    background-color: orange;
+    border-radius: 5px;
+}
+
+.libraryRecommendation {
+    width: 81%;
+    float: left;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-bottom: 1%;
+    padding-top: 10px;
+}
+
+.recommendationBooks {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    padding-left: 1%;
+    padding-bottom: 1%; 
+
+    overflow: hidden;
+    overflow-x: scroll;
+    white-space:nowrap;
+}
+
+.rBook {
+    display: inline-block;
+    vertical-align: top;
+    width: 23%;
+    height:100%;
+    padding: 1%;
+    margin-right: 1%;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #fdd4b8;
+    white-space: normal;
+}
+
+.rBook:hover {
+    background-color: #fdd4b8;
+}
+
+.libraryBooks {
+    width: 81%;
+    float: left;
+    background-color: #fff;
+    border-radius: 5px;
+    padding-top: 10px;
+}
+
+.myLibBooksTitle {
+    width: 70%;
+    border-radius: 5px;
+    float:left;
+}
+
+.myLibBooksTitle2 {
+    width: 100%;
+    border-radius: 5px;
+    float:left;
+    padding-bottom: 1%;
+}
+
+select[type="myBookLibSort"] {
+    outline: none;
+    border: 1px solid #dededf;
+    display: block;
+    width: 15%;
+    height: 40px;
+    font-size: 14pt;
+    color: #dadada;
+    background: #fff;
+    border-radius: 5px;
+    background-color: transparent;
+    margin-right: 10px;
+    float:right;
+}
+
+.libraryAllBooks {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.libBook {
+    display: inline-block;
+    vertical-align: top;
+    width: 23%;
+    height:100%;
+    margin-left: 1%;
+    border-radius: 5px;
+    margin-bottom: 1%;
+}
+
+.libBook:hover {
+    box-shadow: 0 0 2px 2px rgb(0, 0, 0, 0.1);
+}
+
+.libBookCover {
+    width: 30%;
+    /* height: 100%; */
+    height: 150px;
+    float: left;
+    background-color: red;
+    border-radius: 5px
+}
+
+.libRecommendBookCover {
+    width: 40%;
+    /* height: 100%; */
+    height: 150px;
+    float: left;
+    background-color: red;
+    border-radius: 5px
+}
+
+.libBookInfo {
+    width: 70%;
+    height: 100%;
+    float: left;
+    border-radius: 5px;
+    padding: 0 10px 0 10px; 
+}
+
+.libBookInfo1 {
+    width: 100%;
+    height: 100%;
+    float: left;
+    background-color: yellow;
+    border-radius: 5px;
+    margin-bottom: 2%;
+}
+
+.libRecommendBookInfo {
+    width: 60%;
+    height: 100%;
+    float: left;
+    border-radius: 5px;
+    padding: 0 10px 10px 10px; 
+}
+
+.bookReaded {
+    border-radius: 5px;
+    background-color: #fd7b7d;
+    width: 70%;
+    text-align: center;
+    float: right;
+    margin-bottom: 2%;
+    color: #fff;
+}
+
+.bookReaded2 {
+    border-radius: 5px;
+    background-color: #fd7b7d;
+    width: 60%;
+    text-align: center;
+    float: right;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    color: #fff;
+}
+
+.bookTitle {
+    border-radius: 5px;
+    float: left;
+    margin-bottom: 2%;
+    color: #000;
+    font-size: 11pt;
+    font-weight: bold;
+    width: 100%;
+}
+
+.bookAuthor {
+    border-radius: 5px;
+    float: left;
+    margin-bottom: 2%;
+    color: #525252;
+    font-size: 10pt;
+    width: 100%;
+}
+
+.bookButtons {
+    border-radius: 5px;
+    float: right;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.btnLibReadBook {
+    background-color: #dfdfdf;
+    color: white;
+    width: 70%;
+    height: 35px;
+    font-size: 14px;
+    border: none;
+    vertical-align: bottom;
+    border-radius: 5px;
+    float: right;
+}
+
+.btnLibReadBook:hover {
+    color: white;
+    background-color: #d65600;
+}
+
+.btnLibReadBook2 {
+    background-color: #dfdfdf;
+    color: white;
+    width: 60%;
+    height: 35px;
+    font-size: 14px;
+    border: none;
+    vertical-align: bottom;
+    border-radius: 5px;
+    float: right;
+}
+.btnLibReadBook2:hover {
+    color: white;
+    background-color: #d65600;
+}
+
+.btnLibFavoriteBook {
+    background: url(/content/images/ico/favoriteBookNoHover.png) no-repeat 50% 50%;
+    width: 25px;
+    height: 25px;
+    border: 0;
+    margin-top: 5px;
+    float: right;
+    margin-right: 5px;
+}
+
+.btnLibFavoriteBook:hover {
+    background: url(/content/images/ico/favoriteBookHover.png) no-repeat 50% 50%;
+}
+
+.btnLibDeleteBook {
+    border: 0;
+    border-radius: 5px;
+    background: url(/content/images/ico/deleteBookNoHover.png) no-repeat 50% 50%;
+    float: right;
+    margin-right: 5px;
+    height: 30px;
+    width: 30px;
+}
+
+.btnLibDeleteBook:hover {
+    background: url(/content/images/ico/deleteBookHover.png) no-repeat 50% 50%;
+}
+
+/* ==========================================================================
+Админ - управление пользователями
+========================================================================== */
+
+.userManagementList {
+    width: 50%;
+    height: 100%;
+    float: left;
+    border-radius: 5px;
+    margin-right: 2%;
+    padding: 2%;
+
+    background-color: #fff;
+}
+
+.AllBookCounter {
+    width: 18%;
+    height: 100%;
+    float: left;
+    border-radius: 5px;
+    margin-right: 2%;
+    padding: 3%;
+
+    background-color: #fff;
+}
+
+.AllUserCounter {
+    width: 18%;
+    height: 100%;
+    float: left;
+    border-radius: 5px;
+    margin-right: 2%;
+    padding: 3%;
+
+    background-color: #fff;
+}
+
+.userManagementViewUser {
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    border-radius: 5px;
+    float: left;
+    margin-bottom: 2%;
+    padding: 2%;
+}
+
+.userManagementViewUser:hover {
+    box-shadow: 0 0 2px 2px rgb(0, 0, 0, 0.1);
+}
+
+.userManagementPhoto {
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+
+.userManagementAvatar {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    background-image: url(/content/images/ico/sailor.jpg);
+}
+
+.userManagementName {
+    width: 30%;
+    border-radius: 5px;
+    float: left;
+    font-weight: bold;
+    font-size: 14pt;
+    padding-left: 1%;
+    margin-left: 1%;
+}
+
+.userManagementEmail {
+    width: 30%;
+    border-radius: 5px;
+    float: left;
+    font-size: 9pt;
+    padding-left: 1%;
+    margin-left: 1%;
+}
+
+.userManagementLogin {
+    width: 30%;
+    border-radius: 5px;
+    float: left;
+    padding-left: 1%;
+    margin-left: 1%;
+}
+.userManagementBtns {
+    width: 27%;
+    border-radius: 5px;
+    float: right;
+}
+
+.counterNum {
+    font-size: 24pt;
+    font-weight: bold;
+    text-align: center;
+}
+
+.counterName {
+    font-size: 14pt;
+    text-align: center;
+}
+
+IMG.AllImgCenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10%;
+}
+
+.btnUserEdit {
+    border: 0;
+    border-radius: 5px;
+    background: url(/content/images/ico/userEditNoHover.png) no-repeat 50% 50%;
+    float: right;
+    margin-right: 1px;
+    height: 30px;
+    width: 30px;
+}
+
+.btnUserEdit:hover {
+    background: url(/content/images/ico/userEditHover.png) no-repeat 50% 50%;
+}
+
+.btnUserDelete {
+    border: 0;
+    border-radius: 5px;
+    background: url(/content/images/ico/userDeleteNoHover.png) no-repeat 50% 50%;
+    float: right;
+    margin-right: 1px;
+    height: 30px;
+    width: 30px;
+}
+
+.btnUserDelete:hover {
+    background: url(/content/images/ico/userDeleteHover.png) no-repeat 50% 50%;
+}
+
+.btnUserTrust {
+    border: 0;
+    border-radius: 5px;
+    background: url(/content/images/ico/userTrustNoHover.png) no-repeat 50% 50%;
+    float: right;
+    margin-right: 1px;
+    height: 30px;
+    width: 30px;
+}
+
+.btnUserTrust:hover {
+    background: url(/content/images/ico/userTrustHover.png) no-repeat 50% 50%;
+}
+
+.btnUserBlocked {
+    border: 0;
+    border-radius: 5px;
+    background: url(/content/images/ico/userBlockedNoHover.png) no-repeat 50% 50%;
+    float: right;
+    margin-right: 1px;
+    height: 30px;
+    width: 30px;
+}
+
+.btnUserBlocked:hover {
+    background: url(/content/images/ico/userBlockedHover.png) no-repeat 50% 50%;
+}
+
+/* ==========================================================================
+header search area form
+========================================================================== */
+
+form {
+    display: inline-block;
+    vertical-align: auto;
+    position: relative;
+}
+input[type="search"] {
+    outline: none;
+    border: 2px solid #dededf;
+    padding: 5px 20px 5px 60px;
+    display: block;
+    width: 500px;
+    height: 55px;
+    font-size: 20pt;
+    color: #dadada;
+    background: #fff;
+    border-radius: 25px;
+    -webkit-border-radius: 265px;
+    -moz-border-radius: 265px;
+    border-radius: 265px;
+    background-color: transparent;
+}
+button[type="search-submit"] {
+    position: absolute; left: 20px; top: 7px; right: 10px;
+    z-index: 9;
+    outline: none;
+    border: none;
+    display: inline-block;
+    background: url(/content/images/ico/searchico.png) no-repeat 50% 50%;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 10px;
+    border-radius: 25px;
+    cursor: pointer;
+}   
+button[type="search-submit"]:hover {
+    background-color: transparent;
+}
+::placeholder { 
+    color:#dadada;
 }
 
 /* ==========================================================================
@@ -12,54 +997,15 @@ Hide ng-cloak on page load, https://docs.angularjs.org/api/ng/directive/ngCloak
 }
 
 /* ==========================================================================
-Development Ribbon
-========================================================================== */
-.ribbon {
-    background-color: #a00;
-    box-shadow: 0 0 10px #888;
-    left: -3.5em;
-    moz-box-shadow: 0 0 10px #888;
-    moz-transform: rotate(-45deg);
-    ms-transform: rotate(-45deg);
-    o-transform: rotate(-45deg);
-    overflow: hidden;
-    position: absolute;
-    top: 40px;
-    transform: rotate(-45deg);
-    webkit-box-shadow: 0 0 10px #888;
-    webkit-transform: rotate(-45deg);
-    white-space: nowrap;
-    width: 15em;
-    z-index: 9999;
-    pointer-events: none;
-}
-
-.ribbon a {
-    border: 1px solid #faa;
-    color: #fff;
-    display: block;
-    font: bold 81.25% 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    margin: 1px 0;
-    padding: 10px 50px;
-    text-align: center;
-    text-decoration: none;
-    text-shadow: 0 0 5px #444;
-    pointer-events: none;
-}
-
-/* ==========================================================================
-Version number in navbar
-========================================================================== */
-.navbar-version {
-    font-size: 10px;
-    color: #444;
-}
-
-/* ==========================================================================
 navbar text
 ========================================================================== */
 .navbar-default .navbar-brand {
     color: #444;
+}
+
+.navbar-collapse {
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
 /* ==========================================================================
@@ -82,6 +1028,16 @@ Logo styles
 .logo .logo-img {
     height: 45px;
     display: inline-block;
+}
+
+/* ==========================================================================
+Navbar vertical
+========================================================================== */
+
+.navmenu {
+    width: 100px;
+    padding: auto;
+    margin: auto;
 }
 
 /* ==========================================================================

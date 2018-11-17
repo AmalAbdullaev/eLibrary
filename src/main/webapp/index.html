@@ -25,17 +25,42 @@
     <!--[if lt IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <page-ribbon></page-ribbon>
-    <div ui-view="navbar" ng-cloak></div>
-    <div class="container">
-        <div class="well" ui-view="content">
-            <!-- Angular views -->
+    
+    <div class="wrapper">
+       
+        <div id="sidebar">
+            <div ui-view="navbar" ng-cloak></div>
+        </div>
+    
+        <div id="header">
+            <div class="container">
+                <div class="rowhead">
+                    <div ui-view="header" ng-cloak>
+                        <!-- Angular views -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="rowcontent">
+            <div class="col-md-2"></div>
+            
+            <div class="col-md-10">
+                <div id="info">
+                    <div class="container">
+                        <div class="well" ui-view="content">
+                            <!-- Angular views -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="footer" ng-cloak>
+        <!-- <div class="footer" ng-cloak>
             <p data-translate="footer">This is your footer</p>
-        </div>
+        </div> -->
     </div>
+
     <noscript>
         <h1>You must enable javascript to view this page.</h1>
     </noscript>
@@ -103,6 +128,7 @@
     <script src="app/services/auth/account.service.js"></script>
     <script src="app/layouts/navbar/navbar.controller.js"></script>
     <script src="app/layouts/navbar/active-menu.directive.js"></script>
+    <script src="app/layouts/header/header.controller.js"></script>
     <script src="app/layouts/error/error.state.js"></script>
     <script src="app/home/home.state.js"></script>
     <script src="app/home/home.controller.js"></script>
@@ -131,9 +157,9 @@
     <script src="app/entities/favorite-book/favorite-book.service.js"></script>
     <script src="app/entities/favorite-book/favorite-book.controller.js"></script>
     <script src="app/entities/entity.state.js"></script>
-    <script src="app/entities/book/book-dialog.controller.js"></script>
     <script src="app/entities/book/book-detail.controller.js"></script>
     <script src="app/entities/book/book-delete-dialog.controller.js"></script>
+    <script src="app/entities/book/book-add.controller.js"></script>
     <script src="app/entities/book/book.state.js"></script>
     <script src="app/entities/book/book.service.js"></script>
     <script src="app/entities/book/book.controller.js"></script>

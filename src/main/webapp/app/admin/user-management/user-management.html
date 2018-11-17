@@ -1,24 +1,85 @@
-<div>
+<div class="container">
+    <h2>
+        Пользователи
+        <button class="btn btn-primary" ui-sref="user-management.new" >
+            <span data-translate="userManagement.home.createLabel">Create a new User</span>
+        </button>
+    </h2>
+    
+    <div>
+        <div class="userManagementList">
+            <div class="userManagementViewUser" ng-repeat="user in vm.users track by user.id">
+                <div class="userManagementPhoto"><div class="userManagementAvatar"></div></div>
+                <div class="userManagementName">{{user.id}}</div>
+                <div class="userManagementLogin">{{user.login}}</div>
+                <div class="userManagementBtns">
+                    <a ui-sref="book-detail({id:book.path})"><button class="btnUserBlocked"></button></a>
+                    <a ui-sref="book-detail({id:book.path})"><button class="btnUserTrust"></button></a>
+                    <a ui-sref="book-detail({id:book.path})"><button class="btnUserEdit" ui-sref="user-management.edit({login:user.login})"></button></a>
+                    <a ui-sref="book-detail({id:book.path})"><button class="btnUserDelete" ui-sref="user-management.delete({login:user.login})"></button></a>
+                </div>
+                <div class="userManagementEmail">{{user.email}}</div>
+            </div>
+        </div>
+        
+        <div class="AllBookCounter">
+            <img class="AllImgCenter" src="/content/images/ico/AllBookCounter.png" width="70%">
+            <div class="counterNum">123</div>
+            <div class="counterName">Книг</div>
+        </div>
+
+        <div class="AllUserCounter">
+            <img class="AllImgCenter" src="/content/images/ico/AllUserCounter.png" width="70%">
+            <div class="counterNum">228</div>
+            <div class="counterName">Пользователей</div>
+        </div>
+    </div>
+    
+</div>
+
+<!-- <div>
     <h2 data-translate="userManagement.home.title">Users</h2>
     <jhi-alert></jhi-alert>
     <div class="row">
-      <div class="col-md-4">
-          <button class="btn btn-primary" ui-sref="user-management.new">
-              <span class="glyphicon glyphicon-flash"></span> <span data-translate="userManagement.home.createLabel">Create a new User</span>
-          </button>
-      </div>
+        <div class="row col-md-4">
+            <button class="btn btn-primary" ui-sref="user-management.new">
+                <span class="glyphicon glyphicon-flash"></span>
+                <span data-translate="userManagement.home.createLabel">Create a new User</span>
+            </button>
+            <span uib-dropdown on-toggle="toggled()">
+                <input type="text" class="form-control" style="display: inline; width: 30%;" id="search-dropdown"
+                       placeholder="Введите логин, email, имя или фамилию" ng-model="searchText">
+                <button id="simple-dropdown" class="btn btn-primary" uib-dropdown-toggle>Поиск</button>
+                <ul class="dropdown-menu" style="width: 83%;" uib-dropdown-menu>
+                    <li ng-repeat="user in vm.foundUsers">
+                        <a ui-sref="user-management-detail({login: user.login})">{{user.login}}
+                            | {{user.firstName}} {{user.lastName}}</a>
+                    </li>
+                </ul>
+            </span>
+        </div>
     </div>
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
             <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                <th jh-sort-by="id"><span data-translate="global.field.id">ID</span><span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="login"><span data-translate="userManagement.login">Login</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="email"><span data-translate="userManagement.email">Email</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="id"><span data-translate="global.field.id">ID</span><span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="login"><span data-translate="userManagement.login">Login</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="email"><span data-translate="userManagement.email">Email</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
                 <th></th>
-                <th  jh-sort-by="langKey"> <span data-translate="userManagement.langKey">Lang Key</span> <span class="glyphicon glyphicon-sort"></span></th>                <th><span data-translate="userManagement.profiles">Profiles</span></th>                <th jh-sort-by="createdDate"><span data-translate="userManagement.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="lastModifiedBy"><span data-translate="userManagement.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="lastModifiedDate"><span data-translate="userManagement.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="langKey"><span data-translate="userManagement.langKey">Lang Key</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th><span data-translate="userManagement.profiles">Profiles</span></th>
+                <th jh-sort-by="createdDate"><span data-translate="userManagement.createdDate">Created Date</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="lastModifiedBy"><span
+                    data-translate="userManagement.lastModifiedBy">Last Modified By</span> <span
+                    class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="lastModifiedDate"><span data-translate="userManagement.lastModifiedDate">Last Modified Date</span>
+                    <span class="glyphicon glyphicon-sort"></span></th>
                 <th></th>
             </tr>
             </thead>
@@ -29,9 +90,12 @@
                 <td>{{user.email}}</td>
                 <td>
                     <button class="btn btn-danger btn-xs" ng-click="vm.setActive(user, true)" ng-show="!user.activated"
-                            data-translate="userManagement.deactivated">Deactivated</button>
+                            data-translate="userManagement.deactivated">Deactivated
+                    </button>
                     <button class="btn btn-success btn-xs" ng-click="vm.setActive(user, false)" ng-show="user.activated"
-                            ng-disabled="vm.currentAccount.login === user.login" data-translate="userManagement.activated">Activated</button>
+                            ng-disabled="vm.currentAccount.login === user.login"
+                            data-translate="userManagement.activated">Activated
+                    </button>
                 </td>
                 <td>{{user.langKey}}</td>
                 <td>
@@ -50,9 +114,7 @@
                             <span class="glyphicon glyphicon-eye-open"></span>
                             <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
                         </button>
-                        <button type="submit"
-                                ui-sref="user-management.edit({login:user.login})"
-                                class="btn btn-primary btn-sm">
+                        <button type="submit" ui-sref="user-management.edit({login:user.login})" class="btn btn-primary btn-sm">
                             <span class="glyphicon glyphicon-pencil"></span>
                             <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
                         </button>
@@ -70,6 +132,7 @@
     </div>
     <div class="text-center">
         <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage"
+                        ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
     </div>
-</div>
+</div> -->

@@ -1,5 +1,87 @@
+<div class="container">
+    <h2>Библиотека</h2>
+    
+        <!-- Жанры -->
+        <div class="libraryGenre">
+            Жанры
+        </div>
+
+        <!-- Рекомендации -->
+        <div class="libraryRecommendation">
+            <div><h3>Рекомендации</h3></div>
+            
+            <div class="recommendationBooks">
+
+                <div class="rBook" ng-repeat="book in vm.books track by book.id">
+                    <div class="libRecommendBookCover">{{book.coverPath}}</div>
+                    <div class="libRecommendBookInfo">
+                        <div class="bookReaded">Прочитано</div>
+                        <div class="bookTitle">{{book.title}}</div>
+                        <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
+                        
+                        <div class="bookButtons">
+                                <a ui-sref="book-detail({id:book.path})"><button class="btnLibReadBook2">Читать</button></a>
+                            <button class="btnLibFavoriteBook"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rBook"></div>
+                <div class="rBook"></div>
+                <div class="rBook"></div>
+                <div class="rBook"></div>
+                <div class="rBook"></div>
+
+            </div>
+        </div>
+
+        <!-- все Книги -->
+        <div class="libraryBooks">
+            <div class="myLibBooksTitle2">
+                <div class="myLibBooksTitle">
+                    <h3>Книги</h3>
+                </div>
+        
+                <select type="myBookLibSort" class="browser-default custom-select" placeholder="Сортировка">
+                    <option selected>По убыванию</option>
+                    <option value="1">По возрастанию</option>
+                    <option value="2">Сначала новые</option>
+                    <option value="3">Сначала старые</option>
+                </select>
+            </div>
+
+            <div class="libraryAllBooks">
+                
+                <div class="libBook" ng-repeat="book in vm.books track by book.id">
+                    <div class="libBookCover">{{book.coverPath}}</div>
+                    <div class="libBookInfo">
+                        <div class="bookReaded2">Прочитано</div>
+                        <div class="bookTitle" ui-sref="book-detail({id:book.id})">{{book.title}}</div>
+                        <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
+                        <div class="bookButtons">
+                            <a ui-sref="book-detail({id:book.path})"><button class="btnLibReadBook2">Читать</button></a>
+                            <button class="btnLibDeleteBook" type="submit" ui-sref="book.delete({id:book.id})" has-authority="ROLE_ADMIN">
+                            </button>
+                            <button class="btnLibFavoriteBook"></button>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="libBook">Еще книга</div>
+                <div class="libBook">Еще книга</div>
+                <div class="libBook">Еще книга</div>
+                <div class="libBook">Еще книга</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--
 <div>
-    <h2 data-translate="eLibraryApp.book.home.title">Books</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
@@ -37,6 +119,7 @@
                     <th></th>
                 </tr>
             </thead>
+            
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
                 <tr ng-repeat="book in vm.books track by book.id">
                     <td><a ui-sref="book-detail({id:book.id})">{{book.id}}</a></td>
@@ -61,9 +144,7 @@
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="book-detail({id:book.id})"
-                                    class="btn btn-info btn-sm">
+                            <button type="submit" ui-sref="book-detail({id:book.id})" class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
@@ -86,3 +167,4 @@
         </table>
     </div>
 </div>
+-->

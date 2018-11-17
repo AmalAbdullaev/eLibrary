@@ -3,11 +3,11 @@
 
     angular
         .module('eLibraryApp')
-        .controller('BookDialogController', BookDialogController);
+        .controller('BookAddController', BookAddController);
 
-    BookDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Book', 'Profile', 'Genre', 'Upload'];
+    BookAddController.$inject = ['$timeout', '$scope', '$stateParams',  'DataUtils', 'entity', 'Book', 'Profile', 'Genre', 'Upload','Principal'];
 
-    function BookDialogController($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Book, Profile, Genre, Upload) {
+    function BookAddController($timeout, $scope, $stateParams,DataUtils, entity, Book, Profile, Genre, Upload,Principal) {
         var vm = this;
 
         vm.book = entity;
@@ -17,34 +17,46 @@
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
         vm.save = save;
-        vm.profiles = Profile.query();
+        vm.account = null;
         vm.genres = Genre.query();
+
+        $scope.isCoverUploading = false;
+        $scope.isBookUploading = false;
+        $scope.isAlertVisible = false;
+        $scope.alert = {
+            type: 'success',
+            message: null
+        };
+
+        $scope.closeAlert = function() {
+            $scope.alert.type = null;
+            $scope.alert.message = null;
+            $scope.isAlertVisible = false;
+        };
 
         $timeout(function () {
             angular.element('.form-group:eq(1)>input').focus();
+
         });
 
-        // function upload(file, id, type) {
-        //     Upload.upload({
-        //         url: '/api/books/upload',
-        //         data: {file: file, id: id, type: type}
-        //     }).then(function (resp) {
-        //         console.log('Success ' + resp.config.data.file.name + ' uploaded');
-        //         if(book.path == null)
-        //             vm.book.path = resp.path;
-        //         else
-        //             vm.book.coverPath = resp.coverPath;
-        //         $scope.$emit('eLibraryApp:bookUpdate', resp);
-        //         uploadCover();
-        //     }, function (resp) {
-        //         console.log('Error status: ' + resp.status);
-        //     }, function (evt) {
-        //         $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-        //     });
-        // }
+        function showAlert(type, message) {
+            $scope.alert.type = type;
+            $scope.alert.message = message;
+            $scope.isAlertVisible = true;
+        }
 
         function clear() {
-            $uibModalInstance.dismiss('cancel');
+          //  $uibModalInstance.dismiss('cancel');
+        }
+
+        Principal.identity().then(function(user) {
+            if (!(user.id in [1, 2, 3, 4]))
+            Profile.getProfile({userId:user.id},onSuccess);
+        });
+
+        function onSuccess(result) {
+            vm.book.profileId = result.id;
+            console.log( vm.book.profileId );
         }
 
         function save() {
@@ -67,27 +79,37 @@
                 url: '/api/books/upload',
                 data: {file: vm.bookFile, id: vm.book.id, type: 'book'}
             }).then(function (resp) {
+                $scope.isBookUploading = false;
                 console.log('Success ' + resp.config.data.file.name + ' uploaded');
                 $scope.$emit('eLibraryApp:bookUpdate', resp);
                 Upload.upload({
                     url: '/api/books/upload',
                     data: {file: vm.coverFile, id: vm.book.id, type: 'cover'}
                 }).then(function (resp) {
+                    $scope.isCoverUploading = false;
                     console.log('Success ' + resp.config.data.file.name + ' uploaded');
                     $scope.$emit('eLibraryApp:bookUpdate', resp);
+                    showAlert('success', 'Книга ' + vm.book.title + ' успешно загружена');
+                    vm.book = entity;
                 }, function (resp) {
+                    showAlert('success', 'Не удалось загрузить книгу '
+                        + vm.book.title + '. Статус: ' + resp.status);
                     console.log('Error status: ' + resp.status);
                 }, function (evt) {
-                    $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    $scope.isCoverUploading = true;
+                    $scope.coverProgressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                 });
             }, function (resp) {
+                showAlert('success', 'Не удалось загрузить книгу '
+                    + vm.book.title + '. Статус: ' + resp.status);
                 console.log('Error status: ' + resp.status);
             }, function (evt) {
-                $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                $scope.isBookUploading = true;
+                $scope.bookProgressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             });
             // upload(vm.bookFile, vm.book.id, 'book');
             // upload(vm.coverFile, vm.book.id, 'cover');
-            $uibModalInstance.close(result);
+            //$uibModalInstance.close(result);
             vm.isSaving = false;
         }
 

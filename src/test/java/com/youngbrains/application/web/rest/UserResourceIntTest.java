@@ -1,12 +1,12 @@
 package com.youngbrains.application.web.rest;
 
 import com.youngbrains.application.ELibraryApp;
-import com.youngbrains.application.config.CacheConfiguration;
 import com.youngbrains.application.domain.Authority;
 import com.youngbrains.application.domain.User;
 import com.youngbrains.application.repository.UserRepository;
 import com.youngbrains.application.security.AuthoritiesConstants;
 import com.youngbrains.application.service.MailService;
+import com.youngbrains.application.service.UserQueryService;
 import com.youngbrains.application.service.UserService;
 import com.youngbrains.application.service.dto.UserDTO;
 import com.youngbrains.application.service.mapper.UserMapper;
@@ -74,6 +74,9 @@ public class UserResourceIntTest {
     private UserRepository userRepository;
 
     @Autowired
+    private UserQueryService userQueryService;
+
+    @Autowired
     private MailService mailService;
 
     @Autowired
@@ -106,7 +109,7 @@ public class UserResourceIntTest {
         MockitoAnnotations.initMocks(this);
         cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).clear();
         cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).clear();
-        UserResource userResource = new UserResource(userRepository, userService, mailService);
+        UserResource userResource = new UserResource(userRepository, userService, userQueryService, mailService);
         this.restUserMockMvc = MockMvcBuilders.standaloneSetup(userResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
