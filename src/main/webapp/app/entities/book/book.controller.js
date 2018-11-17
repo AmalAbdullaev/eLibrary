@@ -1,17 +1,18 @@
-(function() {
+(function () {
     'use strict';
 
     angular
         .module('eLibraryApp')
         .controller('BookController', BookController);
 
-    BookController.$inject = ['DataUtils', 'Book', 'ParseLinks', 'AlertService', 'paginationConstants'];
+    BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'ParseLinks', 'AlertService', 'paginationConstants'];
 
-    function BookController(DataUtils, Book, ParseLinks, AlertService, paginationConstants) {
+    function BookController($scope, $http, DataUtils, Book, ParseLinks, AlertService, paginationConstants) {
 
         var vm = this;
 
         vm.books = [];
+        vm.genres = [];
         vm.loadPage = loadPage;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.page = 0;
@@ -24,15 +25,18 @@
         vm.openFile = DataUtils.openFile;
         vm.byteSize = DataUtils.byteSize;
 
+        $scope.genres = [];
+
         loadAll();
+        loadAllGenres();
 
-
-        function loadAll () {
+        function loadAll() {
             Book.query({
                 page: vm.page,
                 size: vm.itemsPerPage,
                 sort: sort()
             }, onSuccess, onError);
+
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
                 if (vm.predicate !== 'id') {
@@ -54,7 +58,13 @@
             }
         }
 
-        function reset () {
+        function loadAllGenres() {
+            $http.get('/api/genres').success(function (data) {
+                vm.genres = data;
+            })
+        }
+
+        function reset() {
             vm.page = 0;
             vm.books = [];
             loadAll();

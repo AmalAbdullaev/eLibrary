@@ -114,21 +114,41 @@ public class BookService {
     public BookDTO uploadBook(MultipartFile file, Long id, String type) throws BadRequestException, FileSystemException {
         Book book = bookRepository.getOne(id);
         BookDTO bookDTO = bookMapper.toDto(book);
+        Transliterator transliterator = Transliterator.getInstance();
         String extension = "";
         int start = file.getOriginalFilename().lastIndexOf('.');
         if (start != -1)
             extension = file.getOriginalFilename().substring(start).trim();
         String fileName = StringUtils.cleanPath(bookDTO.getTitle() + extension);
+        fileName = transliterator.transliterate(fileName);
         Path targetLocation;
         switch (type) {
             case "book": {
-                targetLocation = bookStorageLocation.resolve(String.valueOf(id) + "-" + fileName);
+                Path profileDir = bookStorageLocation.resolve(bookDTO.getProfileId().toString());
+                boolean dirExists = Files.exists(profileDir);
+                if (!dirExists) {
+                    try {
+                        Files.createDirectories(profileDir);
+                    } catch (IOException e) {
+                        throw new FileSystemException("Could not create profile directory: " + profileDir.getFileName());
+                    }
+                }
+                targetLocation = profileDir.resolve(String.valueOf(id) + "-" + fileName);
                 bookDTO.setPath(targetLocation.toString());
                 break;
             }
             case "cover": {
-                targetLocation = coverStorageLocation.resolve(String.valueOf(id) + "-cover-" + fileName);
-                bookDTO.setCoverPath(targetLocation.toString());
+                Path profileDir = coverStorageLocation.resolve(bookDTO.getProfileId().toString());
+                boolean dirExists = Files.exists(profileDir);
+                if (!dirExists)
+                    try {
+                        Files.createDirectories(profileDir);
+                    } catch (IOException e) {
+                        throw new FileSystemException("Could not create profile directory: " + profileDir.getFileName());
+                    }
+                targetLocation = profileDir.resolve(String.valueOf(id) + "-cover-" + fileName);
+                bookDTO.setCoverPath("/content/images/" + bookDTO.getProfileId() + "/" + bookDTO.getId() +
+                    "-cover-" + fileName);
                 break;
             }
             default:

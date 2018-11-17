@@ -2,8 +2,8 @@
     <h2>Библиотека</h2>
     
         <!-- Жанры -->
-        <div class="libraryGenre">
-            Жанры
+        <div class="col-md-3 libraryGenre" ng-repeat="genre in vm.genres track by genre.id">
+            <div>{{genre.name}}</div>
         </div>
 
         <!-- Рекомендации -->
@@ -13,25 +13,17 @@
             <div class="recommendationBooks">
 
                 <div class="rBook" ng-repeat="book in vm.books track by book.id">
-                    <div class="libRecommendBookCover">{{book.coverPath}}</div>
+                    <img ng-src="{{book.coverPath}}">
                     <div class="libRecommendBookInfo">
                         <div class="bookReaded">Прочитано</div>
                         <div class="bookTitle">{{book.title}}</div>
                         <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
-                        
                         <div class="bookButtons">
-                                <a ui-sref="book-detail({id:book.path})"><button class="btnLibReadBook2">Читать</button></a>
+                                <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
                             <button class="btnLibFavoriteBook"></button>
                         </div>
                     </div>
                 </div>
-
-                <div class="rBook"></div>
-                <div class="rBook"></div>
-                <div class="rBook"></div>
-                <div class="rBook"></div>
-                <div class="rBook"></div>
-
             </div>
         </div>
 
@@ -53,15 +45,14 @@
             <div class="libraryAllBooks">
                 
                 <div class="libBook" ng-repeat="book in vm.books track by book.id" | ng-if = "book.approved===true">
-                    <div class="libBookCover">{{book.coverPath}}</div>
+                    <div class="libBookCover"><img ng-src="{{book.coverPath}}" width="100%"></div>
                     <div class="libBookInfo">
                         <div class="bookReaded2">Прочитано</div>
                         <div class="bookTitle" ui-sref="book-detail({id:book.id})">{{book.title}}</div>
                         <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                         <div class="bookButtons">
-                            <a ui-sref="book-detail({id:book.path})"><button class="btnLibReadBook2">Читать</button></a>
-                            <button class="btnLibDeleteBook" type="submit" ui-sref="book.delete({id:book.id})" has-authority="ROLE_ADMIN">
-                            </button>
+                            <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
+                            <!-- <button class="btnLibDeleteBook" type="submit" ui-sref="book.delete({id:book.id})" has-authority="ROLE_ADMIN"></button> -->
                             <button class="btnLibFavoriteBook"></button>
                         </div>
                     </div>

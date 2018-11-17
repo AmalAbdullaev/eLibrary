@@ -1,0 +1,5 @@
+id;trusted;banned;user_id
+1;true;false;1
+2;false;false;2
+3;true;false;3
+4;false;false;4

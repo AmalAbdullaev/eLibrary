@@ -95,115 +95,24 @@
             <option value="3">Сначала старые</option>
         </select>
 
-        <div class="bookSection">
+        <div class="bookSection" >
 
-            <div class="singleBook">
+            <div class="singleBook" ng-repeat="book in vm.allBooks" ng-if = "book.approved===true && book.profileId === vm.book.profileId">
                 <div class="singleBookCover">
-                    <img src="/content/images/ico/testbook.png" width="100%">
+                    <img ng-src="{{book.coverPath}}" width="100%">
                 </div>
                 <div class="singleBookInfo">
                     <div class="divv">
-                        <textarea name="Опубликовал" readonly>Andrew DD</textarea>
+                        <textarea name="Название книги" readonly>{{book.title}}</textarea>
                     </div>
                     <div class="divv">
-                        <textarea name="Название книги" readonly>Название книги</textarea>
-                    </div>
-                    <div class="divv">
-                        <textarea name="Имя автора" readonly>Имя автора</textarea>
+                        <textarea name="Имя автора" readonly>{{book.authorFirstName}} {{book.authorLastName}}</textarea>
                     </div>
                 </div>
-                <button class="btnDetail">Подробнее</button>
+                <button class="btnDetail" ui-sref="book-detail({id:book.id})">Подробнее</button>
             </div>
 
-            <div class="singleBook">
-                <div class="singleBookCover">
-                    <img src="/content/images/ico/testbook.png" width="100%">
-                </div>
-                <div class="singleBookInfo">
-                    <div class="divv">
-                        <textarea name="Опубликовал" readonly>Andrew DD</textarea>
-                    </div>
-                    <div class="divv">
-                        <textarea name="Название книги" readonly>Название книги</textarea>
-                    </div>
-                    <div class="divv">
-                        <textarea name="Имя автора" readonly>Имя автора</textarea>
-                    </div>
-                </div>
-                <button class="btnDetail">Подробнее</button>
-            </div>
 
-            <div class="singleBook">
-                <div class="singleBookCover">
-                    <img src="/content/images/ico/testbook.png" width="100%">
-                </div>
-                <div class="singleBookInfo">
-                    <div class="divv">
-                        <textarea name="Опубликовал" readonly>Andrew DD</textarea>
-                    </div>
-                    <div class="divv">
-                        <textarea name="Название книги" readonly>Название книги</textarea>
-                    </div>
-                    <div class="divv">
-                        <textarea name="Имя автора" readonly>Имя автора</textarea>
-                    </div>
-                </div>
-                <button class="btnDetail">Подробнее</button>
-            </div>
-
-            <div class="singleBook">
-                <div class="singleBookCover">
-                    <img src="/content/images/ico/testbook.png" width="100%">
-                </div>
-                <div class="singleBookInfo">
-                    <div class="divv">
-                        <textarea name="Опубликовал" readonly>Andrew DD</textarea>
-                    </div>
-                    <div class="divv">
-                        <textarea name="Название книги" readonly>Название книги</textarea>
-                    </div>
-                    <div class="divv">
-                        <textarea name="Имя автора" readonly>Имя автора</textarea>
-                    </div>
-                </div>
-                <button class="btnDetail">Подробнее</button>
-            </div>
-
-            <div class="singleBook">
-                <div class="singleBookCover">
-                    <img src="/content/images/ico/testbook.png" width="100%">
-                </div>
-                <div class="singleBookInfo">
-                    <div class="divv">
-                        <textarea name="Опубликовал" readonly>Andrew DD</textarea>
-                    </div>
-                    <div class="divv">
-                        <textarea name="Название книги" readonly>Название книги</textarea>
-                    </div>
-                    <div class="divv">
-                        <textarea name="Имя автора" readonly>Имя автора</textarea>
-                    </div>
-                </div>
-                <button class="btnDetail">Подробнее</button>
-            </div>
-
-            <div class="singleBook">
-                <div class="singleBookCover">
-                    <img src="/content/images/ico/testbook.png" width="100%">
-                </div>
-                <div class="singleBookInfo">
-                    <div class="divv">
-                        <textarea name="Опубликовал" readonly>Andrew DD</textarea>
-                    </div>
-                    <div class="divv">
-                        <textarea name="Название книги" readonly>Название книги</textarea>
-                    </div>
-                    <div class="divv">
-                        <textarea name="Имя автора" readonly>Имя автора</textarea>
-                    </div>
-                </div>
-                <button class="btnDetail">Подробнее</button>
-            </div>
 
         </div>
     </div>
