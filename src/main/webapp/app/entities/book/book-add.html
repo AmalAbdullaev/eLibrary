@@ -1,7 +1,7 @@
 <div class="container">
     <h2>Предложить книгу</h2>
     <div class="addBook">
-        <div uib-alert close="closeAlert()" ng-show="isAlertVisible">{{alert.message}}</div>
+        <div uib-alert  ng-show="isAlertVisible">{{alert.message}}</div>
         <!-- Добавление книги/обложки/отправка -->
         <div class="col-md-3">
             <!-- Обложка -->
@@ -44,100 +44,41 @@
         <!-- Книги, ожидающие проверки -->
         <div class="col-md-3">
             <div class="addWaitBook">
-
+                
                 <div class="waitBooksTitle">
                     <h3>Ожидают проверки</h3>
                 </div>
 
                 <div class="waitBooksScroll">
 
-                    <div class="singleBookWait">
+                    <div class="singleBookWait" ng-repeat="book in vm.allBooks" | ng-if = "book.approved===false && book.profileId === vm.book.profileId" >
                         <div class="singleBookWCover">
-                            <img src="/content/images/ico/testbook.png" width="100%">
+                            <img ng-src="{{book.coverPath}}" width="100%">
+                            
                         </div>
                         <div class="singleBookWInfo">
 
                             <div class="divv">
-                                <textarea name="Название книги" readonly>Название книги</textarea>
+                                <textarea name="Название книги" readonly>{{book.title}}</textarea>
                             </div>
                             <div class="divv">
-                                <textarea name="Имя автора" readonly>Имя автора</textarea>
+                                <textarea name="Имя автора" readonly>{{book.authorFirstName}} {{book.authorLastName}}</textarea>
                             </div>
 
                         </div>
-                        <button class="btnDetail">Изменить</button>
+                    
                     </div>
-
-                    <div class="singleBookWait">
-                        <div class="singleBookWCover">
-                            <img src="/content/images/ico/testbook.png" width="100%">
-                        </div>
-                        <div class="singleBookWInfo">
-
-                            <div class="divv">
-                                <textarea name="Название книги" readonly>Название книги</textarea>
-                            </div>
-                            <div class="divv">
-                                <textarea name="Имя автора" readonly>Имя автора</textarea>
-                            </div>
-
-                        </div>
-                        <button class="btnDetail">Изменить</button>
-                    </div>
-
-                    <div class="singleBookWait">
-                        <div class="singleBookWCover">
-                            <img src="/content/images/ico/testbook.png" width="100%">
-                        </div>
-                        <div class="singleBookWInfo">
-
-                            <div class="divv">
-                                <textarea name="Название книги" readonly>Название книги</textarea>
-                            </div>
-                            <div class="divv">
-                                <textarea name="Имя автора" readonly>Имя автора</textarea>
-                            </div>
-
-                        </div>
-                        <button class="btnDetail">Изменить</button>
-                    </div>
-
-                    <div class="singleBookWait">
-                        <div class="singleBookWCover">
-                            <img src="/content/images/ico/testbook.png" width="100%">
-                        </div>
-                        <div class="singleBookWInfo">
-
-                            <div class="divv">
-                                <textarea name="Название книги" readonly>Название книги</textarea>
-                            </div>
-                            <div class="divv">
-                                <textarea name="Имя автора" readonly>Имя автора</textarea>
-                            </div>
-
-                        </div>
-                        <button class="btnDetail">Изменить</button>
-                    </div>
-
-                    <div class="singleBookWait">
-                        <div class="singleBookWCover">
-                            <img src="/content/images/ico/testbook.png" width="100%">
-                        </div>
-                        <div class="singleBookWInfo">
-
-                            <div class="divv">
-                                <textarea name="Название книги" readonly>Название книги</textarea>
-                            </div>
-                            <div class="divv">
-                                <textarea name="Имя автора" readonly>Имя автора</textarea>
-                            </div>
-
-                        </div>
-                        <button class="btnDetail">Изменить</button>
-                    </div>
-
                 </div>
+
+
             </div>
+        
+
+        
+        <!--Ожидают проверки -->
+        
+
+        
         </div>
     </div>
 

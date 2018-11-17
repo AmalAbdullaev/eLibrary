@@ -52,7 +52,7 @@
 
             <div class="libraryAllBooks">
                 
-                <div class="libBook" ng-repeat="book in vm.books track by book.id">
+                <div class="libBook" ng-repeat="book in vm.books track by book.id" | ng-if = "book.approved===true">
                     <div class="libBookCover">{{book.coverPath}}</div>
                     <div class="libBookInfo">
                         <div class="bookReaded2">Прочитано</div>
@@ -67,12 +67,12 @@
                     </div>
                 </div>
 
-                
+                <!--
                 <div class="libBook">Еще книга</div>
                 <div class="libBook">Еще книга</div>
                 <div class="libBook">Еще книга</div>
                 <div class="libBook">Еще книга</div>
-
+                -->
             </div>
         </div>
     </div>
