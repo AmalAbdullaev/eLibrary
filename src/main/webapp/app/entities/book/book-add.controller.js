@@ -24,7 +24,7 @@
         $scope.isBookUploading = false;
         $scope.isAlertVisible = false;
         $scope.alert = {
-            type: null,
+            type: 'success',
             message: null
         };
 
@@ -90,6 +90,7 @@
                     console.log('Success ' + resp.config.data.file.name + ' uploaded');
                     $scope.$emit('eLibraryApp:bookUpdate', resp);
                     showAlert('success', 'Книга ' + vm.book.title + ' успешно загружена');
+                    vm.book = entity;
                 }, function (resp) {
                     showAlert('success', 'Не удалось загрузить книгу '
                         + vm.book.title + '. Статус: ' + resp.status);
