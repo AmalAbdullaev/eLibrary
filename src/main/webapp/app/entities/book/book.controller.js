@@ -5,13 +5,14 @@
         .module('eLibraryApp')
         .controller('BookController', BookController);
 
-    BookController.$inject = ['$scope', 'DataUtils', 'Book', 'ParseLinks', 'AlertService', 'paginationConstants'];
+    BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'ParseLinks', 'AlertService', 'paginationConstants'];
 
-    function BookController($scope, DataUtils, Book, ParseLinks, AlertService, paginationConstants) {
+    function BookController($scope, $http, DataUtils, Book, ParseLinks, AlertService, paginationConstants) {
 
         var vm = this;
 
         vm.books = [];
+        vm.genres = [];
         vm.loadPage = loadPage;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.page = 0;
@@ -24,13 +25,10 @@
         vm.openFile = DataUtils.openFile;
         vm.byteSize = DataUtils.byteSize;
 
-        vm.coverSrc = function (book) {
-            var title = book.title.replace(/ /g, '%20');
-            return '/content/images/' + book.profileId
-                + '/' + book.id + '-cover-' + title;
-        };
+        $scope.genres = [];
 
         loadAll();
+        loadAllGenres();
 
         function loadAll() {
             Book.query({
@@ -58,6 +56,12 @@
             function onError(error) {
                 AlertService.error(error.data.message);
             }
+        }
+
+        function loadAllGenres() {
+            $http.get('/api/genres').success(function (data) {
+                vm.genres = data;
+            })
         }
 
         function reset() {

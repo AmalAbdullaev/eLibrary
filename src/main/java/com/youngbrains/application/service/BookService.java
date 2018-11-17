@@ -114,11 +114,13 @@ public class BookService {
     public BookDTO uploadBook(MultipartFile file, Long id, String type) throws BadRequestException, FileSystemException {
         Book book = bookRepository.getOne(id);
         BookDTO bookDTO = bookMapper.toDto(book);
+        Transliterator transliterator = Transliterator.getInstance();
         String extension = "";
         int start = file.getOriginalFilename().lastIndexOf('.');
         if (start != -1)
             extension = file.getOriginalFilename().substring(start).trim();
         String fileName = StringUtils.cleanPath(bookDTO.getTitle() + extension);
+        fileName = transliterator.transliterate(fileName);
         Path targetLocation;
         switch (type) {
             case "book": {
@@ -145,7 +147,8 @@ public class BookService {
                         throw new FileSystemException("Could not create profile directory: " + profileDir.getFileName());
                     }
                 targetLocation = profileDir.resolve(String.valueOf(id) + "-cover-" + fileName);
-                bookDTO.setCoverPath(targetLocation.toString());
+                bookDTO.setCoverPath("/content/images/" + bookDTO.getProfileId() + "/" + bookDTO.getId() +
+                    "-cover-" + fileName);
                 break;
             }
             default:
