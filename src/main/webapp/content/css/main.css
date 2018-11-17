@@ -218,9 +218,10 @@ input[type="addBookOther"] {
 }
 
 .file_upload_cover {
-    background-color: white;
     margin-bottom: 15px;
-    background: url(/content/images/ico/addcover.png) no-repeat 50% 50%;
+    background-image: url(/content/images/ico/addcover.png);
+    background-repeat: no-repeat;
+    background-position: center;
     width: 100%;
     height: 320px;
 }
@@ -940,6 +941,145 @@ IMG.AllImgCenter {
 
 .btnUserBlocked:hover {
     background: url(/content/images/ico/userBlockedHover.png) no-repeat 50% 50%;
+}
+
+
+/* ==========================================================================
+Админ - Уведомления
+========================================================================== */
+
+.libraryNotification {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 2%;
+    float: left;
+}
+
+.singleNotification {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    margin-bottom: 1%;
+    float: left;
+}
+
+.singleNotification:hover {
+    box-shadow: 0 0 2px 2px rgb(0, 0, 0, 0.1);
+}
+
+.nBookCover {
+    background-color: yellow;
+    float: left;
+    border-radius: 5px;
+    margin-right: 1%
+}
+
+.nBookInfo {
+    width: 25%;
+    height: 100%;
+    float: left;
+    border-radius: 5px;
+    margin-right: 1%;
+    word-break:break-all;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.nBookDescription {
+    width: 50%;
+    float: left;
+    border-radius: 5px;
+    padding-left: 1%;
+    padding-right: 1%;
+    margin-right: 1%
+}
+
+.nButtons {
+    width: 10%;
+    float: right;
+    border-radius: 5px;
+}
+
+.nBookInfoTitle {
+    border-radius: 5px;
+    float: left;
+    margin-bottom: 2%;
+    color: #000;
+    font-size: 11pt;
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    word-break:break-all;
+}
+
+.nBookBText {
+    width: 100%;
+    float: left;
+}
+
+.nBookBText1 {
+    width: 35%;
+    font-size: 11pt;
+    font-weight: bold;
+    float: left;
+}
+
+.nBookBText2 {
+    width: 65%;
+    font-size: 11pt;
+    float: left;
+}
+
+.nBtnRead {
+    background-color: #dfdfdf;
+    color: white;
+    width: 100%;
+    height: 35px;
+    font-size: 14px;
+    border: none;
+    vertical-align: bottom;
+    border-radius: 5px;
+    float: right;
+    margin-bottom: 10%;
+}
+.nBtnRead:hover {
+    color: white;
+    background-color: #d65600;
+}
+
+.nBtnPublish {
+    background-color: #dfdfdf;
+    color: white;
+    width: 100%;
+    height: 35px;
+    font-size: 14px;
+    border: none;
+    vertical-align: bottom;
+    border-radius: 5px;
+    float: right;
+    margin-bottom: 2%;
+}
+.nBtnPublish:hover {
+    color: white;
+    background-color: #00d323;
+}
+
+.nBtnCancel {
+    background-color: #dfdfdf;
+    color: white;
+    width: 100%;
+    height: 35px;
+    font-size: 14px;
+    border: none;
+    vertical-align: bottom;
+    border-radius: 5px;
+    float: right;
+}
+.nBtnCancel:hover {
+    color: white;
+    background-color: #f51d1d;
 }
 
 /* ==========================================================================

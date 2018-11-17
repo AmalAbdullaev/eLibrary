@@ -49,136 +49,108 @@
         <span class="hidden-sm-down" data-translate="entity.action.back">Back</span>
     </button>
 </p>
+
 <div class="container" ng-hide="vm.isReading">
-    <div>
-        <!-- Обложка книги -->
-        <div class="bookDetailCover">
-            <div class="bookCover">
-                <span>{{vm.book.coverPath}}</span>
+    <h2>Уведомления</h2>
+    <div class="libraryNotification">
+        
+        <!-- 1 Уведомление -->
+        <div class="singleNotification"> 
+            <div class="nBookCover">
+                <img src="/content/images/ico/testbook.png">
+            </div> 
+            <div class="nBookInfo">
+                <div class="nBookText">
+                    <div class="nBookBText1">Название:</div>
+                    <div class="nBookBText2">Гарри Поттер и узник Algol60</div>
+                </div>
+                <div class="nBookText">
+                    <div class="nBookBText1">Автор:</div>
+                    <div class="nBookBText2">Бородатый Гик</div>
+                </div>
+                <div class="nBookText">
+                    <div class="nBookBText1">Жанр:</div>
+                    <div class="nBookBText2">Фантастическое программирование</div>
+                </div>
+                <div class="nBookText">
+                    <div class="nBookBText1">Год:</div>
+                    <div class="nBookBText2">1010</div>
+                </div>
+                <div class="nBookText">
+                    <div class="nBookBText1">Страниц:</div>
+                    <div class="nBookBText2">1010</div>
+                </div>
+                <div class="nBookText">
+                    <div class="nBookBText1">Предложил:</div>
+                    <div class="nBookBText2">Автор</div>
+                </div>
             </div>
-
-            <button type="button" class="btn btn-primary" ng-click="download()" has-authority="ROLE_USER">
-                <span class="hidden-sm-down" data-translate="entity.action.download">Download</span>
-            </button>
-
-            <button type="button" class="btn btn-primary" ng-click="read()" ng-show="vm.book.path.endsWith('.pdf')">
-                <span class="hidden-sm-down" data-translate="entity.action.read">Read</span>
-            </button>
-
-        </div>
-
-        <!-- Название и автор книги -->
-        <div class="bookDetailName">
-            <button type="button" ui-sref="book.delete({id:vm.book.id})" class="btn btn-danger" style="float:right" has-authority="ROLE_ADMIN">
-                <span class="glyphicon glyphicon-trash"></span>
-                <span class="hidden-sm-down">Удалить книгу</span>
-            </button>
-
-            <button type="submit" ui-sref="{{ vm.previousState }}" class="btn btn-info" style="float:right">
-                <span class="glyphicon glyphicon-arrow-left"></span>
-                <span>Назад</span>
-            </button>
-
-            <div class="h7">
-                <b>{{vm.book.title}}</b>
+            <div class="nBookDescription">
+                    <p><b>Описание</b></p>
+                    <p> Тут описание книгиТут описание книгиТут описание книгиТут описание книгиТут описание книги
+                        Тут описание книгиТут описание книгиТут описание книгиТут описание книгиТут описание книги
+                        Тут описание книгиТут описание книгиТут описание книгиТут описание книгиТут описание книги
+                    </p>
             </div>
-
-            <div class="h8">
-                {{vm.book.authorFirstName}} {{vm.book.authorLastName}}
-            </div>
-        </div>
-
-        <!-- Жанр и прочее о книге -->
-        <div class="bookDetailInfo">
-            <div class="h8">
-                <span>
-                    <b>Жанр:</b>
-                    {{vm.book.genreName}}
-                </span>
-            </div>
-            <div class="h8">
-                <span>
-                    <b>Год издания:</b>
-                    {{vm.book.yearOfPublishing}}
-                </span>
-            </div>
-            <div class="h8">
-                <span>
-                    <b>Страниц:</b>
-                    {{vm.book.pages}}
-                </span>
-            </div>
-            <div class="h8">
-                <span>
-                    <b>Предложил:</b>
-                    {{vm.book.createdBy}}
-                </span>
+            <div class="nButtons">
+                <!-- <button class="nBtnRead" ng-click="read()" ng-show="vm.book.path.endsWith('.pdf')">Читать</button> -->
+                <button class="nBtnRead">Читать</button>
+                <button class="nBtnPublish"><span class="glyphicon glyphicon-book"></span> Опубликовать</button>
+                <button class="nBtnCancel"><span class="glyphicon glyphicon-remove"></span> Отменить</button>
             </div>
         </div>
+        <!-- Конец уведомления -->
 
-        <!-- Описание -->
-        <div class="bookDetailDescription">
-            <div class="h8">
-                <span><b>Описание</b></span>
+
+        <!-- 1 Уведомление -->
+        <div class="singleNotification"> 
+            <div class="nBookCover">
+                <img src="/content/images/ico/testbook.png">
+            </div> 
+            <div class="nBookInfo">
+                <div class="nBookText">
+                    <div class="nBookBText1">Название:</div>
+                    <div class="nBookBText2">Гарри Поттер и узник Algol60</div>
+                </div>
+                <div class="nBookText">
+                    <div class="nBookBText1">Автор:</div>
+                    <div class="nBookBText2">Бородатый Гик</div>
+                </div>
+                <div class="nBookText">
+                    <div class="nBookBText1">Жанр:</div>
+                    <div class="nBookBText2">Фантастическое программирование</div>
+                </div>
+                <div class="nBookText">
+                    <div class="nBookBText1">Год:</div>
+                    <div class="nBookBText2">1010</div>
+                </div>
+                <div class="nBookText">
+                    <div class="nBookBText1">Страниц:</div>
+                    <div class="nBookBText2">1010</div>
+                </div>
+                <div class="nBookText">
+                    <div class="nBookBText1">Предложил:</div>
+                    <div class="nBookBText2">Автор</div>
+                </div>
             </div>
-            <div class="h9">
-                <span>{{vm.book.description}}</span>
+            <div class="nBookDescription">
+                    <p><b>Описание</b></p>
+                    <p> Тут описание книгиТут описание книгиТут описание книгиТут описание книгиТут описание книги
+                        Тут описание книгиТут описание книгиТут описание книгиТут описание книгиТут описание книги
+                        Тут описание книгиТут описание книгиТут описание книгиТут описание книгиТут описание книги
+                    </p>
+            </div>
+            <div class="nButtons">
+                <!-- <button class="nBtnRead" ng-click="read()" ng-show="vm.book.path.endsWith('.pdf')">Читать</button> -->
+                <button class="nBtnRead">Читать</button>
+                <button class="nBtnPublish"><span class="glyphicon glyphicon-book"></span> Опубликовать</button>
+                <button class="nBtnCancel"><span class="glyphicon glyphicon-remove"></span> Отменить</button>
             </div>
         </div>
-
-        <!-- Админ: дополнительная информация -->
-        <div class="bookDetailAdmin" has-authority="ROLE_ADMIN">
-            <div class="h9">
-                <span>
-                    <b>ID Книги:</b>
-                    {{vm.book.id}}
-                </span>
-            </div>
-            <div class="h9">
-                <span>
-                    <b>Жанр:</b>
-                    {{vm.book.genreName}}
-                </span>
-            </div>
-            <div class="h9">
-                <span>
-                    <b>Одобрена:</b>
-                    {{vm.book.approved}}
-                </span>
-            </div>
-            <div class="h9">
-                <span>
-                    <b>Добавил:</b>
-                    {{vm.book.createdBy}}
-                </span>
-            </div>
-            <div class="h9">
-                <span>
-                    <b>Дата добавления:</b>
-                    {{vm.book.createdDate | date:'medium'}}
-                </span>
-            </div>
-            <div class="h9">
-                <span>
-                    <b>Изменения внес:</b>
-                    {{vm.book.lastModifiedBy}}
-                </span>
-            </div>
-            <div class="h9">
-                <span>
-                    <b>Дата изменения:</b>
-                    {{vm.book.lastModifiedDate | date:'medium'}}
-                </span>
-            </div>
-            <div class="h9">
-                <span>
-                    <b>Владелец:</b>
-                    {{vm.book.profileId}}
-                </span>
-            </div>
-        </div>
+        <!-- Конец уведомления -->
+        
     </div>
-    <div>
+<div>
 
         <!-- <div>
                 <h2><span data-translate="eLibraryApp.book.detail.title">Book</span> {{vm.book.id}}</h2>
