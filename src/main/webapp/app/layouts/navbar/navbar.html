@@ -18,10 +18,10 @@
                 <ul class="nav navmenu-nav">
                     
                     <!-- Главная -->
-                    <li class="icobox"><a href="#"><img src="content/images/ico/logo.png"></a></li>
+                    <li class="icobox-logo" data-title="Главная страница"><a href="#"><img src="content/images/ico/logo.png"></a></li>
                     
                     <!-- Библиотека -->
-                    <li class="icobox">
+                    <li class="icobox" data-title="Библиотека">
                         <!-- <a ui-sref="book" ng-click="vm.collapseNavbar()" has-authority="ROLE_ANONYMOUS"> -->
                         <a ui-sref="book" ng-click="vm.collapseNavbar()">
                             <img src="content/images/ico/library.png">
@@ -29,14 +29,14 @@
                     </li>
 
                     <!-- Избранное -->
-                    <li class="icobox" ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" has-authority="ROLE_USER">
+                    <li class="icobox" data-title="Избранное" ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" has-authority="ROLE_USER">
                         <a ui-sref="favorite-book" ng-click="vm.collapseNavbar()">
                             <img src="content/images/ico/favorites.png">
                         </a>
                     </li>
 
                     <!-- Форма добавления книги -->
-                    <li class="icobox" has-authority="ROLE_USER">
+                    <li class="icobox" data-title="Добавить книгу" has-authority="ROLE_USER">
                         <!-- <a ui-sref="book" ng-click="vm.collapseNavbar()"> -->
                         <a ui-sref="book.new" ng-click="vm.collapseNavbar()">
                             <img src="content/images/ico/addbook.png">
@@ -44,21 +44,25 @@
                     </li>
                     
                     <!-- Админ: Управление пользователями -->
-                    <li class="icobox" ng-class="{active: vm.$state.includes('entity')}"  ng-switch-when="true" has-authority="ROLE_ADMIN">
+                    <li class="icobox" data-title="Управление пользователями" ng-class="{active: vm.$state.includes('entity')}"  ng-switch-when="true" has-authority="ROLE_ADMIN">
                         <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu" ui-sref="profile" ng-click="vm.collapseNavbar()">
                             <img src="content/images/ico/user.png">
                         </a>
                     </li>
                     
                     <!-- Админ: Уведомления -->
-                    <li class="icobox" ng-class="{active: vm.$state.includes('entity')}"  ng-switch-when="true" has-authority="ROLE_ADMIN">
+                    <li class="icobox" data-title="Уведомления" ng-class="{active: vm.$state.includes('entity')}"  ng-switch-when="true" has-authority="ROLE_ADMIN">
                         <a ui-sref="notification" ng-click="vm.collapseNavbar()">
                             <img src="content/images/ico/notice.png">
                         </a>
                     </li>
 
                     <!-- Админ: Статистика -->
+<<<<<<< HEAD
                     <li ng-class="{active: vm.$state.includes('admin')}"  ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown class="dropdown pointer">
+=======
+                    <li class="icobox" data-title="Статистика" ng-class="{active: vm.$state.includes('admin')}" ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown class="dropdown pointer">
+>>>>>>> homepage
                         <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
                             <img src="content/images/ico/admin.png">
                         </a>
@@ -109,7 +113,7 @@
                     </li>
     
                     <!-- Справка -->
-                    <li class="icobox"><img src="content/images/ico/help.png"></li>
+                    <li class="icobox" data-title="Справка"><img src="content/images/ico/help.png"></li>
                     
                     <!-- Сущности -->
                     <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer">
