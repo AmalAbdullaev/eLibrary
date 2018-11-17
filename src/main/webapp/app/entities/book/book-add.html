@@ -1,12 +1,7 @@
 <div class="container">
     <h3>Предложить книгу</h3>
     <div class="addBook">
-<<<<<<< HEAD
         <div uib-alert  ng-show="isAlertVisible">{{alert.message}}</div>
-=======
-        <div uib-alert close="closeAlert()" ng-show="isAlertVisible">{{alert.message}}</div>
-        
->>>>>>> homepage
         <!-- Добавление книги/обложки/отправка -->
         <div class="col-md-3 col-xs-12">
             <div class="addBookCover">
@@ -53,47 +48,19 @@
         
         <div class="col-md-2">
             <div class="addWaitBook">
-<<<<<<< HEAD
                 
-=======
->>>>>>> homepage
                 <div class="waitBooksTitle">
                     <p>Ожидают проверки</p>
                 </div>
 
                 <div class="waitBooksScroll">
 
-<<<<<<< HEAD
                     <div class="singleBookWait" ng-repeat="book in vm.allBooks" | ng-if = "book.approved===false && book.profileId === vm.book.profileId" >
-=======
-                    <div class="singleBookWait">
-                        <div class="singleBookWCover">
-                            <img src="/content/images/ico/testbook.png" width="100%">
-                        </div>
-                        <div class="singleBookWInfo">
-                            <div class="div">Название</div>
-                            <div class="div">Имя автора</div>
-                        </div>
-                    </div>
-
-                    <div class="singleBookWait">
-                        <div class="singleBookWCover">
-                            <img src="/content/images/ico/testbook.png" width="100%">
-                        </div>
-                        <div class="singleBookWInfo">
-                            <div class="div">Название</div>
-                            <div class="div">Имя автора</div>
-                        </div>
-                    </div>
-
-                    <div class="singleBookWait">
->>>>>>> homepage
                         <div class="singleBookWCover">
                             <img ng-src="{{book.coverPath}}" width="100%">
                             
                         </div>
                         <div class="singleBookWInfo">
-<<<<<<< HEAD
 
                             <div class="divv">
                                 <textarea name="Название книги" readonly>{{book.title}}</textarea>
@@ -104,25 +71,9 @@
 
                         </div>
                     
-=======
-                            <div class="div">Название</div>
-                            <div class="div">Имя автора</div>
-                        </div>
-                    </div>
-
-                    <div class="singleBookWait">
-                        <div class="singleBookWCover">
-                            <img src="/content/images/ico/testbook.png" width="100%">
-                        </div>
-                        <div class="singleBookWInfo">
-                            <div class="div">Название</div>
-                            <div class="div">Имя автора</div>
-                        </div>
->>>>>>> homepage
                     </div>
                 </div>
 
-<<<<<<< HEAD
 
             </div>
         
@@ -132,20 +83,6 @@
         
 
         
-=======
-                    <div class="singleBookWait">
-                        <div class="singleBookWCover">
-                            <img src="/content/images/ico/testbook.png" width="100%">
-                        </div>
-                        <div class="singleBookWInfo">
-                            <div class="div">Название</div>
-                            <div class="div">Имя автора</div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
->>>>>>> homepage
         </div>
     </div>
 
@@ -180,46 +117,6 @@
             </div>
 
 
-<<<<<<< HEAD
-
-=======
-            <div class="singleBook">
-                <div class="singleBookCover">
-                    <img src="/content/images/ico/testbook.png" width="100%">
-                </div>
-                <div class="singleBookInfo">
-                    <div class="divv">
-                        <textarea name="Опубликовал" readonly>Andrew DD</textarea>
-                    </div>
-                    <div class="divv">
-                        <textarea name="Название книги" readonly>Название книги</textarea>
-                    </div>
-                    <div class="divv">
-                        <textarea name="Имя автора" readonly>Имя автора</textarea>
-                    </div>
-                </div>
-                <button class="btnDetail">Подробнее</button>
-            </div>
-
-            <div class="singleBook">
-                <div class="singleBookCover">
-                    <img src="/content/images/ico/testbook.png" width="100%">
-                </div>
-                <div class="singleBookInfo">
-                    <div class="divv">
-                        <textarea name="Опубликовал" readonly>Andrew DD</textarea>
-                    </div>
-                    <div class="divv">
-                        <textarea name="Название книги" readonly>Название книги</textarea>
-                    </div>
-                    <div class="divv">
-                        <textarea name="Имя автора" readonly>Имя автора</textarea>
-                    </div>
-                </div>
-                <button class="btnDetail">Подробнее</button>
-            </div>
-        </div>
->>>>>>> homepage
         </div>
     </div>
 </div>
