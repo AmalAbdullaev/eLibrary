@@ -154,11 +154,36 @@
             }]
         })
 
+        // .state('book.delete', {
+        //     parent: 'book',
+        //     url: '/{id}/delete',
+        //     data: {
+        //         authorities: ['ROLE_USER']
+        //     },
+        //     onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+        //         $uibModal.open({
+        //             templateUrl: 'app/entities/book/book-delete-dialog.html',
+        //             controller: 'BookDeleteController',
+        //             controllerAs: 'vm',
+        //             size: 'md',
+        //             resolve: {
+        //                 entity: ['Book', function(Book) {
+        //                     return Book.get({id : $stateParams.id}).$promise;
+        //                 }]
+        //             }
+        //         }).result.then(function() {
+        //             $state.go('book', null, { reload: 'book' });
+        //         }, function() {
+        //             $state.go('^');
+        //         });
+        //     }]
+        // })
+
         .state('book.delete', {
             parent: 'book',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_USER']
+                authorities: ['ROLE_ADMIN']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -177,6 +202,29 @@
                     $state.go('^');
                 });
             }]
+        })
+
+        .state('notification', {
+            parent: 'entity',
+            url: '/notification',
+            data: {
+                authorities: ['ROLE_ADMIN'],
+                pageTitle: 'eLibraryApp.book.home.title'
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/entities/book/lib-notification.html',
+                    // controller: 'BookController',
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('book');
+                    $translatePartialLoader.addPart('global');
+                    return $translate.refresh();
+                }]
+            }
         });
     }
 
