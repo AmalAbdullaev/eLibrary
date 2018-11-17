@@ -53,7 +53,7 @@
             <div class="libraryAllBooks">
                 
                 <div class="libBook" ng-repeat="book in vm.books track by book.id">
-                    <div class="libBookCover">{{book.coverPath}}</div>
+                    <img ng-src="/content/images/">
                     <div class="libBookInfo">
                         <div class="bookReaded2">Прочитано</div>
                         <div class="bookTitle" ui-sref="book-detail({id:book.id})">{{book.title}}</div>
