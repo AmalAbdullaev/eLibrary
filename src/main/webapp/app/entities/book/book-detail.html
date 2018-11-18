@@ -54,7 +54,7 @@
         <!-- Обложка книги -->
         <div class="bookDetailCover">
             <div class="bookCover">
-                <span>{{vm.book.coverPath}}</span>
+                <img ng-src="{{vm.book.coverPath}}">
             </div>
 
             <button type="button" class="btn btn-primary" ng-click="download()" has-authority="ROLE_USER">

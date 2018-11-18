@@ -5,14 +5,14 @@
         .module('eLibraryApp')
         .controller('BookAddController', BookAddController);
 
+    BookAddController.$inject = ['$sce', '$timeout', '$scope', '$stateParams', 'DataUtils', 'entity', 'Book', 'Profile', 'Genre', 'Upload', 'Principal', '$state'];
 
-    BookAddController.$inject = ['$timeout', '$scope', '$stateParams',  'DataUtils', 'entity', 'Book', 'Profile', 'Genre', 'Upload','Principal','$state'];
-
-    function BookAddController($timeout, $scope, $stateParams,DataUtils, entity, Book, Profile, Genre, Upload,Principal,$state) {
+    function BookAddController($sce, $timeout, $scope, $stateParams, DataUtils, entity, Book, Profile, Genre, Upload, Principal, $state) {
 
         var vm = this;
 
         vm.book = entity;
+        vm.profile = null;
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
@@ -21,11 +21,6 @@
         vm.save = save;
         vm.account = null;
         vm.genres = Genre.query();
-        vm.allBooks = Book.query();
-        
-        
-            console.log(vm.allBooks);
-        
 
         $scope.isCoverUploading = false;
         $scope.isBookUploading = false;
@@ -35,26 +30,25 @@
             message: null
         };
 
-        function closeAlert () {
+        function closeAlert() {
 
             $scope.alert.type = null;
             $scope.alert.message = null;
             $scope.isAlertVisible = false;
-        };
+        }
 
         $timeout(function () {
             angular.element('.form-group:eq(1)>input').focus();
-
         });
 
         function showAlert(type, message) {
             $scope.alert.type = type;
             $scope.alert.message = message;
             $scope.isAlertVisible = true;
-            $timeout(function(){
+            $timeout(function () {
                 closeAlert();
                 $state.reload();
-            },1000);
+            }, 1000);
         }
 
         function clear() {
@@ -66,9 +60,18 @@
         });
 
         function onSuccess(result) {
-            vm.profileId = result.id;
+            vm.profile = result;
             vm.book.profileId = result.id;
-            
+            disableUploadIfBanned(vm.profile);
+        }
+
+        function disableUploadIfBanned(profile) {
+            if (profile.banned) {
+                $scope.bannedPopover = $sce.trustAsHtml('Вы были <span style=\"background: #e4002b; ' +
+                    'padding: 0 5px; border-radius: 5px\">заблокированы</span> администратором,' +
+                    'поэтому функция публикации книги для вас <span style="background: #e4002b; ' +
+                    'padding: 0 5px; border-radius: 5px\">недоступна</span>')
+            }
         }
 
         function save() {

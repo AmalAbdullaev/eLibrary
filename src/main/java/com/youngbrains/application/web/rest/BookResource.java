@@ -82,6 +82,9 @@ public class BookResource {
         if (bookDTO.getId() != null) {
             throw new BadRequestAlertException("A new book cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        ProfileDTO profile = profileService.findOne(bookDTO.getProfileId());
+        if (profile.isTrusted())
+            bookDTO.setApproved(true);
         BookDTO result = bookService.save(bookDTO);
         return ResponseEntity.created(new URI("/api/books/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
