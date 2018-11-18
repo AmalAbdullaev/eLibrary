@@ -22,6 +22,9 @@
         vm.account = null;
         vm.genres = Genre.query();
 
+        vm.allBooks = Book.query();
+        
+
         $scope.isCoverUploading = false;
         $scope.isBookUploading = false;
         $scope.isAlertVisible = false;
@@ -48,7 +51,7 @@
             $timeout(function () {
                 closeAlert();
                 $state.reload();
-            }, 1000);
+            },2000);
         }
 
         function clear() {

@@ -213,12 +213,31 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/book/lib-notification.html',
-                    // controller: 'BookController',
+                    templateUrl: 'app/entities/book/book-notification.html',
+                    controller: 'BookNotificationController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
+                entity: ["$stateParams", 'Book', function($stateParams,Book) {
+                    return {
+                        title: null,
+                        description: null,
+                        pages: null,
+                        approved: false,
+                        path: null,
+                        coverPath: null,
+                        createdBy: null,
+                        createdDate: null,
+                        lastModifiedBy: null,
+                        lastModifiedDate: null,
+                        yearOfPublishing: null,
+                        authorFirstName: null,
+                        authorLastName: null,
+                        id: null
+                    };
+                }],
+                
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('book');
                     $translatePartialLoader.addPart('global');
