@@ -5,9 +5,9 @@
             .module('eLibraryApp')
             .controller('BookController', BookController);
 
-        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'ParseLinks', 'AlertService', 'paginationConstants'];
+        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants'];
 
-        function BookController($scope, $http, DataUtils, Book, ParseLinks, AlertService, paginationConstants) {
+        function BookController($scope, $http, DataUtils, Book, FavoriteBook, ParseLinks, AlertService, paginationConstants) {
 
             var vm = this;
 
@@ -26,6 +26,29 @@
             vm.byteSize = DataUtils.byteSize;
 
             $scope.genres = [];
+
+            $scope.makeFavorite = function ($event) {
+                var elem = angular.element($event.currentTarget);
+                var book = elem.parents('.rBook').scope().book;
+                if (elem.hasClass('btnLibFavoriteBook')) {
+                    var favoriteBook = new FavoriteBook();
+                    favoriteBook.bookId = book.id;
+                    favoriteBook.profileId = book.profileId;
+                    elem.removeClass();
+                    elem.addClass('btnLibFavoriteBookChecked');
+                    FavoriteBook.save(favoriteBook);
+                }
+                else {
+                    elem.removeClass();
+                    elem.addClass('btnLibFavoriteBook');
+                    $http.get('/api/favorite-books?bookId.equals=' + book.id
+                        + '&profileId.equals=' + book.profileId).success(function (response) {
+                        response = response[0];
+                        FavoriteBook.delete({id: response.id})
+                    });
+                }
+            };
+
             $scope.options = {
                 data: [
                     {
@@ -56,10 +79,9 @@
             loadAllGenres();
 
             $scope.reloadAll = function () {
-                vm.books = [];
                 vm.predicate = $scope.options.selected.predicate;
                 vm.reverse = $scope.options.selected.reverse;
-                loadAll();
+                reset();
             };
 
             function loadAll() {

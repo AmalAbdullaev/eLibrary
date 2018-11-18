@@ -1,7 +1,9 @@
 package com.youngbrains.application.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.youngbrains.application.service.FavoriteBookQueryService;
 import com.youngbrains.application.service.FavoriteBookService;
+import com.youngbrains.application.service.dto.FavoriteBookCriteria;
 import com.youngbrains.application.web.rest.errors.BadRequestAlertException;
 import com.youngbrains.application.web.rest.util.HeaderUtil;
 import com.youngbrains.application.service.dto.FavoriteBookDTO;
@@ -11,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Pageable;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -30,8 +33,11 @@ public class FavoriteBookResource {
 
     private final FavoriteBookService favoriteBookService;
 
-    public FavoriteBookResource(FavoriteBookService favoriteBookService) {
+    private final FavoriteBookQueryService favoriteBookQueryService;
+
+    public FavoriteBookResource(FavoriteBookService favoriteBookService, FavoriteBookQueryService favoriteBookQueryService) {
         this.favoriteBookService = favoriteBookService;
+        this.favoriteBookQueryService = favoriteBookQueryService;
     }
 
     /**
@@ -83,9 +89,9 @@ public class FavoriteBookResource {
      */
     @GetMapping("/favorite-books")
     @Timed
-    public List<FavoriteBookDTO> getAllFavoriteBooks() {
+    public List<FavoriteBookDTO> getAllFavoriteBooks(FavoriteBookCriteria criteria) {
         log.debug("REST request to get all FavoriteBooks");
-        return favoriteBookService.findAll();
+        return favoriteBookQueryService.findByCriteria(criteria);
         }
 
     /**

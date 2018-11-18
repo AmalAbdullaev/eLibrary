@@ -775,6 +775,16 @@ select[type="myBookLibSort"] {
     margin-right: 5px;
 }
 
+.btnLibFavoriteBookChecked {
+    background: url(/content/images/ico/favoriteBookHover.png) no-repeat 50% 50%;
+    width: 25px;
+    height: 25px;
+    border: 0;
+    margin-top: 5px;
+    float: right;
+    margin-right: 5px;
+}
+
 .btnLibFavoriteBook:hover {
     background: url(/content/images/ico/favoriteBookHover.png) no-repeat 50% 50%;
 }

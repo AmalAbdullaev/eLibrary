@@ -4,6 +4,7 @@ import com.youngbrains.application.ELibraryApp;
 
 import com.youngbrains.application.domain.FavoriteBook;
 import com.youngbrains.application.repository.FavoriteBookRepository;
+import com.youngbrains.application.service.FavoriteBookQueryService;
 import com.youngbrains.application.service.FavoriteBookService;
 import com.youngbrains.application.service.dto.FavoriteBookDTO;
 import com.youngbrains.application.service.mapper.FavoriteBookMapper;
@@ -51,6 +52,9 @@ public class FavoriteBookResourceIntTest {
     private FavoriteBookService favoriteBookService;
 
     @Autowired
+    private FavoriteBookQueryService favoriteBookQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -69,7 +73,7 @@ public class FavoriteBookResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final FavoriteBookResource favoriteBookResource = new FavoriteBookResource(favoriteBookService);
+        final FavoriteBookResource favoriteBookResource = new FavoriteBookResource(favoriteBookService, favoriteBookQueryService);
         this.restFavoriteBookMockMvc = MockMvcBuilders.standaloneSetup(favoriteBookResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

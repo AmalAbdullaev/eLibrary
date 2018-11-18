@@ -22,7 +22,7 @@
                         <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                         <div class="bookButtons">
                             <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
-                            <button class="btnLibFavoriteBook"></button>
+                            <button class="btnLibFavoriteBook" ng-click="makeFavorite($event)"></button>
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                         <div class="bookButtons">
                             <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
                             <!-- <button class="btnLibDeleteBook" type="submit" ui-sref="book.delete({id:book.id})" has-authority="ROLE_ADMIN"></button> -->
-                            <button class="btnLibFavoriteBook"></button>
+                            <button class="btnLibFavoriteBook" ng-click="makeFavorite($event)"></button>
                         </div>
                     </div>
                 </div>
