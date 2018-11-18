@@ -36,12 +36,8 @@
                     <h3>Книги</h3>
                 </div>
         
-                <select type="myBookLibSort" class="browser-default custom-select" placeholder="Сортировка">
-                    <option selected>По убыванию</option>
-                    <option value="1">По возрастанию</option>
-                    <option value="2">Сначала новые</option>
-                    <option value="3">Сначала старые</option>
-                </select>
+                <select type="myBookLibSort" ng-options="opt.name for opt in options.data track by opt.name"
+                        ng-model="options.selected" ng-change="reloadAll()"></select>
             </div>
 
             <div class="libraryAllBooks">
