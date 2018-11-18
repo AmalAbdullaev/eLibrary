@@ -6,9 +6,9 @@
         .controller('BookNotificationController', BookNotificationController);
 
 
-    BookNotificationController.$inject = ['$http', 'Book', 'entity', '$scope', '$stateParams', '$state', '$timeout'];
+    BookNotificationController.$inject = ['$http', '$state', "$uibModal", 'Book', '$scope'];
 
-    function BookNotificationController($http, Book, entity, $scope, $stateParams, $state, $timeout) {
+    function BookNotificationController($http, $state, $uibModal, Book, $scope) {
 
         var vm = this;
 
@@ -26,6 +26,23 @@
                 vm.books = response;
             })
         }
+
+        $scope.reject = function (book, reason, index) {
+            $uibModal.open({
+                templateUrl: 'app/entities/book/book-delete-dialog.html',
+                controller: 'BookDeleteController',
+                controllerAs: 'vm',
+                size: 'md',
+                resolve: {
+                    entity: ['Book', function(Book) {
+                        return Book.get({id : book.id}).$promise;
+                    }]
+                }
+            }).result.then(function() {
+                showAlert('success', 'Книга ' + book.title + ' успешно снята с публикации');
+                vm.books.splice(index, 1);
+            });
+        };
 
         $scope.publish = function (book, index) {
             book.approved = true;

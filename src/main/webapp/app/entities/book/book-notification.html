@@ -1,4 +1,4 @@
-<div class="container" ng-hide="vm.isReading">
+<div class="container">
     <h2>Уведомления</h2>
     <div uib-alert close="closeAlert()" ng-show="isAlertVisible">{{alert.message}}</div>
     <div class="libraryNotification">
@@ -38,11 +38,14 @@
             </div>
             <div class="nButtons">
                 <button class="nBtnRead" ui-sref="book-detail({id:book.id})">Читать</button>
-                <button class="nBtnPublish" ng-click="publish(book, $index)"><span class="glyphicon glyphicon-book"></span>
+                <button class="nBtnPublish" ng-click="publish(book, $index)"><span
+                    class="glyphicon glyphicon-book"></span>
                     Опубликовать
                 </button>
-                <button class="nBtnCancel"><span class="glyphicon glyphicon-remove"></span> Отменить</button>
+                <button class="nBtnCancel" ng-click="reject(book, reason, $index)"><span
+                    class="glyphicon glyphicon-remove"></span>Отменить
+                </button>
             </div>
         </div>
     </div>
-    <div>
+</div>
