@@ -1,55 +1,55 @@
-<script src="/build/pdf.js"></script>
+<script ng-init="isReading = false" src="/build/pdf.js"></script>
 
-<button type="button" class="btn btn-primary" ng-click="firstPage()" ng-show="vm.isReading">
+<button type="button" class="btn btn-primary" ng-click="firstPage()" ng-show="isReading">
     <span class="hidden-sm-down" data-translate="entity.action.firstPage">First page</span>
 </button>
 
-<button type="button" class="btn btn-primary" ng-click="prevPage()" ng-show="vm.isReading">
+<button type="button" class="btn btn-primary" ng-click="prevPage()" ng-show="isReading">
     <span class="hidden-sm-down" data-translate="entity.action.prevPage">Previous page</span>
 </button>
 
-<span class="hidden-sm-down" data-translate="eLibraryApp.book.page" ng-show="vm.isReading"
+<span class="hidden-sm-down" data-translate="eLibraryApp.book.page" ng-show="isReading"
       translate-values="{pageNum: '{{vm.pdfBook.pageNum}}', numPages: '{{vm.pdfBook.pdfDoc.numPages}}'}">Pages:</span>
 
-<button type="button" class="btn btn-primary" ng-click="nextPage()" ng-show="vm.isReading">
+<button type="button" class="btn btn-primary" ng-click="nextPage()" ng-show="isReading">
     <span class="hidden-sm-down" data-translate="entity.action.nextPage">Next page</span>
 </button>
 
-<button type="button" class="btn btn-primary" ng-click="lastPage()" ng-show="vm.isReading">
+<button type="button" class="btn btn-primary" ng-click="lastPage()" ng-show="isReading">
     <span class="hidden-sm-down" data-translate="entity.action.lastPage">Last page</span>
 </button>
 
-<button type="button" class="btn btn-primary" ng-click="vm.isReading = false" ng-show="vm.isReading">
+<button type="button" class="btn btn-primary" ng-click="isReading = false" ng-show="isReading">
     <span class="hidden-sm-down" data-translate="entity.action.back">Back</span>
 </button>
 
-<canvas id="book-canvas" ng-show="vm.isReading"></canvas>
+<canvas id="book-canvas" ng-show="isReading"></canvas>
 
 <p>
-    <button type="button" class="btn btn-primary" ng-click="firstPage()" ng-show="vm.isReading">
+    <button type="button" class="btn btn-primary" ng-click="firstPage()" ng-show="isReading">
         <span class="hidden-sm-down" data-translate="entity.action.firstPage">First page</span>
     </button>
 
-    <button type="button" class="btn btn-primary" ng-click="prevPage()" ng-show="vm.isReading">
+    <button type="button" class="btn btn-primary" ng-click="prevPage()" ng-show="isReading">
         <span class="hidden-sm-down" data-translate="entity.action.prevPage">Previous page</span>
     </button>
 
-    <span class="hidden-sm-down" data-translate="eLibraryApp.book.page" ng-show="vm.isReading"
+    <span class="hidden-sm-down" data-translate="eLibraryApp.book.page" ng-show="isReading"
           translate-values="{pageNum: '{{vm.pdfBook.pageNum}}', numPages: '{{vm.pdfBook.pdfDoc.numPages}}'}">Pages:</span>
 
-    <button type="button" class="btn btn-primary" ng-click="nextPage()" ng-show="vm.isReading">
+    <button type="button" class="btn btn-primary" ng-click="nextPage()" ng-show="isReading">
         <span class="hidden-sm-down" data-translate="entity.action.nextPage">Next page</span>
     </button>
 
-    <button type="button" class="btn btn-primary" ng-click="lastPage()" ng-show="vm.isReading">
+    <button type="button" class="btn btn-primary" ng-click="lastPage()" ng-show="isReading">
         <span class="hidden-sm-down" data-translate="entity.action.lastPage">Last page</span>
     </button>
 
-    <button type="button" class="btn btn-primary" ng-click="vm.isReading = false" ng-show="vm.isReading">
+    <button type="button" class="btn btn-primary" ng-click="isReading = false" ng-show="isReading">
         <span class="hidden-sm-down" data-translate="entity.action.back">Back</span>
     </button>
 </p>
-<div class="container" ng-hide="vm.isReading">
+<div class="container" ng-hide="isReading">
     <div>
         <!-- Обложка книги -->
         <div class="bookDetailCover">

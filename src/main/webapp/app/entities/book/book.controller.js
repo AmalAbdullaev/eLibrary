@@ -59,8 +59,6 @@
                 vm.books = [];
                 vm.predicate = $scope.options.selected.predicate;
                 vm.reverse = $scope.options.selected.reverse;
-                console.log(vm.predicate);
-                console.log(vm.reverse);
                 loadAll();
             };
 
@@ -76,7 +74,6 @@
                     if (vm.predicate !== 'id') {
                         result.push('id');
                     }
-                    console.log(result);
                     return result;
                 }
 
