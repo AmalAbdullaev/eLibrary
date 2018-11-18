@@ -24,8 +24,8 @@ body {
 }
 #header {
     padding-left: 24px;
-    padding-top: 24px;
-    height: 100px;
+    padding-top: 10px;
+    height: 70px;
     width: 100%;
     background: #faf8ff;
     box-shadow: 0 2px 2px rgba(0, 0, 0, .1);
@@ -71,10 +71,6 @@ body {
     width: 100px;
 }
 
-.col-md-10 {
-    width: 100%;
-    padding-left: 0px;
-}
 
 .row {
     /* padding-left: 100px; */
@@ -352,6 +348,7 @@ input[type='file'] {
     height: 100%;
     border-radius: 5px;
     float:left;
+    word-break:break-all;
 }
 
 .label {
@@ -536,10 +533,16 @@ h3 {
 ========================================================================== */
 
 .libraryGenre {
-    width: 18%;
-    float: right;
+    width: 100%;
+    float: left;
     background-color: orange;
     border-radius: 5px;
+}
+
+.libraryGenreList {
+    width: 18%;
+    float: right;
+    background-color: yellow;
 }
 
 .libraryRecommendation {
@@ -641,7 +644,6 @@ select[type="myBookLibSort"] {
     /* height: 100%; */
     height: 150px;
     float: left;
-    background-color: red;
     border-radius: 5px
 }
 
@@ -1114,7 +1116,7 @@ input[type="search"] {
     padding: 5px 20px 5px 60px;
     display: block;
     width: 500px;
-    height: 55px;
+    height: 50px;
     font-size: 20pt;
     color: #dadada;
     background: #fff;
@@ -1131,7 +1133,7 @@ button[type="search-submit"] {
     border: none;
     display: inline-block;
     background: url(/content/images/ico/searchico.png) no-repeat 50% 50%;
-    padding-top: 30px;
+    padding-top: 25px;
     padding-bottom: 10px;
     padding-left: 30px;
     padding-right: 10px;

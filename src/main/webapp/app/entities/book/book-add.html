@@ -3,7 +3,7 @@
     <div class="addBook">
         <div uib-alert  ng-show="isAlertVisible">{{alert.message}}</div>
         <!-- Добавление книги/обложки/отправка -->
-        <div class="col-md-3 col-xs-12">
+        <div class="col-md-3">
             <div class="addBookCover">
                 <!-- Обложка -->
                 <div class="file_upload_cover" ngf-background="vm.coverFile || '/content/images/ico/addcover.png'" for="file_upload_cover">
@@ -45,7 +45,6 @@
         </div>
 
         <!-- Книги, ожидающие проверки -->
-        
         <div class="col-md-2">
             <div class="addWaitBook">
                 
@@ -54,36 +53,19 @@
                 </div>
 
                 <div class="waitBooksScroll">
-
                     <div class="singleBookWait" ng-repeat="book in vm.allBooks" | ng-if = "book.approved===false && book.profileId === vm.book.profileId" >
                         <div class="singleBookWCover">
                             <img ng-src="{{book.coverPath}}" width="100%">
-                            
                         </div>
                         <div class="singleBookWInfo">
-
-                            <div class="divv">
-                                <textarea name="Название книги" readonly>{{book.title}}</textarea>
-                            </div>
-                            <div class="divv">
-                                <textarea name="Имя автора" readonly>{{book.authorFirstName}} {{book.authorLastName}}</textarea>
-                            </div>
-
+                            <div>{{book.title}}</div>
+                            <div>{{book.authorFirstName}} {{book.authorLastName}}</div>
                         </div>
-                    
                     </div>
                 </div>
-
-
             </div>
-        
-
-        
-        <!--Ожидают проверки -->
-        
-
-        
         </div>
+
     </div>
 
     <!-- Мои книги -->
