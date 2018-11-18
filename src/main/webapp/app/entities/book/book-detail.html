@@ -54,7 +54,7 @@
         <!-- Обложка книги -->
         <div class="bookDetailCover">
             <div class="bookCover">
-                <img ng-src="{{vm.book.coverPath}}">
+                <img ng-src="{{vm.book.coverPath}}" width="100%" height="100%">
             </div>
 
             <button type="button" class="btn btn-primary" ng-click="download()" has-authority="ROLE_USER">
@@ -79,99 +79,100 @@
                 <span>Назад</span>
             </button>
 
-            <div class="h7">
+            <div class="bookDetailNameText">
                 <b>{{vm.book.title}}</b>
             </div>
 
-            <div class="h8">
+            <div class="bookDetailInfoText">
                 {{vm.book.authorFirstName}} {{vm.book.authorLastName}}
             </div>
         </div>
 
         <!-- Жанр и прочее о книге -->
-        <div class="bookDetailInfo">
-            <div class="h8">
-                <span>
-                    <b>Жанр:</b>
-                    {{vm.book.genreName}}
-                </span>
+        <div class="bookDetailName2">
+            <div class="bookDetailInfo">
+                <div class="bookDetailInfoText">
+                    <span>
+                        <b>Жанр:</b>
+                        {{vm.book.genreName}}
+                    </span>
+                </div>
+                <div class="bookDetailInfoText">
+                    <span>
+                        <b>Год издания:</b>
+                        {{vm.book.yearOfPublishing}}
+                    </span>
+                </div>
+                <div class="bookDetailInfoText">
+                    <span>
+                        <b>Страниц:</b>
+                        {{vm.book.pages}}
+                    </span>
+                </div>
+                <div class="bookDetailInfoText">
+                    <span>
+                        <b>Предложил:</b>
+                        <span  ui-sref="profile-detail({id:vm.book.profileId})"><a>{{vm.book.createdBy}}</a></span>
+                    </span>
+                </div>
             </div>
-            <div class="h8">
-                <span>
-                    <b>Год издания:</b>
-                    {{vm.book.yearOfPublishing}}
-                </span>
-            </div>
-            <div class="h8">
-                <span>
-                    <b>Страниц:</b>
-                    {{vm.book.pages}}
-                </span>
-            </div>
-            <div class="h8">
-                <span>
-                    <b>Предложил:</b>
-                    <span  ui-sref="profile-detail({id:vm.book.profileId})"><a>{{vm.book.createdBy}}</a></span>
-                   
-                </span>
+
+            <!-- Описание -->
+            <div class="bookDetailDescription">
+                <div class="bookDetailInfoText">
+                    <span><b>Описание</b></span>
+                </div>
+                <div class="bookDetailDescriptionText">
+                    <span>{{vm.book.description}}</span>
+                </div>
             </div>
         </div>
-
-        <!-- Описание -->
-        <div class="bookDetailDescription">
-            <div class="h8">
-                <span><b>Описание</b></span>
-            </div>
-            <div class="h9">
-                <span>{{vm.book.description}}</span>
-            </div>
-        </div>
-
+        
         <!-- Админ: дополнительная информация -->
         <div class="bookDetailAdmin" has-authority="ROLE_ADMIN">
-            <div class="h9">
+            <div class="bookDetailTextBreakAll">
                 <span>
                     <b>ID Книги:</b>
                     {{vm.book.id}}
                 </span>
             </div>
-            <div class="h9">
+            <div class="bookDetailTextBreakAll">
                 <span>
                     <b>Жанр:</b>
                     {{vm.book.genreName}}
                 </span>
             </div>
-            <div class="h9">
+            <div class="bookDetailTextBreakAll">
                 <span>
                     <b>Одобрена:</b>
                     {{vm.book.approved}}
                 </span>
             </div>
-            <div class="h9">
+            <div class="bookDetailTextBreakAll">
                 <span>
                     <b>Добавил:</b>
                     {{vm.book.createdBy}}
                 </span>
             </div>
-            <div class="h9">
+            <div class="bookDetailTextBreakAll">
                 <span>
                     <b>Дата добавления:</b>
                     {{vm.book.createdDate | date:'medium'}}
                 </span>
             </div>
-            <div class="h9">
+            <div class="bookDetailTextBreakAll">
                 <span>
                     <b>Изменения внес:</b>
                     {{vm.book.lastModifiedBy}}
                 </span>
             </div>
-            <div class="h9">
+            <div class="bookDetailTextBreakAll">
                 <span>
                     <b>Дата изменения:</b>
                     {{vm.book.lastModifiedDate | date:'medium'}}
                 </span>
             </div>
-            <div class="h9">
+            <div class="bookDetailTextBreakAll">
                 <span>
                     <b>Владелец:</b>
                     {{vm.book.profileId}}
