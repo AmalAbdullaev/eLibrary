@@ -6,64 +6,45 @@
         .controller('BookNotificationController', BookNotificationController);
 
 
-    BookNotificationController.$inject = ['Book', 'entity','$scope','$stateParams','$state','$timeout'];
+    BookNotificationController.$inject = ['$http', 'Book', 'entity', '$scope', '$stateParams', '$state', '$timeout'];
 
-    function BookNotificationController( Book, entity,$scope,$stateParams,$state,$timeout) {
+    function BookNotificationController($http, Book, entity, $scope, $stateParams, $state, $timeout) {
 
         var vm = this;
-        
-        
-        vm.book = entity;
-        vm.allBooks = Book.query();
-        vm.publish = publish;
 
+        vm.books = [];
         $scope.isAlertVisible = false;
         $scope.alert = {
             type: 'success',
             message: null
         };
 
-        function publish(bookId){
-            Book.get({id : bookId},onSuccess);
+        loadAll();
+
+        function loadAll() {
+            $http.get('/api/books?approved.equals=false').success(function (response) {
+                vm.books = response;
+            })
         }
 
-    
-       function onSuccess(result){
-            var props = ['title','description','pages','path','coverPath','createdBy','createdDate','lastModifiedBy','lastModifiedDate' , 'yearOfPublishing', 'authorFirstName','authorLastName','id','profileId','genreId','genreName'];
-
-            props.forEach(function(prop) {
-                vm.book[prop] = result[prop];
+        $scope.publish = function (book, index) {
+            book.approved = true;
+            Book.update(book).$promise.then(function (response) {
+                vm.books.splice(index, 1);
+                showAlert('success', 'Книга ' + book.title + ' успешно опубликована');
             });
+        };
 
-            vm.book.approved = true;
-            Book.update(vm.book, onSaveSuccess, onSaveError);
-            
-       }
+        $scope.closeAlert = function () {
+            $scope.alert.type = null;
+            $scope.alert.message = null;
+            $scope.isAlertVisible = false;
+        };
 
-       function closeAlert () {
-
-        $scope.alert.type = null;
-        $scope.alert.message = null;
-        $scope.isAlertVisible = false;
-    }; 
-       function onSaveSuccess(result) {
-            console.log("Book updated, aprooved is true");
-            showAlert('success', 'Книга ' + vm.book.title + ' успешно опубликована');
-       }
-
-       function showAlert(type, message) {
-        $scope.alert.type = type;
-        $scope.alert.message = message;
-        $scope.isAlertVisible = true;
-        $timeout(function(){
-            closeAlert();
-            $state.reload();
-        },2000);
-    }
-
-       function onSaveError(){ 
-        console.log('Error book update');
-       }
-
+        function showAlert(type, message) {
+            $scope.alert.type = type;
+            $scope.alert.message = message;
+            $scope.isAlertVisible = true;
+        }
     }
 })();
