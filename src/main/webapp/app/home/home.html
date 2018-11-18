@@ -1,4 +1,196 @@
-<div ng-cloak>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9 col-sm-12">
+            
+            <!-- Баннер с переходом на библиотеку -->
+            <a ui-sref="book" ng-click="vm.collapseNavbar()">
+                <div class="goToLibrary"></div>
+            </a>
+
+            <!-- БЛОК рекомендации -->
+            <div class="homeRecommendedBooks">
+                <h3>Рекомендации</h3>
+                <div class="homeRow">
+                    <div class="homeCol col-md-4">
+                        <div class="homeRBook">
+                            <!-- Рекомендуемая книга 1 -->
+                            <div class="homeRBookSingle">
+                                <!-- Обложка книги -->
+                                <div class="homeRBookCover"></div>
+                                <!-- Информация о книге -->
+                                <div class="homeRBookInfo">
+                                    <div class="homeRBookReaded">Прочитано</div>
+                                    <div class="homeRBookTitle">Гаррик Поттер</div>
+                                    <div class="homeRBookAuthor">Расшоуман Пэйнович</div>
+                                </div>
+                                <!-- Кнопки -->
+                                <div class="homeRBookBtns">
+                                    <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
+                                    <button class="btnLibFavoriteBook"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="homeCol col-md-4">
+                        <div class="homeRBook">
+                            <!-- Рекомендуемая книга 2 -->
+                            <div class="homeRBookSingle">
+                                <div class="homeRBookCover"></div>
+                                <div class="homeRBookInfo">
+                                    <div class="homeRBookReaded">Прочитано</div>
+                                    <div class="homeRBookTitle">Гаррик Поттер</div>
+                                    <div class="homeRBookAuthor">Расшоуман Пэйнович</div>
+                                </div>
+                                <div class="homeRBookBtns">
+                                    <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
+                                    <button class="btnLibFavoriteBook"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="homeCol col-md-4">
+                        <div class="homeRBook">
+                            <!-- Рекомендуемая книга 3 -->
+                            <div class="homeRBookSingle">
+                                <div class="homeRBookCover"></div>
+                                <div class="homeRBookInfo">
+                                    <div class="homeRBookReaded">Прочитано</div>
+                                    <div class="homeRBookTitle">Гаррик Поттер</div>
+                                    <div class="homeRBookAuthor">Расшоуман Пэйнович</div>
+                                </div>
+                                <div class="homeRBookBtns">
+                                    <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
+                                    <button class="btnLibFavoriteBook"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- БЛОК Топ 10 пользователей -->
+        <div class="col-md-3 col-sm-12">
+            <div class="topTenUsers">
+                <div class="topTenTitle">Топ 10 Пользователей по загрузке книг</div>
+                <div class="topUsers">
+                    <div class="topUser">1</div>
+                    <div class="topUser">2</div>
+                    <div class="topUser">3</div>
+                    <div class="topUser">4</div>
+                    <div class="topUser">5</div>
+                    <div class="topUser">6</div>
+                    <div class="topUser">7</div>
+                    <div class="topUser">8</div>
+                    <div class="topUser">9</div>
+                    <div class="topUser">10</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- БЛОК Новое поступление книг -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <h3>Новое поступление</h3>
+            <div class="newArrival">
+                <div class="row">
+                    <!-- Книга 1 -->
+                    <div class="col-md-3">
+                        <div class="homeNewArrivalBook">
+                            <div class="homeRBookSingle">
+                                <!-- Обложка -->
+                                <div class="homeABookCover"></div>
+                                <!-- Инфа о книге -->
+                                <div class="homeABookInfo">
+                                    <div class="homeRBookReaded">Прочитано</div>
+                                    <div class="homeRBookTitle">Гаррик Поттер</div>
+                                    <div class="homeRBookAuthor">Расшоуман Пэйнович</div>
+                                </div>
+                                <!-- Кнопки -->
+                                <div class="homeABookBtns">
+                                    <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
+                                    <button class="btnLibFavoriteBook"></button>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>
+                    <!-- Книга 2 -->
+                    <div class="col-md-3">
+                        <div class="homeNewArrivalBook">
+                            <div class="homeRBookSingle">
+                                <div class="homeABookCover"></div>
+                                <div class="homeABookInfo">
+                                    <div class="homeRBookReaded">Прочитано</div>
+                                    <div class="homeRBookTitle">Гаррик Поттер</div>
+                                    <div class="homeRBookAuthor">Расшоуман Пэйнович</div>
+                                </div>
+                                <div class="homeABookBtns">
+                                    <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
+                                    <button class="btnLibFavoriteBook"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Книга 3 -->
+                    <div class="col-md-3">
+                        <div class="homeNewArrivalBook">
+                            <div class="homeRBookSingle">
+                                <div class="homeABookCover"></div>
+                                <div class="homeABookInfo">
+                                    <div class="homeRBookReaded">Прочитано</div>
+                                    <div class="homeRBookTitle">Гаррик Поттер</div>
+                                    <div class="homeRBookAuthor">Расшоуман Пэйнович</div>
+                                </div>
+                                <div class="homeABookBtns">
+                                    <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
+                                    <button class="btnLibFavoriteBook"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Книга 4 -->
+                    <div class="col-md-3">
+                        <div class="homeNewArrivalBook">
+                            <div class="homeRBookSingle">
+                                <div class="homeABookCover"></div>
+                                <div class="homeABookInfo">
+                                    <div class="homeRBookReaded">Прочитано</div>
+                                    <div class="homeRBookTitle">Гаррик Поттер</div>
+                                    <div class="homeRBookAuthor">Расшоуман Пэйнович</div>
+                                </div>
+                                <div class="homeABookBtns">
+                                    <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
+                                    <button class="btnLibFavoriteBook"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Книга 5 -->
+                    <div class="col-md-3">
+                        <div class="homeNewArrivalBook">
+                            <div class="homeRBookSingle">
+                                <div class="homeABookCover"></div>
+                                <div class="homeABookInfo">
+                                    <div class="homeRBookReaded">Прочитано</div>
+                                    <div class="homeRBookTitle">Гаррик Поттер</div>
+                                    <div class="homeRBookAuthor">Расшоуман Пэйнович</div>
+                                </div>
+                                <div class="homeABookBtns">
+                                    <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
+                                    <button class="btnLibFavoriteBook"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+ <!--<div ng-cloak>
     <div class="row">
         <div class="col-md-2">
             <span class="hipster img-responsive img-rounded"></span>
@@ -37,5 +229,5 @@
              <span data-translate="home.like">If you like JHipster, don't forget to give us a star on </span>&nbsp;<a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener" data-translate="home.github">GitHub</a>!
             </p>
         </div>
-    </div>
-</div>
+    </div> 
+</div>-->

@@ -34,7 +34,7 @@ body {
 #info {
     margin: 55px;
     height: 100%;
-    background: #faf8ff;
+    background: #e2dfeb;
     width: 100%;
 }
 
@@ -44,6 +44,10 @@ body {
     background-color: none;
     position:absolute; /* добавили */
 	bottom:0;
+}
+
+.icobox-logo:hover {
+    background:#e49159;
 }
 
 .icobox {
@@ -65,6 +69,7 @@ body {
 .container {
     padding: 0px;
     width: 100%;
+    background-color: #faf8ff;
 }
 
 .col-md-1 {
@@ -89,6 +94,203 @@ body {
 
 .aColor {
     text:white;
+}
+
+/* ==========================================================================
+Главная страница
+========================================================================== */
+
+.homeRow {
+    padding-left: 0;
+    padding-right:0;
+}
+
+.homeCol {
+    padding-left: 5px; 
+    padding-right:5px;
+}
+
+.goToLibrary {
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+    background-image: url(/content/images/ico/goToLibrary.png);
+    margin-bottom: 30px;
+}
+
+.goToLibrary:hover {
+    background-image: url(/content/images/ico/goToLibraryHover.png);
+}
+
+.homeRecommendedBooks {
+    width: 100%;
+    height: 250px;
+    border-radius: 5px;
+}
+
+.homeRBook {
+    width: 100%;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #fdd4b8;
+    white-space: normal;
+    padding: 10px;
+    float: left;
+}
+
+.homeRBook:hover {
+    background-color: #fdd4b8;
+}
+
+.homeRBookSingle {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.homeRBookCover {
+    width: 30%;
+    height: 150px;
+    border-radius: 5px;
+    background-image: url(/content/images/ico/testbook.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    float: left;
+}
+
+.homeABookCover {
+    width: 30%;
+    height: 145px;
+    border-radius: 5px;
+    background-image: url(/content/images/ico/testbook.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    float: left;
+}
+
+.homeRBookInfo {
+    width: 70%;
+    height: 100%;
+    float: left;
+    padding-left: 5%;
+}
+
+.homeABookInfo {
+    width: 70%;
+    height: 100%;
+    float: left;
+    padding: 5%;
+}
+
+.homeRBookReaded {
+    width: 50%;
+    height: 100%;
+    border-radius: 5px;
+    background-color: #fd7b7d;
+    float: right;
+    text-align: center;
+    color: #fff;
+    font-size: 10pt;
+
+}
+
+.homeRBookTitle {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    font-size: 14pt;
+    font-weight: bold;
+    float: left;
+    margin-top: 1%;
+}
+
+.homeRBookAuthor {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    font-size: 10pt;
+    float: left;
+    margin-top: 1%;
+}
+
+.homeRBookBtns {
+    width: 50%;
+    height: 100%;
+    border-radius: 5px;
+    float: right;
+    margin-top: 15%;
+}
+
+.homeABookBtns {
+    width: 50%;
+    height: 100%;
+    border-radius: 5px;
+    float: right;
+    margin-top: 5%;
+    padding-bottom: 15px;
+    padding-right: 15px;;
+}
+
+.topTenUsers {
+    width: 100%;
+    height: 100%;
+    background-image: url(/content/images/ico/topTenNoHover.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    padding: 33px;
+}
+
+.topTenUsers:hover {
+    background-image: url(/content/images/ico/topTen.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+
+.topTenTitle {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.topUsers {
+    width: 100%;
+    height: 100%;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+.topUser {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.486)
+}
+
+.newArrival {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    padding-top: 15px;
+    background-color: #fff;
+}
+
+.homeNewArrivalBook {
+    width: 100%;
+    height: 100%;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    float: left;
+}
+
+.homeNewArrivalBook:hover {
+    box-shadow: 0 0 10px rgba(172, 172, 172, 0.3);
+    border-radius: 5px;
 }
 
 /* ==========================================================================
@@ -140,7 +342,7 @@ input[type="addBookName"] {
     width: 100%;
     height: 55px;
     font-size: 16pt;
-    color: #b9b9b9;
+    color: #818181;
     background: #fff;
     border-radius: 5px;
     background-color: transparent;
@@ -155,7 +357,7 @@ textarea[name="addBookDescription"] {
     width: 100%;
     height: 326px;
     font-size: 16pt;
-    color: #b9b9b9;
+    color: #818181;
     background: #fff;
     border-radius: 5px;
     background-color: transparent;
@@ -171,7 +373,7 @@ input[type="addBookAuthorName"] {
     width: 19%;
     height: 55px;
     font-size: 16pt;
-    color: #b9b9b9;
+    color: #818181;
     background: #fff;
     border-radius: 5px;
     background-color: transparent;
@@ -188,7 +390,7 @@ input[type="addBookAuthorSurname"] {
     width: 19%;
     height: 55px;
     font-size: 16pt;
-    color: #b9b9b9;
+    color: #818181;
     background: #fff;
     border-radius: 5px;
     background-color: transparent;
@@ -205,7 +407,7 @@ select[type="addBookGenre"] {
     width: 19%;
     height: 55px;
     font-size: 16pt;
-    color: #b9b9b9;
+    color: #818181;
     background: #fff;
     border-radius: 5px;
     background-color: transparent;
@@ -220,7 +422,7 @@ input[type="addBookOther"] {
     width: 15%;
     height: 55px;
     font-size: 16pt;
-    color: #b9b9b9;
+    color: #818181;
     background: #fff;
     border-radius: 5px;
     background-color: transparent;
