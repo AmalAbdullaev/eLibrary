@@ -5,9 +5,9 @@
             .module('eLibraryApp')
             .controller('BookDetailController', BookDetailController);
 
-        BookDetailController.$inject = ['$scope', '$http', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Principal', 'Book', 'ReadBook', 'Profile', 'Genre'];
+        BookDetailController.$inject = ['$scope', '$http', '$rootScope',  'previousState', 'DataUtils', 'entity', 'Principal', 'ReadBook','Book'];
 
-        function BookDetailController($scope, $http, $rootScope, $stateParams, previousState, DataUtils, entity, Principal, Book, ReadBook, Profile, Genre) {
+        function BookDetailController($scope, $http, $rootScope,  previousState, DataUtils, entity, Principal, ReadBook,Book) {
             var vm = this;
 
             vm.book = entity;
@@ -15,6 +15,7 @@
             vm.byteSize = DataUtils.byteSize;
             vm.openFile = DataUtils.openFile;
             vm.isRead = false;
+            $scope.isReading = false;
 
             pdfjsLib.GlobalWorkerOptions.workerSrc = '/build/pdf.worker.js';
 
@@ -115,6 +116,10 @@
                 queueRenderPage(vm.pdfBook.pageNum);
             };
 
+
+
+
+
             $scope.read = function () {
                 $http({
                     method: 'GET',
@@ -125,10 +130,10 @@
                     var file = new Blob([data], {type: contentType});
                     var objectUrl = URL.createObjectURL(file);
                     pdfjsLib.getDocument(objectUrl).then(function (pdfDoc) {
-                        $scope.isReading = true;
                         vm.pdfBook.pdfDoc = pdfDoc;
                         renderPage(vm.pdfBook.pageNum);
                     });
+                    $scope.isReading = true;
                 });
             };
 

@@ -46,8 +46,9 @@
                     <div class="libBookCover"><img ng-src="{{book.coverPath}}" width="100%"></div>
                     <div class="libBookInfo">
                         <div class="bookReaded2">Прочитано</div>
-                        <div class="bookTitle" ui-sref="book-detail({id:book.id})">{{book.title}}</div>
+                        <div class="bookTitle">{{book.title}}</div>
                         <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
+                        <div class="bookAuthor">{{book.createdBy}}</div>
                         <div class="bookButtons">
                             <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
                             <!-- <button class="btnLibDeleteBook" type="submit" ui-sref="book.delete({id:book.id})" has-authority="ROLE_ADMIN"></button> -->

@@ -62,6 +62,8 @@
                 loadAll();
             };
 
+            
+
             function loadAll() {
                 Book.query({
                     page: vm.page,

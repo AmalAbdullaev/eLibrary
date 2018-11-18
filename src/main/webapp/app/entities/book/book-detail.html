@@ -1,4 +1,4 @@
-<script ng-init="isReading = false" src="/build/pdf.js"></script>
+
 
 <button type="button" class="btn btn-primary" ng-click="firstPage()" ng-show="isReading">
     <span class="hidden-sm-down" data-translate="entity.action.firstPage">First page</span>
@@ -111,7 +111,8 @@
             <div class="h8">
                 <span>
                     <b>Предложил:</b>
-                    {{vm.book.createdBy}}
+                    <span  ui-sref="profile-detail({id:vm.book.profileId})"><a>{{vm.book.createdBy}}</a></span>
+                   
                 </span>
             </div>
         </div>

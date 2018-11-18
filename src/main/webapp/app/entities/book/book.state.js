@@ -221,7 +221,19 @@
             resolve: {
                 entity: ["$stateParams", 'Book', function($stateParams,Book) {
                     return {
+                        title: null,
+                        description: null,
+                        pages: null,
                         approved: false,
+                        path: null,
+                        coverPath: null,
+                        createdBy: null,
+                        createdDate: null,
+                        lastModifiedBy: null,
+                        lastModifiedDate: null,
+                        yearOfPublishing: null,
+                        authorFirstName: null,
+                        authorLastName: null,
                         id: null
                     };
                 }],

@@ -25,8 +25,6 @@
         vm.allBooks = Book.query();
         
 
-
-
         $scope.isCoverUploading = false;
         $scope.isBookUploading = false;
         $scope.isAlertVisible = false;
