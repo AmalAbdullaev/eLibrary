@@ -20,9 +20,14 @@
                         <div class="bookReaded">Прочитано</div>
                         <div class="bookTitle">{{book.title}}</div>
                         <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
-                        <div class="bookButtons">
+                        <div class="bookButtons" has-authority="ROLE_USER" >
                             <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
-                            <button class="btnLibFavoriteBook" ng-click="makeFavorite($event)"></button>
+                            
+                            
+                            <button ng-init= "getFavorite(book.id,this)"  ng-class="{false:'btnLibFavoriteBook',true:'btnLibFavoriteBookChecked ' } [isFavorite]" ng-click="setFavorite(book.id,this)"></button>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -49,10 +54,12 @@
                         <div class="bookTitle">{{book.title}}</div>
                         <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                         <div class="bookAuthor">{{book.createdBy}}</div>
-                        <div class="bookButtons">
+                        <div class="bookButtons" has-authority="ROLE_USER">
+                            
                             <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
+                            <button ng-init= "getFavorite(book.id,this)"  ng-class="{false:'btnLibFavoriteBook',true:'btnLibFavoriteBookChecked ' } [isFavorite]" ng-click="setFavorite(book.id,this)"></button>
                             <!-- <button class="btnLibDeleteBook" type="submit" ui-sref="book.delete({id:book.id})" has-authority="ROLE_ADMIN"></button> -->
-                            <button class="btnLibFavoriteBook" ng-click="makeFavorite($event)"></button>
+                            <!-- нужен эотот <button class="btnLibFavoriteBook" ng-click="makeFavorite($event)"></button> -->
                         </div>
                     </div>
                 </div>

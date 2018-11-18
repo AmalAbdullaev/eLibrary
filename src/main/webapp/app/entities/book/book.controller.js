@@ -5,9 +5,9 @@
             .module('eLibraryApp')
             .controller('BookController', BookController);
 
-        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants'];
+        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','Profile'];
 
-        function BookController($scope, $http, DataUtils, Book, FavoriteBook, ParseLinks, AlertService, paginationConstants) {
+        function BookController($scope, $http, DataUtils, Book, FavoriteBook, ParseLinks, AlertService, paginationConstants,Principal,Profile) {
 
             var vm = this;
 
@@ -25,29 +25,88 @@
             vm.openFile = DataUtils.openFile;
             vm.byteSize = DataUtils.byteSize;
 
+            vm.profile = null; 
+            vm.profileFavoriteBook = null;
+
             $scope.genres = [];
 
-            $scope.makeFavorite = function ($event) {
-                var elem = angular.element($event.currentTarget);
-                var book = elem.parents('.rBook').scope().book;
-                if (elem.hasClass('btnLibFavoriteBook')) {
+            //переделать
+            // $scope.makeFavorite = function ($event) {
+            //     var elem = angular.element($event.currentTarget);
+            //     var book = elem.parents('.rBook').scope().book;
+            //     if (elem.hasClass('btnLibFavoriteBook')) {
+            //         var favoriteBook = new FavoriteBook();
+            //         favoriteBook.bookId = book.id;
+            //         favoriteBook.profileId = book.profileId;
+            //         elem.removeClass();
+            //         elem.addClass('btnLibFavoriteBookChecked');
+            //         FavoriteBook.save(favoriteBook);
+            //     }
+            //     else {
+            //         elem.removeClass();
+            //         elem.addClass('btnLibFavoriteBook');
+            //         $http.get('/api/favorite-books?bookId.equals=' + book.id
+            //             + '&profileId.equals=' + book.profileId).success(function (response) {
+            //             response = response[0];
+            //             FavoriteBook.delete({id: response.id})
+            //         });
+            //     }
+            // };
+
+
+    
+
+
+
+             $scope.getFavorite  = function (bookId,repeatScope){
+
+
+                var bookId = bookId;
+                var repeatScope = repeatScope;   
+
+                Principal.identity().then(function (user) {
+                    Profile.getProfile({userId: user.id}, onSuccess);
+                });
+
+                function onSuccess(result) {
+                    vm.profile = result;
+                    getFavoriteInDB(bookId,repeatScope);
+                }
+            }
+
+            
+            $scope.setFavorite = function(bookId,repeatScope){
+
                     var favoriteBook = new FavoriteBook();
-                    favoriteBook.bookId = book.id;
-                    favoriteBook.profileId = book.profileId;
-                    elem.removeClass();
-                    elem.addClass('btnLibFavoriteBookChecked');
+                    favoriteBook.bookId = bookId;
+                    favoriteBook.profileId = vm.profile.id;
                     FavoriteBook.save(favoriteBook);
-                }
-                else {
-                    elem.removeClass();
-                    elem.addClass('btnLibFavoriteBook');
-                    $http.get('/api/favorite-books?bookId.equals=' + book.id
-                        + '&profileId.equals=' + book.profileId).success(function (response) {
-                        response = response[0];
-                        FavoriteBook.delete({id: response.id})
-                    });
-                }
-            };
+
+                    repeatScope.isFavorite = true;
+
+                };
+
+
+                
+                function getFavoriteInDB (bookId,repeatScope){
+                    repeatScope.isFavorite = false;
+
+                    $http.get('/api/favorite-books?bookId.equals=' + bookId
+                        + '&profileId.equals=' + vm.profile.id).success(function (response) {
+                            if(response.length === 0){repeatScope.isFavorite = false}
+                            else {
+                                vm.profileFavoriteBook = response[0];
+
+                                if(bookId === vm.profileFavoriteBook.bookId){
+                                    repeatScope.isFavorite = true;
+                               }
+                               else repeatScope.isFavorite = false;
+                              }
+                           })
+
+                    };
+
+
 
             $scope.options = {
                 data: [
@@ -114,6 +173,7 @@
                 }
             }
 
+            //переделать 
             function loadAllGenres() {
                 $http.get('/api/genres').success(function (data) {
                     vm.genres = data;

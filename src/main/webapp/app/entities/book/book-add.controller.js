@@ -19,7 +19,6 @@
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
         vm.save = save;
-        vm.account = null;
         vm.genres = Genre.query();
 
         vm.allBooks = Book.query();
