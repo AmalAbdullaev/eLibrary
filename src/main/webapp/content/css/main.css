@@ -13,16 +13,19 @@ body {
 }
 
 #sidebar {
-    height: 150%;
     background-color: #d65600;
     width: 100px;
+    min-height:100vh;
     float: left;
-    position: absolute;
+    position: fixed;
+	top: 0;
+    left: 0;
+    z-index: 9;
 }
 #header {
     padding-left: 24px;
-    padding-top: 24px;
-    height: 100px;
+    padding-top: 10px;
+    height: 70px;
     width: 100%;
     background: #faf8ff;
     box-shadow: 0 2px 2px rgba(0, 0, 0, .1);
@@ -35,14 +38,28 @@ body {
     width: 100%;
 }
 
-.icobox {
+.icobox-logo {
     height: 100px;
+    width: 100px;
+    background-color: none;
+    position:absolute; /* добавили */
+	bottom:0;
+}
+
+.icobox {
+    height: 50px;
     width: 100px;
     background-color: none;
 }
 
 .icobox:hover {
     background:#e49159;
+}
+
+.icobox:hover::after { 
+    content: attr(data-title); 
+    padding-left: 70px;
+    font-size: 12pt;
 }
 
 .container {
@@ -54,10 +71,6 @@ body {
     width: 100px;
 }
 
-.col-md-10 {
-    width: 100%;
-    padding-left: 0px;
-}
 
 .row {
     /* padding-left: 100px; */
@@ -84,25 +97,22 @@ body {
 
 
 .addBook {
-    background-color: #FF9900;
     width: 100%;
     border-radius: 5px;
 }
 
 .addBookCover {
-    background-color: #fff;
-    width: 17%;
     padding: 15px;
-    margin-right: 1%;
     float:left;
+    height: 500px;
     border-radius: 5px;
+    border: 2px solid rgb(209, 209, 209);
 }
 .addBookView {
-    background-color: #fff;
-    width: 62%;
     float:left;
     padding: 15px;
     border-radius: 5px;
+    border: 2px solid rgb(209, 209, 209);
 }
 
 .addBookWait {
@@ -117,8 +127,10 @@ body {
 
 .addWaitBook {
     width: 100%;
-    height: 400px;
+    height: 500px;
     border-radius: 5px;
+    padding-left: 3%;
+    border: 2px solid rgb(209, 209, 209);
 }
 
 input[type="addBookName"] {
@@ -128,7 +140,7 @@ input[type="addBookName"] {
     width: 100%;
     height: 55px;
     font-size: 16pt;
-    color: #dadada;
+    color: #b9b9b9;
     background: #fff;
     border-radius: 5px;
     background-color: transparent;
@@ -141,9 +153,9 @@ textarea[name="addBookDescription"] {
     border: 1px solid #dededf;
     display: block;
     width: 100%;
-    height: 400px;
+    height: 326px;
     font-size: 16pt;
-    color: #dadada;
+    color: #b9b9b9;
     background: #fff;
     border-radius: 5px;
     background-color: transparent;
@@ -159,7 +171,7 @@ input[type="addBookAuthorName"] {
     width: 19%;
     height: 55px;
     font-size: 16pt;
-    color: #dadada;
+    color: #b9b9b9;
     background: #fff;
     border-radius: 5px;
     background-color: transparent;
@@ -176,7 +188,7 @@ input[type="addBookAuthorSurname"] {
     width: 19%;
     height: 55px;
     font-size: 16pt;
-    color: #dadada;
+    color: #b9b9b9;
     background: #fff;
     border-radius: 5px;
     background-color: transparent;
@@ -193,7 +205,7 @@ select[type="addBookGenre"] {
     width: 19%;
     height: 55px;
     font-size: 16pt;
-    color: #dadada;
+    color: #b9b9b9;
     background: #fff;
     border-radius: 5px;
     background-color: transparent;
@@ -208,7 +220,7 @@ input[type="addBookOther"] {
     width: 15%;
     height: 55px;
     font-size: 16pt;
-    color: #dadada;
+    color: #b9b9b9;
     background: #fff;
     border-radius: 5px;
     background-color: transparent;
@@ -296,7 +308,7 @@ input[type='file'] {
     background-color: #fff;
     width: 95%;
     border-radius: 5px;
-    margin-bottom: 5%;
+    margin-top: 3%;
     margin-right: 1%;
     float:left;
 }
@@ -315,10 +327,12 @@ input[type='file'] {
 }
 
 .singleBookWInfo {
-    width: 65%;
+    width: 55%;
     height: 100%;
     border-radius: 5px;
     float:left;
+    word-break:break-all;
+    font-size: 9pt;
 }
 
 .singleBookCover {
@@ -334,6 +348,7 @@ input[type='file'] {
     height: 100%;
     border-radius: 5px;
     float:left;
+    word-break:break-all;
 }
 
 .label {
@@ -374,7 +389,6 @@ textarea
 }
 
 .myBooksTitle {
-    background-color: #fff;
     width: 60%;
     border-radius: 5px;
     margin-top: 1%;
@@ -382,10 +396,10 @@ textarea
 }
 
 .waitBooksTitle {
-    background-color: #fff;
     width: 100%;
     border-radius: 5px;
-    margin-top: 1%;
+    margin-top: 2%;
+    text-align: center;
     float:left;
 }
 
@@ -519,10 +533,20 @@ h3 {
 ========================================================================== */
 
 .libraryGenre {
-    width: 18%;
-    float: right;
+    width: 100%;
+    float: left;
     background-color: orange;
     border-radius: 5px;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.libraryGenreList {
+    width: 18%;
+    float: right;
+    background-color: yellow;
 }
 
 .libraryRecommendation {
@@ -624,7 +648,6 @@ select[type="myBookLibSort"] {
     /* height: 100%; */
     height: 150px;
     float: left;
-    background-color: red;
     border-radius: 5px
 }
 
@@ -1097,7 +1120,7 @@ input[type="search"] {
     padding: 5px 20px 5px 60px;
     display: block;
     width: 500px;
-    height: 55px;
+    height: 50px;
     font-size: 20pt;
     color: #dadada;
     background: #fff;
@@ -1114,7 +1137,7 @@ button[type="search-submit"] {
     border: none;
     display: inline-block;
     background: url(/content/images/ico/searchico.png) no-repeat 50% 50%;
-    padding-top: 30px;
+    padding-top: 25px;
     padding-bottom: 10px;
     padding-left: 30px;
     padding-right: 10px;

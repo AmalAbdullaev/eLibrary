@@ -2,8 +2,11 @@
     <h2>Библиотека</h2>
     
         <!-- Жанры -->
-        <div class="col-md-3 libraryGenre" ng-repeat="genre in vm.genres track by genre.id">
-            <div>{{genre.name}}</div>
+        <div class="libraryGenreList">
+            <h4>Жанры</h4>
+            <div class="libraryGenre" ng-repeat="genre in vm.genres track by genre.id">
+                {{genre.name}}
+            </div>
         </div>
 
         <!-- Рекомендации -->
@@ -11,15 +14,14 @@
             <div><h3>Рекомендации</h3></div>
             
             <div class="recommendationBooks">
-
                 <div class="rBook" ng-repeat="book in vm.books track by book.id">
-                    <img ng-src="{{book.coverPath}}">
+                    <div class="libBookCover"><img ng-src="{{book.coverPath}}"></div>
                     <div class="libRecommendBookInfo">
                         <div class="bookReaded">Прочитано</div>
                         <div class="bookTitle">{{book.title}}</div>
                         <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                         <div class="bookButtons">
-                                <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
+                            <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
                             <button class="btnLibFavoriteBook"></button>
                         </div>
                     </div>
@@ -34,18 +36,14 @@
                     <h3>Книги</h3>
                 </div>
         
-                <select type="myBookLibSort" class="browser-default custom-select" placeholder="Сортировка">
-                    <option selected>По убыванию</option>
-                    <option value="1">По возрастанию</option>
-                    <option value="2">Сначала новые</option>
-                    <option value="3">Сначала старые</option>
-                </select>
+                <select type="myBookLibSort" ng-options="opt.name for opt in options.data track by opt.name"
+                        ng-model="options.selected" ng-change="reloadAll()"></select>
             </div>
 
             <div class="libraryAllBooks">
                 
                 <div class="libBook" ng-repeat="book in vm.books track by book.id" | ng-if = "book.approved===true">
-                    <div class="libBookCover"><img ng-src="{{book.coverPath}}" width="100%"></div>
+                    <div class="libBookCover"><img ng-src="{{book.coverPath}}"></div>
                     <div class="libBookInfo">
                         <div class="bookReaded2">Прочитано</div>
                         <div class="bookTitle" ui-sref="book-detail({id:book.id})">{{book.title}}</div>
@@ -57,13 +55,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!--
-                <div class="libBook">Еще книга</div>
-                <div class="libBook">Еще книга</div>
-                <div class="libBook">Еще книга</div>
-                <div class="libBook">Еще книга</div>
-                -->
             </div>
         </div>
     </div>

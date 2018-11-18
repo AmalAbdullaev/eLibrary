@@ -1,85 +1,81 @@
 <div class="container">
-    <h2>Предложить книгу</h2>
+    <h3>Предложить книгу</h3>
     <div class="addBook">
-        <div uib-alert  ng-show="isAlertVisible">{{alert.message}}</div>
+        <div uib-alert ng-show="isAlertVisible">{{alert.message}}</div>
         <!-- Добавление книги/обложки/отправка -->
         <div class="col-md-3">
-            <!-- Обложка -->
-            <div class="file_upload_cover" ngf-background="vm.coverFile || '/content/images/ico/addcover.png'"
-                 for="file_upload_cover">
-                <input id="cover" ng-model="vm.coverFile" type="file" ngf-select ngf-pattern="'image/*'"
-                       ngf-accept="'image/*'" ngf-resize="{width: 240, height: 320, centerCrop: true}" required>
+            <div class="addBookCover">
+                <!-- Обложка -->
+                <div class="file_upload_cover" ngf-background="vm.coverFile || '/content/images/ico/addcover.png'"
+                     for="file_upload_cover">
+                    <input id="cover" ng-model="vm.coverFile" type="file" ngf-select ngf-pattern="'image/*'"
+                           ngf-accept="'image/*'" ngf-resize="{width: 240, height: 320, centerCrop: true}"
+                           ng-disabled="vm.profile.banned" required>
+                </div>
+                <div>
+                    <uib-progressbar animate="true" value="bookProgressPercentage" ng-show="isCoverUploading"
+                                     type="success"><b>{{coverProgressPercentage}}%</b></uib-progressbar>
+                </div>
+                <!-- Загрузка книги -->
+                <div class="file_upload_book" for="field_bookFile">
+                    <input type='file' ngf-select ng-model="vm.bookFile" ng-disabled="vm.profile.banned" required>
+                </div>
+                <uib-progressbar animate="false" value="bookProgressPercentage" ng-show="isBookUploading"
+                                 type="success"><b>{{bookProgressPercentage}}%</b></uib-progressbar>
+                <!-- Кнопка "Публикации" -->
+                <button class="file_publication" type="submit" ng-disabled="editForm.$invalid || vm.isSaving"
+                        ng-click="vm.save()" ng-hide="vm.profile.banned"></button>
+                <button uib-popover-html="bannedPopover" class="file_publication" ng-show="vm.profile.banned"
+                        popover-is-open="vm.profile.banned"></button>
             </div>
-            <div>
-                <uib-progressbar animate="true" value="bookProgressPercentage" ng-show="isCoverUploading"
-                                 type="success"><b>{{coverProgressPercentage}}%</b></uib-progressbar>
-            </div>
-            <!-- Загрузка книги -->
-            <div class="file_upload_book" for="field_bookFile">
-                <input type='file' ngf-select ng-model="vm.bookFile" required>
-            </div>
-            <uib-progressbar animate="false" value="bookProgressPercentage" ng-show="isBookUploading"
-                             type="success"><b>{{bookProgressPercentage}}%</b></uib-progressbar>
-            <!-- Кнопка "Публикации" -->
-            <button class="file_publication" type="submit" ng-disabled="editForm.$invalid || vm.isSaving"
-                    ng-click="vm.save()"></button>
         </div>
 
         <!-- Поля ввода информации о книге -->
-        <div class="col-md-6">
-            <input type="addBookName" placeholder="Название книги" ng-model="vm.book.title">
-            <input type="addBookAuthorName" placeholder="Имя автора" ng-model="vm.book.authorFirstName">
-            <input type="addBookAuthorSurname" placeholder="Фамилия" ng-model="vm.book.authorLastName">
+        <div class="col-md-7">
+            <div class="addBookView">
+                <input type="addBookName" placeholder="Название книги"
+                       ng-model="vm.book.title" ng-disabled="vm.profile.banned">
+                <input type="addBookAuthorName" placeholder="Имя автора"
+                       ng-disabled="vm.profile.banned" ng-model="vm.book.authorFirstName">
+                <input type="addBookAuthorSurname" placeholder="Фамилия"
+                       ng-disabled="vm.profile.banned" ng-model="vm.book.authorLastName">
 
-            <select type="addBookGenre" class="browser-default custom-select" placeholder="Автор книги"
-                    ng-model="vm.book.genreId"
-                    ng-options="genre.id as genre.name for genre in vm.genres"></select>
+                <select type="addBookGenre" class="browser-default custom-select" placeholder="Автор книги"
+                        ng-model="vm.book.genreId" ng-disabled="vm.profile.banned"
+                        ng-options="genre.id as genre.name for genre in vm.genres"></select>
 
-            <input type="addBookOther" placeholder="Год" ng-model="vm.book.yearOfPublishing">
-            <input type="addBookOther" placeholder="Страниц" ng-model="vm.book.pages">
+                <input type="addBookOther" placeholder="Год" ng-disabled="vm.profile.banned"
+                       ng-model="vm.book.yearOfPublishing">
+                <input type="addBookOther" ng-disabled="vm.profile.banned" placeholder="Страниц" ng-model="vm.book.pages">
 
-            <textarea name="addBookDescription" placeholder="Описание" ng-model="vm.book.description"></textarea>
+                <textarea name="addBookDescription" placeholder="Описание" ng-disabled="vm.profile.banned"
+                          ng-model="vm.book.description"></textarea>
+            </div>
         </div>
 
         <!-- Книги, ожидающие проверки -->
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="addWaitBook">
-                
+
                 <div class="waitBooksTitle">
-                    <h3>Ожидают проверки</h3>
+                    <p>Ожидают проверки</p>
                 </div>
 
                 <div class="waitBooksScroll">
-
-                    <div class="singleBookWait" ng-repeat="book in vm.allBooks" | ng-if = "book.approved===false && book.profileId === vm.book.profileId" >
+                    <div class="singleBookWait" ng-repeat="book in vm.allBooks" |
+                         ng-if="book.approved===false && book.profileId === vm.book.profileId">
                         <div class="singleBookWCover">
                             <img ng-src="{{book.coverPath}}" width="100%">
-                            
                         </div>
                         <div class="singleBookWInfo">
-
-                            <div class="divv">
-                                <textarea name="Название книги" readonly>{{book.title}}</textarea>
-                            </div>
-                            <div class="divv">
-                                <textarea name="Имя автора" readonly>{{book.authorFirstName}} {{book.authorLastName}}</textarea>
-                            </div>
-
+                            <div>{{book.title}}</div>
+                            <div>{{book.authorFirstName}} {{book.authorLastName}}</div>
                         </div>
-                    
                     </div>
                 </div>
-
-
             </div>
-        
-
-        
-        <!--Ожидают проверки -->
-        
-
-        
         </div>
+
     </div>
 
     <!-- Мои книги -->
@@ -95,9 +91,10 @@
             <option value="3">Сначала старые</option>
         </select>
 
-        <div class="bookSection" >
+        <div class="bookSection">
 
-            <div class="singleBook" ng-repeat="book in vm.allBooks" ng-if = "book.approved===true && book.profileId === vm.book.profileId">
+            <div class="singleBook" ng-repeat="book in vm.allBooks"
+                 ng-if="book.approved===true && book.profileId === vm.book.profileId">
                 <div class="singleBookCover">
                     <img ng-src="{{book.coverPath}}" width="100%">
                 </div>
@@ -111,7 +108,6 @@
                 </div>
                 <button class="btnDetail" ui-sref="book-detail({id:book.id})">Подробнее</button>
             </div>
-
 
 
         </div>

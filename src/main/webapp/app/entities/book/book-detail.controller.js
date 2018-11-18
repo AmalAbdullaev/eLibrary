@@ -15,7 +15,6 @@
             vm.byteSize = DataUtils.byteSize;
             vm.openFile = DataUtils.openFile;
             vm.isRead = false;
-            vm.isReading = false;
 
             pdfjsLib.GlobalWorkerOptions.workerSrc = '/build/pdf.worker.js';
 
@@ -126,7 +125,7 @@
                     var file = new Blob([data], {type: contentType});
                     var objectUrl = URL.createObjectURL(file);
                     pdfjsLib.getDocument(objectUrl).then(function (pdfDoc) {
-                        vm.isReading = true;
+                        $scope.isReading = true;
                         vm.pdfBook.pdfDoc = pdfDoc;
                         renderPage(vm.pdfBook.pageNum);
                     });
