@@ -1,0 +1,53 @@
+<div class="container" ng-hide="vm.isReading">
+    <h2>Уведомления</h2>
+    <div class="libraryNotification">
+        
+       
+        <!-- 1 Уведомление -->
+        <div class="singleNotification" ng-repeat="book in vm.allBooks"ng-if = "book.approved===false"> 
+                <div uib-alert  ng-show="isAlertVisible">{{alert.message}}</div>
+            <div class="nBookCover">
+                <img ng-src="{{book.coverPath}}">
+            </div> 
+            <div class="nBookInfo">
+                <div class="nBookText">
+                    <div class="nBookBText1">Название:</div>
+                    <div class="nBookBText2">{{book.title}}</div>
+                </div>
+                <div class="nBookText">
+                    <div class="nBookBText1">Автор:</div>
+                    <div class="nBookBText2">{{book.authorFirstName}} {{book.authorLastName}}</div>
+                </div>
+                <div class="nBookText">
+                    <div class="nBookBText1">Жанр:</div>
+                    <div class="nBookBText2">{{book.genreName}}</div>
+                </div>
+                <div class="nBookText">
+                    <div class="nBookBText1">Год:</div>
+                    <div class="nBookBText2">{{book.yearOfPublishing}}</div>
+                </div>
+                <div class="nBookText">
+                    <div class="nBookBText1">Страниц:</div>
+                    <div class="nBookBText2">{{book.pages}}</div>
+                </div>
+                <div class="nBookText">
+                    <div class="nBookBText1">Предложил:</div>
+                    <div class="nBookBText2">{{book.createdBy}}</div>
+                </div>
+            </div>
+            <div class="nBookDescription">
+                    <p><b>Описание</b></p>
+                    <p>{{book.description}}</p>
+            </div>
+            <div class="nButtons">
+                <!-- <button class="nBtnRead" ng-click="read()" ng-show="vm.book.path.endsWith('.pdf')">Читать</button> -->
+                <button class="nBtnRead" ui-sref="book-detail({id:book.id})">Читать</button>
+                <button class="nBtnPublish" ng-click="vm.publish(book.id)"><span class="glyphicon glyphicon-book"></span> Опубликовать</button>
+                <button class="nBtnCancel"><span class="glyphicon glyphicon-remove"></span> Отменить</button>
+            </div>
+        </div>
+        <!-- Конец уведомления -->
+
+        
+    </div>
+<div>

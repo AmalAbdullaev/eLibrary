@@ -23,8 +23,7 @@
         vm.genres = Genre.query();
         vm.allBooks = Book.query();
         
-        
-            console.log(vm.allBooks);
+
         
 
         $scope.isCoverUploading = false;
@@ -54,7 +53,7 @@
             $timeout(function(){
                 closeAlert();
                 $state.reload();
-            },1000);
+            },2000);
         }
 
         function clear() {
