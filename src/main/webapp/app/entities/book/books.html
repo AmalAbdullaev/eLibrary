@@ -15,7 +15,7 @@
             
             <div class="recommendationBooks">
                 <div class="rBook" ng-repeat="book in vm.books track by book.id">
-                    <div class="libBookCover"><img ng-src="{{book.coverPath}}" width="100%"></div>
+                    <div class="libBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%"></div>
                     <div class="libRecommendBookInfo">
                         <div class="bookReaded">Прочитано</div>
                         <div class="bookTitle">{{book.title}}</div>
@@ -35,13 +35,10 @@
                 <div class="myLibBooksTitle">
                     <h3>Книги</h3>
                 </div>
-        
                 <select type="myBookLibSort" ng-options="opt.name for opt in options.data track by opt.name"
                         ng-model="options.selected" ng-change="reloadAll()"></select>
             </div>
-
             <div class="libraryAllBooks">
-                
                 <div class="libBook" ng-repeat="book in vm.books track by book.id" | ng-if = "book.approved===true">
                     <div class="libBookCover"><img ng-src="{{book.coverPath}}" width="100%"></div>
                     <div class="libBookInfo">
@@ -52,9 +49,13 @@
                         <div class="bookButtons" has-authority="ROLE_USER">
                             
                             <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
+<<<<<<< HEAD
                             <button ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [isFavorite(book.id) || !!isSetFavorite]" ng-click="setFavorite(book.id,this)"></button>
 
                             <!-- <button class="btnLibDeleteBook" type="submit" ui-sref="book.delete({id:book.id})" has-authority="ROLE_ADMIN"></button> -->
+=======
+                            <button class="btnLibFavoriteBook" ng-click="makeFavorite($event)"></button>
+>>>>>>> 0be50df1e9be68be3b2ccef8861a4bc20a6bb5bc
                         </div>
                     </div>
                 </div>

@@ -6,64 +6,62 @@
         .controller('BookNotificationController', BookNotificationController);
 
 
-    BookNotificationController.$inject = ['Book', 'entity','$scope','$stateParams','$state','$timeout'];
+    BookNotificationController.$inject = ['$http', '$state', "$uibModal", 'Book', '$scope'];
 
-    function BookNotificationController( Book, entity,$scope,$stateParams,$state,$timeout) {
+    function BookNotificationController($http, $state, $uibModal, Book, $scope) {
 
         var vm = this;
-        
-        
-        vm.book = entity;
-        vm.allBooks = Book.query();
-        vm.publish = publish;
 
+        vm.books = [];
         $scope.isAlertVisible = false;
         $scope.alert = {
             type: 'success',
             message: null
         };
 
-        function publish(bookId){
-            Book.get({id : bookId},onSuccess);
+        loadAll();
+
+        function loadAll() {
+            $http.get('/api/books?approved.equals=false').success(function (response) {
+                vm.books = response;
+            })
         }
 
-    
-       function onSuccess(result){
-            var props = ['title','description','pages','path','coverPath','createdBy','createdDate','lastModifiedBy','lastModifiedDate' , 'yearOfPublishing', 'authorFirstName','authorLastName','id','profileId','genreId','genreName'];
-
-            props.forEach(function(prop) {
-                vm.book[prop] = result[prop];
+        $scope.reject = function (book, reason, index) {
+            $uibModal.open({
+                templateUrl: 'app/entities/book/book-delete-dialog.html',
+                controller: 'BookDeleteController',
+                controllerAs: 'vm',
+                size: 'md',
+                resolve: {
+                    entity: ['Book', function(Book) {
+                        return Book.get({id : book.id}).$promise;
+                    }]
+                }
+            }).result.then(function() {
+                showAlert('success', 'Книга ' + book.title + ' успешно снята с публикации');
+                vm.books.splice(index, 1);
             });
+        };
 
-            vm.book.approved = true;
-            Book.update(vm.book, onSaveSuccess, onSaveError);
-            
-       }
+        $scope.publish = function (book, index) {
+            book.approved = true;
+            Book.update(book).$promise.then(function (response) {
+                vm.books.splice(index, 1);
+                showAlert('success', 'Книга ' + book.title + ' успешно опубликована');
+            });
+        };
 
-       function closeAlert () {
+        $scope.closeAlert = function () {
+            $scope.alert.type = null;
+            $scope.alert.message = null;
+            $scope.isAlertVisible = false;
+        };
 
-        $scope.alert.type = null;
-        $scope.alert.message = null;
-        $scope.isAlertVisible = false;
-    }; 
-       function onSaveSuccess(result) {
-            console.log("Book updated, aprooved is true");
-            showAlert('success', 'Книга ' + vm.book.title + ' успешно опубликована');
-       }
-
-       function showAlert(type, message) {
-        $scope.alert.type = type;
-        $scope.alert.message = message;
-        $scope.isAlertVisible = true;
-        $timeout(function(){
-            closeAlert();
-            $state.reload();
-        },2000);
-    }
-
-       function onSaveError(){ 
-        console.log('Error book update');
-       }
-
+        function showAlert(type, message) {
+            $scope.alert.type = type;
+            $scope.alert.message = message;
+            $scope.isAlertVisible = true;
+        }
     }
 })();
