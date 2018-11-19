@@ -22,12 +22,7 @@
                         <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                         <div class="bookButtons" has-authority="ROLE_USER" >
                             <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
-                            
-                            
-                            <button ng-init= "getFavorite(book.id,this)"  ng-class="{false:'btnLibFavoriteBook',true:'btnLibFavoriteBookChecked ' } [isFavorite]" ng-click="setFavorite(book.id,this)"></button>
-
-
-
+                            <button ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [isFavorite(book.id) || !!isSetFavorite]" ng-click="setFavorite(book.id,this)"></button>
                         </div>
                     </div>
                 </div>
@@ -57,9 +52,9 @@
                         <div class="bookButtons" has-authority="ROLE_USER">
                             
                             <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
-                            <button ng-init= "getFavorite(book.id,this)"  ng-class="{false:'btnLibFavoriteBook',true:'btnLibFavoriteBookChecked ' } [isFavorite]" ng-click="setFavorite(book.id,this)"></button>
+                            <button ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [isFavorite(book.id) || !!isSetFavorite]" ng-click="setFavorite(book.id,this)"></button>
+
                             <!-- <button class="btnLibDeleteBook" type="submit" ui-sref="book.delete({id:book.id})" has-authority="ROLE_ADMIN"></button> -->
-                            <!-- нужен эотот <button class="btnLibFavoriteBook" ng-click="makeFavorite($event)"></button> -->
                         </div>
                     </div>
                 </div>

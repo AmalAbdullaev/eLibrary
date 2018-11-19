@@ -26,84 +26,46 @@
             vm.byteSize = DataUtils.byteSize;
 
             vm.profile = null; 
-            vm.profileFavoriteBook = null;
-
             $scope.genres = [];
 
-            //переделать
-            // $scope.makeFavorite = function ($event) {
-            //     var elem = angular.element($event.currentTarget);
-            //     var book = elem.parents('.rBook').scope().book;
-            //     if (elem.hasClass('btnLibFavoriteBook')) {
-            //         var favoriteBook = new FavoriteBook();
-            //         favoriteBook.bookId = book.id;
-            //         favoriteBook.profileId = book.profileId;
-            //         elem.removeClass();
-            //         elem.addClass('btnLibFavoriteBookChecked');
-            //         FavoriteBook.save(favoriteBook);
-            //     }
-            //     else {
-            //         elem.removeClass();
-            //         elem.addClass('btnLibFavoriteBook');
-            //         $http.get('/api/favorite-books?bookId.equals=' + book.id
-            //             + '&profileId.equals=' + book.profileId).success(function (response) {
-            //             response = response[0];
-            //             FavoriteBook.delete({id: response.id})
-            //         });
-            //     }
-            // };
 
-
-    
-
-
-
-             $scope.getFavorite  = function (bookId,repeatScope){
-
-
-                var bookId = bookId;
-                var repeatScope = repeatScope;   
-
-                Principal.identity().then(function (user) {
+            Principal.identity().then(function (user) {
+                if(user!==null){
                     Profile.getProfile({userId: user.id}, onSuccess);
-                });
-
-                function onSuccess(result) {
-                    vm.profile = result;
-                    getFavoriteInDB(bookId,repeatScope);
                 }
+            });
+
+
+            vm.favoriteBook = FavoriteBook.query();
+
+            function onSuccess(result) {
+                vm.profile = result;
             }
 
-            
             $scope.setFavorite = function(bookId,repeatScope){
-
                     var favoriteBook = new FavoriteBook();
                     favoriteBook.bookId = bookId;
                     favoriteBook.profileId = vm.profile.id;
                     FavoriteBook.save(favoriteBook);
-
-                    repeatScope.isFavorite = true;
-
+                    repeatScope.isSetFavorite = true;
                 };
 
 
                 
-                function getFavoriteInDB (bookId,repeatScope){
-                    repeatScope.isFavorite = false;
+                 $scope.isFavorite = function (bookId){
 
-                    $http.get('/api/favorite-books?bookId.equals=' + bookId
-                        + '&profileId.equals=' + vm.profile.id).success(function (response) {
-                            if(response.length === 0){repeatScope.isFavorite = false}
-                            else {
-                                vm.profileFavoriteBook = response[0];
+                    if(vm.profile===null){
+                        return false
+                    }
 
-                                if(bookId === vm.profileFavoriteBook.bookId){
-                                    repeatScope.isFavorite = true;
-                               }
-                               else repeatScope.isFavorite = false;
-                              }
-                           })
-
+                    var bool = false;
+                    vm.favoriteBook.forEach(favoriteBook => {
+                        if(favoriteBook.bookId === bookId && favoriteBook.profileId === vm.profile.id){
+                            bool = true;
+                            return;
+                        }
+                    });
+                    return bool;
                     };
 
 
@@ -173,7 +135,6 @@
                 }
             }
 
-            //переделать 
             function loadAllGenres() {
                 $http.get('/api/genres').success(function (data) {
                     vm.genres = data;
