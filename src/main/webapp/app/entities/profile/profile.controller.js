@@ -13,21 +13,28 @@
 
         vm.profiles = [];
         vm.books = [];
-        vm.searchText = null;
-        vm.keyPress = keyPress;
+        vm.searchText = undefined;
+        // vm.keyPress = keyPress;
+        vm.search = search;
 
         loadAll();
 
-        function keyPress(event) {
-            if (event.which === 13)
-                search();
+        function search(profile) {
+            if (vm.searchText === undefined)
+                return true;
+            return profile.userLogin.indexOf(vm.searchText) !== -1;
         }
 
-        function search() {
-            $http.get('/api/users?search=' + vm.searchText).success(function (profiles) {
-                vm.profiles = profiles;
-            });
-        }
+        // function keyPress(event) {
+        //     if (event.which === 13)
+        //         search();
+        // }
+
+        // function search() {
+        //     $http.get('/api/users?search=' + vm.searchText).success(function (profiles) {
+        //         vm.profiles = profiles;
+        //     });
+        // }
 
         function loadAll() {
             Profile.query(function (result) {
