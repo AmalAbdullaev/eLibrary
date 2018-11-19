@@ -1,14 +1,19 @@
 package com.youngbrains.application.service;
 
+import com.youngbrains.application.domain.Book;
 import com.youngbrains.application.domain.FavoriteBook;
+import com.youngbrains.application.repository.BookRepository;
 import com.youngbrains.application.repository.FavoriteBookRepository;
+import com.youngbrains.application.service.dto.BookDTO;
 import com.youngbrains.application.service.dto.FavoriteBookDTO;
+import com.youngbrains.application.service.mapper.BookMapper;
 import com.youngbrains.application.service.mapper.FavoriteBookMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigInteger;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,10 +29,16 @@ public class FavoriteBookService {
 
     private final FavoriteBookRepository favoriteBookRepository;
 
+    private final BookRepository bookRepository;
+
+    private final BookMapper bookMapper;
+
     private final FavoriteBookMapper favoriteBookMapper;
 
-    public FavoriteBookService(FavoriteBookRepository favoriteBookRepository, FavoriteBookMapper favoriteBookMapper) {
+    public FavoriteBookService(FavoriteBookRepository favoriteBookRepository, BookRepository bookRepository, BookMapper bookMapper, FavoriteBookMapper favoriteBookMapper) {
         this.favoriteBookRepository = favoriteBookRepository;
+        this.bookRepository = bookRepository;
+        this.bookMapper = bookMapper;
         this.favoriteBookMapper = favoriteBookMapper;
     }
 
@@ -55,6 +66,16 @@ public class FavoriteBookService {
         return favoriteBookRepository.findAll().stream()
             .map(favoriteBookMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public List<BookDTO> findTop10Books() {
+        List<BigInteger> rawBooks = favoriteBookRepository.findTop10Books();
+        List<BookDTO> books = new LinkedList<>();
+        for (BigInteger id : rawBooks) {
+            Book book = bookRepository.findOne(id.longValue());
+            books.add(bookMapper.toDto(book));
+        }
+        return books;
     }
 
     /**

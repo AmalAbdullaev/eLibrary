@@ -79,16 +79,8 @@
         function save() {
             vm.isSaving = true;
             if (vm.book.id !== null) {
-                console.log('before Book.update');
-                console.log('book id: ' + vm.book.id);
-                console.log('book profile id: ' + vm.book.profileId);
-                console.log(vm.book);
                 Book.update(vm.book, onSaveSuccess, onSaveError);
             } else {
-                console.log('before Book.save');
-                console.log('book id: ' + vm.book.id);
-                console.log('book profile id: ' + vm.book.profileId);
-                console.log(vm.book);
                 Book.save(vm.book, onSaveSuccess, onSaveError);
             }
         }

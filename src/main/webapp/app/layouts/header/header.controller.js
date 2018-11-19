@@ -18,6 +18,8 @@
             vm.swaggerEnabled = response.swaggerEnabled;
         });
 
+        $scope.searchBarOpen = false;
+
         vm.login = login;
         vm.logout = logout;
         vm.toggleNavbar = toggleNavbar;
@@ -34,6 +36,13 @@
                 vm.foundBooks = data;
             });
         }
+
+        $scope.keyPressed = function (event) {
+            if (event.which === 13) {
+                $scope.searchBarOpen = true;
+                search();
+            }
+        };
 
         $scope.toggled = function () {
             search();

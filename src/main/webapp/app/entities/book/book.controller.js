@@ -13,6 +13,7 @@
 
             vm.books = [];
             vm.genres = [];
+            vm.recommendedBooks = [];
             vm.loadPage = loadPage;
             vm.itemsPerPage = paginationConstants.itemsPerPage;
             vm.page = 0;
@@ -97,7 +98,6 @@
             };
 
             loadAll();
-            loadAllGenres();
 
             $scope.reloadAll = function () {
                 vm.predicate = $scope.options.selected.predicate;
@@ -113,6 +113,13 @@
                     size: vm.itemsPerPage,
                     sort: sort()
                 }, onSuccess, onError);
+
+                $http.get('/api/genres').success(function (data) {
+                    vm.genres = data;
+                });
+                $http.get('/api/favorite-books/top').success(function (data) {
+                    vm.recommendedBooks = data;
+                });
 
                 function sort() {
                     var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
@@ -135,11 +142,6 @@
                 }
             }
 
-            function loadAllGenres() {
-                $http.get('/api/genres').success(function (data) {
-                    vm.genres = data;
-                })
-            }
 
             function reset() {
                 vm.page = 0;

@@ -1,34 +1,39 @@
-(function() {
+(function () {
     'use strict';
 
     angular
         .module('eLibraryApp')
         .controller('ProfileController', ProfileController);
 
-    ProfileController.$inject = ['Profile','Book'];
+    ProfileController.$inject = ['$state', '$scope', '$http', 'Book', 'Profile'];
 
-    function ProfileController(Profile,Book) {
+    function ProfileController($state, $scope, $http, Book, Profile) {
 
         var vm = this;
 
         vm.profiles = [];
         vm.books = [];
-
-
-    
+        vm.searchText = null;
+        vm.keyPress = keyPress;
 
         loadAll();
 
-        
+        function keyPress(event) {
+            if (event.which === 13)
+                search();
+        }
+
+        function search() {
+            $http.get('/api/users?search=' + vm.searchText).success(function (profiles) {
+                vm.profiles = profiles;
+            });
+        }
+
         function loadAll() {
-            Profile.query(function(result) {
+            Profile.query(function (result) {
                 vm.profiles = result;
-                console.log(vm.profiles);
-                vm.searchQuery = null;
             });
             vm.books = Book.query();
-
-
         }
     }
 })();
