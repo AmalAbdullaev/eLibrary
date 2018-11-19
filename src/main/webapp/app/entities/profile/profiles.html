@@ -12,7 +12,10 @@
             <div class="userManagementViewUser" ng-repeat="profile in vm.profiles track by profile.id">
                 <div class="userManagementPhoto"><div class="userManagementAvatar"></div></div>
 
-                <div class="userManagementLogin">Логин<a ui-sref="profile-detail({id:profile.id})"> {{profile.userLogin}}</a></div>
+                <div class="userManagementLogin">
+                    <p>Логин</p>
+                    <a ui-sref="profile-detail({id:profile.id})"> {{profile.userLogin}}</a>
+                </div>
                 <div class="userManagementBtns">
                     <button type="submit" ui-sref="profile-detail({id:profile.id})" class="btn btn-info btn-sm" style="float:right">
                             <span class="glyphicon glyphicon-eye-open"></span>
@@ -20,7 +23,10 @@
                         </button>
                     <a ><button class="btnUserEdit" ui-sref="profile.edit({id:profile.id})"></button></a>
                 </div>
-                <div class="userManagementEmail">Email <span>{{profile.userEmail}}</span></div>
+                <div class="userManagementEmail">
+                    <p>Email</p>
+                    <span>{{profile.userEmail}}</span>
+                </div>
             </div>
         </div>
         
