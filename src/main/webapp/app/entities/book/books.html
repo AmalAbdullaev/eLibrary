@@ -20,9 +20,9 @@
                         <div class="bookReaded">Прочитано</div>
                         <div class="bookTitle">{{book.title}}</div>
                         <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
-                        <div class="bookButtons" has-authority="ROLE_USER" >
+                        <div class="bookButtons" >
                             <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
-                            <button ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [favorite(book.id) ] " ng-click="getFavorite(book.id)"></button>
+                            <button has-authority="ROLE_USER"  ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [favorite(book.id) ] " ng-click="getFavorite(book.id)"></button>
                         </div>
                     </div>
                 </div>
@@ -46,10 +46,10 @@
                         <div class="bookTitle">{{book.title}}</div>
                         <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                         <div class="bookAuthor">{{book.createdBy}}</div>
-                        <div class="bookButtons" has-authority="ROLE_USER">
+                        <div class="bookButtons" >
                             
                             <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
-                            <button ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [favorite(book.id)]" ng-click="getFavorite(book.id)"></button>
+                            <button has-authority="ROLE_USER" ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [favorite(book.id)]" ng-click="getFavorite(book.id)"></button>
 
                             <!-- <button class="btnLibDeleteBook" type="submit" ui-sref="book.delete({id:book.id})" has-authority="ROLE_ADMIN"></button> -->
                         </div>
