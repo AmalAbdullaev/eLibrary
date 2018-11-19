@@ -5,9 +5,9 @@
             .module('eLibraryApp')
             .controller('BookController', BookController);
 
-        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','Profile'];
+        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','Profile','$timeout'];
 
-        function BookController($scope, $http, DataUtils, Book, FavoriteBook, ParseLinks, AlertService, paginationConstants,Principal,Profile) {
+        function BookController($scope, $http, DataUtils, Book, FavoriteBook, ParseLinks, AlertService, paginationConstants,Principal,Profile,$timeout) {
 
             var vm = this;
 
@@ -29,46 +29,61 @@
             $scope.genres = [];
 
 
-            Principal.identity().then(function (user) {
-                if(user!==null){
-                    Profile.getProfile({userId: user.id}, onSuccess);
+            function load(){
+                Principal.identity().then(function (user) {
+                    if(user!==null){
+                        Profile.getProfile({userId: user.id}, onSuccess);
+                    }
+                });
+    
+                vm.favoriteBook = FavoriteBook.query();
+    
+                function onSuccess(result) {
+                    vm.profile = result;
                 }
-            });
-
-
-            vm.favoriteBook = FavoriteBook.query();
-
-            function onSuccess(result) {
-                vm.profile = result;
             }
-
-            $scope.setFavorite = function(bookId,repeatScope){
-                    var favoriteBook = new FavoriteBook();
-                    favoriteBook.bookId = bookId;
-                    favoriteBook.profileId = vm.profile.id;
-                    FavoriteBook.save(favoriteBook);
-                    repeatScope.isSetFavorite = true;
-                };
+            load();
 
 
-                
-                 $scope.isFavorite = function (bookId){
+            $scope.favorite = function(bookId){
 
                     if(vm.profile===null){
                         return false
                     }
 
                     var bool = false;
-                    vm.favoriteBook.forEach(favoriteBook => {
+                    vm.favoriteBook.forEach(function(favoriteBook){
                         if(favoriteBook.bookId === bookId && favoriteBook.profileId === vm.profile.id){
                             bool = true;
                             return;
                         }
                     });
                     return bool;
-                    };
+            }
 
+            $scope.getFavorite = function(bookId){
+                if($scope.favorite(bookId)){
+                    FavoriteBook.query({'profileId.equals': vm.profile.id,'bookId.equals':bookId},onSuccess);
+                        function onSuccess(result){
+                            var id = result[0].id; 
+                            FavoriteBook.delete({'id': id},success);
+                            function success(){
+                                load();
+                            }
+                        }
 
+                }
+                else {
+                    var favoriteBook = new FavoriteBook();
+                    favoriteBook.bookId = bookId;
+                    favoriteBook.profileId = vm.profile.id;
+                    FavoriteBook.save(favoriteBook,success);
+                    function success(){
+                        load();
+                    }
+                }
+
+            }
 
             $scope.options = {
                 data: [

@@ -14,12 +14,8 @@
         vm.profiles = [];
         vm.books = [];
 
-
-    
-
         loadAll();
 
-        
         function loadAll() {
             Profile.query(function(result) {
                 vm.profiles = result;
@@ -27,8 +23,6 @@
                 vm.searchQuery = null;
             });
             vm.books = Book.query();
-
-
         }
     }
 })();
