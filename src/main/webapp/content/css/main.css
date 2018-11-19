@@ -1434,6 +1434,145 @@ IMG.AllImgCenter {
 }
 
 /* ==========================================================================
+Детали - Профиль
+========================================================================== */
+
+.profileDetail {
+    width: 100%;
+    height: 100%;
+    float: left;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+.profileDetailAllInfo {
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+
+.profileDetailPhoto {
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+
+.profileDetailInfo {
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+
+.profileInfo {
+    width: 100%;
+    height: 100%;
+}
+
+.profileLogin {
+    font-size: 18pt;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.profileName {
+    font-size: 14pt;
+    padding: 5px;
+}
+
+.profileEmail {
+    font-size: 14pt;
+    padding: 5px;
+}
+
+.profileBtn {
+    padding-top: 30px;
+}
+
+/* 
+ПРОФИЛЬ - Мои книги / читаю
+*/
+
+ .myBooksAndReaded {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 30px;
+    margin-top: 30px;
+    float: left;
+}
+
+section {
+    display: none;
+    padding: 20px 0 0;
+}
+
+input {
+    display: none;
+}
+
+label {
+    width: 49%;
+    display: inline-block;
+    margin: 0 0 -1px;
+    padding: 20px;
+    font-size: 14pt;
+    font-weight: bold;
+    text-align: center;
+    color: #abc;
+    border: 1px solid transparent;
+}
+
+label:before {
+    margin-right: 10px;
+}
+
+label:hover {
+    color: #789;
+    cursor: pointer;
+}
+
+input:checked + label {
+    color: #d65600;;
+    border-bottom: 2px solid #d65600;
+}
+
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2 {
+    display: block;
+}
+
+.btnProfileBookDetail {
+    background-color: #dfdfdf;
+    color: white;
+    width: 70%;
+    height: 35px;
+    font-size: 14px;
+    border: none;
+    vertical-align: bottom;
+    border-radius: 5px;
+    float: right;
+}
+
+.btnProfileBookDetail:hover {
+    color: white;
+    background-color: #d65600;
+}
+
+.profileDetailMyBook {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    float: left;
+}
+
+.profileDetailMyBook:hover {
+    box-shadow: 0 0 2px 2px rgb(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
 header search area form
 ========================================================================== */
 
