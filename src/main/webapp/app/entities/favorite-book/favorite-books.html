@@ -9,16 +9,17 @@
                     <div class="favoriteSingleBook">
                         <!-- Обложка -->
                         <!-- <div class="fBookCover"><img src="{{book.coverPath}}" width="100%" height="100%"></div> -->
-                        <div class="fBookCover"><img src="\content\images\ico\testbook2.png" width="100%" height="100%"></div>
+                        <div class="fBookCover"><img ng-src="{{favoriteBook.bookCoverPath}}"  width="100%" height="100%"></div>
                         <!-- Название книги -->
-                        <div class="fBookTitle">Go Lang</div>
+                        <div class="fBookTitle">{{favoriteBook.bookTitle}}</div>
                         <!-- Кнопки -->
                         <div class="fBookBtns">
                             <div class="fBookCBtns">
                                 <a ui-sref="book-detail({id:favoriteBook.bookId})">
                                     <button class="btnFavoriteBookRead">Читать</button>
+                                
                                 </a>
-                                <button class="btnLibFavoriteBook" ng-click="makeFavorite($event)"></button>
+                                <button class="btnFavoriteBookRead" ng-click="vm.bookDelete(favoriteBook.id)">Удалить</button>
                             </div>
                         </div>
                     </div>

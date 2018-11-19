@@ -17,6 +17,27 @@ public class FavoriteBookDTO implements Serializable {
 
     private Long profileId;
 
+    private String bookCoverPath;
+
+    private String bookTitle;
+
+
+    public void setBookTitle(String bookTitle){
+        this.bookTitle = bookTitle;
+    }
+
+    public String getBookTitle(){
+        return bookTitle;
+    }
+
+    public String getBookCoverPath(){
+        return bookCoverPath;
+    }
+
+    public void setBookCoverPath(String bookCoverPath){
+        this.bookCoverPath = bookCoverPath;
+    }
+
     public Long getId() {
         return id;
     }
