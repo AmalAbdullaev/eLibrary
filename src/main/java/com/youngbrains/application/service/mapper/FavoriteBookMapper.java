@@ -12,6 +12,8 @@ import org.mapstruct.*;
 public interface FavoriteBookMapper extends EntityMapper<FavoriteBookDTO, FavoriteBook> {
 
     @Mapping(source = "book.id", target = "bookId")
+    @Mapping(source = "book.title", target = "bookTitle")
+    @Mapping(source = "book.coverPath", target = "bookCoverPath")
     @Mapping(source = "profile.id", target = "profileId")
     FavoriteBookDTO toDto(FavoriteBook favoriteBook);
 
