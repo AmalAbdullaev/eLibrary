@@ -18,6 +18,7 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 
 import javax.mail.internet.MimeMessage;
 import java.util.Locale;
+import java.util.Optional;
 
 /**
  * Service for sending emails.
@@ -45,13 +46,16 @@ public class MailService {
 
     private final SpringTemplateEngine templateEngine;
 
+    private final UserService userService;
+
     public MailService(JHipsterProperties jHipsterProperties, JavaMailSender javaMailSender,
-                       MessageSource messageSource, SpringTemplateEngine templateEngine) {
+                       MessageSource messageSource, SpringTemplateEngine templateEngine, UserService userService) {
 
         this.jHipsterProperties = jHipsterProperties;
         this.javaMailSender = javaMailSender;
         this.messageSource = messageSource;
         this.templateEngine = templateEngine;
+        this.userService = userService;
     }
 
     @Async
@@ -122,9 +126,12 @@ public class MailService {
         context.setVariable(USER, user);
         context.setVariable(BOOK, book);
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
-        String content = templateEngine.process(templateName, context);
-        String subject = getMessageTitle(content);
-        sendEmail(user.getEmail(), subject, content, false, true);
+        Optional<User> admin = userService.getUserWithAuthoritiesByLogin("admin");
+        if (admin.isPresent()) {
+            String content = templateEngine.process(templateName, context);
+            String subject = getMessageTitle(content);
+            sendEmail(admin.get().getEmail(), subject, content, false, true);
+        }
     }
 
     @Async

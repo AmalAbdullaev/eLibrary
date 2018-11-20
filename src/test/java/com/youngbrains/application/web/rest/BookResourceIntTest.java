@@ -6,6 +6,8 @@ import com.youngbrains.application.domain.Book;
 import com.youngbrains.application.domain.Profile;
 import com.youngbrains.application.domain.Genre;
 import com.youngbrains.application.repository.BookRepository;
+import com.youngbrains.application.repository.FavoriteBookRepository;
+import com.youngbrains.application.repository.ReadBookRepository;
 import com.youngbrains.application.repository.UserRepository;
 import com.youngbrains.application.service.*;
 import com.youngbrains.application.service.dto.BookDTO;
@@ -116,6 +118,12 @@ public class BookResourceIntTest {
     private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
 
     @Autowired
+    private ReadBookService readBookService;
+
+    @Autowired
+    private FavoriteBookService favoriteBookService;
+
+    @Autowired
     private ExceptionTranslator exceptionTranslator;
 
     @Autowired
@@ -128,7 +136,7 @@ public class BookResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final BookResource bookResource = new BookResource(bookService, bookMapper, userService, profileService, mailService, bookQueryService);
+        final BookResource bookResource = new BookResource(bookService, bookMapper, userService, profileService, mailService, bookQueryService, readBookService, favoriteBookService);
         this.restBookMockMvc = MockMvcBuilders.standaloneSetup(bookResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

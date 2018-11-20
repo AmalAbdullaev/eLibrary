@@ -3,6 +3,8 @@ package com.youngbrains.application.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.youngbrains.application.domain.Book;
 import com.youngbrains.application.domain.User;
+import com.youngbrains.application.repository.FavoriteBookRepository;
+import com.youngbrains.application.repository.ReadBookRepository;
 import com.youngbrains.application.service.*;
 import com.youngbrains.application.service.dto.BookCriteria;
 import com.youngbrains.application.service.dto.BookDTO;
@@ -59,13 +61,19 @@ public class BookResource {
 
     private final BookQueryService bookQueryService;
 
-    public BookResource(BookService bookService, BookMapper bookMapper, UserService userService, ProfileService profileService, MailService mailService, BookQueryService bookQueryService) {
+    private final ReadBookService readBookService;
+
+    private final FavoriteBookService favoriteBookService;
+
+    public BookResource(BookService bookService, BookMapper bookMapper, UserService userService, ProfileService profileService, MailService mailService, BookQueryService bookQueryService, ReadBookService readBookService, FavoriteBookService favoriteBookService) {
         this.bookService = bookService;
         this.bookMapper = bookMapper;
         this.userService = userService;
         this.profileService = profileService;
         this.mailService = mailService;
         this.bookQueryService = bookQueryService;
+        this.readBookService = readBookService;
+        this.favoriteBookService = favoriteBookService;
     }
 
     /**
@@ -110,9 +118,11 @@ public class BookResource {
             ProfileDTO profile = profileService.findOne(bookService.findOne(id).getProfileId());
             if (!profile.isTrusted()) {
                 if (type != null && type.equals("book")) {
-                    User user = userService.getUserWithAuthoritiesByLogin("admin").orElse(null);
                     Book book = bookMapper.toEntity(bookDTO);
-                    mailService.sendNewBookEmail(user, book, "newBookEmail");
+                    Long profileId = book.getProfile().getId();
+                    Long userId = profileService.findOne(profileId).getUserId();
+                    Optional<User> optionalUser = userService.getUserWithAuthorities(userId);
+                    optionalUser.ifPresent(user -> mailService.sendNewBookEmail(user, book, "newBookEmail"));
                 }
             }
         } catch (FileSystemException | BadRequestException e) {
@@ -257,6 +267,8 @@ public class BookResource {
                 Book book = bookMapper.toEntity(bookDTO);
                 mailService.sendDeletionEmail(user, book, reason, "deletionEmail");
             }
+            favoriteBookService.deleteAllByBookId(bookDTO.getId());
+            readBookService.deleteAllByBookId(bookDTO.getId());
             bookService.delete(id);
             return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
         }

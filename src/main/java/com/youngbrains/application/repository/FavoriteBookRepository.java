@@ -18,4 +18,5 @@ import java.util.List;
 public interface FavoriteBookRepository extends JpaRepository<FavoriteBook, Long>, JpaSpecificationExecutor<FavoriteBook> {
     @Query(value = "select book_id from favorite_book group by book_id order by count(*) desc limit 10", nativeQuery = true)
     List<BigInteger> findTop10Books();
+    void deleteAllByBookId(Long bookId);
 }
