@@ -7,11 +7,11 @@
 
     <div class="row">
         <div class="col-md-10">
-            <span uib-dropdown is-open="searchBarOpen" dropdown-append-to-body on-toggle="toggled()">
-                <button id="simple-dropdown" type="search-submit" uib-dropdown-toggle></button>
-                <input id="search-dropdown" ng-keypress="keyPressed($event)" type="search" placeholder="Поиск по книгам" ng-model="searchText">
+            <span uib-dropdown is-open="searchBarOpen" dropdown-append-to-body >
+                <button id="simple-dropdown" type="search-submit" uib-dropdown-toggle ng-click="toggled()" ></button>
+                <input id="search-dropdown" ng-keypress="keyPressed($event)" type="search" placeholder="Поиск по книгам" ng-model="searchText" >
                 <ul class="dropdown-menu" style="width: 37%" uib-dropdown-menu>
-                    <li ng-repeat="book in vm.foundBooks">
+                    <li  ng-repeat="book in vm.foundBooks">
                         <a ui-sref="book-detail({id: book.id})">{{book.title}}
                             | {{book.authorFirstName}} {{book.authorLastName}}</a>
                     </li>
@@ -27,6 +27,12 @@
                         <img src="/content/images/ico/profile.png">
                     </a>
                     <ul class="dropdown-menu pull-right" uib-dropdown-menu>
+                        <li ui-sref-active="active" ng-switch-when="true">
+                                <a  ui-sref="profile-detail({id: vm.profile.id})">
+                                    <span class="glyphicon glyphicon-wrench"></span>&nbsp;
+                                    <span >Мой профиль</span>
+                                </a>
+                            </li>
                         <li ui-sref-active="active" ng-switch-when="true">
                             <a ui-sref="settings" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-wrench"></span>&nbsp;

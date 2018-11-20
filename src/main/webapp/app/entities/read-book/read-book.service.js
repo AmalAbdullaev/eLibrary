@@ -10,6 +10,7 @@
         var resourceUrl =  'api/read-books/:id';
 
         return $resource(resourceUrl, {}, {
+            'getReadBookByProfileId':{method:'GET',isArray: true,params: {profileId:'profileId'}},
             'query': { method: 'GET', isArray: true},
             'get': {
                 method: 'GET',

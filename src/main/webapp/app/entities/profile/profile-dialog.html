@@ -1,5 +1,5 @@
 
-<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+<form name="editForm" role="form" has-authority="ROLE_ADMIN" >
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
@@ -15,12 +15,12 @@
         <!--</div>-->
         <div class="form-group">
             <label class="control-label" data-translate="eLibraryApp.profile.trusted" for="field_trusted">Trusted</label>
-                <button class="btnUserTrust" name="trusted" id="field_trusted" ng-model="vm.profile.trusted"></button>    
+                <button ng-class="{false:'btnUserUnTrust', true:'btnUserTrust' } [isTrusted()]"  name="banned" id="field_banned" ng-click="vm.trusted()" name="trusted" id="field_trusted"></button>    
                 <!-- <input type="checkbox" name="trusted" id="field_trusted" ng-model="vm.profile.trusted"/> -->
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="eLibraryApp.profile.banned" for="field_banned">Banned</label>
-                <button class="btnUserBlocked" name="banned" id="field_banned" ng-model="vm.profile.banned"></button>       
+                <button  ng-class="{false:'btnUserUnBlocked', true:'btnUserBlocked' } [isBanned()]"  name="banned" id="field_banned" ng-click="vm.banned()"></button>       
                 <!-- <input type="checkbox" name="banned" id="field_banned" ng-model="vm.profile.banned"/> -->
         </div>
 
@@ -37,8 +37,8 @@
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
         </button>
-        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary" ng-click="vm.save()">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save" >Save</span>
         </button>
     </div>
 </form>

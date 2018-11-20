@@ -1175,10 +1175,20 @@ IMG.AllImgCenter {
     background: url(/content/images/ico/userDeleteHover.png) no-repeat 50% 50%;
 }
 
-.btnUserTrust {
+.btnUserUnTrust {
     border: 0;
     border-radius: 5px;
     background: url(/content/images/ico/userTrustNoHover.png) no-repeat 50% 50%;
+    float: right;
+    margin-right: 1px;
+    height: 30px;
+    width: 30px;
+}
+
+.btnUserTrust {
+    border: 0;
+    border-radius: 5px;
+    background: url(/content/images/ico/userTrustHover.png) no-repeat 50% 50%;
     float: right;
     margin-right: 1px;
     height: 30px;
@@ -1190,6 +1200,15 @@ IMG.AllImgCenter {
 }
 
 .btnUserBlocked {
+    border: 0;
+    border-radius: 5px;
+    background: url(/content/images/ico/userBlockedHover.png) no-repeat 50% 50%;
+    float: right;
+    margin-right: 1px;
+    height: 30px;
+    width: 30px;
+}
+.btnUserUnBlocked {
     border: 0;
     border-radius: 5px;
     background: url(/content/images/ico/userBlockedNoHover.png) no-repeat 50% 50%;

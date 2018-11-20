@@ -15,12 +15,31 @@
         vm.save = save;
         vm.users = User.query();
 
+
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
 
         function clear () {
             $uibModalInstance.dismiss('cancel');
+        }
+
+        $scope.isBanned = function(){
+            vm.profile = entity;
+            return vm.profile.banned;
+        }
+
+        $scope.isTrusted = function(){
+            vm.profile = entity;
+            return vm.profile.trusted;
+        }
+
+        vm.banned = function(){
+            vm.profile.banned = !vm.profile.banned;
+        }
+
+        vm.trusted = function(){
+            vm.profile.trusted = !vm.profile.trusted;
         }
 
         function save () {

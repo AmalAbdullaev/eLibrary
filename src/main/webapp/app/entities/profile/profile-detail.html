@@ -29,8 +29,8 @@
                             <!-- Email -->
                             <div class="profileEmail">{{vm.profile.userEmail}}</div>   
                             <!-- Кнопки -->
-                            <div class="profileBtn">
-                                <button type="button" ui-sref="profile-detail.edit({id:vm.profile.id})" class="btn btn-success" style="float:right">
+                            <div class="profileBtn" >
+                                <button has-authority="ROLE_ADMIN" type="button" ui-sref="profile-detail.edit({id:vm.profile.id})" class="btn btn-success" style="float:right">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                     <span class="hidden-sm-down">Изменить</span>
                                 </button>
@@ -64,14 +64,14 @@
                         <div class="col-md-4">
                             
                             <!-- Книга 1 -->
-                            <div class="profileDetailMyBook">
+                            <div class="profileDetailMyBook" ng-repeat="book in vm.books">
                                 <div class="homeRBookSingle">
                                     <!-- Обложка -->
-                                    <div class="homeABookCover"></div>
+                                    <div class="homeABookCover" ><img ng-src="{{book.coverPath}}" width="100%"></div>
                                     <!-- Инфа о книге -->
                                     <div class="homeABookInfo">
-                                        <div class="homeRBookTitle">Гаррик Поттер</div>
-                                        <div class="homeRBookAuthor">Расшоуман Пэйнович</div>
+                                        <div class="homeRBookTitle">{{book.title}}</div>
+                                        <div class="homeRBookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                                     </div>
                                     <!-- Кнопки -->
                                     <div class="homeABookBtns">
@@ -95,7 +95,7 @@
                                     <!-- Инфа о книге -->
                                     <div class="homeABookInfo">
                                         <div class="homeRBookTitle">Гаррик Поттер</div>
-                                        <div class="homeRBookAuthor">Расшоуман Пэйнович</div>
+                                        <div class="homeRBookAuthor">hjkhkjhjkh</div>
                                     </div>
                                     <!-- Кнопки -->
                                     <div class="homeABookBtns">
