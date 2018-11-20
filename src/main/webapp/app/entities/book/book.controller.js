@@ -5,9 +5,9 @@
             .module('eLibraryApp')
             .controller('BookController', BookController);
 
-        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants', 'Principal', 'Profile', '$timeout'];
+        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'ReadBook', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants', 'Principal', 'Profile', '$timeout'];
 
-        function BookController($scope, $http, DataUtils, Book, FavoriteBook, ParseLinks, AlertService, paginationConstants, Principal, Profile, $timeout) {
+        function BookController($scope, $http, DataUtils, Book, ReadBook, FavoriteBook, ParseLinks, AlertService, paginationConstants, Principal, Profile, $timeout) {
 
             var vm = this;
 
@@ -30,6 +30,12 @@
             vm.profile = null;
             $scope.genres = [];
 
+            $scope.isRead = function (id) {
+                ReadBook.query({
+                    'bookId.equals': id,
+                    'profileId.equals': vm.profile.id
+                });
+            };
 
             function load() {
                 Principal.identity().then(function (user) {
@@ -38,10 +44,9 @@
                     }
                 });
 
-                vm.favoriteBook = FavoriteBook.query();
-
                 function onSuccess(result) {
                     vm.profile = result;
+                    vm.favoriteBook = FavoriteBook.query({'profileId.equals': vm.profile.id});
                 }
             }
 
@@ -56,10 +61,8 @@
 
                 var bool = false;
                 vm.favoriteBook.forEach(function (favoriteBook) {
-                    if (favoriteBook.bookId === bookId && favoriteBook.profileId === vm.profile.id) {
+                    if (favoriteBook.bookId === bookId)
                         bool = true;
-                        return;
-                    }
                 });
                 return bool;
             };
@@ -67,32 +70,29 @@
             $scope.getFavorite = function (bookId) {
                 if ($scope.favorite(bookId)) {
                     FavoriteBook.query({'profileId.equals': vm.profile.id, 'bookId.equals': bookId}, onSuccess);
-
-                    function onSuccess(result) {
-                        var id = result[0].id;
-                        FavoriteBook.delete({'id': id}, success);
-
-                        function success() {
-                            load();
-                        }
-                    }
-
                 }
                 else {
                     var favoriteBook = new FavoriteBook();
                     favoriteBook.bookId = bookId;
                     favoriteBook.profileId = vm.profile.id;
                     FavoriteBook.save(favoriteBook, success);
+                }
+
+                function onSuccess(result) {
+                    var id = result[0].id;
+                    FavoriteBook.delete({'id': id}, success);
 
                     function success() {
                         load();
                     }
                 }
 
+                function success() {
+                    load();
+                }
             };
 
             $scope.selectGenre = function (genreId) {
-                console.log('genre id: ' + genreId);
                 vm.currentGenre = genreId;
                 $scope.reloadAll();
             };
@@ -132,7 +132,6 @@
             };
 
             function loadAll() {
-                console.log('current genre: ' + vm.currentGenre);
                 if (vm.currentGenre != null)
                     Book.query({
                         page: vm.page,
@@ -163,8 +162,6 @@
                 }
 
                 function onSuccess(data, headers) {
-                    console.log('data: ');
-                    console.log(data);
                     vm.links = ParseLinks.parse(headers('link'));
                     vm.totalItems = headers('X-Total-Count');
                     for (var i = 0; i < data.length; i++) {

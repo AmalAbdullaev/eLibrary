@@ -4,6 +4,7 @@ import com.youngbrains.application.ELibraryApp;
 
 import com.youngbrains.application.domain.ReadBook;
 import com.youngbrains.application.repository.ReadBookRepository;
+import com.youngbrains.application.service.ReadBookQueryService;
 import com.youngbrains.application.service.ReadBookService;
 import com.youngbrains.application.service.dto.ReadBookDTO;
 import com.youngbrains.application.service.mapper.ReadBookMapper;
@@ -51,6 +52,9 @@ public class ReadBookResourceIntTest {
     private ReadBookService readBookService;
 
     @Autowired
+    private ReadBookQueryService readBookQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -69,7 +73,7 @@ public class ReadBookResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ReadBookResource readBookResource = new ReadBookResource(readBookService);
+        final ReadBookResource readBookResource = new ReadBookResource(readBookService, readBookQueryService);
         this.restReadBookMockMvc = MockMvcBuilders.standaloneSetup(readBookResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

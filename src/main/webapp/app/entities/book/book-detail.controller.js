@@ -5,9 +5,9 @@
             .module('eLibraryApp')
             .controller('BookDetailController', BookDetailController);
 
-        BookDetailController.$inject = ['$scope', '$http', '$rootScope',  'previousState', 'DataUtils', 'entity', 'Principal', 'ReadBook','Book'];
+        BookDetailController.$inject = ['$scope', '$http', '$rootScope', 'previousState', 'DataUtils', 'entity', 'Profile', 'Principal', 'ReadBook', 'Book'];
 
-        function BookDetailController($scope, $http, $rootScope,  previousState, DataUtils, entity, Principal, ReadBook,Book) {
+        function BookDetailController($scope, $http, $rootScope, previousState, DataUtils, entity, Profile, Principal, ReadBook, Book) {
             var vm = this;
 
             vm.book = entity;
@@ -15,7 +15,16 @@
             vm.byteSize = DataUtils.byteSize;
             vm.openFile = DataUtils.openFile;
             vm.isRead = false;
+            vm.profile = null;
             $scope.isReading = false;
+
+            Principal.identity().then(function (account) {
+                if (account !== null) {
+                    Profile.getProfile({userId: account.id}, function (profile) {
+                        vm.profile = profile;
+                    });
+                }
+            });
 
             pdfjsLib.GlobalWorkerOptions.workerSrc = '/build/pdf.worker.js';
 
@@ -70,18 +79,14 @@
 
             function markAsRead() {
                 if (Principal.isAuthenticated() && !vm.isRead) {
-                    $http({
-                        method: 'GET',
-                        url: '/api/read-books'
-                    }).success(function (data) {
-                        if (data.find(function (o) {
-                            return o.bookId === vm.book.id &&
-                                o.profileId === vm.book.profileId;
-                        }) == null)
-                            ReadBook.save({
-                                bookId: vm.book.id,
-                                profileId: vm.book.profileId
-                            });
+                    ReadBook.query({
+                        'bookId.equals': vm.book.id,
+                        'profileId.equals': vm.profile.id
+                    }, function (response) {
+                        ReadBook.save({
+                            bookId: vm.book.id,
+                            profileId: vm.profile.id
+                        });
                     });
                     vm.isRead = true;
                 }
@@ -115,10 +120,6 @@
                     markAsRead();
                 queueRenderPage(vm.pdfBook.pageNum);
             };
-
-
-
-
 
             $scope.read = function () {
                 $http({

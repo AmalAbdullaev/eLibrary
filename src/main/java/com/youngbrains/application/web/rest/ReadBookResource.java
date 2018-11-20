@@ -1,6 +1,8 @@
 package com.youngbrains.application.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.youngbrains.application.service.ReadBookCriteria;
+import com.youngbrains.application.service.ReadBookQueryService;
 import com.youngbrains.application.service.ReadBookService;
 import com.youngbrains.application.web.rest.errors.BadRequestAlertException;
 import com.youngbrains.application.web.rest.util.HeaderUtil;
@@ -30,8 +32,11 @@ public class ReadBookResource {
 
     private final ReadBookService readBookService;
 
-    public ReadBookResource(ReadBookService readBookService) {
+    private final ReadBookQueryService readBookQueryService;
+
+    public ReadBookResource(ReadBookService readBookService, ReadBookQueryService readBookQueryService) {
         this.readBookService = readBookService;
+        this.readBookQueryService = readBookQueryService;
     }
 
     /**
@@ -83,9 +88,9 @@ public class ReadBookResource {
      */
     @GetMapping("/read-books")
     @Timed
-    public List<ReadBookDTO> getAllReadBooks() {
+    public List<ReadBookDTO> getAllReadBooks(ReadBookCriteria criteria) {
         log.debug("REST request to get all ReadBooks");
-        return readBookService.findAll();
+        return readBookQueryService.findByCriteria(criteria);
         }
 
     /**
