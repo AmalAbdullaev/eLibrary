@@ -12,6 +12,7 @@
 
         vm.newBooks = [];
         vm.recommendedBooks = [];
+        vm.topProfiles = [];
         vm.account = null;
         vm.isAuthenticated = null;
         vm.login = LoginService.open;
@@ -31,7 +32,10 @@
             $http.get('/api/books?approved.equals=true&createDate.greaterThen=' + oneWeekAgo.toISOString())
                 .success(function (data) {
                     vm.newBooks = data;
-                })
+                });
+            $http.get('/api/profiles/top').success(function (data) {
+                vm.topProfiles = data;
+            })
         }
 
         getAccount();

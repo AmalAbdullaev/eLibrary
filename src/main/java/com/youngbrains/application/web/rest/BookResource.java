@@ -165,6 +165,12 @@ public class BookResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/profiles/top")
+    public ResponseEntity<List<ProfileDTO>> findTop10Profiles() {
+        List<ProfileDTO> profiles = bookService.findTop10Profiles();
+        return new ResponseEntity<>(profiles, HttpStatus.OK);
+    }
+
     /**
      * GET  /books/:id : get the "id" book.
      *

@@ -11,7 +11,7 @@
             <div class="homeRecommendedBooks">
                 <h3>Рекомендации</h3>
                 <div class="homeRow">
-                    <div class="homeCol col-md-4" ng-repeat="book in vm.recommendedBooks track by book.id">
+                    <div class="homeCol col-md-4" ng-repeat="book in vm.recommendedBooks | limitTo:3 track by book.id">
                         <div class="homeRBook">
                             <!-- Рекомендуемая книга 1 -->
                             <div class="homeRBookSingle">
@@ -39,17 +39,8 @@
         <div class="col-md-3 col-sm-12">
             <div class="topTenUsers">
                 <div class="topTenTitle">Топ 10 Пользователей по загрузке книг</div>
-                <div class="topUsers">
-                    <div class="topUser">1</div>
-                    <div class="topUser">2</div>
-                    <div class="topUser">3</div>
-                    <div class="topUser">4</div>
-                    <div class="topUser">5</div>
-                    <div class="topUser">6</div>
-                    <div class="topUser">7</div>
-                    <div class="topUser">8</div>
-                    <div class="topUser">9</div>
-                    <div class="topUser">10</div>
+                <div class="topUsers" ng-repeat="profile in vm.topProfiles track by profile.id">
+                    <div ui-sref="profile-detail({id: profile.id})" class="topUser">{{profile.userLogin}}</div>
                 </div>
             </div>
         </div>

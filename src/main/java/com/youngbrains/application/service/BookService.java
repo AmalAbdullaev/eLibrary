@@ -2,9 +2,15 @@ package com.youngbrains.application.service;
 
 import com.youngbrains.application.config.BookStorageProperties;
 import com.youngbrains.application.domain.Book;
+import com.youngbrains.application.domain.Profile;
+import com.youngbrains.application.domain.User;
 import com.youngbrains.application.repository.BookRepository;
+import com.youngbrains.application.repository.ProfileRepository;
 import com.youngbrains.application.service.dto.BookDTO;
+import com.youngbrains.application.service.dto.ProfileDTO;
+import com.youngbrains.application.service.dto.UserDTO;
 import com.youngbrains.application.service.mapper.BookMapper;
+import com.youngbrains.application.service.mapper.ProfileMapper;
 import io.undertow.util.BadRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +24,12 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.nio.file.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -37,13 +47,22 @@ public class BookService {
 
     private final BookRepository bookRepository;
 
+    private final ProfileRepository profileRepository;
+
+    private final UserService userService;
+
     private final BookMapper bookMapper;
 
-    public BookService(BookRepository bookRepository, BookMapper bookMapper, BookStorageProperties storageProperties) {
+    private final ProfileMapper profileMapper;
+
+    public BookService(BookRepository bookRepository, BookMapper bookMapper, BookStorageProperties storageProperties, ProfileRepository profileRepository, UserService userService, ProfileMapper profileMapper) {
         this.bookRepository = bookRepository;
         this.bookMapper = bookMapper;
         this.bookStorageLocation = Paths.get(storageProperties.getUploadDir());
         this.coverStorageLocation = Paths.get(storageProperties.getCoverUploadDir());
+        this.profileRepository = profileRepository;
+        this.userService = userService;
+        this.profileMapper = profileMapper;
         try {
             Files.createDirectories(Paths.get(storageProperties.getUploadDir()));
             Files.createDirectories(Paths.get(storageProperties.getCoverUploadDir()));
@@ -77,6 +96,24 @@ public class BookService {
         log.debug("Request to get all Books");
         return bookRepository.findAll(pageable)
             .map(bookMapper::toDto);
+    }
+
+    public List<ProfileDTO> findTop10Profiles() {
+        List<BigInteger> rawProfiles = bookRepository.findTop10Profiles();
+        List<ProfileDTO> profiles = new LinkedList<>();
+        for (BigInteger profileId : rawProfiles) {
+            Profile profile = profileRepository.findOne(profileId.longValue());
+            ProfileDTO profileDTO = profileMapper.toDto(profile);
+            Optional<User> user = userService.getUserWithAuthorities(profileDTO.getUserId());
+            if (user.isPresent()) {
+                profileDTO.setUserLogin(user.get().getLogin());
+                profileDTO.setUserFirstName(user.get().getFirstName());
+                profileDTO.setUserLastName(user.get().getLastName());
+                profileDTO.setUserEmail(user.get().getEmail());
+            }
+            profiles.add(profileDTO);
+        }
+        return profiles;
     }
 
     /**
