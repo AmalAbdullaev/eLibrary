@@ -11,12 +11,12 @@
             <div class="homeRecommendedBooks">
                 <h3>Рекомендации</h3>
                 <div class="homeRow">
-                    <div class="homeCol col-md-4">
+                    <div class="homeCol col-md-4" ng-repeat="book in vm.recommendedBooks track by book.id">
                         <div class="homeRBook">
                             <!-- Рекомендуемая книга 1 -->
-                            <div class="homeRBookSingle" ng-repeat="book in vm.recommendedBooks track by book.id">
+                            <div class="homeRBookSingle">
                                 <!-- Обложка книги -->
-                                <div class="homeRBookCover"><img ng-src="{{book.coverPath}}"></div>
+                                <div class="homeRBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%"></div>
                                 <!-- Информация о книге -->
                                 <div class="homeRBookInfo">
                                     <div class="homeRBookReaded">Прочитано</div>
