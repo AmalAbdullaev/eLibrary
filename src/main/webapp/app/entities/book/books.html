@@ -4,9 +4,9 @@
         <!-- Жанры -->
         <div class="libraryGenreList">
             <h4 class="libraryGenreTitle">Жанры</h4>
-            <button ng-click="selectGenre(genre.id)" class="libraryGenre" ng-repeat="genre in vm.genres track by genre.id">
+            <div ng-click="selectGenre(genre.id)" class="libraryGenre" ng-repeat="genre in vm.genres track by genre.id">
                 {{genre.name}}
-            </button>
+            </div>
         </div>
 
         <!-- Рекомендации -->
