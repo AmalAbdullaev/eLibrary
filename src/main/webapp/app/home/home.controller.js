@@ -28,7 +28,7 @@
             });
             var oneWeekAgo = new Date();
             oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-            $http.get('/api/books?createDate.greaterThen=' + oneWeekAgo.toISOString())
+            $http.get('/api/books?approved.equals=true&createDate.greaterThen=' + oneWeekAgo.toISOString())
                 .success(function (data) {
                     vm.newBooks = data;
                 })
