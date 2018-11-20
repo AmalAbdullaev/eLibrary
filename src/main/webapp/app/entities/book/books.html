@@ -4,9 +4,9 @@
         <!-- Жанры -->
         <div class="libraryGenreList">
             <h4 class="libraryGenreTitle">Жанры</h4>
-            <div class="libraryGenre" ng-repeat="genre in vm.genres track by genre.id">
+            <button ng-click="selectGenre(genre.id)" class="libraryGenre" ng-repeat="genre in vm.genres track by genre.id">
                 {{genre.name}}
-            </div>
+            </button>
         </div>
 
         <!-- Рекомендации -->
@@ -17,12 +17,12 @@
                 <div class="rBook" ng-repeat="book in vm.recommendedBooks track by book.id">
                     <div class="libBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%"></div>
                     <div class="libRecommendBookInfo">
-                        <div class="bookReaded">Прочитано</div>
+                        <div class="bookReaded" has-authority="ROLE_USER">Прочитано</div>
                         <div class="bookTitle">{{book.title}}</div>
                         <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
-                        <div class="bookButtons" >
+                        <div class="bookButtons">
                             <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
-                            <button has-authority="ROLE_USER"  ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [favorite(book.id) ] " ng-click="getFavorite(book.id)"></button>
+                            <button ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [favorite(book.id) ] " ng-click="getFavorite(book.id)"></button>
                         </div>
                     </div>
                 </div>
@@ -42,12 +42,12 @@
                 <div class="libBook" ng-repeat="book in vm.books track by book.id" | ng-if = "book.approved===true">
                     <div class="libBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%"></div>
                     <div class="libBookInfo">
-                        <div class="bookReaded2">Прочитано</div>
+                        <div class="bookReaded2" has-authority="ROLE_USER">Прочитано</div>
                         <div class="bookTitle">{{book.title}}</div>
                         <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                         <div class="bookAuthor">{{book.createdBy}}</div>
-                        <div class="bookButtons" >
-                            
+                        <div class="bookButtons">
+
                             <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
                             <button has-authority="ROLE_USER" ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [favorite(book.id)]" ng-click="getFavorite(book.id)"></button>
 

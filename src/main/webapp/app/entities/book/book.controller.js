@@ -5,15 +5,16 @@
             .module('eLibraryApp')
             .controller('BookController', BookController);
 
-        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','Profile','$timeout'];
+        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants', 'Principal', 'Profile', '$timeout'];
 
-        function BookController($scope, $http, DataUtils, Book, FavoriteBook, ParseLinks, AlertService, paginationConstants,Principal,Profile,$timeout) {
+        function BookController($scope, $http, DataUtils, Book, FavoriteBook, ParseLinks, AlertService, paginationConstants, Principal, Profile, $timeout) {
 
             var vm = this;
 
             vm.books = [];
             vm.genres = [];
             vm.recommendedBooks = [];
+            vm.currentGenre = null;
             vm.loadPage = loadPage;
             vm.itemsPerPage = paginationConstants.itemsPerPage;
             vm.page = 0;
@@ -26,64 +27,74 @@
             vm.openFile = DataUtils.openFile;
             vm.byteSize = DataUtils.byteSize;
 
-            vm.profile = null; 
+            vm.profile = null;
             $scope.genres = [];
 
 
-            function load(){
+            function load() {
                 Principal.identity().then(function (user) {
-                    if(user!==null){
+                    if (user !== null) {
                         Profile.getProfile({userId: user.id}, onSuccess);
                     }
                 });
-    
+
                 vm.favoriteBook = FavoriteBook.query();
-    
+
                 function onSuccess(result) {
                     vm.profile = result;
                 }
             }
+
             load();
 
 
-            $scope.favorite = function(bookId){
+            $scope.favorite = function (bookId) {
 
-                    if(vm.profile===null){
-                        return false
+                if (vm.profile === null) {
+                    return false
+                }
+
+                var bool = false;
+                vm.favoriteBook.forEach(function (favoriteBook) {
+                    if (favoriteBook.bookId === bookId && favoriteBook.profileId === vm.profile.id) {
+                        bool = true;
+                        return;
                     }
-
-                    var bool = false;
-                    vm.favoriteBook.forEach(function(favoriteBook){
-                        if(favoriteBook.bookId === bookId && favoriteBook.profileId === vm.profile.id){
-                            bool = true;
-                            return;
-                        }
-                    });
-                    return bool;
+                });
+                return bool;
             };
 
-            $scope.getFavorite = function(bookId){
-                if($scope.favorite(bookId)){
-                    FavoriteBook.query({'profileId.equals': vm.profile.id,'bookId.equals':bookId},onSuccess);
-                        function onSuccess(result){
-                            var id = result[0].id; 
-                            FavoriteBook.delete({'id': id},success);
-                            function success(){
-                                load();
-                            }
+            $scope.getFavorite = function (bookId) {
+                if ($scope.favorite(bookId)) {
+                    FavoriteBook.query({'profileId.equals': vm.profile.id, 'bookId.equals': bookId}, onSuccess);
+
+                    function onSuccess(result) {
+                        var id = result[0].id;
+                        FavoriteBook.delete({'id': id}, success);
+
+                        function success() {
+                            load();
                         }
+                    }
 
                 }
                 else {
                     var favoriteBook = new FavoriteBook();
                     favoriteBook.bookId = bookId;
                     favoriteBook.profileId = vm.profile.id;
-                    FavoriteBook.save(favoriteBook,success);
-                    function success(){
+                    FavoriteBook.save(favoriteBook, success);
+
+                    function success() {
                         load();
                     }
                 }
 
+            };
+
+            $scope.selectGenre = function (genreId) {
+                console.log('genre id: ' + genreId);
+                vm.currentGenre = genreId;
+                $scope.reloadAll();
             };
 
             $scope.options = {
@@ -120,14 +131,21 @@
                 reset();
             };
 
-            
-
             function loadAll() {
-                Book.query({
-                    page: vm.page,
-                    size: vm.itemsPerPage,
-                    sort: sort()
-                }, onSuccess, onError);
+                console.log('current genre: ' + vm.currentGenre);
+                if (vm.currentGenre != null)
+                    Book.query({
+                        page: vm.page,
+                        size: vm.itemsPerPage,
+                        sort: sort(),
+                        'genreId.equals': vm.currentGenre
+                    }, onSuccess, onError);
+                else
+                    Book.query({
+                        page: vm.page,
+                        size: vm.itemsPerPage,
+                        sort: sort()
+                    }, onSuccess, onError);
 
                 $http.get('/api/genres').success(function (data) {
                     vm.genres = data;
@@ -145,6 +163,8 @@
                 }
 
                 function onSuccess(data, headers) {
+                    console.log('data: ');
+                    console.log(data);
                     vm.links = ParseLinks.parse(headers('link'));
                     vm.totalItems = headers('X-Total-Count');
                     for (var i = 0; i < data.length; i++) {
@@ -156,7 +176,6 @@
                     AlertService.error(error.data.message);
                 }
             }
-
 
             function reset() {
                 vm.page = 0;

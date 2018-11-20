@@ -19,14 +19,14 @@
                                 <div class="homeRBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%"></div>
                                 <!-- Информация о книге -->
                                 <div class="homeRBookInfo">
-                                    <div class="homeRBookReaded">Прочитано</div>
+                                    <div class="homeRBookReaded" has-authority="ROLE_USER">Прочитано</div>
                                     <div class="homeRBookTitle">{{book.title}}</div>
                                     <div class="homeRBookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                                 </div>
                                 <!-- Кнопки -->
                                 <div class="homeRBookBtns">
                                     <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
-                                    <button class="btnLibFavoriteBook"></button>
+                                    <button class="btnLibFavoriteBook" has-authority="ROLE_USER"></button>
                                 </div>
                             </div>
                         </div>
@@ -60,14 +60,14 @@
                                 <div class="homeABookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%"></div>
                                 <!-- Инфа о книге -->
                                 <div class="homeABookInfo">
-                                    <div class="homeRBookReaded">Прочитано</div>
+                                    <div class="homeRBookReaded" has-authority="ROLE_USER">Прочитано</div>
                                     <div class="homeRBookTitle">{{book.title}}</div>
                                     <div class="homeRBookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                                 </div>
                                 <!-- Кнопки -->
                                 <div class="homeABookBtns">
                                     <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
-                                    <button class="btnLibFavoriteBook"></button>
+                                    <button class="btnLibFavoriteBook" has-authority="ROLE_USER"></button>
                                 </div>
                             </div>
                         </div>   
