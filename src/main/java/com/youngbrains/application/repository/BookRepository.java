@@ -17,4 +17,5 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Long>, JpaSpecificationExecutor<Book> {
     @Query(value = "select profile_id from book where approved = true group by profile_id order by count(*) desc limit 10", nativeQuery = true)
     List<BigInteger> findTop10Profiles();
+    long countBookByGenreId(Long genreId);
 }

@@ -3,8 +3,6 @@ package com.youngbrains.application.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.youngbrains.application.domain.Book;
 import com.youngbrains.application.domain.User;
-import com.youngbrains.application.repository.FavoriteBookRepository;
-import com.youngbrains.application.repository.ReadBookRepository;
 import com.youngbrains.application.service.*;
 import com.youngbrains.application.service.dto.BookCriteria;
 import com.youngbrains.application.service.dto.BookDTO;
@@ -65,7 +63,9 @@ public class BookResource {
 
     private final FavoriteBookService favoriteBookService;
 
-    public BookResource(BookService bookService, BookMapper bookMapper, UserService userService, ProfileService profileService, MailService mailService, BookQueryService bookQueryService, ReadBookService readBookService, FavoriteBookService favoriteBookService) {
+    private final GenreService genreService;
+
+    public BookResource(BookService bookService, BookMapper bookMapper, UserService userService, ProfileService profileService, MailService mailService, BookQueryService bookQueryService, ReadBookService readBookService, FavoriteBookService favoriteBookService, GenreService genreService) {
         this.bookService = bookService;
         this.bookMapper = bookMapper;
         this.userService = userService;
@@ -74,6 +74,7 @@ public class BookResource {
         this.bookQueryService = bookQueryService;
         this.readBookService = readBookService;
         this.favoriteBookService = favoriteBookService;
+        this.genreService = genreService;
     }
 
     /**
@@ -270,6 +271,9 @@ public class BookResource {
             favoriteBookService.deleteAllByBookId(bookDTO.getId());
             readBookService.deleteAllByBookId(bookDTO.getId());
             bookService.delete(id);
+            long booksInGenre = bookService.countBookByGenreId(bookDTO.getGenreId());
+            if (booksInGenre == 0)
+                genreService.delete(bookDTO.getGenreId());
             return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

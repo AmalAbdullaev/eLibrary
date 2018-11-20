@@ -116,6 +116,10 @@ public class BookService {
         return profiles;
     }
 
+    public long countBookByGenreId(Long genreId) {
+        return bookRepository.countBookByGenreId(genreId);
+    }
+
     /**
      * Get one book by id.
      *

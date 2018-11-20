@@ -1,65 +1,71 @@
 <div class="container">
     <h2>Библиотека</h2>
-    
-        <!-- Жанры -->
-        <div class="libraryGenreList">
-            <h4 class="libraryGenreTitle">Жанры</h4>
-            <div ng-click="selectGenre(genre.id)" class="libraryGenre" ng-repeat="genre in vm.genres track by genre.id">
-                {{genre.name}}
-            </div>
-        </div>
 
-        <!-- Рекомендации -->
-        <div class="libraryRecommendation">
-            <div><h3>Рекомендации</h3></div>
-            
-            <div class="recommendationBooks">
-                <div class="rBook" ng-repeat="book in vm.recommendedBooks track by book.id">
-                    <div class="libBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%"></div>
-                    <div class="libRecommendBookInfo">
-                        <div class="bookReaded" has-authority="ROLE_USER">Прочитано</div>
-                        <div class="bookTitle">{{book.title}}</div>
-                        <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
-                        <div class="bookButtons">
-                            <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
-                            <button ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [favorite(book.id) ] " ng-click="getFavorite(book.id)"></button>
-                        </div>
+    <!-- Жанры -->
+    <div class="libraryGenreList">
+        <h4 class="libraryGenreTitle">Жанры</h4>
+        <div ng-click="selectGenre(genre.id)" class="libraryGenre" ng-repeat="genre in vm.genres track by genre.id">
+            {{genre.name}}
+        </div>
+    </div>
+
+    <!-- Рекомендации -->
+    <div class="libraryRecommendation">
+        <div><h3>Рекомендации</h3></div>
+
+        <div class="recommendationBooks">
+            <div class="rBook" ng-repeat="book in vm.recommendedBooks track by book.id">
+                <div class="libBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%"></div>
+                <div class="libRecommendBookInfo">
+                    <div class="bookReaded" has-authority="ROLE_USER">Прочитано</div>
+                    <div class="bookTitle">{{book.title}}</div>
+                    <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
+                    <div class="bookButtons">
+                        <a ui-sref="book-detail({id:book.id})">
+                            <button class="btnLibReadBook2">Читать</button>
+                        </a>
+                        <button
+                            ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [favorite(book.id) ] "
+                            ng-click="getFavorite(book.id)"></button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- все Книги -->
-        <div class="libraryBooks">
-            <div class="myLibBooksTitle2">
-                <div class="myLibBooksTitle">
-                    <h3>Книги</h3>
-                </div>
-                <select type="myBookLibSort" ng-options="opt.name for opt in options.data track by opt.name"
-                        ng-model="options.selected" ng-change="reloadAll()"></select>
+    <!-- все Книги -->
+    <div class="libraryBooks">
+        <div class="myLibBooksTitle2">
+            <div class="myLibBooksTitle">
+                <h3>Книги</h3>
             </div>
-            <div class="libraryAllBooks">
-                <div class="libBook" ng-repeat="book in vm.books track by book.id" | ng-if = "book.approved===true">
-                    <div class="libBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%"></div>
-                    <div class="libBookInfo">
-                        <div class="bookReaded2" has-authority="ROLE_USER">Прочитано</div>
-                        <div class="bookTitle">{{book.title}}</div>
-                        <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
-                        <div class="bookAuthor">{{book.createdBy}}</div>
-                        <div class="bookButtons">
+            <select type="myBookLibSort" ng-options="opt.name for opt in options.data track by opt.name"
+                    ng-model="options.selected" ng-change="reloadAll()"></select>
+        </div>
+        <div class="libraryAllBooks">
+            <div class="libBook" ng-repeat="book in vm.books track by book.id" | ng-if="book.approved===true">
+                <div class="libBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%"></div>
+                <div class="libBookInfo">
+                    <div class="bookReaded2" has-authority="ROLE_USER">Прочитано</div>
+                    <div class="bookTitle">{{book.title}}</div>
+                    <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
+                    <div class="bookAuthor">{{book.createdBy}}</div>
+                    <div class="bookButtons">
 
-                            <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
-                            <button has-authority="ROLE_USER" ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [favorite(book.id)]" ng-click="getFavorite(book.id)"></button>
+                        <a ui-sref="book-detail({id:book.id})">
+                            <button class="btnLibReadBook2">Читать</button>
+                        </a>
+                        <button has-authority="ROLE_USER"
+                                ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [favorite(book.id)]"
+                                ng-click="getFavorite(book.id)"></button>
 
-                            <!-- <button class="btnLibDeleteBook" type="submit" ui-sref="book.delete({id:book.id})" has-authority="ROLE_ADMIN"></button> -->
-                        </div>
+                        <!-- <button class="btnLibDeleteBook" type="submit" ui-sref="book.delete({id:book.id})" has-authority="ROLE_ADMIN"></button> -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 
 <!--
