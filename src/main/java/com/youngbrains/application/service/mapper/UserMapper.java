@@ -1,7 +1,10 @@
 package com.youngbrains.application.service.mapper;
 
 import com.youngbrains.application.domain.Authority;
+import com.youngbrains.application.domain.Profile;
 import com.youngbrains.application.domain.User;
+import com.youngbrains.application.repository.ProfileRepository;
+import com.youngbrains.application.service.dto.ProfileDTO;
 import com.youngbrains.application.service.dto.UserDTO;
 
 import org.springframework.stereotype.Service;
@@ -18,8 +21,27 @@ import java.util.stream.Collectors;
 @Service
 public class UserMapper {
 
+    private final ProfileRepository profileRepository;
+
+    private final ProfileMapper profileMapper;
+
+    public UserMapper(ProfileRepository profileRepository, ProfileMapper profileMapper) {
+        this.profileRepository = profileRepository;
+        this.profileMapper = profileMapper;
+    }
+
     public UserDTO userToUserDTO(User user) {
         return new UserDTO(user);
+    }
+
+    public ProfileDTO userToProfileDTO(User user) {
+        Profile profile = profileRepository.findProfileByUserId(user.getId());
+        ProfileDTO profileDTO = profileMapper.toDto(profile);
+        profileDTO.setUserEmail(user.getEmail());
+        profileDTO.setUserFirstName(user.getFirstName());
+        profileDTO.setUserLastName(user.getLastName());
+        profileDTO.setUserLogin(user.getLogin());
+        return profileDTO;
     }
 
     public List<UserDTO> usersToUserDTOs(List<User> users) {

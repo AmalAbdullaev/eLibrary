@@ -2,12 +2,14 @@ package com.youngbrains.application.web.rest;
 
 import com.youngbrains.application.config.Constants;
 import com.codahale.metrics.annotation.Timed;
+import com.youngbrains.application.domain.Profile;
 import com.youngbrains.application.domain.User;
 import com.youngbrains.application.repository.UserRepository;
 import com.youngbrains.application.security.AuthoritiesConstants;
 import com.youngbrains.application.service.MailService;
 import com.youngbrains.application.service.UserQueryService;
 import com.youngbrains.application.service.UserService;
+import com.youngbrains.application.service.dto.ProfileDTO;
 import com.youngbrains.application.service.dto.UserDTO;
 import com.youngbrains.application.web.rest.errors.BadRequestAlertException;
 import com.youngbrains.application.web.rest.errors.EmailAlreadyUsedException;
@@ -146,13 +148,15 @@ public class UserResource {
      */
     @GetMapping("/users")
     @Timed
-    public ResponseEntity<List<UserDTO>> getAllUsers(@RequestParam(value = "search", required = false) String searchText,
-                                                     Pageable pageable) {
-        Page<UserDTO> page;
-        if (searchText != null)
-            page = userQueryService.findByLoginOrName(searchText, pageable);
-        else
-            page = userService.getAllManagedUsers(pageable);
+    public ResponseEntity<List<UserDTO>> getAllUsers(Pageable pageable) {
+        Page<UserDTO> page = userService.getAllManagedUsers(pageable);;
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/users/search")
+    public ResponseEntity<List<ProfileDTO>> findProfiles(@RequestParam("text") String searchText, Pageable pageable) {
+        Page<ProfileDTO> page = userQueryService.findByLoginOrName(searchText, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

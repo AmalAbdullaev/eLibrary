@@ -4,6 +4,7 @@ package com.youngbrains.application.service;
 import com.youngbrains.application.domain.*;
 import com.youngbrains.application.repository.UserRepository;
 import com.youngbrains.application.repository.UserRepository;
+import com.youngbrains.application.service.dto.ProfileDTO;
 import com.youngbrains.application.service.dto.UserCriteria;
 import com.youngbrains.application.service.dto.UserDTO;
 import com.youngbrains.application.service.mapper.UserMapper;
@@ -52,7 +53,7 @@ public class UserQueryService extends QueryService<User> {
     }
 
     @Transactional(readOnly = true)
-    public Page<UserDTO> findByLoginOrName(String searchText, Pageable page) {
+    public Page<ProfileDTO> findByLoginOrName(String searchText, Pageable page) {
         log.debug("find by search text : {}, page: {}", searchText, page);
         UserCriteria criteria = new UserCriteria();
 
@@ -64,17 +65,9 @@ public class UserQueryService extends QueryService<User> {
         emailFilter.setContains(searchText);
         criteria.setEmail(emailFilter);
 
-        StringFilter lastNameFilter = new StringFilter();
-        lastNameFilter.setContains(searchText);
-        criteria.setLastName(lastNameFilter);
-
-        StringFilter firstNameFilter = new StringFilter();
-        firstNameFilter.setContains(searchText);
-        criteria.setFirstName(firstNameFilter);
-
         final Specifications<User> specification = createDisjunctiveSpecification(criteria);
         final Page<User> result = userRepository.findAll(specification, page);
-        return result.map(userMapper::userToUserDTO);
+        return result.map(userMapper::userToProfileDTO);
     }
 
     private Specifications<User> createSpecification(UserCriteria criteria) {
@@ -138,12 +131,6 @@ public class UserQueryService extends QueryService<User> {
         if (criteria != null) {
             if (criteria.getLogin() != null) {
                 specification = specification.or(buildStringSpecification(criteria.getLogin(), User_.login));
-            }
-            if (criteria.getFirstName() != null) {
-                specification = specification.or(buildStringSpecification(criteria.getFirstName(), User_.firstName));
-            }
-            if (criteria.getLastName() != null) {
-                specification = specification.or(buildStringSpecification(criteria.getLastName(), User_.lastName));
             }
             if (criteria.getEmail() != null) {
                 specification = specification.or(buildStringSpecification(criteria.getEmail(), User_.email));

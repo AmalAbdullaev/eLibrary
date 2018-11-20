@@ -6,10 +6,10 @@
         </button> -->
     </h2>
     <jhi-alert></jhi-alert>
-    <input class="form-control" ng-keypress="vm.keyPress($event)" ng-model="vm.searchText" placeholder="Введите логин или email">
+    <input class="form-control" ng-keyup="vm.keyPress($event)" ng-model="vm.searchText" placeholder="Введите логин или email">
     <div>
         <div class="userManagementList">
-            <div class="userManagementViewUser" ng-repeat="profile in vm.profiles | filter:vm.search track by profile.id">
+            <div class="userManagementViewUser" ng-repeat="profile in vm.profiles track by profile.id">
                 <div class="userManagementPhoto"><div class="userManagementAvatar"></div></div>
 
                 <div class="userManagementLogin">
