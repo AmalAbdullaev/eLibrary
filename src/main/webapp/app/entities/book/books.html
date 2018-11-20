@@ -17,7 +17,7 @@
                 <div class="rBook" ng-repeat="book in vm.recommendedBooks track by book.id">
                     <div class="libBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%"></div>
                     <div class="libRecommendBookInfo">
-                        <div class="bookReaded">Прочитано</div>
+                        <div class="bookReaded" ng-if="isRead(book.id)">Прочитано</div>
                         <div class="bookTitle">{{book.title}}</div>
                         <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                         <div class="bookButtons" >
@@ -42,7 +42,7 @@
                 <div class="libBook" ng-repeat="book in vm.books track by book.id" | ng-if = "book.approved===true">
                     <div class="libBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%"></div>
                     <div class="libBookInfo">
-                        <div class="bookReaded2">Прочитано</div>
+                        <div class="bookReaded2" ng-if="isRead(book.id)">Прочитано</div>
                         <div class="bookTitle">{{book.title}}</div>
                         <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                         <div class="bookAuthor">{{book.createdBy}}</div>

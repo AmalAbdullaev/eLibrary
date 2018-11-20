@@ -5,9 +5,9 @@
             .module('eLibraryApp')
             .controller('BookController', BookController);
 
-        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','Profile','$timeout'];
+        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','Profile','$timeout','ReadBook'];
 
-        function BookController($scope, $http, DataUtils, Book, FavoriteBook, ParseLinks, AlertService, paginationConstants,Principal,Profile,$timeout) {
+        function BookController($scope, $http, DataUtils, Book, FavoriteBook, ParseLinks, AlertService, paginationConstants,Principal,Profile,$timeout,ReadBook) {
 
             var vm = this;
 
@@ -30,6 +30,10 @@
             $scope.genres = [];
 
 
+            
+
+
+
             function load(){
                 Principal.identity().then(function (user) {
                     if(user!==null){
@@ -38,6 +42,8 @@
                 });
     
                 vm.favoriteBook = FavoriteBook.query();
+                vm.readBook = ReadBook.query();
+
     
                 function onSuccess(result) {
                     vm.profile = result;
@@ -45,6 +51,23 @@
             }
             load();
 
+
+
+            $scope.isRead = function(bookId){
+
+                if(vm.profile===null){
+                    return false
+                }
+
+                var bool = false;
+                vm.readBook.forEach(function(readBook){
+                    if(readBook.bookId === bookId && readBook.profileId === vm.profile.id){
+                        bool = true;
+                        return;
+                    }
+                });
+                return bool;
+            }
 
             $scope.favorite = function(bookId){
 
