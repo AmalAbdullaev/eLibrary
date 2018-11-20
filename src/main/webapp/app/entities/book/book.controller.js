@@ -60,7 +60,7 @@
                         }
                     });
                     return bool;
-            }
+            };
 
             $scope.getFavorite = function(bookId){
                 if($scope.favorite(bookId)){
@@ -84,7 +84,7 @@
                     }
                 }
 
-            }
+            };
 
             $scope.options = {
                 data: [
