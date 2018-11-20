@@ -69,7 +69,7 @@
                 return bool;
             }
 
-            $scope.favorite = function(bookId){
+            $scope.isFavorite = function(bookId){
 
                     if(vm.profile===null){
                         return false
@@ -86,7 +86,7 @@
             }
 
             $scope.getFavorite = function(bookId){
-                if($scope.favorite(bookId)){
+                if($scope.isFavorite(bookId)){
                     FavoriteBook.query({'profileId.equals': vm.profile.id,'bookId.equals':bookId},onSuccess);
                         function onSuccess(result){
                             var id = result[0].id; 

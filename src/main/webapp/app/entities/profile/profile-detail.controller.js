@@ -13,6 +13,7 @@
         vm.profile = entity;
         vm.previousState = previousState.name;
 
+
         var unsubscribe = $rootScope.$on('eLibraryApp:profileUpdate', function(event, result) {
             vm.profile = result;
         });
