@@ -100,4 +100,8 @@ public class FavoriteBookService {
         log.debug("Request to delete FavoriteBook : {}", id);
         favoriteBookRepository.delete(id);
     }
+
+    public void deleteAllByBookId(Long bookId) {
+        favoriteBookRepository.deleteAllByBookId(bookId);
+    }
 }

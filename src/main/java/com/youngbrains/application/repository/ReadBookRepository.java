@@ -11,6 +11,8 @@ import org.springframework.data.jpa.repository.*;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ReadBookRepository extends JpaRepository<ReadBook, Long> {
+public interface ReadBookRepository extends JpaRepository<ReadBook, Long>, JpaSpecificationExecutor<ReadBook> {
+    void deleteAllByBookId(Long bookId);
+
 
 }

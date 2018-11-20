@@ -116,6 +116,15 @@ public class BookResourceIntTest {
     private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
 
     @Autowired
+    private ReadBookService readBookService;
+
+    @Autowired
+    private FavoriteBookService favoriteBookService;
+
+    @Autowired
+    private GenreService genreService;
+
+    @Autowired
     private ExceptionTranslator exceptionTranslator;
 
     @Autowired
@@ -128,7 +137,7 @@ public class BookResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final BookResource bookResource = new BookResource(bookService, bookMapper, userService, profileService, mailService, bookQueryService);
+        final BookResource bookResource = new BookResource(bookService, bookMapper, userService, profileService, mailService, bookQueryService, readBookService, favoriteBookService, genreService);
         this.restBookMockMvc = MockMvcBuilders.standaloneSetup(bookResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

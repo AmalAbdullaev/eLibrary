@@ -12,6 +12,7 @@
 
         vm.newBooks = [];
         vm.recommendedBooks = [];
+        vm.topProfiles = [];
         vm.account = null;
         vm.isAuthenticated = null;
         vm.login = LoginService.open;
@@ -28,10 +29,13 @@
             });
             var oneWeekAgo = new Date();
             oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-            $http.get('/api/books?createDate.greaterThen=' + oneWeekAgo.toISOString())
+            $http.get('/api/books?approved.equals=true&createDate.greaterThen=' + oneWeekAgo.toISOString())
                 .success(function (data) {
                     vm.newBooks = data;
-                })
+                });
+            $http.get('/api/profiles/top').success(function (data) {
+                vm.topProfiles = data;
+            })
         }
 
         getAccount();

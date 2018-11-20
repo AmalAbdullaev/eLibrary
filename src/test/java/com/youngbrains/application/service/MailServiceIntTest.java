@@ -42,6 +42,9 @@ public class MailServiceIntTest {
     @Autowired
     private SpringTemplateEngine templateEngine;
 
+    @Autowired
+    private UserService userService;
+
     @Spy
     private JavaMailSenderImpl javaMailSender;
 
@@ -54,7 +57,7 @@ public class MailServiceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         doNothing().when(javaMailSender).send(any(MimeMessage.class));
-        mailService = new MailService(jHipsterProperties, javaMailSender, messageSource, templateEngine);
+        mailService = new MailService(jHipsterProperties, javaMailSender, messageSource, templateEngine, userService);
     }
 
     @Test

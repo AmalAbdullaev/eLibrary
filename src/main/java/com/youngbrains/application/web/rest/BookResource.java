@@ -59,13 +59,22 @@ public class BookResource {
 
     private final BookQueryService bookQueryService;
 
-    public BookResource(BookService bookService, BookMapper bookMapper, UserService userService, ProfileService profileService, MailService mailService, BookQueryService bookQueryService) {
+    private final ReadBookService readBookService;
+
+    private final FavoriteBookService favoriteBookService;
+
+    private final GenreService genreService;
+
+    public BookResource(BookService bookService, BookMapper bookMapper, UserService userService, ProfileService profileService, MailService mailService, BookQueryService bookQueryService, ReadBookService readBookService, FavoriteBookService favoriteBookService, GenreService genreService) {
         this.bookService = bookService;
         this.bookMapper = bookMapper;
         this.userService = userService;
         this.profileService = profileService;
         this.mailService = mailService;
         this.bookQueryService = bookQueryService;
+        this.readBookService = readBookService;
+        this.favoriteBookService = favoriteBookService;
+        this.genreService = genreService;
     }
 
     /**
@@ -110,9 +119,11 @@ public class BookResource {
             ProfileDTO profile = profileService.findOne(bookService.findOne(id).getProfileId());
             if (!profile.isTrusted()) {
                 if (type != null && type.equals("book")) {
-                    User user = userService.getUserWithAuthoritiesByLogin("admin").orElse(null);
                     Book book = bookMapper.toEntity(bookDTO);
-                    mailService.sendNewBookEmail(user, book, "newBookEmail");
+                    Long profileId = book.getProfile().getId();
+                    Long userId = profileService.findOne(profileId).getUserId();
+                    Optional<User> optionalUser = userService.getUserWithAuthorities(userId);
+                    optionalUser.ifPresent(user -> mailService.sendNewBookEmail(user, book, "newBookEmail"));
                 }
             }
         } catch (FileSystemException | BadRequestException e) {
@@ -163,6 +174,12 @@ public class BookResource {
             page = bookQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/books");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/profiles/top")
+    public ResponseEntity<List<ProfileDTO>> findTop10Profiles() {
+        List<ProfileDTO> profiles = bookService.findTop10Profiles();
+        return new ResponseEntity<>(profiles, HttpStatus.OK);
     }
 
     /**
@@ -251,7 +268,12 @@ public class BookResource {
                 Book book = bookMapper.toEntity(bookDTO);
                 mailService.sendDeletionEmail(user, book, reason, "deletionEmail");
             }
+            favoriteBookService.deleteAllByBookId(bookDTO.getId());
+            readBookService.deleteAllByBookId(bookDTO.getId());
             bookService.delete(id);
+            long booksInGenre = bookService.countBookByGenreId(bookDTO.getGenreId());
+            if (booksInGenre == 0)
+                genreService.delete(bookDTO.getGenreId());
             return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

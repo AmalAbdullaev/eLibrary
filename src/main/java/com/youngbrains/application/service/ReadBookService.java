@@ -79,4 +79,8 @@ public class ReadBookService {
         log.debug("Request to delete ReadBook : {}", id);
         readBookRepository.delete(id);
     }
+
+    public void deleteAllByBookId(Long bookId) {
+        readBookRepository.deleteAllByBookId(bookId);
+    }
 }

@@ -11,22 +11,22 @@
             <div class="homeRecommendedBooks">
                 <h3>Рекомендации</h3>
                 <div class="homeRow">
-                    <div class="homeCol col-md-4">
+                    <div class="homeCol col-md-4" ng-repeat="book in vm.recommendedBooks | limitTo:3 track by book.id">
                         <div class="homeRBook">
                             <!-- Рекомендуемая книга 1 -->
-                            <div class="homeRBookSingle" ng-repeat="book in vm.recommendedBooks track by book.id">
+                            <div class="homeRBookSingle">
                                 <!-- Обложка книги -->
-                                <div class="homeRBookCover"><img ng-src="{{book.coverPath}}"></div>
+                                <div class="homeRBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%"></div>
                                 <!-- Информация о книге -->
                                 <div class="homeRBookInfo">
-                                    <div class="homeRBookReaded">Прочитано</div>
+                                    <div class="homeRBookReaded" has-authority="ROLE_USER">Прочитано</div>
                                     <div class="homeRBookTitle">{{book.title}}</div>
                                     <div class="homeRBookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                                 </div>
                                 <!-- Кнопки -->
                                 <div class="homeRBookBtns">
                                     <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
-                                    <button class="btnLibFavoriteBook"></button>
+                                    <button class="btnLibFavoriteBook" has-authority="ROLE_USER"></button>
                                 </div>
                             </div>
                         </div>
@@ -39,17 +39,8 @@
         <div class="col-md-3 col-sm-12">
             <div class="topTenUsers">
                 <div class="topTenTitle">Топ 10 Пользователей по загрузке книг</div>
-                <div class="topUsers">
-                    <div class="topUser">1</div>
-                    <div class="topUser">2</div>
-                    <div class="topUser">3</div>
-                    <div class="topUser">4</div>
-                    <div class="topUser">5</div>
-                    <div class="topUser">6</div>
-                    <div class="topUser">7</div>
-                    <div class="topUser">8</div>
-                    <div class="topUser">9</div>
-                    <div class="topUser">10</div>
+                <div class="topUsers" ng-repeat="profile in vm.topProfiles track by profile.id">
+                    <div ui-sref="profile-detail({id: profile.id})" class="topUser">{{profile.userLogin}}</div>
                 </div>
             </div>
         </div>
@@ -69,14 +60,14 @@
                                 <div class="homeABookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%"></div>
                                 <!-- Инфа о книге -->
                                 <div class="homeABookInfo">
-                                    <div class="homeRBookReaded">Прочитано</div>
+                                    <div class="homeRBookReaded" has-authority="ROLE_USER">Прочитано</div>
                                     <div class="homeRBookTitle">{{book.title}}</div>
                                     <div class="homeRBookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                                 </div>
                                 <!-- Кнопки -->
                                 <div class="homeABookBtns">
                                     <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
-                                    <button class="btnLibFavoriteBook"></button>
+                                    <button class="btnLibFavoriteBook" has-authority="ROLE_USER"></button>
                                 </div>
                             </div>
                         </div>   
