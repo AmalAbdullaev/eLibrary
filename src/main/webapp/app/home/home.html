@@ -1,12 +1,3 @@
-<style>
-    .newArrivalTitle {
-    width: 100%;
-    height: 100%;
-    font-size: 100%;
-    font-family: 'Oswald', Arial, sans-serif;
-}
-</style>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-9 col-sm-12">
@@ -28,7 +19,9 @@
                                 <div class="homeRBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%" style="border-radius:5px"></div>
                                 <!-- Информация о книге -->
                                 <div class="homeRBookInfo">
-                                    <div class="homeRBookReaded"ng-if="isRead(book.id)" has-authority="ROLE_USER">Прочитано</div>
+                                    <div class="homeRBookReadedH">&nbsp;
+                                        <div class="homeRBookReaded"ng-if="isRead(book.id)" has-authority="ROLE_USER">Прочитано</div>
+                                    </div>
                                     <div class="homeRBookTitle">{{book.title}}</div>
                                     <div class="homeRBookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                                 </div>
@@ -69,7 +62,9 @@
                                 <div class="homeABookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%" style="border-radius:5px"></div>
                                 <!-- Инфа о книге -->
                                 <div class="homeABookInfo">
-                                    <div class="homeRBookReaded" ng-if="isRead(book.id)" has-authority="ROLE_USER">Прочитано</div>
+                                    <div class="homeRBookReadedH">&nbsp;
+                                        <div class="homeRBookReaded" ng-if="isRead(book.id)" has-authority="ROLE_USER">Прочитано</div>
+                                    </div>
                                     <div class="homeRBookTitle">{{book.title}}</div>
                                     <div class="homeRBookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                                 </div>
