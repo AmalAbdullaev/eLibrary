@@ -26,7 +26,7 @@
                         </a>
                         <button
                             ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [favorite(book.id) ] "
-                            ng-click="getFavorite(book.id)"></button>
+                            ng-click="getFavorite(book.id)" has-authority="ROLE_USER"></button>
                     </div>
                 </div>
             </div>
