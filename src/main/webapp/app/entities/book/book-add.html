@@ -62,16 +62,18 @@
                 </div>
 
                 <div class="waitBooksScroll">
+                    <!-- Книга ожидающая проверку -->
                     <div class="singleBookWait" ng-repeat="book in vm.allBooks" |
                          ng-if="book.approved===false && book.profileId === vm.book.profileId">
                         <div class="singleBookWCover">
-                            <img ng-src="{{book.coverPath}}" width="100%">
+                            <img ng-src="{{book.coverPath}}" width="100%" height="100%" style="border-radius:5px">
                         </div>
                         <div class="singleBookWInfo">
-                            <div>{{book.title}}</div>
-                            <div>{{book.authorFirstName}} {{book.authorLastName}}</div>
+                            <div class="bookTitle">{{book.title}}</div>
+                            <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -96,19 +98,16 @@
             <div class="singleBook" ng-repeat="book in vm.allBooks"
                  ng-if="book.approved===true && book.profileId === vm.book.profileId">
                 <div class="singleBookCover">
-                    <img ng-src="{{book.coverPath}}" width="100%">
+                    <img ng-src="{{book.coverPath}}" width="100%" height="100%" style="border-radius:5px">
                 </div>
                 <div class="singleBookInfo">
-                    <div class="divv">
-                        <textarea name="Название книги" readonly>{{book.title}}</textarea>
-                    </div>
-                    <div class="divv">
-                        <textarea name="Имя автора" readonly>{{book.authorFirstName}} {{book.authorLastName}}</textarea>
+                    <div class="bookTitle">{{book.title}}</div>
+                    <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
+                    <div class="bookRButtons">
+                        <button class="btnDetail" ui-sref="book-detail({id:book.id})">Подробнее</button>
                     </div>
                 </div>
-                <button class="btnDetail" ui-sref="book-detail({id:book.id})">Подробнее</button>
             </div>
-
 
         </div>
     </div>

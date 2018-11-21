@@ -16,7 +16,7 @@
                             <!-- Рекомендуемая книга 1 -->
                             <div class="homeRBookSingle">
                                 <!-- Обложка книги -->
-                                <div class="homeRBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%"></div>
+                                <div class="homeRBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%" style="border-radius:5px"></div>
                                 <!-- Информация о книге -->
                                 <div class="homeRBookInfo">
                                     <div class="homeRBookReaded">Прочитано</div>
@@ -64,9 +64,9 @@
                     <!-- Книга 1 -->
                     <div class="col-md-3" ng-repeat="book in vm.newBooks | limitTo:10 track by book.id">
                         <div class="homeNewArrivalBook">
-                            <div class="homeRBookSingle">
+                            <div class="homeABookSingle">
                                 <!-- Обложка -->
-                                <div class="homeABookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%"></div>
+                                <div class="homeABookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%" style="border-radius:5px"></div>
                                 <!-- Инфа о книге -->
                                 <div class="homeABookInfo">
                                     <div class="homeRBookReaded">Прочитано</div>
