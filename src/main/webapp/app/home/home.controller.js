@@ -26,13 +26,13 @@
         vm.favoriteBook = null;
         vm.readBook = null;
 
-        vm.user = null;
+         vm.user = null;
 
 
 
         $scope.isRead = function(bookId){
 
-            if(vm.readBook===null){
+            if(vm.readBook===null ){
                 return false
             }
 
@@ -47,24 +47,31 @@
         }
 
         function load(){
-            Principal.identity().then(function (user) {
-                Profile.getProfile({userId: user.id},onSuccess);
-                function onSuccess(result){
-                    vm.profile = result;
+            
+                Principal.identity().then(function (user) {
+
+                    if(user===null){
+                        console.log('user is  unauthorized');
+                        return;
+                    }
+                    Profile.getProfile({userId: user.id},onSuccess);
                     
-                    FavoriteBook.query({'profileId.equals': vm.profile.id},onSuccess);
                     function onSuccess(result){
-                        vm.favoriteBook = result;
-                    }
+                        vm.profile = result;
+                        
+                        FavoriteBook.query({'profileId.equals': vm.profile.id},onSuccess);
+                        function onSuccess(result){
+                            vm.favoriteBook = result;
+                        }
 
-                                
-                    ReadBook.query({'profileId.equals': vm.profile.id},onReadSuccess);
-                    function onReadSuccess(result){
-                        vm.readBook = result;
-                    }
+                                    
+                        ReadBook.query({'profileId.equals': vm.profile.id},onReadSuccess);
+                        function onReadSuccess(result){
+                            vm.readBook = result;
+                        }
 
-                }                
-            })
+                    }                
+                })
         };
 
         $scope.isFavorite = function(bookId){

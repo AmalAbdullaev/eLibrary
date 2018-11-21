@@ -39,27 +39,31 @@
 
 
 
-            $scope.isRead = function(bookId){
+        $scope.isRead = function(bookId){
 
-                if(vm.readBook===null){
-                    return false
-                }
-
-                var bool = false;
-                vm.readBook.forEach(function(readBook){
-                    if(readBook.bookId === bookId){
-                        bool = true;
-                        return;
-                    }
-                });
-                return bool;
+            if(vm.readBook===null){
+                return false
             }
+
+            var bool = false;
+            vm.readBook.forEach(function(readBook){
+                if(readBook.bookId === bookId){
+                    bool = true;
+                    return;
+                }
+            });
+            return bool;
+        }
 
 
 
 
             function load(){
                 Principal.identity().then(function (user) {
+                    if(user===null){
+                        console.log('user is unauthorized');
+                        return;
+                    }
                     Profile.getProfile({userId: user.id},onSuccess);
                     function onSuccess(result){
                         vm.profile = result;
