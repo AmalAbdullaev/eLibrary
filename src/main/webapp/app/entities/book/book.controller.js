@@ -5,15 +5,9 @@
             .module('eLibraryApp')
             .controller('BookController', BookController);
 
-<<<<<<< HEAD
         BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','Profile','$timeout','ReadBook'];
 
         function BookController($scope, $http, DataUtils, Book, FavoriteBook, ParseLinks, AlertService, paginationConstants,Principal,Profile,$timeout,ReadBook) {
-=======
-        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'ReadBook', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants', 'Principal', 'Profile', '$timeout'];
-
-        function BookController($scope, $http, DataUtils, Book, ReadBook, FavoriteBook, ParseLinks, AlertService, paginationConstants, Principal, Profile, $timeout) {
->>>>>>> 7ace50eaaf9ae335a28564601b0db277a2e9f53f
 
             var vm = this;
 
@@ -43,29 +37,21 @@
                 });
             };
 
-<<<<<<< HEAD
             
 
 
 
             function load(){
-=======
-            function load() {
->>>>>>> 7ace50eaaf9ae335a28564601b0db277a2e9f53f
                 Principal.identity().then(function (user) {
                     if (user !== null) {
                         Profile.getProfile({userId: user.id}, onSuccess);
                     }
                 });
-<<<<<<< HEAD
     
                 vm.favoriteBook = FavoriteBook.query();
                 vm.readBook = ReadBook.query();
 
     
-=======
-
->>>>>>> 7ace50eaaf9ae335a28564601b0db277a2e9f53f
                 function onSuccess(result) {
                     vm.profile = result;
                     vm.favoriteBook = FavoriteBook.query({'profileId.equals': vm.profile.id});
@@ -75,7 +61,6 @@
             load();
 
 
-<<<<<<< HEAD
 
             $scope.isRead = function(bookId){
 
@@ -94,9 +79,6 @@
             }
 
             $scope.isFavorite = function(bookId){
-=======
-            $scope.favorite = function (bookId) {
->>>>>>> 7ace50eaaf9ae335a28564601b0db277a2e9f53f
 
                 if (vm.profile === null) {
                     return false
@@ -110,7 +92,6 @@
                 return bool;
             };
 
-<<<<<<< HEAD
             $scope.getFavorite = function(bookId){
                 if($scope.isFavorite(bookId)){
                     FavoriteBook.query({'profileId.equals': vm.profile.id,'bookId.equals':bookId},onSuccess);
@@ -122,11 +103,6 @@
                             }
                         }
 
-=======
-            $scope.getFavorite = function (bookId) {
-                if ($scope.favorite(bookId)) {
-                    FavoriteBook.query({'profileId.equals': vm.profile.id, 'bookId.equals': bookId}, onSuccess);
->>>>>>> 7ace50eaaf9ae335a28564601b0db277a2e9f53f
                 }
                 else {
                     var favoriteBook = new FavoriteBook();
