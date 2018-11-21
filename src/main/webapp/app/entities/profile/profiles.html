@@ -13,7 +13,7 @@
                 <div class="userManagementPhoto"><div class="userManagementAvatar"></div></div>
 
                 <div class="userManagementLogin">
-                    <p>Логин</p>
+                    <p><b>Логин</b></p>
                     <a ui-sref="profile-detail({id:profile.id})"> {{profile.userLogin}}</a>
                 </div>
                 <div class="userManagementBtns">
@@ -24,7 +24,7 @@
                     <a has-authority="ROLE_ADMIN"  ><button class="btnUserEdit" ui-sref="profile.edit({id:profile.id})"></button></a>
                 </div>
                 <div class="userManagementEmail">
-                    <p>Email</p>
+                    <p><b>Email</b></p>
                     <span>{{profile.userEmail}}</span>
                 </div>
             </div>

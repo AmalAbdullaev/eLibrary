@@ -1,10 +1,3 @@
-<style>
-
-
-
-
-</style>
-
 <div class="container">
     <h2>Профиль</h2>
     
@@ -47,79 +40,68 @@
             <div class="col-md-5"></div>
         </div>
 
-            <div class="col-md-10">
-            <!-- Мои книги / читаю -->
+        <div class="col-md-10">
+        <!-- Мои книги / читаю -->
 
-                <div class="myBooksAndReaded">
-                    <!-- Переключатель Мои книги -->
-                    <input id="tab1" type="radio" name="tabs" checked>
-                    <label for="tab1"><span class="glyphicon glyphicon-book"></span> Мои книги</label>
-                    <!-- Переключатель Читаю -->
-                    <input id="tab2" type="radio" name="tabs">
-                    <label for="tab2"><span class="glyphicon glyphicon-list-alt"></span> Читаю</label>
-                    <!-- Мои книги -->
-                    <section id="content1">
-                        <div class="col-md-4" ng-repeat="book in vm.books">
-<<<<<<< HEAD
-                            
-                            <!-- Книга 1 -->
-                            <div class="profileDetailMyBook" >
-=======
-                            <!-- Книга 1 -->
-                            <div class="profileDetailMyBook">
->>>>>>> book-reader
-                                <div class="homeRBookSingle">
-                                    <!-- Обложка -->
-                                    <div class="homeABookCover" ><img ng-src="{{book.coverPath}}" width="100%" style="border-radius:5px"></div>
-                                    <!-- Инфа о книге -->
-                                    <div class="homeABookInfo">
-                                        <div class="homeRBookTitle">{{book.title}}</div>
-                                        <div class="homeRBookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
-                                    </div>
-                                    <!-- Кнопки -->
-                                    <div class="homeABookBtns">
-                                        <a ui-sref="book-detail({id:book.id})"><button class="btnProfileBookDetail">Подробнее</button></a>
-                                    </div>
-                                </div>
-                            </div>   
-                        </div>
-                    </section>
-                  
-                    <!-- Читаю -->
-                    <section id="content2">
-                        <div class="col-md-4" ng-repeat="book in vm.readBooks">
-<<<<<<< HEAD
+            <div class="myBooksAndReaded">
+                <!-- Переключатель Мои книги -->
+                <input id="tab1" type="radio" name="tabs" checked>
+                <label for="tab1"><span class="glyphicon glyphicon-book"></span> Мои книги</label>
+                <!-- Переключатель Читаю -->
+                <input id="tab2" type="radio" name="tabs">
+                <label for="tab2"><span class="glyphicon glyphicon-list-alt"></span> Читаю</label>
+                
+                <!-- Мои книги -->
+                <section id="content1">
+                    <div class="col-md-4" ng-repeat="book in vm.books">
                         
-                            <!-- Книга 1 -->
-                            <div class="profileDetailMyBook" >
-=======
-                            <!-- Книга 1 -->
-                            <div class="profileDetailMyBook">
->>>>>>> book-reader
-                                <div class="homeRBookSingle">
-                                    <!-- Обложка -->
-                                    <div class="homeABookCover"><img ng-src="{{book.bookCoverPath}}" width="100%"></div>
-                                    <!-- Инфа о книге -->
-                                    <div class="homeABookInfo">
-                                        <div class="homeRBookTitle">{{book.bookTitle}}</div>
-                                        <div class="homeRBookAuthor">{{book.bookAuthorFirstName}} {{book.bookAuthorLastName}}</div>
-                                    </div>
-                                    <!-- Кнопки -->
-                                    <div class="homeABookBtns">
-                                        <a ui-sref="book-detail({id:book.bookId})"><button class="btnProfileBookDetail">Подробнее</button></a>
-                                    </div>
+                        <!-- Книга 1 -->
+                        <div class="profileDetailMyBook" >
+                            <div class="homeRBookSingle">
+                                <!-- Обложка -->
+                                <div class="homeABookCover" ><img ng-src="{{book.coverPath}}" width="100%" style="border-radius:5px"></div>
+                                <!-- Инфа о книге -->
+                                <div class="homeABookInfo">
+                                    <div class="homeRBookTitle">{{book.title}}</div>
+                                    <div class="homeRBookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                                 </div>
-                            </div>   
-                        </div>
-                    </section>
-                </div>
+                                <!-- Кнопки -->
+                                <div class="homeABookBtns">
+                                    <a ui-sref="book-detail({id:book.id})"><button class="btnProfileBookDetail">Подробнее</button></a>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>
+                </section>
+                
+                <!-- Читаю -->
+                <section id="content2">
+                    <div class="col-md-4" ng-repeat="book in vm.readBooks">
+                    
+                        <!-- Книга 1 -->
+                        <div class="profileDetailMyBook" >
+                            <div class="homeRBookSingle">
+                                <!-- Обложка -->
+                                <div class="homeABookCover"><img ng-src="{{book.bookCoverPath}}" width="100%"></div>
+                                <!-- Инфа о книге -->
+                                <div class="homeABookInfo">
+                                    <div class="homeRBookTitle">{{book.bookTitle}}</div>
+                                    <div class="homeRBookAuthor">{{book.bookAuthorFirstName}} {{book.bookAuthorLastName}}</div>
+                                </div>
+                                <!-- Кнопки -->
+                                <div class="homeABookBtns">
+                                    <a ui-sref="book-detail({id:book.bookId})"><button class="btnProfileBookDetail">Подробнее</button></a>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>
+                </section>
             </div>
+        </div>
 
         <div class="col-md-5"></div>
     </div>
 </div>
-
-
 
 <!-- <div>
     <h2><span data-translate="eLibraryApp.profile.detail.title">Profile</span> {{vm.profile.id}}</h2>
