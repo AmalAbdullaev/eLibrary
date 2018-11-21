@@ -116,6 +116,7 @@ body {
     border-radius: 5px;
     background-image: url(/content/images/ico/goToLibrary.png);
     margin-bottom: 30px;
+    background-size: cover;
 }
 
 .goToLibrary:hover {
@@ -123,8 +124,10 @@ body {
 }
 
 .homeRecommendedBooks {
+    margin-top: 4%;
+    margin-bottom: 2%;
     width: 100%;
-    height: 250px;
+    height: 200px;
     border-radius: 5px;
 }
 
@@ -146,11 +149,19 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 5px;
+    float: left;
+}
+
+.homeABookSingle {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    float: left;
+    background-color: rgb(253, 253, 253);
 }
 
 .homeRBookCover {
     width: 30%;
-    height: 150px;
     border-radius: 5px;
     background-position: center center;
     background-repeat: no-repeat;
@@ -159,7 +170,6 @@ body {
 
 .homeABookCover {
     width: 30%;
-    height: 145px;
     border-radius: 5px;
     background-image: url(/content/images/ico/testbook.png);
     background-position: center center;
@@ -172,13 +182,16 @@ body {
     height: 100%;
     float: left;
     padding-left: 5%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;    
 }
 
 .homeABookInfo {
     width: 70%;
     height: 100%;
     float: left;
-    padding: 5%;
+    padding: 1% 5% 5% 5%;
 }
 
 .homeRBookReaded {
@@ -201,6 +214,9 @@ body {
     font-weight: bold;
     float: left;
     margin-top: 1%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .homeRBookAuthor {
@@ -210,6 +226,9 @@ body {
     font-size: 10pt;
     float: left;
     margin-top: 1%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .homeRBookBtns {
@@ -217,7 +236,7 @@ body {
     height: 100%;
     border-radius: 5px;
     float: right;
-    margin-top: 15%;
+    margin-top: 11%;
 }
 
 .homeABookBtns {
@@ -225,9 +244,9 @@ body {
     height: 100%;
     border-radius: 5px;
     float: right;
-    margin-top: 5%;
-    padding-bottom: 15px;
-    padding-right: 15px;;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 5px;
 }
 
 .topTenUsers {
@@ -266,7 +285,7 @@ body {
     padding: 5px;
     margin-bottom: 5px;
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.486)
+    background-color: rgba(255, 255, 255, 0.486);
 }
 
 .newArrival {
@@ -491,12 +510,13 @@ input[type='file'] {
 }
 
 .singleBook {
-    background-color: #fff;
+    background-color: rgb(253, 253, 253);
     width: 19%;
     border-radius: 5px;
     margin-bottom: 1%;
     margin-right: 1%;
     float:left;
+
 }
 
 .singleBook:hover {
@@ -505,7 +525,7 @@ input[type='file'] {
 }
 
 .singleBookWait {
-    background-color: #fff;
+    background-color: rgb(253, 253, 253);
     width: 95%;
     border-radius: 5px;
     margin-top: 3%;
@@ -539,16 +559,16 @@ input[type='file'] {
     background-color: red;
     width: 30%;
     border-radius: 5px;
-    margin-right: 10px;
+    margin-right: 5px;
     float:left;
 }
 
 .singleBookInfo {
-    width: 66%;
+    width: 65%;
     height: 100%;
     border-radius: 5px;
     float:left;
-    word-break:break-all;
+    padding: 5px;
 }
 
 .label {
@@ -557,7 +577,7 @@ input[type='file'] {
     float: left;
 }
 
-textarea
+/* textarea
 {
     width: 100%;
     height: 30px;
@@ -567,19 +587,18 @@ textarea
     background: none;
     resize:none;
     overflow: auto;
-}
+} */
 
 .btnDetail {
     background-color: #dfdfdf;
     color: white;
-    width: 35%;
-    height: 25px;
-    font-size: 14px;
+    width: 60%;
+    height: 30px;
+    font-size: 15px;
     border: none;
     vertical-align: bottom;
     border-radius: 5px;
     float: right;
-    margin-right: 10px;
 }
 
 .btnDetail:hover {
@@ -647,7 +666,6 @@ h3 {
 
 .divv {
     width: 100%;
-    height: 20px;
 }
 
 /* ==========================================================================
@@ -802,7 +820,7 @@ h3 {
     vertical-align: top;
     width: 27%;
     height:100%;
-    padding: 1%;
+    padding: 10px;
     margin-right: 1%;
     border-radius: 5px;
     border-style: solid;
@@ -864,6 +882,7 @@ select[type="myBookLibSort"] {
     margin-left: 1%;
     border-radius: 5px;
     margin-bottom: 1%;
+    background-color: rgb(253, 253, 253);
 }
 
 .libBook:hover {
@@ -872,7 +891,6 @@ select[type="myBookLibSort"] {
 
 .libBookCover {
     width: 35%;
-    /* height: 100%; */
     height: 25%;
     float: left;
     border-radius: 5px
@@ -880,7 +898,6 @@ select[type="myBookLibSort"] {
 
 .libRecommendBookCover {
     width: 40%;
-    /* height: 100%; */
     height: 150px;
     float: left;
     background-color: red;
@@ -909,7 +926,6 @@ select[type="myBookLibSort"] {
     height: 100%;
     float: right;
     border-radius: 5px;
-    padding: 0 10px 10px 10px; 
 }
 
 .bookReaded {
@@ -918,7 +934,7 @@ select[type="myBookLibSort"] {
     width: 70%;
     text-align: center;
     float: right;
-    margin-bottom: 2%;
+    margin-bottom: 3%;
     color: #fff;
 }
 
@@ -938,9 +954,12 @@ select[type="myBookLibSort"] {
     float: left;
     margin-bottom: 2%;
     color: #000;
-    font-size: 11pt;
+    font-size: 13pt;
     font-weight: bold;
     width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .bookAuthor {
@@ -950,13 +969,23 @@ select[type="myBookLibSort"] {
     color: #525252;
     font-size: 10pt;
     width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .bookButtons {
     border-radius: 5px;
     float: right;
     width: 100%;
-    margin-top: 15px;
+    margin-top: 5px;
+}
+
+.bookRButtons {
+    border-radius: 5px;
+    float: right;
+    width: 100%;
+    margin-top: 40px;
 }
 
 .btnLibReadBook {
@@ -1412,43 +1441,51 @@ IMG.AllImgCenter {
     width: 80%;
     height: 20%;
     border-bottom: 1px solid rgb(233, 233, 233);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     text-align: center;
     font-size: 12pt;
     font-weight: bold;
     padding-bottom: 10px;
     margin-bottom: 10px;
     margin: 0 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.fBookBtns {
-    width: 100%;
-    height: 100%;
-    padding-top: 10px;
-}
-
-.fBookCBtns {
-    margin: 0 auto;
-    width: 60%;
-}
+.fBookBtnsOuter {
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 10px;
+} 
 
 .btnFavoriteBookRead {
-    background-color: #dfdfdf;
+    background-color: #d65600;
     color: white;
-    width: 70%;
-    height: 35px;
-    font-size: 14px;
+    width: 50%;
+    font-size: 16px;
     border: none;
-    vertical-align: bottom;
     border-radius: 5px;
-    float: right;
+    padding: 5px;
 }
 
 .btnFavoriteBookRead:hover {
     color: white;
-    background-color: #d65600;
+    background-color: #943b00;
+}
+
+.btnFavoriteBookDelete {
+    background-color: #f51d1d;
+    color: white;
+    width: 20%;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.btnFavoriteBookDelete:hover {
+    color: white;
+    background-color: #bb0101;
 }
 
 /* ==========================================================================
