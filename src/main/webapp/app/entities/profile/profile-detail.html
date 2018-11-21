@@ -61,10 +61,10 @@
                   
                     <!-- Мои книги -->
                     <section id="content1">
-                        <div class="col-md-4">
+                        <div class="col-md-4" ng-repeat="book in vm.books">
                             
                             <!-- Книга 1 -->
-                            <div class="profileDetailMyBook" ng-repeat="book in vm.books">
+                            <div class="profileDetailMyBook" >
                                 <div class="homeRBookSingle">
                                     <!-- Обложка -->
                                     <div class="homeABookCover" ><img ng-src="{{book.coverPath}}" width="100%"></div>
@@ -85,21 +85,21 @@
                   
                     <!-- Читаю -->
                     <section id="content2">
-                        <div class="col-md-4">
+                        <div class="col-md-4" ng-repeat="book in vm.readBooks">
                         
                             <!-- Книга 1 -->
-                            <div class="profileDetailMyBook" ng-repeat="book in vm.readBooks">
+                            <div class="profileDetailMyBook" >
                                 <div class="homeRBookSingle">
                                     <!-- Обложка -->
                                     <div class="homeABookCover"><img ng-src="{{book.bookCoverPath}}" width="100%"></div>
                                     <!-- Инфа о книге -->
                                     <div class="homeABookInfo">
                                         <div class="homeRBookTitle">{{book.bookTitle}}</div>
-                                        <div class="homeRBookAuthor">{{book.bookAuthorFirstName}} {{book.booksAuthorLastName}}</div>
+                                        <div class="homeRBookAuthor">{{book.bookAuthorFirstName}} {{book.bookAuthorLastName}}</div>
                                     </div>
                                     <!-- Кнопки -->
                                     <div class="homeABookBtns">
-                                        <a ui-sref="book-detail({id:book.id})"><button class="btnProfileBookDetail">Подробнее</button></a>
+                                        <a ui-sref="book-detail({id:book.bookId})"><button class="btnProfileBookDetail">Подробнее</button></a>
                                     </div>
                                 </div>
                             </div>   
