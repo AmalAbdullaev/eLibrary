@@ -1,6 +1,11 @@
+@font-face {
+    font-family: Oswald;
+    src: url(/content/fonts/oswald.ttf);
+}
+
 body {
     background: #faf8ff;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Oswald, Arial, sans-serif;
     color: #333;
     height: 100%; 
 }
@@ -24,7 +29,7 @@ body {
 }
 #header {
     padding-left: 24px;
-    padding-top: 10px;
+    padding-top: 12px;
     height: 70px;
     width: 100%;
     background: #faf8ff;
@@ -203,7 +208,6 @@ body {
     text-align: center;
     color: #fff;
     font-size: 10pt;
-
 }
 
 .homeRBookTitle {
@@ -267,7 +271,7 @@ body {
 
 .topTenTitle {
     text-align: center;
-    font-size: 18px;
+    font-size: 125%;
     font-weight: bold;
     margin-bottom: 15px;
 }
@@ -275,7 +279,7 @@ body {
 .topUsers {
     width: 100%;
     height: 100%;
-    font-size: 12px;
+    font-size: 100%;
     border-radius: 5px;
 }
 
@@ -352,13 +356,17 @@ body {
     border: 2px solid rgb(209, 209, 209);
 }
 
+input::placeholder {
+    color: #818181;
+}
+
 input[type="addBookName"] {
     outline: none;
     border: 1px solid #dededf;
     display: block;
     width: 100%;
     height: 55px;
-    font-size: 16pt;
+    font-size: 100%;
     color: #818181;
     background: #fff;
     border-radius: 5px;
@@ -373,14 +381,17 @@ textarea[name="addBookDescription"] {
     display: block;
     width: 100%;
     height: 326px;
-    font-size: 16pt;
+    font-size: 100%;
     color: #818181;
     background: #fff;
     border-radius: 5px;
     background-color: transparent;
     padding-left: 15px;
     padding-top: 10px;
-    
+}
+
+textarea::placeholder {
+    color: #818181;
 }
 
 input[type="addBookAuthorName"] {
@@ -389,7 +400,7 @@ input[type="addBookAuthorName"] {
     display: block;
     width: 19%;
     height: 55px;
-    font-size: 16pt;
+    font-size: 100%;
     color: #818181;
     background: #fff;
     border-radius: 5px;
@@ -406,7 +417,7 @@ input[type="addBookAuthorSurname"] {
     display: block;
     width: 19%;
     height: 55px;
-    font-size: 16pt;
+    font-size: 100%;
     color: #818181;
     background: #fff;
     border-radius: 5px;
@@ -421,9 +432,9 @@ select[type="addBookGenre"] {
     outline: none;
     border: 1px solid #dededf;
     display: block;
-    width: 19%;
+    width: 25%;
     height: 55px;
-    font-size: 16pt;
+    font-size: 100%;
     color: #818181;
     background: #fff;
     border-radius: 5px;
@@ -436,9 +447,9 @@ input[type="addBookOther"] {
     outline: none;
     border: 1px solid #dededf;
     display: block;
-    width: 15%;
+    width: 10%;
     height: 55px;
-    font-size: 16pt;
+    font-size: 100%;
     color: #818181;
     background: #fff;
     border-radius: 5px;
@@ -783,13 +794,13 @@ h3 {
     border-bottom: 1px solid rgb(223, 223, 223);
     word-break: break-all;
     color: #d65600;
-    font-size: 12pt;
+    font-size: 100%;
 }
 
 .libraryGenreList {
     width: 18%;
     float: right;
-    background-color: #fff;
+    background-color: rgb(254, 254, 254);
     border-radius: 5px;
     padding-bottom: 5px;
 }
@@ -797,7 +808,7 @@ h3 {
 .libraryRecommendation {
     width: 81%;
     float: left;
-    background-color: #fff;
+    background-color: rgb(254, 254, 254);
     border-radius: 5px;
     margin-bottom: 1%;
     padding-top: 10px;
@@ -835,13 +846,13 @@ h3 {
 .libraryBooks {
     width: 81%;
     float: left;
-    background-color: #fff;
+    background-color: rgb(254, 254, 254);
     border-radius: 5px;
     padding-top: 10px;
 }
 
 .myLibBooksTitle {
-    width: 70%;
+    width: 100%;
     border-radius: 5px;
     float:left;
 }
@@ -857,10 +868,10 @@ select[type="myBookLibSort"] {
     outline: none;
     border: 1px solid #dededf;
     display: block;
-    width: 15%;
+    width: 100%;
     height: 40px;
     font-size: 14pt;
-    color: #dadada;
+    color: #b3b3b3;
     background: #fff;
     border-radius: 5px;
     background-color: transparent;
@@ -877,11 +888,11 @@ select[type="myBookLibSort"] {
 .libBook {
     display: inline-block;
     vertical-align: top;
-    width: 23%;
+    width: 100%;
     height:100%;
     margin-left: 1%;
     border-radius: 5px;
-    margin-bottom: 1%;
+    margin-bottom: 5%;
     background-color: rgb(253, 253, 253);
 }
 
@@ -947,6 +958,7 @@ select[type="myBookLibSort"] {
     margin-top: 2%;
     margin-bottom: 2%;
     color: #fff;
+    font-size: 90%;
 }
 
 .bookTitle {
@@ -954,7 +966,7 @@ select[type="myBookLibSort"] {
     float: left;
     margin-bottom: 2%;
     color: #000;
-    font-size: 13pt;
+    font-size: 100%;
     font-weight: bold;
     width: 100%;
     white-space: nowrap;
@@ -967,7 +979,7 @@ select[type="myBookLibSort"] {
     float: left;
     margin-bottom: 2%;
     color: #525252;
-    font-size: 10pt;
+    font-size: 100%;
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
@@ -1010,7 +1022,7 @@ select[type="myBookLibSort"] {
     color: white;
     width: 60%;
     height: 35px;
-    font-size: 14px;
+    font-size: 100%;
     border: none;
     vertical-align: bottom;
     border-radius: 5px;
@@ -1063,6 +1075,11 @@ select[type="myBookLibSort"] {
 Админ - управление пользователями
 ========================================================================== */
 
+.form-control {
+    width: 60%;
+    margin-bottom: 1%;
+}
+
 .userManagementList {
     width: 60%;
     height: 100%;
@@ -1070,12 +1087,11 @@ select[type="myBookLibSort"] {
     border-radius: 5px;
     margin-right: 2%;
     padding: 2%;
-
     background-color: #fff;
 }
 
 .AllBookCounter {
-    width: 13%;
+    width: 17%;
     height: 100%;
     float: left;
     border-radius: 5px;
@@ -1085,7 +1101,7 @@ select[type="myBookLibSort"] {
 }
 
 .AllUserCounter {
-    width: 13%;
+    width: 17%;
     height: 100%;
     float: left;
     border-radius: 5px;
@@ -1259,8 +1275,8 @@ IMG.AllImgCenter {
 }
 
 .nBookCover {
-    width: 150px;
-    height: 200px;
+    width: 125px;
+    height: 175px;
     float: left;
     border-radius: 5px;
     margin-right: 1%
@@ -1273,8 +1289,8 @@ IMG.AllImgCenter {
     border-radius: 5px;
     margin-right: 1%;
     word-break:break-all;
-    padding-left: 1%;
     padding-right: 1%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .nBookDescription {
@@ -1284,6 +1300,8 @@ IMG.AllImgCenter {
     padding-left: 1%;
     padding-right: 1%;
     margin-right: 1%;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .nButtons {
@@ -1311,22 +1329,28 @@ IMG.AllImgCenter {
 
 .nBookBText1 {
     width: 45%;
-    font-size: 10pt;
+    font-size: 12pt;
     font-weight: bold;
     float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .nBookBText2 {
     width: 55%;
-    font-size: 10pt;
+    font-size: 12pt;
     float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .nBtnRead {
-    background-color: #dfdfdf;
+    background-color: #d65600;
     color: white;
-    width: 100%;
-    height: 35px;
+    width: 80%;
+    height: 45px;
     font-size: 14px;
     border: none;
     vertical-align: bottom;
@@ -1336,31 +1360,31 @@ IMG.AllImgCenter {
 }
 .nBtnRead:hover {
     color: white;
-    background-color: #d65600;
+    background-color: #b84a01;
 }
 
 .nBtnPublish {
-    background-color: #dfdfdf;
+    background-color: #00d435;
     color: white;
-    width: 100%;
-    height: 35px;
+    width: 80%;
+    height: 45px;
     font-size: 14px;
     border: none;
     vertical-align: bottom;
     border-radius: 5px;
     float: right;
-    margin-bottom: 2%;
+    margin-bottom: 1%;
 }
 .nBtnPublish:hover {
     color: white;
-    background-color: #00d323;
+    background-color: rgb(3, 97, 0);
 }
 
 .nBtnCancel {
-    background-color: #dfdfdf;
+    background-color: #f51d1d;
     color: white;
-    width: 100%;
-    height: 35px;
+    width: 80%;
+    height: 45px;
     font-size: 14px;
     border: none;
     vertical-align: bottom;
@@ -1369,7 +1393,7 @@ IMG.AllImgCenter {
 }
 .nBtnCancel:hover {
     color: white;
-    background-color: #f51d1d;
+    background-color: #941212;
 }
 
 /* ==========================================================================
@@ -1379,7 +1403,7 @@ IMG.AllImgCenter {
 .favoriteBooks {
     width: 100%;
     height: 100%;
-    background-color: #fff;
+    background-color: rgb(254, 254, 254);
     float: left;
     border-radius: 5px;
     padding-top: 30px;
@@ -1391,9 +1415,10 @@ IMG.AllImgCenter {
 .favoriteBook {
     width: 100%;
     height: 100%;
-    background-color: #fff;
     float: left;
     margin-bottom: 30px;
+    border-radius: 5px;
+    background-color: rgb(253, 253, 253);
 }
 
 .favoriteSingleBook {
@@ -1442,8 +1467,8 @@ IMG.AllImgCenter {
 .btnFavoriteBookRead {
     background-color: #d65600;
     color: white;
-    width: 50%;
-    font-size: 16px;
+    width: 55%;
+    font-size: 100%;
     border: none;
     border-radius: 5px;
     padding: 5px;
@@ -1458,7 +1483,7 @@ IMG.AllImgCenter {
     background-color: #f51d1d;
     color: white;
     width: 20%;
-    font-size: 16px;
+    font-size: 100%;
     border: none;
     border-radius: 5px;
     padding: 5px;
@@ -1622,9 +1647,9 @@ input[type="search"] {
     border: 2px solid #dededf;
     padding: 5px 20px 5px 60px;
     display: block;
-    width: 500px;
-    height: 50px;
-    font-size: 20pt;
+    width: 400px;
+    height: 45px;
+    font-size: 100%;
     color: #dadada;
     background: #fff;
     border-radius: 25px;

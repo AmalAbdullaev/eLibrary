@@ -36,7 +36,7 @@
                     </li>
 
                     <!-- Форма добавления книги -->
-                    <li class="icobox" data-title="Добавить книгу" has-authority="ROLE_USER">
+                    <li class="icobox" data-title="Добавить" has-authority="ROLE_USER">
                         <!-- <a ui-sref="book" ng-click="vm.collapseNavbar()"> -->
                         <a ui-sref="book.new" ng-click="vm.collapseNavbar()">
                             <img src="content/images/ico/addbook.png">
@@ -44,7 +44,7 @@
                     </li>
                     
                     <!-- Админ: Управление пользователями -->
-                    <li class="icobox" data-title="Управление пользователями" ng-class="{active: vm.$state.includes('entity')}"  ng-switch-when="true" has-authority="ROLE_ADMIN">
+                    <li class="icobox" data-title="Пользователи" ng-class="{active: vm.$state.includes('entity')}"  ng-switch-when="true" has-authority="ROLE_USER">
                         <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu" ui-sref="profile" ng-click="vm.collapseNavbar()">
                             <img src="content/images/ico/user.png">
                         </a>
@@ -58,7 +58,7 @@
                     </li>
 
                     <!-- Админ: Статистика -->
-                    <li class="icobox" data-title="Статистика" ng-class="{active: vm.$state.includes('admin')}" ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown class="dropdown pointer">
+                    <li class="icobox" data-title="Администрирование" ng-class="{active: vm.$state.includes('admin')}" ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown class="dropdown pointer">
                         <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
                             <img src="content/images/ico/admin.png">
                         </a>
@@ -66,43 +66,55 @@
                             <li ui-sref-active="active">
                                 <a ui-sref="user-management" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-user"></span>&nbsp;
-                                    <span data-translate="global.menu.admin.userManagement">User management</span>
+                                    <span>Управление пользователями</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="genre" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-tags"></span>&nbsp;
+                                    <span>Жанры</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="read-book" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
+                                    <span>Прочитанные книги</span>
                                 </a>
                             </li>
                             <li ui-sref-active="active">
                                 <a ui-sref="jhi-metrics" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-dashboard"></span>&nbsp;
-                                    <span data-translate="global.menu.admin.metrics">Metrics</span>
+                                    <span>Метрики</span>
                                 </a>
                             </li>
                             <li ui-sref-active="active">
                                 <a ui-sref="jhi-health" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-heart"></span>&nbsp;
-                                    <span data-translate="global.menu.admin.health">Health</span>
+                                    <span>Состояние</span>
                                 </a>
                             </li>
                             <li ui-sref-active="active">
                                 <a ui-sref="jhi-configuration" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
-                                    <span data-translate="global.menu.admin.configuration">Configuration</span>
+                                    <span>Настройки</span>
                                 </a>
                             </li>
                             <li ui-sref-active="active">
                                 <a ui-sref="audits" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-bell"></span>&nbsp;
-                                    <span data-translate="global.menu.admin.audits">Audits</span>
+                                    <span>Аудит</span>
                                 </a>
                             </li>
                             <li ui-sref-active="active">
                                 <a ui-sref="logs" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-tasks"></span>&nbsp;
-                                    <span data-translate="global.menu.admin.logs">Logs</span>
+                                    <span>Логи</span>
                                 </a>
                             </li>
                             <li ng-show="vm.swaggerEnabled" ui-sref-active="active">
                                 <a ui-sref="docs" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-book"></span>&nbsp;
-                                    <span data-translate="global.menu.admin.apidocs">API</span>
+                                    <span>API</span>
                                 </a>
                             </li>
                         </ul>
@@ -112,7 +124,7 @@
                     <li class="icobox" data-title="Справка"><img src="content/images/ico/help.png"></li>
                     
                     <!-- Сущности -->
-                    <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer">
+                    <!-- <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer">
                         <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
                             <span>
                                 <span class="glyphicon glyphicon-th-list"></span>
@@ -147,9 +159,8 @@
                                         <span data-translate="global.menu.entities.profile">Profile</span>
                                     </a>
                                 </li>
-                            <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                         </ul>
-                    </li>
+                    </li> -->
 
                     
                     
