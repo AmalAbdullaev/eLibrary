@@ -210,6 +210,10 @@ body {
     font-size: 10pt;
 }
 
+.homeRBookReadedH {
+    height: 20px;
+}
+
 .homeRBookTitle {
     width: 100%;
     height: 100%;
@@ -953,12 +957,18 @@ select[type="myBookLibSort"] {
     border-radius: 5px;
     background-color: #fd7b7d;
     width: 60%;
+    height: 20px;
     text-align: center;
     float: right;
     margin-top: 2%;
     margin-bottom: 2%;
     color: #fff;
     font-size: 90%;
+}
+
+.bookReadedH {
+    height: 27px;
+    color: white;
 }
 
 .bookTitle {
