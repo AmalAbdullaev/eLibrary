@@ -6,9 +6,9 @@
             .module('eLibraryApp')
             .controller('BookController', BookController);
 
-        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','Profile','$timeout','ReadBook'];
+        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','Profile','ReadBook'];
 
-        function BookController($scope, $http, DataUtils, Book, FavoriteBook, ParseLinks, AlertService, paginationConstants,Principal,Profile,$timeout,ReadBook) {
+        function BookController($scope, $http, DataUtils, Book, FavoriteBook, ParseLinks, AlertService, paginationConstants,Principal,Profile,ReadBook) {
 
             var vm = this;
 
@@ -34,30 +34,26 @@
             $scope.genres = [];
 
             vm.favoriteBook = null;
-
-            // $scope.isRead = function (id) {
-            //     ReadBook.query({
-            //         'bookId.equals': id,
-            //         'profileId.equals': vm.profile.id
-            //     });
-            // };
+            vm.readBook = null;
 
 
-                        // $scope.isRead = function(bookId){
 
-            //     if(vm.profile===null){
-            //         return false
-            //     }
 
-            //     var bool = false;
-            //     vm.readBook.forEach(function(readBook){
-            //         if(readBook.bookId === bookId && readBook.profileId === vm.profile.id){
-            //             bool = true;
-            //             return;
-            //         }
-            //     });
-            //     return bool;
-            // }
+            $scope.isRead = function(bookId){
+
+                if(vm.readBook===null){
+                    return false
+                }
+
+                var bool = false;
+                vm.readBook.forEach(function(readBook){
+                    if(readBook.bookId === bookId){
+                        bool = true;
+                        return;
+                    }
+                });
+                return bool;
+            }
 
 
 
@@ -67,10 +63,18 @@
                     Profile.getProfile({userId: user.id},onSuccess);
                     function onSuccess(result){
                         vm.profile = result;
+
                         FavoriteBook.query({'profileId.equals': vm.profile.id},onSuccess);
                         function onSuccess(result){
                             vm.favoriteBook = result;
                         }
+
+                                    
+                        ReadBook.query({'profileId.equals': vm.profile.id},onReadSuccess);
+                        function onReadSuccess(result){
+                            vm.readBook = result;
+                        }
+
                     }                
                 })
             };
