@@ -46,7 +46,7 @@
                 }
             },
             resolve: {
-                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                translatePartialLoader: ['$translate', '$translatePartialLoader','$state', function ($translate, $translatePartialLoader,$state) {
                     $translatePartialLoader.addPart('profile');
                     return $translate.refresh();
                 }],
@@ -57,8 +57,9 @@
                     var currentStateData = {
                         name: $state.current.name || 'profile',
                         params: $state.params,
-                        url: $state.href($state.current.name, $state.params)
+                        url: $state.href($state.current.name, $state.params,$state.reload)
                     };
+                    
                     return currentStateData;
                 }]
             }
@@ -82,7 +83,7 @@
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('^', {}, { reload: false });
+                    $state.go('^', {}, { reload: true });
                 }, function() {
                     $state.go('^');
                 });

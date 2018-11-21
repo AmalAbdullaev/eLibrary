@@ -5,13 +5,14 @@
         .module('eLibraryApp')
         .controller('ProfileDetailController', ProfileDetailController);
 
-    ProfileDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Profile', 'User','Book','ReadBook'];
+    ProfileDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Profile', 'User','Book','ReadBook','$state'];
 
-    function ProfileDetailController($scope, $rootScope, $stateParams, previousState, entity, Profile, User,Book,ReadBook) {
+    function ProfileDetailController($scope, $rootScope, $stateParams, previousState, entity, Profile, User,Book,ReadBook,$state) {
         var vm = this;
 
         vm.profile = entity;
         vm.previousState = previousState.name;
+
 
         Book.query({'profileId.equals':vm.profile.id},onSuccess);
 
@@ -19,11 +20,10 @@
             vm.books = result;
         }
 
-        ReadBook.getReadBookByProfileId({profileId:vm.profile.id},onSuccessForReadBooks);
+        ReadBook.query({'profileId.equals':vm.profile.id},onSuccessForReadBooks);
 
         function onSuccessForReadBooks(result){
             vm.readBooks = result;
-            console.log(vm.readBooks);
         }
 
         var unsubscribe = $rootScope.$on('eLibraryApp:profileUpdate', function(event, result) {

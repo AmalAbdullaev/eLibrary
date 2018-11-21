@@ -17,8 +17,72 @@ public class ReadBookDTO implements Serializable {
 
     private Long profileId;
 
+    private String bookTitle;
+
+    private String bookAuthorFirstName;
+
+    private String bookAuthorLastName;
+    
+    private String bookCoverPath;
+
     public Long getId() {
         return id;
+    }
+
+    /**
+     * @return the bookTitle
+     */
+    public String getBookTitle() {
+        return bookTitle;
+    }
+
+    /**
+     * @param bookTitle the bookTitle to set
+     */
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
+
+    /**
+     * @return the bookAuthorFirstName
+     */
+    public String getBookAuthorFirstName() {
+        return bookAuthorFirstName;
+    }
+
+    /**
+     * @param bookAuthorFirstName the bookAuthorFirstName to set
+     */
+    public void setBookAuthorFirstName(String bookAuthorFirstName) {
+        this.bookAuthorFirstName = bookAuthorFirstName;
+    }
+
+    /**
+     * @return the bookAuthorLastName
+     */
+    public String getBookAuthorLastName() {
+        return bookAuthorLastName;
+    }
+
+    /**
+     * @param bookAuthorLastName the bookAuthorLastName to set
+     */
+    public void setBookAuthorLastName(String bookAuthorLastName) {
+        this.bookAuthorLastName = bookAuthorLastName;
+    }
+
+    /**
+     * @return the bookCoverPath
+     */
+    public String getBookCoverPath() {
+        return bookCoverPath;
+    }
+
+    /**
+     * @param bookCoverPath the bookCoverPath to set
+     */
+    public void setBookCoverPath(String bookCoverPath) {
+        this.bookCoverPath = bookCoverPath;
     }
 
     public void setId(Long id) {
@@ -40,6 +104,10 @@ public class ReadBookDTO implements Serializable {
     public void setProfileId(Long profileId) {
         this.profileId = profileId;
     }
+
+
+
+
 
     @Override
     public boolean equals(Object o) {

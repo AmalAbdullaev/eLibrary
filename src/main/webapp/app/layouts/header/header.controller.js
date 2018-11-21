@@ -5,9 +5,9 @@
         .module('eLibraryApp')
         .controller('HeaderController', HeaderController);
 
-    HeaderController.$inject = ['$scope', '$http', '$state', 'Auth', 'Principal', 'ProfileService', 'LoginService','Profile'];
+    HeaderController.$inject = ['$scope', '$http', '$state', 'Auth', 'Principal', 'ProfileService', 'LoginService','Profile','$stateParams'];
 
-    function HeaderController($scope, $http, $state, Auth, Principal, ProfileService, LoginService,Profile) {
+    function HeaderController($scope, $http, $state, Auth, Principal, ProfileService, LoginService,Profile,$stateParams) {
         var vm = this;
 
         vm.isNavbarCollapsed = true;
@@ -28,19 +28,21 @@
         vm.collapseNavbar = collapseNavbar;
         vm.$state = $state;
         vm.foundBooks = [];
+        vm.getAccount = getAccount;
 
-        vm.profile = null;
-
-
-
-        Principal.identity().then(function (user) {
-            Profile.getProfile({userId: user.id}, onSuccess);
-        });
-
-        function onSuccess(result){
-            vm.profile = result;
+        function getAccount(){
+            Principal.identity().then(function (user) {
+                if(user===null){
+                    return null;
+                }
+                Profile.getProfile({userId: user.id}, onSuccess);
+            });
+            function onSuccess(result){
+                vm.profile = result;
+            }
         }
-        
+         getAccount();
+
         function search() {
             vm.foundBooks = [];
 
@@ -49,7 +51,6 @@
                 method: 'GET',
                 url: '/api/books?search=' + $scope.searchText
             }).success(function (data) {
-                console.log(typeof(data),data.length)
                 var toArray = data;
                 vm.foundBooks = toArray.slice(0,10);
                 $scope.searchBarOpen = true;

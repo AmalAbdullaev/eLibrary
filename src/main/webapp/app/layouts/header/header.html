@@ -20,15 +20,15 @@
         </div>
 
         <div class="col-md-1">
-            <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">
+            <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()" ng-click="vm.getAccount()">
                 <!-- Иконка аккаунта пользователя -->
-                <div ng-class="{active: vm.$state.includes('account')}" uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
+                <div  uib-dropdown class="dropdown pointer">
+                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu" >
                         <img src="/content/images/ico/profile.png">
                     </a>
                     <ul class="dropdown-menu pull-right" uib-dropdown-menu>
-                        <li ui-sref-active="active" ng-switch-when="true">
-                                <a  ui-sref="profile-detail({id: vm.profile.id})">
+                        <li ui-sref-active="active" ng-switch-when="true" >
+                                <a  ui-sref="profile-detail({id: vm.profile.id})" >
                                     <span class="glyphicon glyphicon-wrench"></span>&nbsp;
                                     <span >Мой профиль</span>
                                 </a>

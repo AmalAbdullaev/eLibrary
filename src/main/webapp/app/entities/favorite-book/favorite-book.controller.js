@@ -5,9 +5,9 @@
         .module('eLibraryApp')
         .controller('FavoriteBookController', FavoriteBookController);
 
-    FavoriteBookController.$inject = ['FavoriteBook','$state'];
+    FavoriteBookController.$inject = ['FavoriteBook','$state','Profile','Principal'];
 
-    function FavoriteBookController(FavoriteBook,$state) {
+    function FavoriteBookController(FavoriteBook,$state,Profile,Principal) {
 
         var vm = this;
 
@@ -24,10 +24,17 @@
         }
 
         function loadAll() {
-            FavoriteBook.query(function(result) {
-                vm.favoriteBooks = result;
-                vm.searchQuery = null;
-            });
+
+            Principal.identity().then(function (user) {
+                Profile.getProfile({userId: user.id},onSuccess);
+                    function onSuccess(result){
+                        vm.profile = result;
+                        FavoriteBook.query({'profileId.equals': vm.profile.id},function(result) {
+                            vm.favoriteBooks = result;
+                            vm.searchQuery = null;
+                        });
+                    }                
+            })
         }
     }
 })();

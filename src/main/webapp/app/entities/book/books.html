@@ -49,13 +49,6 @@
                             <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
                             <button has-authority="ROLE_USER" ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [isFavorite(book.id)]" ng-click="getFavorite(book.id)"></button>
 
-                        <a ui-sref="book-detail({id:book.id})">
-                            <button class="btnLibReadBook2">Читать</button>
-                        </a>
-                        <button has-authority="ROLE_USER"
-                                ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [favorite(book.id)]"
-                                ng-click="getFavorite(book.id)"></button>
-
                         <!-- <button class="btnLibDeleteBook" type="submit" ui-sref="book.delete({id:book.id})" has-authority="ROLE_ADMIN"></button> -->
                     </div>
                 </div>

@@ -1,3 +1,4 @@
+
 (function () {
         'use strict';
 
@@ -21,69 +22,67 @@
             vm.links = {
                 last: 0
             };
+
             vm.predicate = 'id';
             vm.reset = reset;
             vm.reverse = true;
             vm.openFile = DataUtils.openFile;
             vm.byteSize = DataUtils.byteSize;
 
-            vm.profile = null;
+
+            vm.user = null;
             $scope.genres = [];
 
-            $scope.isRead = function (id) {
-                ReadBook.query({
-                    'bookId.equals': id,
-                    'profileId.equals': vm.profile.id
-                });
-            };
+            vm.favoriteBook = null;
 
-            
+            // $scope.isRead = function (id) {
+            //     ReadBook.query({
+            //         'bookId.equals': id,
+            //         'profileId.equals': vm.profile.id
+            //     });
+            // };
+
+
+                        // $scope.isRead = function(bookId){
+
+            //     if(vm.profile===null){
+            //         return false
+            //     }
+
+            //     var bool = false;
+            //     vm.readBook.forEach(function(readBook){
+            //         if(readBook.bookId === bookId && readBook.profileId === vm.profile.id){
+            //             bool = true;
+            //             return;
+            //         }
+            //     });
+            //     return bool;
+            // }
+
 
 
 
             function load(){
                 Principal.identity().then(function (user) {
-                    if (user !== null) {
-                        Profile.getProfile({userId: user.id}, onSuccess);
-                    }
-                });
-    
-                vm.favoriteBook = FavoriteBook.query();
-                vm.readBook = ReadBook.query();
+                    Profile.getProfile({userId: user.id},onSuccess);
+                    function onSuccess(result){
+                        vm.profile = result;
+                        FavoriteBook.query({'profileId.equals': vm.profile.id},onSuccess);
+                        function onSuccess(result){
+                            vm.favoriteBook = result;
+                        }
+                    }                
+                })
+            };
 
-    
-                function onSuccess(result) {
-                    vm.profile = result;
-                    vm.favoriteBook = FavoriteBook.query({'profileId.equals': vm.profile.id});
-                }
-            }
+             
 
-            load();
-
-
-
-            $scope.isRead = function(bookId){
-
-                if(vm.profile===null){
-                    return false
-                }
-
-                var bool = false;
-                vm.readBook.forEach(function(readBook){
-                    if(readBook.bookId === bookId && readBook.profileId === vm.profile.id){
-                        bool = true;
-                        return;
-                    }
-                });
-                return bool;
-            }
 
             $scope.isFavorite = function(bookId){
 
-                if (vm.profile === null) {
-                    return false
+                if(vm.favoriteBook===null){
+                    return false;
                 }
-
                 var bool = false;
                 vm.favoriteBook.forEach(function (favoriteBook) {
                     if (favoriteBook.bookId === bookId)
@@ -109,21 +108,16 @@
                     favoriteBook.bookId = bookId;
                     favoriteBook.profileId = vm.profile.id;
                     FavoriteBook.save(favoriteBook, success);
-                }
-
-                function onSuccess(result) {
-                    var id = result[0].id;
-                    FavoriteBook.delete({'id': id}, success);
 
                     function success() {
                         load();
                     }
                 }
-
-                function success() {
-                    load();
-                }
             };
+
+
+
+            
 
             $scope.selectGenre = function (genreId) {
                 vm.currentGenre = genreId;
@@ -165,6 +159,9 @@
             };
 
             function loadAll() {
+
+                load();
+
                 if (vm.currentGenre != null)
                     Book.query({
                         page: vm.page,

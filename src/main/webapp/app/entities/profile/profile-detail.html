@@ -88,14 +88,14 @@
                         <div class="col-md-4">
                         
                             <!-- Книга 1 -->
-                            <div class="profileDetailMyBook">
+                            <div class="profileDetailMyBook" ng-repeat="book in vm.readBooks">
                                 <div class="homeRBookSingle">
                                     <!-- Обложка -->
-                                    <div class="homeABookCover"></div>
+                                    <div class="homeABookCover"><img ng-src="{{book.bookCoverPath}}" width="100%"></div>
                                     <!-- Инфа о книге -->
                                     <div class="homeABookInfo">
-                                        <div class="homeRBookTitle">Гаррик Поттер</div>
-                                        <div class="homeRBookAuthor">hjkhkjhjkh</div>
+                                        <div class="homeRBookTitle">{{book.bookTitle}}</div>
+                                        <div class="homeRBookAuthor">{{book.bookAuthorFirstName}} {{book.booksAuthorLastName}}</div>
                                     </div>
                                     <!-- Кнопки -->
                                     <div class="homeABookBtns">

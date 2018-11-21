@@ -30,7 +30,7 @@
                     $translatePartialLoader.addPart('book');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
-                }]
+                }],          
             }
         })
 
