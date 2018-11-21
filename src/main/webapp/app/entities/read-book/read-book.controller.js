@@ -5,9 +5,9 @@
         .module('eLibraryApp')
         .controller('ReadBookController', ReadBookController);
 
-    ReadBookController.$inject = ['ReadBook'];
+    ReadBookController.$inject = ['ReadBook','Profile','Principal'];
 
-    function ReadBookController(ReadBook) {
+    function ReadBookController(ReadBook,Profile,Principal) {
 
         var vm = this;
 
@@ -16,10 +16,16 @@
         loadAll();
 
         function loadAll() {
-            ReadBook.query(function(result) {
-                vm.readBooks = result;
-                vm.searchQuery = null;
-            });
+            Principal.identity().then(function (user) {
+                Profile.getProfile({userId: user.id},onSuccess);
+                    function onSuccess(result){
+                        vm.profile = result;
+                        ReadBook.query({'profileId.equals': vm.profile.id},function(result) {
+                            vm.readBooks = result;
+                            vm.searchQuery = null;
+                        });
+                    }                
+            })
         }
     }
 })();
