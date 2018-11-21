@@ -14,18 +14,16 @@
                         <div class="fBookTitle">{{favoriteBook.bookTitle}}</div>
                         <!-- Кнопки -->
                         <div class="fBookBtnsOuter">
-                            <span class="fBookBtnsInner">
-                                <!-- Читать книгу -->
-                                <a ui-sref="book-detail({id:favoriteBook.bookId})">
-                                    <button class="btnFavoriteBookRead">
-                                        <span class="glyphicon glyphicon-book"></span> Читать
-                                    </button>
-                                </a>
-                                <!-- Удалить из избранного -->
-                                <button class="btnFavoriteBookDelete" ng-click="vm.bookDelete(favoriteBook.id)">
-                                    <span class="glyphicon glyphicon-trash"></span>
+                            <!-- Читать книгу -->
+                            <a ui-sref="book-detail({id:favoriteBook.bookId})">
+                                <button class="btnFavoriteBookRead">
+                                    <span class="glyphicon glyphicon-book"></span> Читать
                                 </button>
-                            </span>
+                            </a>
+                            <!-- Удалить из избранного -->
+                            <button class="btnFavoriteBookDelete" ng-click="vm.bookDelete(favoriteBook.id)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
                         </div>
                     </div>
                 </div>
