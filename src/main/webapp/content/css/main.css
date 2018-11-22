@@ -1081,8 +1081,12 @@ select[type="myBookLibSort"] {
 ========================================================================== */
 
 .form-control {
-    width: 60%;
+    width: 100%;
     margin-bottom: 1%;
+}
+
+.userSearchList {
+    width: 60%;
 }
 
 .userManagementList {
@@ -1660,6 +1664,7 @@ header search area form
 ========================================================================== */
 
 form {
+    width: 100%;
     display: inline-block;
     vertical-align: auto;
     position: relative;
@@ -1705,6 +1710,37 @@ button[type="search-submit"]:hover {
     button[type="search-submit"] { padding: 20px 28px 40px 4px !important;} 
 } 
 
+
+/* ==========================================================================
+Окна аккаунт
+========================================================================== */
+
+.genreView {
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 1%;
+}
+
+.registration-form {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+.registration-banner {
+    width: 530px;
+    height: 545px;
+    background-color: #fff;
+    border-radius: 5px;
+    background-image: url(/content/images/ico/registrationNoHover.jpg);
+    margin-top: 68px;
+    background-size: cover;
+}
+
+.registration-banner:hover {
+    background-image: url(/content/images/ico/registrationHover.jpg);
+}
 
 /* ==========================================================================
 Hide ng-cloak on page load, https://docs.angularjs.org/api/ng/directive/ngCloak
