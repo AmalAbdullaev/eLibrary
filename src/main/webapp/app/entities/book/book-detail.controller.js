@@ -30,6 +30,7 @@
 
             var unsubscribe = $rootScope.$on('eLibraryApp:bookUpdate', function (event, result) {
                 vm.book = result;
+                console.log(vm.book.result);
             });
 
             $scope.$on('$destroy', unsubscribe);
