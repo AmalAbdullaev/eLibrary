@@ -1081,8 +1081,12 @@ select[type="myBookLibSort"] {
 ========================================================================== */
 
 .form-control {
-    width: 60%;
+    width: 100%;
     margin-bottom: 1%;
+}
+
+.userSearchList {
+    width: 60%;
 }
 
 .userManagementList {
@@ -1708,13 +1712,34 @@ button[type="search-submit"]:hover {
 
 
 /* ==========================================================================
-Модальные окна
+Окна аккаунт
 ========================================================================== */
 
 .genreView {
     border-radius: 5px;
     background-color: #fff;
     padding: 1%;
+}
+
+.registration-form {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+.registration-banner {
+    width: 530px;
+    height: 545px;
+    background-color: #fff;
+    border-radius: 5px;
+    background-image: url(/content/images/ico/registrationNoHover.jpg);
+    margin-top: 68px;
+    background-size: cover;
+}
+
+.registration-banner:hover {
+    background-image: url(/content/images/ico/registrationHover.jpg);
 }
 
 /* ==========================================================================
