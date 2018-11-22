@@ -1,27 +1,30 @@
+<p>
+    <button type="button" class="btn btn-primary" ng-click="firstPage()" ng-show="isReading">
+        <span class="hidden-sm-down" data-translate="entity.action.firstPage">First page</span>
+    </button>
 
+    <button type="button" class="btn btn-primary" ng-click="prevPage()" ng-show="isReading">
+        <span class="hidden-sm-down" data-translate="entity.action.prevPage">Previous page</span>
+    </button>
 
-<button type="button" class="btn btn-primary" ng-click="firstPage()" ng-show="isReading">
-    <span class="hidden-sm-down" data-translate="entity.action.firstPage">First page</span>
-</button>
+    <span class="hidden-sm-down" ng-show="isReading">
+    Страница <input id="page_top" type="text" style="width: 5%; display: inline; text-align: center"
+                    ng-keypress="changePage($event)">
+    <span id="pages_top"> / </span>
+</span>
 
-<button type="button" class="btn btn-primary" ng-click="prevPage()" ng-show="isReading">
-    <span class="hidden-sm-down" data-translate="entity.action.prevPage">Previous page</span>
-</button>
+    <button type="button" class="btn btn-primary" ng-click="nextPage()" ng-show="isReading">
+        <span class="hidden-sm-down" data-translate="entity.action.nextPage">Next page</span>
+    </button>
 
-<span class="hidden-sm-down" data-translate="eLibraryApp.book.page" ng-show="isReading"
-      translate-values="{pageNum: '{{vm.pdfBook.pageNum}}', numPages: '{{vm.pdfBook.pdfDoc.numPages}}'}">Pages:</span>
+    <button type="button" class="btn btn-primary" ng-click="lastPage()" ng-show="isReading">
+        <span class="hidden-sm-down" data-translate="entity.action.lastPage">Last page</span>
+    </button>
 
-<button type="button" class="btn btn-primary" ng-click="nextPage()" ng-show="isReading">
-    <span class="hidden-sm-down" data-translate="entity.action.nextPage">Next page</span>
-</button>
-
-<button type="button" class="btn btn-primary" ng-click="lastPage()" ng-show="isReading">
-    <span class="hidden-sm-down" data-translate="entity.action.lastPage">Last page</span>
-</button>
-
-<button type="button" class="btn btn-primary" ng-click="isReading = false" ng-show="isReading">
-    <span class="hidden-sm-down" data-translate="entity.action.back">Back</span>
-</button>
+    <button type="button" class="btn btn-primary" ng-click="isReading = false" ng-show="isReading">
+        <span class="hidden-sm-down" data-translate="entity.action.back">Back</span>
+    </button>
+</p>
 
 <canvas id="book-canvas" ng-show="isReading"></canvas>
 
@@ -34,8 +37,11 @@
         <span class="hidden-sm-down" data-translate="entity.action.prevPage">Previous page</span>
     </button>
 
-    <span class="hidden-sm-down" data-translate="eLibraryApp.book.page" ng-show="isReading"
-          translate-values="{pageNum: '{{vm.pdfBook.pageNum}}', numPages: '{{vm.pdfBook.pdfDoc.numPages}}'}">Pages:</span>
+    <span class="hidden-sm-down" ng-show="isReading">
+        Страница <input id="page_bot" type="text" style="width: 5%; display: inline; text-align: center"
+                        ng-model="vm.pdfBook.pageNum">
+        <span id="pages_bot"> / {{vm.pdfBook.pdfDoc.numPages}}</span>
+    </span>
 
     <button type="button" class="btn btn-primary" ng-click="nextPage()" ng-show="isReading">
         <span class="hidden-sm-down" data-translate="entity.action.nextPage">Next page</span>
@@ -69,7 +75,8 @@
 
         <!-- Название и автор книги -->
         <div class="bookDetailName">
-            <button type="button" ui-sref="book.delete({id:vm.book.id})" class="btn btn-danger" style="float:right" has-authority="ROLE_ADMIN">
+            <button type="button" ui-sref="book.delete({id:vm.book.id})" class="btn btn-danger" style="float:right"
+                    has-authority="ROLE_ADMIN">
                 <span class="glyphicon glyphicon-trash"></span>
                 <span class="hidden-sm-down">Удалить книгу</span>
             </button>
@@ -112,7 +119,7 @@
                 <div class="bookDetailInfoText">
                     <span>
                         <b>Предложил:</b>
-                        <span  ui-sref="profile-detail({id:vm.book.profileId})"><a>{{vm.book.createdBy}}</a></span>
+                        <span ui-sref="profile-detail({id:vm.book.profileId})"><a>{{vm.book.createdBy}}</a></span>
                     </span>
                 </div>
             </div>
@@ -127,7 +134,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Админ: дополнительная информация -->
         <div class="bookDetailAdmin" has-authority="ROLE_ADMIN">
             <div class="bookDetailTextBreakAll">

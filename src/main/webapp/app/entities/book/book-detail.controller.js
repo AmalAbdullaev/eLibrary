@@ -66,6 +66,10 @@
                         }
                     });
                     vm.pdfBook.pageNum = num;
+                    document.getElementById('page_top').value = num;
+                    document.getElementById('page_bot').value = num;
+                }, function (error) {
+                    console.log(error);
                 });
             }
 
@@ -132,10 +136,19 @@
                     var objectUrl = URL.createObjectURL(file);
                     pdfjsLib.getDocument(objectUrl).then(function (pdfDoc) {
                         vm.pdfBook.pdfDoc = pdfDoc;
+                        document.getElementById('pages_top').textContent = '/ ' + pdfDoc.numPages;
+                        document.getElementById('pages_bot').textContent = '/ ' + pdfDoc.numPages;
                         renderPage(vm.pdfBook.pageNum);
                     });
                     $scope.isReading = true;
                 });
+            };
+
+            $scope.changePage = function (event) {
+                if (event.keyCode === 13) {
+                    var page = event.target.value;
+                    queueRenderPage(Number(page));
+                }
             };
 
             $scope.download = function () {
