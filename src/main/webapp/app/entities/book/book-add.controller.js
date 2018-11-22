@@ -5,9 +5,9 @@
         .module('eLibraryApp')
         .controller('BookAddController', BookAddController);
 
-    BookAddController.$inject = ['$sce', '$timeout', '$scope', '$stateParams', 'DataUtils', 'entity', 'Book', 'Profile', 'Genre', 'Upload', 'Principal', '$state'];
+    BookAddController.$inject = ['$sce', '$timeout', '$scope', '$stateParams', 'DataUtils', 'ParseLinks', 'entity', 'Book', 'Profile', 'Genre', 'Upload', 'Principal', '$state'];
 
-    function BookAddController($sce, $timeout, $scope, $stateParams, DataUtils, entity, Book, Profile, Genre, Upload, Principal, $state) {
+    function BookAddController($sce, $timeout, $scope, $stateParams, DataUtils, ParseLinks, entity, Book, Profile, Genre, Upload, Principal, $state) {
 
         var vm = this;
 
@@ -19,10 +19,11 @@
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
         vm.save = save;
+        vm.reset = reset;
+        vm.predicate = 'id';
         vm.genres = Genre.query();
 
-        vm.allBooks = Book.query();
-        
+        vm.books = [];
 
         $scope.isCoverUploading = false;
         $scope.isBookUploading = false;
@@ -31,6 +32,74 @@
             type: 'success',
             message: null
         };
+
+        $scope.options = {
+            data: [
+                {
+                    name: "По возрастанию",
+                    predicate: "title",
+                    reverse: true
+                },
+                {
+                    name: "По убыванию",
+                    predicate: "title",
+                    reverse: false
+                },
+                {
+                    name: "Сначала новые",
+                    predicate: "lastModifiedDate",
+                    reverse: false
+                },
+                {
+                    name: "Сначала старые",
+                    predicate: "lastModifiedDate",
+                    reverse: true
+                }
+            ],
+            selected: {name: "По возрастанию", predicate: "title", reverse: false}
+        };
+
+        $scope.reloadAll = function () {
+            vm.predicate = $scope.options.selected.predicate;
+            vm.reverse = $scope.options.selected.reverse;
+            reset();
+        };
+
+        function loadAll() {
+            Book.query({
+                page: vm.page,
+                size: vm.itemsPerPage,
+                sort: sort(),
+                'profileId.equals': vm.profile.id,
+                'approved.equals': true
+            }, onSuccess, onError);
+
+            function sort() {
+                var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
+                if (vm.predicate !== 'id') {
+                    result.push('id');
+                }
+                return result;
+            }
+
+            function onSuccess(data, headers) {
+                vm.links = ParseLinks.parse(headers('link'));
+                vm.totalItems = headers('X-Total-Count');
+                for (var i = 0; i < data.length; i++) {
+                    vm.books.push(data[i]);
+                }
+            }
+
+            function onError(error) {
+                AlertService.error(error.data.message);
+            }
+        }
+
+        function reset() {
+            vm.page = 0;
+            vm.books = [];
+            loadAll();
+        }
 
         function closeAlert() {
 
@@ -50,7 +119,7 @@
             $timeout(function () {
                 closeAlert();
                 $state.reload();
-            },2000);
+            }, 2000);
         }
 
         function clear() {
@@ -65,6 +134,7 @@
             vm.profile = result;
             vm.book.profileId = result.id;
             disableUploadIfBanned(vm.profile);
+            loadAll();
         }
 
         function disableUploadIfBanned(profile) {

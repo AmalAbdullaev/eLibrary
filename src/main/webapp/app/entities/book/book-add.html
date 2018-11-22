@@ -85,17 +85,12 @@
             <h3>Мои книги</h3>
         </div>
 
-        <select type="myBookSort" class="browser-default custom-select" placeholder="Сортировка">
-            <option selected>По убыванию</option>
-            <option value="1">По возрастанию</option>
-            <option value="2">Сначала новые</option>
-            <option value="3">Сначала старые</option>
-        </select>
+        <select type="myBookSort" ng-options="opt.name for opt in options.data track by opt.name"
+                ng-model="options.selected" ng-change="reloadAll()"></select>
 
         <div class="bookSection">
 
-            <div class="singleBook" ng-repeat="book in vm.allBooks"
-                 ng-if="book.approved===true && book.profileId === vm.book.profileId">
+            <div class="singleBook" ng-repeat="book in vm.books">
                 <div class="singleBookCover">
                     <img ng-src="{{book.coverPath}}" width="100%" height="100%" style="border-radius:5px">
                 </div>
