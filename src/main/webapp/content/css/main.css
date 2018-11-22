@@ -168,7 +168,6 @@ body {
 .homeABookCover {
     width: 30%;
     border-radius: 5px;
-    background-image: url(/content/images/ico/testbook.png);
     background-position: center center;
     background-repeat: no-repeat;
     float: left;
