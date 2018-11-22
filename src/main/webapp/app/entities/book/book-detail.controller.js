@@ -138,6 +138,8 @@
                         vm.pdfBook.pdfDoc = pdfDoc;
                         document.getElementById('pages_top').textContent = '/ ' + pdfDoc.numPages;
                         document.getElementById('pages_bot').textContent = '/ ' + pdfDoc.numPages;
+                        if (pdfDoc.numPages === 1)
+                            markAsRead();
                         renderPage(vm.pdfBook.pageNum);
                     });
                     $scope.isReading = true;
