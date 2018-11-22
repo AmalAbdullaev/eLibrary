@@ -6,8 +6,7 @@
         <div class="col-md-3">
             <div class="addBookCover">
                 <!-- Обложка -->
-                <div class="file_upload_cover" ngf-background="vm.coverFile || '/content/images/ico/addcover.png'"
-                     for="file_upload_cover">
+                <div class="file_upload_cover" ngf-background="vm.coverFile || '/content/images/ico/addcover.png'" for="file_upload_cover">
                     <input id="cover" ng-model="vm.coverFile" type="file" ngf-select ngf-pattern="'image/*'"
                            ngf-accept="'image/*'" ngf-resize="{width: 240, height: 320, centerCrop: true}"
                            ng-disabled="vm.profile.banned" required>
@@ -31,7 +30,7 @@
         </div>
 
         <!-- Поля ввода информации о книге -->
-        <div class="col-md-7">
+        <div class="col-md-6">
             <div class="addBookView">
                 <input type="addBookName" placeholder="Название книги"
                        ng-model="vm.book.title" ng-disabled="vm.profile.banned">
@@ -54,7 +53,7 @@
         </div>
 
         <!-- Книги, ожидающие проверки -->
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="addWaitBook">
 
                 <div class="waitBooksTitle">

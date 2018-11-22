@@ -7,7 +7,6 @@ body {
     background: #faf8ff;
     font-family: Oswald, Arial, sans-serif;
     color: #333;
-    height: 100%; 
 }
 
 #wrapper {
@@ -19,7 +18,7 @@ body {
 
 #sidebar {
     background-color: #d65600;
-    width: 100px;
+    width: 65px;
     min-height:100vh;
     float: left;
     position: fixed;
@@ -28,7 +27,6 @@ body {
     z-index: 9;
 }
 #header {
-    padding-left: 24px;
     padding-top: 12px;
     height: 70px;
     width: 100%;
@@ -44,8 +42,9 @@ body {
 }
 
 .icobox-logo {
-    height: 100px;
-    width: 100px;
+    margin-top: 5px;
+    height: 65px;
+    width: 65px;
     background-color: none;
     position:absolute; /* добавили */
 	bottom:0;
@@ -56,8 +55,8 @@ body {
 }
 
 .icobox {
-    height: 50px;
-    width: 100px;
+    height: 65px;
+    width: 65px;
     background-color: none;
 }
 
@@ -77,14 +76,7 @@ body {
     background-color: #faf8ff;
 }
 
-.col-md-1 {
-    width: 100px;
-}
-
-
 .row {
-    /* padding-left: 100px; */
-    padding-left: 0px;
     width: 100%;
 }
 
@@ -93,8 +85,8 @@ body {
 }
 
 .rowcontent {
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 50px;
+    padding-right: 80px;
 }
 
 .aColor {
@@ -129,7 +121,7 @@ body {
 }
 
 .homeRecommendedBooks {
-    margin-top: 4%;
+    margin-top: 2%;
     margin-bottom: 2%;
     width: 100%;
     height: 200px;
@@ -268,6 +260,7 @@ body {
 }
 
 .topTenUsers:hover {
+    border-radius: 5px;
     background-image: url(/content/images/ico/topTen.jpg);
     background-position: center center;
     background-repeat: no-repeat;
@@ -331,6 +324,7 @@ body {
 .addBookCover {
     padding: 15px;
     float:left;
+    width: 100%;
     height: 500px;
     border-radius: 5px;
     border: 2px solid rgb(209, 209, 209);
@@ -464,12 +458,12 @@ input[type="addBookOther"] {
 }
 
 .file_upload_cover {
+    width: 100%;
+    height: 320px;
     margin-bottom: 15px;
     background-image: url(/content/images/ico/addcover.png);
     background-repeat: no-repeat;
     background-position: center;
-    width: 100%;
-    height: 320px;
 }
 
 .file_upload_cover:hover {
@@ -1685,7 +1679,7 @@ input[type="search"] {
     background-color: transparent;
 }
 button[type="search-submit"] {
-    position: absolute; left: 20px; top: 7px; right: 10px;
+    position: absolute; left: 20px; top: 5px; right: 10px;
     z-index: 9;
     outline: none;
     border: none;
@@ -1704,6 +1698,11 @@ button[type="search-submit"]:hover {
 ::placeholder { 
     color:#dadada;
 }
+
+@-moz-document url-prefix(){
+    button[type="search-submit"] { padding: 20px 28px 40px 4px !important;} 
+} 
+
 
 /* ==========================================================================
 Hide ng-cloak on page load, https://docs.angularjs.org/api/ng/directive/ngCloak
