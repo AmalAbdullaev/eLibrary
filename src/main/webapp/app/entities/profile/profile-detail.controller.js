@@ -12,7 +12,8 @@
 
         vm.profile = entity;
         vm.previousState = previousState.name;
-
+        if (previousState.name === 'book-detail')
+            $scope.bookId = previousState.params.id;
 
         Book.query({'profileId.equals':vm.profile.id},onSuccess);
 

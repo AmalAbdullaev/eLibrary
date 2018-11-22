@@ -146,8 +146,12 @@
 
             $scope.changePage = function (event) {
                 if (event.keyCode === 13) {
-                    var page = event.target.value;
-                    queueRenderPage(Number(page));
+                    var page = Number(event.target.value);
+                    if (page <= vm.pdfBook.pdfDoc.numPages) {
+                        if (page === vm.pdfBook.pdfDoc.numPages)
+                            markAsRead();
+                        queueRenderPage(page);
+                    }
                 }
             };
 

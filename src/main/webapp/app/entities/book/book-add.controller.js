@@ -24,6 +24,7 @@
         vm.genres = Genre.query();
 
         vm.books = [];
+        vm.unconfirmedBooks = [];
 
         $scope.isCoverUploading = false;
         $scope.isBookUploading = false;
@@ -73,6 +74,9 @@
                 'profileId.equals': vm.profile.id,
                 'approved.equals': true
             }, onSuccess, onError);
+            Book.query({'approved.equals': false}, function (data) {
+                vm.unconfirmedBooks = data;
+            });
 
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
