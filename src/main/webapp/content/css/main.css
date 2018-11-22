@@ -1742,6 +1742,11 @@ button[type="search-submit"]:hover {
     background-image: url(/content/images/ico/registrationHover.jpg);
 }
 
+.authorization-logo {
+    width: 100%;
+    height: 100%;
+}
+
 /* ==========================================================================
 Hide ng-cloak on page load, https://docs.angularjs.org/api/ng/directive/ngCloak
 ========================================================================== */
