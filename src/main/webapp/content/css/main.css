@@ -1660,6 +1660,7 @@ header search area form
 ========================================================================== */
 
 form {
+    width: 100%;
     display: inline-block;
     vertical-align: auto;
     position: relative;
@@ -1705,6 +1706,16 @@ button[type="search-submit"]:hover {
     button[type="search-submit"] { padding: 20px 28px 40px 4px !important;} 
 } 
 
+
+/* ==========================================================================
+Модальные окна
+========================================================================== */
+
+.genreView {
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 1%;
+}
 
 /* ==========================================================================
 Hide ng-cloak on page load, https://docs.angularjs.org/api/ng/directive/ngCloak
