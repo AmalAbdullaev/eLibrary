@@ -8,7 +8,7 @@
             {{genre.name}}
         </div>
     </div>
-
+    
     <!-- Рекомендации -->
     <div class="libraryRecommendation">
         <div><h3>Рекомендации</h3></div>
@@ -22,7 +22,7 @@
                     </div>
                     <div class="bookTitle">{{book.title}}</div>
                     <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
-                    <div class="bookButtons" >
+                    <div class="bookRButtons" >
                         <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
                         <button has-authority="ROLE_USER"  ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [isFavorite(book.id) ] " ng-click="getFavorite(book.id)"></button>
                     </div>
@@ -30,40 +30,41 @@
             </div>
         </div>
     </div>
-</div>
-
-<!-- все Книги -->
-<div class="libraryBooks">
-<div class="homeRow">
-    <div class="homeCol col-md-12">
-            
-        <!-- Заголовок / сортировка -->
-        <div class="myLibBooksTitle2">
-            <div class="homeCol col-md-9 col-sm-12">
-                <div class="myLibBooksTitle">
-                    <h3>Книги</h3>
-                </div>
-            </div>
-            <div class="homeCol col-md-3 col-sm-12">
-                <select type="myBookLibSort" ng-options="opt.name for opt in options.data track by opt.name"
-                ng-model="options.selected" ng-change="reloadAll()"></select>
-            </div>
-        </div>
-            
-        <div class="libraryAllBooks">
-            <div class="col-md-3 col-sm-6" ng-repeat="book in vm.books track by book.id" | ng-if="book.approved===true">
-                <div class="libBook">
-                    <div class="libBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%" style="border-radius:5px"></div>
-                    <div class="libBookInfo">
-                        <div class="bookReadedH">&nbsp;
-                            <div class="bookReaded2" ng-if="isRead(book.id)">Прочитано</div>
+    
+    <!-- все Книги -->
+    <div class="libraryBooks">
+        <div class="homeRow">
+            <div class="homeCol col-md-12">
+                    
+                <!-- Заголовок / сортировка -->
+                <div class="myLibBooksTitle2">
+                    <div class="homeCol col-md-9 col-sm-12">
+                        <div class="myLibBooksTitle">
+                            <h3>Книги</h3>
                         </div>
-                        <div class="bookTitle">{{book.title}}</div>
-                        <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
-                        <div class="bookAuthor">{{book.createdBy}}</div>
-                        <div class="bookButtons">
-                            <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
-                            <button has-authority="ROLE_USER" ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [isFavorite(book.id)]" ng-click="getFavorite(book.id)"></button>
+                    </div>
+                    <div class="homeCol col-md-3 col-sm-12">
+                        <select type="myBookLibSort" ng-options="opt.name for opt in options.data track by opt.name"
+                        ng-model="options.selected" ng-change="reloadAll()"></select>
+                    </div>
+                </div>
+                    
+                <div class="libraryAllBooks">
+                    <div class="col-md-3 col-sm-6" ng-repeat="book in vm.books track by book.id" | ng-if="book.approved===true">
+                        <div class="libBook">
+                            <div class="libBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%" style="border-radius:5px"></div>
+                            <div class="libBookInfo">
+                                <div class="bookReadedH">&nbsp;
+                                    <div class="bookReaded2" ng-if="isRead(book.id)">Прочитано</div>
+                                </div>
+                                <div class="bookTitle">{{book.title}}</div>
+                                <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
+                                <div class="bookAuthor">{{book.createdBy}}</div>
+                                <div class="bookButtons">
+                                    <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
+                                    <button has-authority="ROLE_USER" ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [isFavorite(book.id)]" ng-click="getFavorite(book.id)"></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -71,93 +72,3 @@
         </div>
     </div>
 </div>
-</div>
-
-<!--
-<div>
-    <jhi-alert></jhi-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="book.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span  data-translate="eLibraryApp.book.home.createLabel">
-                        Create new Book
-                    </span>
-                </button>
-            </div>
-        </div>
-    </div>
-    <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
-                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="title"><span data-translate="eLibraryApp.book.title">Title</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="description"><span data-translate="eLibraryApp.book.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="pages"><span data-translate="eLibraryApp.book.pages">Pages</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="approved"><span data-translate="eLibraryApp.book.approved">Approved</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="path"><span data-translate="eLibraryApp.book.path">Path</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="coverPath"><span data-translate="eLibraryApp.book.coverPath">Cover Path</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="createdBy"><span data-translate="eLibraryApp.book.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="createdDate"><span data-translate="eLibraryApp.book.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastModifiedBy"><span data-translate="eLibraryApp.book.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastModifiedDate"><span data-translate="eLibraryApp.book.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="yearOfPublishing"><span data-translate="eLibraryApp.book.yearOfPublishing">Year Of Publishing</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="authorFirstName"><span data-translate="eLibraryApp.book.authorFirstName">Author First Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="authorLastName"><span data-translate="eLibraryApp.book.authorLastName">Author Last Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="profileId"><span data-translate="eLibraryApp.book.profile">Profile</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="genreName"><span data-translate="eLibraryApp.book.genre">Genre</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
-                </tr>
-            </thead>
-            
-            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
-                <tr ng-repeat="book in vm.books track by book.id">
-                    <td><a ui-sref="book-detail({id:book.id})">{{book.id}}</a></td>
-                    <td>{{book.title}}</td>
-                    <td>{{book.description}}</td>
-                    <td>{{book.pages}}</td>
-                    <td>{{book.approved}}</td>
-                    <td>{{book.path}}</td>
-                    <td>{{book.coverPath}}</td>
-                    <td>{{book.createdBy}}</td>
-                    <td>{{book.createdDate | date:'medium'}}</td>
-                    <td>{{book.lastModifiedBy}}</td>
-                    <td>{{book.lastModifiedDate | date:'medium'}}</td>
-                    <td>{{book.yearOfPublishing}}</td>
-                    <td>{{book.authorFirstName}}</td>
-                    <td>{{book.authorLastName}}</td>
-                    <td>
-                        <a ui-sref="profile-detail({id:book.profileId})">{{book.profileId}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="genre-detail({id:book.genreId})">{{book.genreName}}</a>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit" ui-sref="book-detail({id:book.id})" class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="book.edit({id:book.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="book.delete({id:book.id})"
-                                    class="btn btn-danger btn-sm">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
--->

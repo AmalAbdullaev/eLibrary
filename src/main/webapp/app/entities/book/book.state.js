@@ -244,6 +244,28 @@
                     return $translate.refresh();
                 }]
             }
+        })
+        .state('help', {
+            parent: 'entity',
+            url: '/help',
+            data: {
+                authorities: [],
+                pageTitle: 'eLibraryApp.book.home.title'
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/entities/book/help.html',
+                    // controller: 'BookController',
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('book');
+                    $translatePartialLoader.addPart('global');
+                    return $translate.refresh();
+                }],          
+            }
         });
     }
 

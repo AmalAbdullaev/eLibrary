@@ -69,7 +69,7 @@
                                     <div class="homeRBookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                                 </div>
                                 <!-- Кнопки -->
-                                <div class="homeABookBtns">
+                                <div class="homePBookBtns">
                                     <a ui-sref="book-detail({id:book.id})"><button class="btnProfileBookDetail">Подробнее</button></a>
                                 </div>
                             </div>
@@ -85,14 +85,14 @@
                         <div class="profileDetailMyBook" >
                             <div class="homeRBookSingle">
                                 <!-- Обложка -->
-                                <div class="homeABookCover"><img ng-src="{{book.bookCoverPath}}" width="100%"></div>
+                                <div class="homeABookCover"><img ng-src="{{book.bookCoverPath}}" width="100%" height="100%" style="border-radius:5px"></div>
                                 <!-- Инфа о книге -->
                                 <div class="homeABookInfo">
                                     <div class="homeRBookTitle">{{book.bookTitle}}</div>
                                     <div class="homeRBookAuthor">{{book.bookAuthorFirstName}} {{book.bookAuthorLastName}}</div>
                                 </div>
                                 <!-- Кнопки -->
-                                <div class="homeABookBtns">
+                                <div class="homePBookBtns">
                                     <a ui-sref="book-detail({id:book.bookId})"><button class="btnProfileBookDetail">Подробнее</button></a>
                                 </div>
                             </div>
