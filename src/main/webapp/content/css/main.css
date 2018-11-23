@@ -236,7 +236,7 @@ body {
     height: 100%;
     border-radius: 5px;
     float: right;
-    margin-top: 11%;
+    padding-top: 45px;
 }
 
 .homeABookBtns {
@@ -244,7 +244,7 @@ body {
     height: 100%;
     border-radius: 5px;
     float: right;
-    padding-top: 15px;
+    padding-top: 20px;
     padding-right: 15px;
     padding-bottom: 5px;
 }
@@ -1001,8 +1001,10 @@ select[type="myBookLibSort"] {
     border-radius: 5px;
     float: right;
     width: 100%;
-    margin-top: 40px;
+    margin-top: 5px;
+    padding-top: 45px;
 }
+
 
 .btnLibReadBook {
     background-color: #dfdfdf;
@@ -1531,6 +1533,16 @@ IMG.AllImgCenter {
     background-color: #fff;
     border-radius: 5px;
     padding: 30px;
+}
+
+.homePBookBtns {
+    width: 50%;
+    height: 100%;
+    border-radius: 5px;
+    float: right;
+    padding-top: 45px;
+    padding-right: 15px;
+    padding-bottom: 5px;
 }
 
 .profileDetailAllInfo {
