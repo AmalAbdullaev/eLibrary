@@ -5,6 +5,6 @@
         .module('eLibraryApp')
         .constant('VERSION', "0.0.1-SNAPSHOT")
         .constant('DEBUG_INFO_ENABLED', false)
-        .constant('BUILD_TIMESTAMP', 1542923390260)
+        .constant('BUILD_TIMESTAMP', 1542980150294)
 ;
 })();
