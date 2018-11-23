@@ -27,20 +27,20 @@
         $scope.isBanned = function(){
             vm.profile = entity;
             return vm.profile.banned;
-        }
+        };
 
         $scope.isTrusted = function(){
             vm.profile = entity;
             return vm.profile.trusted;
-        }
+        };
 
         vm.banned = function(){
             vm.profile.banned = !vm.profile.banned;
-        }
+        };
 
         vm.trusted = function(){
             vm.profile.trusted = !vm.profile.trusted;
-        }
+        };
 
         function save () {
             vm.isSaving = true;
@@ -60,7 +60,5 @@
         function onSaveError () {
             vm.isSaving = false;
         }
-
-
     }
 })();

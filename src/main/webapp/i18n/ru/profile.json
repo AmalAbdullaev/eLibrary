@@ -3,22 +3,22 @@
     "eLibraryApp": {
         "profile" : {
             "home": {
-                "title": "Profiles",
-                "createLabel": "Создать новый Profile",
-                "createOrEditLabel": "Создать или отредактировать Profile"
+                "title": "Профили",
+                "createLabel": "Создать новый профиль",
+                "createOrEditLabel": "Отредактировать профиль"
             },
-            "created": "Новый Profile создан с идентификатором {{ param }}",
-            "updated": "Profile обновлен с идентификатором {{ param }}",
-            "deleted": "Profile удален с идентификатором {{ param }}",
+            "created": "Создан новый профиль с идентификатором {{ param }}",
+            "updated": "Профиль с идентификатором \"{{ param }}\" обновлен",
+            "deleted": "Профиль с идентификатором {{ param }} удален",
             "delete": {
-                "question": "Вы уверены что хотите удалить Profile {{ id }}?"
+                "question": "Вы уверены что хотите удалить профиль с идентификатором {{ id }}?"
             },
             "detail": {
-                "title": "Profile"
+                "title": "Профиль"
             },
-            "trusted": "Trusted",
-            "banned": "Banned",
-            "user": "User"
+            "trusted": "Доверенный",
+            "banned": "Заблокированный",
+            "user": "Пользователь"
         }
     }
 }
