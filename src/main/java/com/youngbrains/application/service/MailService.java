@@ -3,6 +3,7 @@ package com.youngbrains.application.service;
 import com.youngbrains.application.domain.Book;
 import com.youngbrains.application.domain.User;
 
+import com.youngbrains.application.service.dto.FeedbackDTO;
 import io.github.jhipster.config.JHipsterProperties;
 
 import org.apache.commons.lang3.CharEncoding;
@@ -35,6 +36,8 @@ public class MailService {
     private static final String BOOK = "book";
 
     private static final String REASON = "reason";
+
+    private static final String FEEDBACK = "feedback";
 
     private static final String BASE_URL = "baseUrl";
 
@@ -117,6 +120,17 @@ public class MailService {
         String content = templateEngine.process(templateName, context);
         String subject = getMessageTitle(content);
         sendEmail(user.getEmail(), subject, content, false, true);
+    }
+
+    @Async
+    public void sendFeedbackEmail(FeedbackDTO feedback, String templateName) {
+        Locale locale = Locale.forLanguageTag("ru");
+        Context context = new Context(locale);
+        context.setVariable(FEEDBACK, feedback);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        String content = templateEngine.process(templateName, context);
+        String subject = getMessageTitle(content);
+        sendEmail("youngbrains@yahoo.com", subject, content, false, true);
     }
 
     @Async

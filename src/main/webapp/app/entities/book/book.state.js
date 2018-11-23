@@ -30,7 +30,7 @@
                     $translatePartialLoader.addPart('book');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
-                }],          
+                }]
             }
         })
 
@@ -154,31 +154,6 @@
             }]
         })
 
-        // .state('book.delete', {
-        //     parent: 'book',
-        //     url: '/{id}/delete',
-        //     data: {
-        //         authorities: ['ROLE_USER']
-        //     },
-        //     onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-        //         $uibModal.open({
-        //             templateUrl: 'app/entities/book/book-delete-dialog.html',
-        //             controller: 'BookDeleteController',
-        //             controllerAs: 'vm',
-        //             size: 'md',
-        //             resolve: {
-        //                 entity: ['Book', function(Book) {
-        //                     return Book.get({id : $stateParams.id}).$promise;
-        //                 }]
-        //             }
-        //         }).result.then(function() {
-        //             $state.go('book', null, { reload: 'book' });
-        //         }, function() {
-        //             $state.go('^');
-        //         });
-        //     }]
-        // })
-
         .state('book.delete', {
             parent: 'book',
             url: '/{id}/delete',
@@ -244,18 +219,17 @@
                     return $translate.refresh();
                 }]
             }
-        })
-        .state('help', {
+        }).state('help', {
             parent: 'entity',
             url: '/help',
             data: {
                 authorities: [],
-                pageTitle: 'eLibraryApp.book.home.title'
+                pageTitle: 'eLibraryApp.book.home.feedback'
             },
             views: {
                 'content@': {
                     templateUrl: 'app/entities/book/help.html',
-                    // controller: 'BookController',
+                    controller: 'BookController',
                     controllerAs: 'vm'
                 }
             },
@@ -264,9 +238,9 @@
                     $translatePartialLoader.addPart('book');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
-                }],          
+                }]
             }
-        });
+        })
     }
 
 })();

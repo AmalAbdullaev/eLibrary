@@ -5,7 +5,8 @@
             "home": {
                 "title": "Books",
                 "createLabel": "Create a new Book",
-                "createOrEditLabel": "Create or edit a Book"
+                "createOrEditLabel": "Create or edit a Book",
+                "feedback": "Feedback"
             },
             "created": "A new Book is created with identifier {{ param }}",
             "updated": "A Book is updated with identifier {{ param }}",

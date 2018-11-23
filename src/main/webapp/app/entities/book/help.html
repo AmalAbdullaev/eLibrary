@@ -1,5 +1,3 @@
-
-
 <div class="container">
     <div class="homeRow">
         
@@ -8,7 +6,7 @@
             <div class="help-contact-us">
                 
                 <!-- Форма обратной связи -->
-                <form id="contact-form" method="post" action="contact.php" role="form">
+                <form id="contact-form" ng-submit="vm.sendFeedback()" role="form">
                     <div class="messages"></div>
                     <div class="controls">
                         <div class="row">
@@ -16,7 +14,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <h3 for="form_name">Имя</h3>
-                                    <input id="form_name" type="text" name="name" class="form-control" placeholder="Введите свое имя *" required="required" data-error="Firstname is required.">
+                                    <input id="form_name" type="text" name="name" class="form-control"
+                                           placeholder="Введите свое имя *" required data-error="Firstname is required."
+                                           ng-model="feedback.firstName">
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
@@ -24,7 +24,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <h3 for="form_lastname">Фамилия</h3>
-                                    <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Введите свою фамилию *" required="required" data-error="Lastname is required.">
+                                    <input id="form_lastname" type="text" name="surname" class="form-control"
+                                           placeholder="Введите свою фамилию *" required="required"
+                                           data-error="Lastname is required." ng-model="feedback.lastName">
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
@@ -34,7 +36,9 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <h3 for="form_email">Email</h3>
-                                    <input id="form_email" type="email" name="email" class="form-control" placeholder="Введите свой email *" required="required" data-error="Valid email is required.">
+                                    <input id="form_email" type="email" name="email" class="form-control"
+                                           placeholder="Введите свой email *" required="required"
+                                           data-error="Valid email is required." ng-model="feedback.email">
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
@@ -44,13 +48,16 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <h3 for="form_message">Сообщение</h3>
-                                    <textarea id="form_message" name="message" class="form-control" placeholder="Сообщение для нас *" rows="4" required="required" data-error="Please, leave us a message."></textarea>
+                                    <textarea id="form_message" name="message" class="form-control"
+                                              placeholder="Сообщение для нас *" rows="4" required="required"
+                                              data-error="Please, leave us a message." ng-model="feedback.message">
+                                    </textarea>
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                             <!-- Кнопки -->
                             <div class="col-md-12">
-                                <button type="submit" ui-sref="book.delete({id:vm.book.id})" class="btn btn-warning" style="float:right">
+                                <button type="submit" class="btn btn-warning" style="float:right">
                                     <span class="glyphicon glyphicon-send"></span>
                                     <span class="hidden-sm-down">Отправить</span>
                                 </button>

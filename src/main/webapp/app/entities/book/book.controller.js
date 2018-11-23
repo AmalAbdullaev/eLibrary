@@ -1,4 +1,3 @@
-
 (function () {
         'use strict';
 
@@ -6,9 +5,9 @@
             .module('eLibraryApp')
             .controller('BookController', BookController);
 
-        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants','Principal','Profile','ReadBook'];
+        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants', 'Principal', 'Profile', 'ReadBook'];
 
-        function BookController($scope, $http, DataUtils, Book, FavoriteBook, ParseLinks, AlertService, paginationConstants,Principal,Profile,ReadBook) {
+        function BookController($scope, $http, DataUtils, Book, FavoriteBook, ParseLinks, AlertService, paginationConstants, Principal, Profile, ReadBook) {
 
             var vm = this;
 
@@ -17,6 +16,7 @@
             vm.recommendedBooks = [];
             vm.currentGenre = null;
             vm.loadPage = loadPage;
+            vm.sendFeedback = sendFeedback;
             vm.itemsPerPage = paginationConstants.itemsPerPage;
             vm.page = 0;
             vm.links = {
@@ -29,66 +29,59 @@
             vm.openFile = DataUtils.openFile;
             vm.byteSize = DataUtils.byteSize;
 
-
             vm.user = null;
             $scope.genres = [];
 
             vm.favoriteBook = null;
             vm.readBook = null;
 
+            $scope.isRead = function (bookId) {
 
-
-
-        $scope.isRead = function(bookId){
-
-            if(vm.readBook===null){
-                return false
-            }
-
-            var bool = false;
-            vm.readBook.forEach(function(readBook){
-                if(readBook.bookId === bookId){
-                    bool = true;
-                    return;
+                if (vm.readBook === null) {
+                    return false
                 }
-            });
-            return bool;
-        }
 
+                var bool = false;
+                vm.readBook.forEach(function (readBook) {
+                    if (readBook.bookId === bookId) {
+                        bool = true;
+                        return;
+                    }
+                });
+                return bool;
+            };
 
-
-
-            function load(){
+            function load() {
                 Principal.identity().then(function (user) {
-                    if(user===null){
+                    if (user === null) {
                         console.log('user is unauthorized');
                         return;
                     }
-                    Profile.getProfile({userId: user.id},onSuccess);
-                    function onSuccess(result){
+                    Profile.getProfile({userId: user.id}, onSuccess);
+
+                    function onSuccess(result) {
                         vm.profile = result;
 
-                        FavoriteBook.query({'profileId.equals': vm.profile.id},onSuccess);
-                        function onSuccess(result){
+                        FavoriteBook.query({'profileId.equals': vm.profile.id}, onSuccess);
+
+                        function onSuccess(result) {
                             vm.favoriteBook = result;
                         }
 
-                                    
-                        ReadBook.query({'profileId.equals': vm.profile.id},onReadSuccess);
-                        function onReadSuccess(result){
+
+                        ReadBook.query({'profileId.equals': vm.profile.id}, onReadSuccess);
+
+                        function onReadSuccess(result) {
                             vm.readBook = result;
                         }
 
-                    }                
+                    }
                 })
-            };
+            }
 
-             
+            $scope.isFavorite = function (bookId) {
 
-
-            $scope.isFavorite = function(bookId){
-
-                if(vm.favoriteBook===null){
+                if (vm.favoriteBook === null) {
                     return false;
                 }
                 var bool = false;
@@ -99,16 +92,18 @@
                 return bool;
             };
 
-            $scope.getFavorite = function(bookId){
-                if($scope.isFavorite(bookId)){
-                    FavoriteBook.query({'profileId.equals': vm.profile.id,'bookId.equals':bookId},onSuccess);
-                        function onSuccess(result){
-                            var id = result[0].id; 
-                            FavoriteBook.delete({'id': id},success);
-                            function success(){
-                                load();
-                            }
+            $scope.getFavorite = function (bookId) {
+                if ($scope.isFavorite(bookId)) {
+                    FavoriteBook.query({'profileId.equals': vm.profile.id, 'bookId.equals': bookId}, onSuccess);
+
+                    function onSuccess(result) {
+                        var id = result[0].id;
+                        FavoriteBook.delete({'id': id}, success);
+
+                        function success() {
+                            load();
                         }
+                    }
 
                 }
                 else {
@@ -122,10 +117,6 @@
                     }
                 }
             };
-
-
-
-            
 
             $scope.selectGenre = function (genreId) {
                 vm.currentGenre = genreId;
@@ -222,7 +213,15 @@
                 vm.page = page;
                 loadAll();
             }
+
+            $scope.feedback = {};
+
+            function sendFeedback() {
+                console.log($scope.feedback);
+                $http.post('/api/feedback', $scope.feedback).success(function () {
+                    console.log('Ваш отзыва успешно отправлен.');
+                });
+            }
         }
     }
-
 )();
