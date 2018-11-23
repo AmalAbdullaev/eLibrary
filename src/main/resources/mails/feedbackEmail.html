@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{email.feedback.title(${feedback.firstName}, ${feedback.lastName})}">New feedback</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}"/>
+</head>
+<body>
+<p th:text="#{email.feedback.text1(${feedback.email})}">
+    Email
+</p>
+<div th:text="#{email.feedback.text2(${feedback.message})}">Message</div>
+</body>
+</html>

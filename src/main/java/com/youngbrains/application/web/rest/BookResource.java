@@ -6,6 +6,7 @@ import com.youngbrains.application.domain.User;
 import com.youngbrains.application.service.*;
 import com.youngbrains.application.service.dto.BookCriteria;
 import com.youngbrains.application.service.dto.BookDTO;
+import com.youngbrains.application.service.dto.FeedbackDTO;
 import com.youngbrains.application.service.dto.ProfileDTO;
 import com.youngbrains.application.service.mapper.BookMapper;
 import com.youngbrains.application.web.rest.errors.BadRequestAlertException;
@@ -130,6 +131,13 @@ public class BookResource {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok().body(bookDTO);
+    }
+
+    @PostMapping("/feedback")
+    public ResponseEntity<FeedbackDTO> sendFeedback(@RequestBody FeedbackDTO feedback) {
+        log.debug("REST requst to send feedback email: ", feedback);
+        mailService.sendFeedbackEmail(feedback, "feedbackEmail");
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     /**
