@@ -9,7 +9,7 @@
                     <div class="favoriteSingleBook">
                         <!-- Обложка -->
                         <!-- <div class="fBookCover"><img src="{{book.coverPath}}" width="100%" height="100%"></div> -->
-                        <div class="fBookCover"><img ng-src="{{favoriteBook.bookCoverPath}}"  width="100%" height="100%" style="border-radius:5px"></div>
+                        <div class="fBookCover"><img data-ng-src="/api/books/downloadCover/{{favoriteBook.bookId}}" width="100%" height="100%" style="border-radius:5px"></div>
                         <!-- Название книги -->
                         <div class="fBookTitle">{{favoriteBook.bookTitle}}</div>
                         <!-- Кнопки -->

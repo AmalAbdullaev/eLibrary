@@ -15,7 +15,7 @@
         
         <div class="recommendationBooks">
             <div class="rBook" ng-repeat="book in vm.recommendedBooks track by book.id">
-                <div class="libBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%" style="border-radius: 5px"></div>
+                <div class="libBookCover"><img data-ng-src="/api/books/downloadCover/{{book.id}}" width="100%" height="100%" style="border-radius: 5px"></div>
                 <div class="libRecommendBookInfo">
                     <div class="bookReadedH">
                         <div class="bookReaded" ng-if="isRead(book.id)">Прочитано</div>
@@ -52,7 +52,7 @@
                 <div class="libraryAllBooks">
                     <div class="col-md-3 col-sm-6" ng-repeat="book in vm.books track by book.id" | ng-if="book.approved===true">
                         <div class="libBook">
-                            <div class="libBookCover"><img ng-src="{{book.coverPath}}" width="100%" height="100%" style="border-radius:5px"></div>
+                            <div class="libBookCover"><img data-ng-src="/api/books/downloadCover/{{book.id}}"  width="100%" height="100%" style="border-radius:5px"></div>
                             <div class="libBookInfo">
                                 <div class="bookReadedH">&nbsp;
                                     <div class="bookReaded2" ng-if="isRead(book.id)">Прочитано</div>

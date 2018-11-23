@@ -4,7 +4,7 @@
     <div class="libraryNotification">
         <div class="singleNotification" ng-repeat="book in vm.books track by book.id">
             <div class="nBookCover">
-                <img ng-src="{{book.coverPath}}" width="100%" height="100%" style="border-radius:5px">
+                <img data-ng-src="/api/books/downloadCover/{{book.id}}" width="100%" height="100%" style="border-radius:5px">
             </div>
             <div class="nBookInfo">
                 <div class="nBookText">

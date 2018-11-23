@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.MalformedURLException;
@@ -188,7 +189,8 @@ public class BookService {
                         throw new FileSystemException("Could not create profile directory: " + profileDir.getFileName());
                     }
                 targetLocation = profileDir.resolve(String.valueOf(id) + "-cover-" + fileName);
-                bookDTO.setCoverPath("/content/images/" + bookDTO.getProfileId() + "/" + bookDTO.getId() +
+                System.out.println(targetLocation);
+                bookDTO.setCoverPath("./src/main/webapp/content/images/" + bookDTO.getProfileId() + "/" + bookDTO.getId() +
                     "-cover-" + fileName);
                 break;
             }
@@ -197,12 +199,23 @@ public class BookService {
         }
         try {
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+            byte[] bytes = file.getBytes();
+
+            Files.write(targetLocation, bytes);
         } catch (IOException e) {
             throw new FileSystemException("Could not store file " + fileName);
         }
         return save(bookDTO);
     }
 
+
+    public File getCover(Long bookId) {
+        log.debug("Request to download book cover {}", bookId);
+
+        BookDTO bookDTO = findOne(bookId);
+        String coverPath = bookDTO.getCoverPath();
+        return new File(coverPath);
+    }
     /**
      * Loads the file located on the path "path"
      *

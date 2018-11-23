@@ -64,7 +64,7 @@
                     <!-- Книга ожидающая проверку -->
                     <div class="singleBookWait" ng-repeat="book in vm.unconfirmedBooks track by book.id">
                         <div class="singleBookWCover">
-                            <img ng-src="{{book.coverPath}}" width="100%" height="100%" style="border-radius:5px">
+                            <img data-ng-src="/api/books/downloadCover/{{book.id}}" width="100%" height="100%" style="border-radius:5px">
                         </div>
                         <div class="singleBookWInfo">
                             <div class="bookTitle">{{book.title}}</div>
@@ -91,7 +91,7 @@
 
             <div class="singleBook" ng-repeat="book in vm.books">
                 <div class="singleBookCover">
-                    <img ng-src="{{book.coverPath}}" width="100%" height="100%" style="border-radius:5px">
+                    <img data-ng-src="/api/books/downloadCover/{{book.id}}" width="100%" height="100%" style="border-radius:5px">
                 </div>
                 <div class="singleBookInfo">
                     <div class="bookTitle">{{book.title}}</div>
