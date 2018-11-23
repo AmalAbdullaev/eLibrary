@@ -1759,6 +1759,34 @@ button[type="search-submit"]:hover {
     height: 100%;
 }
 
+.help-contact-us {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+.help-about-us {
+    /* height: 417px; */
+    width: 350px;
+    height: 450px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-top: 59px;
+    padding: 50px;
+}
+
+.help-about-us-logo {
+    width: 250px;
+    height: 250px;
+    background-image: url(/content/images/ico/aboutUsNoHover.png);
+    background-size: cover;
+}
+
+.help-about-us-logo:hover {
+    background-image: url(/content/images/ico/aboutUsHover.png);
+}
+
 /* ==========================================================================
 Hide ng-cloak on page load, https://docs.angularjs.org/api/ng/directive/ngCloak
 ========================================================================== */
