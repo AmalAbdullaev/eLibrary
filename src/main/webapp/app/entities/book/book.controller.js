@@ -23,6 +23,12 @@
                 last: 0
             };
 
+            $scope.isAlertVisible = false;
+            $scope.alert = {
+                type: 'success',
+                message: null
+            };
+
             vm.predicate = 'id';
             vm.reset = reset;
             vm.reverse = true;
@@ -50,6 +56,19 @@
                 });
                 return bool;
             };
+
+            function closeAlert() {
+
+                $scope.alert.type = null;
+                $scope.alert.message = null;
+                $scope.isAlertVisible = false;
+            }
+
+            function showAlert(type, message) {
+                $scope.alert.type = type;
+                $scope.alert.message = message;
+                $scope.isAlertVisible = true;
+            }
 
             function load() {
                 Principal.identity().then(function (user) {
@@ -219,7 +238,8 @@
             function sendFeedback() {
                 console.log($scope.feedback);
                 $http.post('/api/feedback', $scope.feedback).success(function () {
-                    console.log('Ваш отзыва успешно отправлен.');
+                    showAlert('success', 'Ваш отзыв успешно отправлен.');
+                    $scope.feedback = {};
                 });
             }
         }

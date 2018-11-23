@@ -8,10 +8,20 @@
     </button>
 
     <span class="hidden-sm-down" ng-show="isReading">
-    Страница <input id="page_top" type="text" style="width: 5%; display: inline; text-align: center"
-                    ng-keypress="changePage($event)">
-    <span id="pages_top"> / </span>
-</span>
+        Страница <input id="page_top" type="text" style="width: 5%; display: inline; text-align: center"
+                        ng-keypress="changePage($event)">
+        <span id="pages_top"> / </span>
+    </span>
+
+    <button type="button" class="btn btn-primary" ng-click="zoomOut()" ng-show="isReading">
+        <span class="hidden-sm-down">-</span>
+    </button>
+
+    <span class="hidden-sm-down" ng-show="isReading">Масштаб {{(vm.pdfBook.scale * 100.0).toFixed(0)}}%</span>
+
+    <button type="button" class="btn btn-primary" ng-click="zoomIn()" ng-show="isReading">
+        <span class="hidden-sm-down">+</span>
+    </button>
 
     <button type="button" class="btn btn-primary" ng-click="nextPage()" ng-show="isReading">
         <span class="hidden-sm-down" data-translate="entity.action.nextPage">Next page</span>
@@ -42,6 +52,16 @@
                         ng-model="vm.pdfBook.pageNum">
         <span id="pages_bot"> / {{vm.pdfBook.pdfDoc.numPages}}</span>
     </span>
+
+    <button type="button" class="btn btn-primary" ng-click="zoomOut()" ng-show="isReading">
+        <span class="hidden-sm-down">-</span>
+    </button>
+
+    <span class="hidden-sm-down" ng-show="isReading">Масштаб {{(vm.pdfBook.scale * 100.0).toFixed(0)}}%</span>
+
+    <button type="button" class="btn btn-primary" ng-click="zoomIn()" ng-show="isReading">
+        <span class="hidden-sm-down">+</span>
+    </button>
 
     <button type="button" class="btn btn-primary" ng-click="nextPage()" ng-show="isReading">
         <span class="hidden-sm-down" data-translate="entity.action.nextPage">Next page</span>

@@ -33,22 +33,22 @@
         <div class="col-md-6">
             <div class="addBookView">
                 <input type="addBookName" placeholder="Название книги"
-                       ng-model="vm.book.title" ng-disabled="vm.profile.banned">
+                       ng-model="vm.book.title" ng-disabled="vm.profile.banned" required>
                 <input type="addBookAuthorName" placeholder="Имя автора"
-                       ng-disabled="vm.profile.banned" ng-model="vm.book.authorFirstName">
+                       ng-disabled="vm.profile.banned" ng-model="vm.book.authorFirstName" required>
                 <input type="addBookAuthorSurname" placeholder="Фамилия"
-                       ng-disabled="vm.profile.banned" ng-model="vm.book.authorLastName">
+                       ng-disabled="vm.profile.banned" ng-model="vm.book.authorLastName" required>
 
                 <select type="addBookGenre" class="browser-default custom-select" placeholder="Автор книги"
                         ng-model="vm.book.genreId" ng-disabled="vm.profile.banned"
                         ng-options="genre.id as genre.name for genre in vm.genres"></select>
 
                 <input type="addBookOther" placeholder="Год" ng-disabled="vm.profile.banned"
-                       ng-model="vm.book.yearOfPublishing">
-                <input type="addBookOther" ng-disabled="vm.profile.banned" placeholder="Стр" ng-model="vm.book.pages">
+                       ng-model="vm.book.yearOfPublishing" required>
+                <input type="addBookOther" ng-disabled="vm.profile.banned" placeholder="Стр" ng-model="vm.book.pages" required>
 
                 <textarea name="addBookDescription" placeholder="Описание" ng-disabled="vm.profile.banned"
-                          ng-model="vm.book.description"></textarea>
+                          ng-model="vm.book.description" required></textarea>
             </div>
         </div>
 
