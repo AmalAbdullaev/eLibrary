@@ -16,7 +16,7 @@
             vm.openFile = DataUtils.openFile;
             vm.isRead = false;
             vm.profile = null;
-            vm.zoomDelta = 0.25;
+            vm.zoomDelta = 0.1;
             $scope.isReading = false;
 
             Principal.identity().then(function (account) {
@@ -129,11 +129,13 @@
 
             $scope.zoomIn = function () {
                 vm.pdfBook.scale += vm.zoomDelta;
+                vm.pdfBook.scale.toString().substring(0, 3);
                 queueRenderPage(vm.pdfBook.pageNum);
             };
 
             $scope.zoomOut = function () {
                 vm.pdfBook.scale -= vm.zoomDelta;
+                vm.pdfBook.scale.toString().substring(0, 3);
                 queueRenderPage(vm.pdfBook.pageNum);
             };
 
