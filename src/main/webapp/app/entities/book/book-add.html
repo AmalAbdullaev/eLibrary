@@ -3,6 +3,10 @@
     <h2>Предложить книгу</h2>
     <div class="addBook">
         <div uib-alert ng-show="isAlertVisible">{{alert.message}}</div>
+        <div uib-alert ng-show="!vm.book.authorFirstName || !vm.book.authorLastName || !vm.book.title ||
+        !vm.book.yearOfPublishing || !vm.book.genreId || !vm.coverFile || !vm.bookFile">
+            Необходимо добавить книгу, обложку и заполнить все обязательные поля (поля, помеченные *)
+        </div>
         <!-- Добавление книги/обложки/отправка -->
         <div class="homeColR col-md-3">
             <div class="addBookCover">
@@ -21,15 +25,17 @@
                     type='file' ngf-select ng-model="vm.bookFile" ng-disabled="vm.profile.banned" required>
                     <span class="glyphicon glyphicon-book"></span> Добавить книгу
                 </button>
-               
+
                 <!-- <div class="file_upload_book" for="field_bookFile">
                     <input type='file' ngf-select ng-model="vm.bookFile" ng-disabled="vm.profile.banned" required>
                 </div> -->
                 <uib-progressbar animate="false" value="bookProgressPercentage" ng-show="isBookUploading"
                                  type="warning"><b>{{bookProgressPercentage}}%</b></uib-progressbar>
                 <!-- Кнопка "Публикации" -->
-                <button class="file_publication"  type="submit" ng-disabled="editForm.$invalid || vm.isSaving"
-                        ng-click="vm.save()" ng-hide="vm.profile.banned">
+                <button class="file_publication" type="submit" ng-disabled="!vm.book.authorFirstName
+                || !vm.book.authorLastName || !vm.book.title || !vm.book.yearOfPublishing
+                || !vm.book.genreId || !vm.coverFile || !vm.bookFile || vm.isSaving" ng-click="vm.save()"
+                        ng-hide="vm.profile.banned">
                     Предложить
                 </button>
 
@@ -37,12 +43,12 @@
                         ng-disabled="vm.profile.banned" popover-is-open="vm.profile.banned">
                     Предложить
                 </button>
-                
+
                 <!-- <button class="file_publication" type="submit" ng-disabled="editForm.$invalid || vm.isSaving"
                         ng-click="vm.save()" ng-hide="vm.profile.banned"></button> -->
                 <!-- <button uib-popover-html="bannedPopover" class="file_publication" ng-show="vm.profile.banned"
                         ng-disabled="vm.profile.banned" popover-is-open="vm.profile.banned"></button> -->
-                
+
             </div>
         </div>
 
@@ -64,9 +70,9 @@
 
                 <input type="addBookOther" placeholder="* Год" ng-disabled="vm.profile.banned"
                        ng-model="vm.book.yearOfPublishing" required>
-                <input type="addBookOther" ng-disabled="vm.profile.banned" placeholder="* Стр" ng-model="vm.book.pages" required>
+                <input type="addBookOther" ng-disabled="vm.profile.banned" placeholder="Стр" ng-model="vm.book.pages" required>
 
-                <textarea name="addBookDescription" placeholder="* Описание" ng-disabled="vm.profile.banned"
+                <textarea name="addBookDescription" placeholder="Описание" ng-disabled="vm.profile.banned"
                           ng-model="vm.book.description" required></textarea>
             </div>
         </div>

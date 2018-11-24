@@ -106,7 +106,6 @@
         }
 
         function closeAlert() {
-
             $scope.alert.type = null;
             $scope.alert.message = null;
             $scope.isAlertVisible = false;
@@ -121,7 +120,6 @@
             $scope.alert.message = message;
             $scope.isAlertVisible = true;
             $timeout(function () {
-                closeAlert();
                 $state.reload();
             }, 2000);
         }
@@ -177,6 +175,7 @@
                     console.log('Success ' + resp.config.data.file.name + ' uploaded');
                     $scope.$emit('eLibraryApp:bookUpdate', resp);
                     showAlert('success', 'Книга ' + vm.book.title + ' успешно загружена');
+
                 }, function (resp) {
                     showAlert('success', 'Не удалось загрузить книгу '
                         + vm.book.title + '. Статус: ' + resp.status);
