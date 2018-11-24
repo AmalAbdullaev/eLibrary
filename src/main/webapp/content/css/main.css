@@ -1655,7 +1655,7 @@ input:checked + label {
 }
 
 .btnProfileBookDetail {
-    background-color: #dfdfdf;
+    background-color: #c0c0c0;
     color: white;
     width: 70%;
     height: 35px;
@@ -1681,6 +1681,20 @@ input:checked + label {
 
 .profileDetailMyBook:hover {
     box-shadow: 0 0 2px 2px rgb(0, 0, 0, 0.1);
+}
+
+.user-settings {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+.user-password {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 30px;
 }
 
 /* ==========================================================================

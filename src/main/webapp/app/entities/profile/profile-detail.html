@@ -23,11 +23,12 @@
                             <div class="profileEmail">{{vm.profile.userEmail}}</div>   
                             <!-- Кнопки -->
                             <div class="profileBtn" >
+                                <!-- Изменить -->
                                 <button has-authority="ROLE_ADMIN" type="button" ui-sref="profile-detail.edit({id:vm.profile.id})" class="btn btn-success" style="float:right">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                     <span class="hidden-sm-down">Изменить</span>
                                 </button>
-
+                                <!-- Назад -->
                                 <button type="submit" ui-sref="{{ vm.previousState }}" ng-if="vm.previousState !== 'book-detail'" class="btn btn-info" style="float:right">
                                     <span class="glyphicon glyphicon-arrow-left"></span> <span>Назад</span>
                                 </button>
