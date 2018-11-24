@@ -107,6 +107,16 @@ body {
     padding-right:5px;
 }
 
+.homeColR {
+    padding-left: 0; 
+    padding-right: 1%;
+}
+
+.homeColL {
+    padding-left: 1%; 
+    padding-right: 0;
+}
+
 .goToLibrary {
     width: 100%;
     height: 200px;
@@ -314,25 +324,27 @@ body {
 Предложить книгу
 ========================================================================== */
 
-
 .addBook {
     width: 100%;
-    border-radius: 5px;
+    height: 100%;
 }
 
 .addBookCover {
-    padding: 15px;
-    float:left;
+    padding: 20px;
     width: 100%;
-    height: 500px;
+    height: 495px;
     border-radius: 5px;
-    border: 2px solid rgb(209, 209, 209);
+    /* border: 2px solid rgb(209, 209, 209); */
+    background-color: #fff;
+    text-align: center;
 }
 .addBookView {
-    float:left;
+    width: 100%;
+    height: 100%;
     padding: 15px;
     border-radius: 5px;
-    border: 2px solid rgb(209, 209, 209);
+    /* border: 2px solid rgb(209, 209, 209); */
+    background-color: #fff;
 }
 
 .addBookWait {
@@ -340,17 +352,17 @@ body {
     width: 17%;
     height: 100%;
     margin-left: 1%;
-    float:left;
     padding: 15px;
     border-radius: 5px;
 }
 
 .addWaitBook {
     width: 100%;
-    height: 500px;
+    height: 495px;
     border-radius: 5px;
     padding-left: 3%;
-    border: 2px solid rgb(209, 209, 209);
+    /* border: 2px solid rgb(209, 209, 209); */
+    background-color: #fff;
 }
 
 input::placeholder {
@@ -460,13 +472,8 @@ input[type="addBookOther"] {
     width: 100%;
     height: 320px;
     margin-bottom: 15px;
-    background-image: url(/content/images/ico/addcover.png);
     background-repeat: no-repeat;
     background-position: center;
-}
-
-.file_upload_cover:hover {
-    background: url(/content/images/ico/addcoverafter.png) no-repeat 50% 50%;
     border-radius: 5px;
 }
 
@@ -476,24 +483,27 @@ input[type="addBookOther"] {
     background: url(/content/images/ico/btnUploadBook.png) no-repeat 50% 50%;
     width: 100%;
     height: 50px;
+    border-radius: 5px;
 }
 
 .file_upload_book:hover {
     background: url(/content/images/ico/btnUploadBookAfter.png) no-repeat 50% 50%;
-    border-radius: 5px;
 }
 
 .file_publication {
-    background-color: white;
-    background: url(/content/images/ico/btnPublishBook.png) no-repeat 50% 50%;
-    width: 100%;
+    background-color: #d65600;
+    color: white;
+    width: 68%;
     height: 50px;
+    font-size: 100%;
     border: none;
-}
-
-.file_publication:hover {
-    background: url(/content/images/ico/btnPublishBookAfter.png) no-repeat 50% 50%;
+    vertical-align: bottom;
     border-radius: 5px;
+    margin-bottom: 4%;
+}
+.file_publication:hover {
+    color: white;
+    background-color: #b84a01;
 }
 
 input[type='file'] {
@@ -537,8 +547,10 @@ input[type='file'] {
     width: 95%;
     border-radius: 5px;
     margin-top: 3%;
-    margin-right: 1%;
     float:left;
+    padding: 2%;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 .singleBookWait:hover {
@@ -547,7 +559,6 @@ input[type='file'] {
 }
 
 .singleBookWCover {
-    background-color: red;
     width: 30%;
     border-radius: 5px;
     margin-right: 10px;
@@ -560,23 +571,22 @@ input[type='file'] {
     border-radius: 5px;
     float:left;
     word-break:break-all;
-    font-size: 9pt;
+    font-size: 100%;
 }
 
 .singleBookCover {
-    background-color: red;
-    width: 30%;
+    width: 33%;
     border-radius: 5px;
     margin-right: 5px;
     float:left;
 }
 
 .singleBookInfo {
-    width: 65%;
+    width: 63%;
     height: 100%;
     border-radius: 5px;
     float:left;
-    padding: 5px;
+    padding: 5px 0px 5px 5px;
 }
 
 .label {
@@ -628,6 +638,7 @@ input[type='file'] {
     margin-top: 2%;
     text-align: center;
     float:left;
+    font-size: 100%;
 }
 
 .waitBooksScroll {
@@ -635,6 +646,8 @@ input[type='file'] {
     height: 90%;    
     overflow-y: scroll;
     overflow: auto;
+    padding-top: 1%;
+    padding-bottom: 1%;
 }
 
 select[type="myBookSort"] {
@@ -644,7 +657,7 @@ select[type="myBookSort"] {
     width: 15%;
     height: 40px;
     font-size: 14pt;
-    color: #dadada;
+    color: #afafaf;
     background: #fff;
     border-radius: 5px;
     background-color: transparent;
@@ -908,7 +921,6 @@ select[type="myBookLibSort"] {
     width: 40%;
     height: 150px;
     float: left;
-    background-color: red;
     border-radius: 5px
 }
 
@@ -924,7 +936,6 @@ select[type="myBookLibSort"] {
     width: 100%;
     height: 100%;
     float: left;
-    background-color: yellow;
     border-radius: 5px;
     margin-bottom: 2%;
 }
