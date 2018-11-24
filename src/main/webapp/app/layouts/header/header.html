@@ -1,19 +1,15 @@
 <div ng-cloak>
-    <style>
-        button[type="search-submit"] {
-            background: url(/content/images/ico/searchico.png) no-repeat 50% 50%;
-        }
-    </style>
-
     <div class="row">
         <div class="col-md-10">
             <span uib-dropdown is-open="searchBarOpen" dropdown-append-to-body >
-                <button id="simple-dropdown" type="search-submit" uib-dropdown-toggle ng-click="toggled()" ></button>
+                <button id="simple-dropdown" type="search-submit" uib-dropdown-toggle ng-click="toggled()"></button>
                 <input id="search-dropdown" ng-keypress="keyPressed($event)" type="search" placeholder="Поиск по книгам" ng-model="searchText" >
-                <ul class="dropdown-menu" style="width: 37%" uib-dropdown-menu>
-                    <li  ng-repeat="book in vm.foundBooks">
-                        <a ui-sref="book-detail({id: book.id})">{{book.title}}
-                            | {{book.authorFirstName}} {{book.authorLastName}}</a>
+                <ul class="dropdown-menu" uib-dropdown-menu>
+                    <li ng-repeat="book in vm.foundBooks">
+                            <a ui-sref="book-detail({id: book.id})">
+                                <img data-ng-src="/api/books/downloadCover/{{book.id}}" width="45px" style="border-radius:5px">
+                                {{book.title}} | {{book.authorFirstName}} {{book.authorLastName}}
+                            </a>
                     </li>
                 </ul>
             </span>
@@ -22,7 +18,7 @@
         <div class="col-md-1">
             <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()" ng-click="vm.getAccount()">
                 <!-- Иконка аккаунта пользователя -->
-                <div  uib-dropdown class="dropdown pointer">
+                <div uib-dropdown class="dropdown pointer">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu" >
                         <img src="/content/images/ico/profile.png">
                     </a>
