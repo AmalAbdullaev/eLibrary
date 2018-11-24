@@ -17,8 +17,11 @@
             vm.currentGenre = null;
             vm.loadPage = loadPage;
             vm.sendFeedback = sendFeedback;
-            vm.itemsPerPage = paginationConstants.itemsPerPage;
+            vm.loadAll = loadAll;
+            vm.itemsPerPage = 8;
             vm.page = 0;
+            vm.maxPage = Number.POSITIVE_INFINITY;
+            vm.busy = false;
             vm.links = {
                 last: 0
             };
@@ -177,6 +180,8 @@
             };
 
             function loadAll() {
+                if (vm.busy) return;
+                vm.busy = true;
 
                 load();
 
@@ -187,6 +192,7 @@
                         sort: sort(),
                         'genreId.equals': vm.currentGenre,
                         'approved.equals':true
+
                     }, onSuccess, onError);
                 else
                     Book.query({
@@ -194,14 +200,17 @@
                         size: vm.itemsPerPage,
                         sort: sort(),
                         'approved.equals':true
+
                     }, onSuccess, onError);
 
-                $http.get('/api/genres').success(function (data) {
-                    vm.genres = data;
-                });
-                $http.get('/api/favorite-books/top').success(function (data) {
-                    vm.recommendedBooks = data;
-                });
+                if (vm.page === 0) {
+                    $http.get('/api/genres').success(function (data) {
+                        vm.genres = data;
+                    });
+                    $http.get('/api/favorite-books/top').success(function (data) {
+                        vm.recommendedBooks = data;
+                    });
+                }
 
                 function sort() {
                     var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
@@ -214,9 +223,12 @@
                 function onSuccess(data, headers) {
                     vm.links = ParseLinks.parse(headers('link'));
                     vm.totalItems = headers('X-Total-Count');
+                    vm.maxPage = vm.totalItems / vm.itemsPerPage;
                     for (var i = 0; i < data.length; i++) {
                         vm.books.push(data[i]);
                     }
+                    vm.page++;
+                    vm.busy = false;
                 }
 
                 function onError(error) {

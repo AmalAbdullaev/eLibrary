@@ -26,9 +26,12 @@ public class ProfileService {
 
     private final ProfileMapper profileMapper;
 
-    public ProfileService(ProfileRepository profileRepository, ProfileMapper profileMapper) {
+    private final BookService bookService;
+
+    public ProfileService(ProfileRepository profileRepository, ProfileMapper profileMapper, BookService bookService) {
         this.profileRepository = profileRepository;
         this.profileMapper = profileMapper;
+        this.bookService = bookService;
     }
 
     /**
@@ -86,6 +89,7 @@ public class ProfileService {
      */
     public void delete(Long id) {
         log.debug("Request to delete Profile : {}", id);
+        bookService.deleteAllByProfileId(id);
         profileRepository.delete(id);
     }
 }
