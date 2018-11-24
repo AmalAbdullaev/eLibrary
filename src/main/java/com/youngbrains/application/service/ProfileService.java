@@ -6,6 +6,8 @@ import com.youngbrains.application.service.dto.ProfileDTO;
 import com.youngbrains.application.service.mapper.ProfileMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,11 +57,10 @@ public class ProfileService {
      * @return the list of entities
      */
     @Transactional(readOnly = true)
-    public List<ProfileDTO> findAll() {
+    public Page<ProfileDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Profiles");
-        return profileRepository.findAll().stream()
-            .map(profileMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return profileRepository.findAll(pageable)
+            .map(profileMapper::toDto);
     }
 
     /**

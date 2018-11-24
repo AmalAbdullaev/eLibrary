@@ -55,11 +55,12 @@
                 <label for="tab2"><span class="glyphicon glyphicon-list-alt"></span> Читаю</label>
                 
                 <!-- Мои книги -->
-                <section id="content1">
-                    <div class="col-md-4" ng-repeat="book in vm.books">
+                <section id="content1" infinite-scroll="vm.loadAllMyBooks()"
+                         infinite-scroll-disabled="vm.busy || vm.pageInMyBooks > vm.maxPageInMyBooks">
+                    <div class="col-md-4" ng-repeat="book in vm.books track by book.id">
                         
                         <!-- Книга 1 -->
-                        <div class="profileDetailMyBook" >
+                        <div class="profileDetailMyBook">
                             <div class="homeRBookSingle">
                                 <!-- Обложка -->
                                 <div class="homeABookCover" ><img data-ng-src="/api/books/downloadCover/{{book.id}}"width="100%" style="border-radius:5px"></div>
@@ -78,8 +79,9 @@
                 </section>
                 
                 <!-- Читаю -->
-                <section id="content2">
-                    <div class="col-md-4" ng-repeat="book in vm.readBooks">
+                <section id="content2" infinite-scroll="vm.loadAllReadBooks()"
+                         infinite-scroll-disabled="vm.busy || vm.pageInReadBooks > vm.maxPageInReadBooks">
+                    <div class="col-md-4" ng-repeat="book in vm.readBooks track by book.id">
                     
                         <!-- Книга 1 -->
                         <div class="profileDetailMyBook" >

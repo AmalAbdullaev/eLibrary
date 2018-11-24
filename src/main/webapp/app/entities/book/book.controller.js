@@ -18,7 +18,7 @@
             vm.loadPage = loadPage;
             vm.sendFeedback = sendFeedback;
             vm.loadAll = loadAll;
-            vm.itemsPerPage = 8;
+            vm.itemsPerPage = 16;
             vm.page = 0;
             vm.maxPage = Number.POSITIVE_INFINITY;
             vm.busy = false;
@@ -171,8 +171,6 @@
                 selected: {name: "По возрастанию", predicate: "title", reverse: false}
             };
 
-            loadAll();
-
             $scope.reloadAll = function () {
                 vm.predicate = $scope.options.selected.predicate;
                 vm.reverse = $scope.options.selected.reverse;
@@ -224,9 +222,8 @@
                     vm.links = ParseLinks.parse(headers('link'));
                     vm.totalItems = headers('X-Total-Count');
                     vm.maxPage = vm.totalItems / vm.itemsPerPage;
-                    for (var i = 0; i < data.length; i++) {
+                    for (var i = 0; i < data.length; i++)
                         vm.books.push(data[i]);
-                    }
                     vm.page++;
                     vm.busy = false;
                 }

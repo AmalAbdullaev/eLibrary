@@ -8,7 +8,8 @@
 
     </div>
     <div>
-        <div class="userManagementList">
+        <div class="userManagementList" infinite-scroll-disabled="vm.busy || vm.page > vm.maxPage"
+             infinite-scroll="vm.loadAll()">
             <div class="userManagementViewUser" ng-repeat="profile in vm.profiles track by profile.id">
                 <div class="userManagementPhoto"><div class="userManagementAvatar"></div></div>
 

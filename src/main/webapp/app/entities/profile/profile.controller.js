@@ -14,16 +14,19 @@
         vm.profiles = [];
         vm.books = [];
         vm.searchText = undefined;
+        vm.busy = false;
+        vm.page = 0;
+        vm.itemsPerPage = 20;
+        vm.maxPage = Number.POSITIVE_INFINITY;
         vm.keyPress = keyPress;
         vm.search = search;
-
-        loadAll();
+        vm.loadAll = loadAll;
 
         function keyPress(event) {
             if (event.keyCode === 13)
                 search();
-            else if(event.keyCode === 8 && vm.searchText.length === 0)
-                    search();
+            else if (event.keyCode === 8 && vm.searchText.length === 0)
+                search();
         }
 
         function search() {
@@ -33,10 +36,16 @@
         }
 
         function loadAll() {
-            Profile.query(function (result) {
-                vm.profiles = result;
+            if (vm.busy) return;
+            vm.busy = true;
+            Profile.query(function (data, headers) {
+                vm.totalItems = headers('X-Total-Count');
+                vm.maxPage = vm.totalItems / vm.itemsPerPage;
+                for (var i = 0; i < data.length; i++)
+                    vm.profiles.push(data[i]);
+                vm.page++;
+                vm.busy = false;
             });
-            vm.books = Book.query();
         }
     }
 })();

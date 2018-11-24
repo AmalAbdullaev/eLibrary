@@ -6,9 +6,14 @@ import com.youngbrains.application.service.ProfileService;
 import com.youngbrains.application.web.rest.errors.BadRequestAlertException;
 import com.youngbrains.application.web.rest.util.HeaderUtil;
 import com.youngbrains.application.service.dto.ProfileDTO;
+import com.youngbrains.application.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -85,10 +90,12 @@ public class ProfileResource {
      */
     @GetMapping("/profiles")
     @Timed
-    public List<ProfileDTO> getAllProfiles() {
+    public ResponseEntity<List<ProfileDTO>> getAllProfiles(Pageable pageable) {
         log.debug("REST request to get all Profiles");
-        return profileService.findAll();
-        }
+        Page<ProfileDTO> page = profileService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/profiles");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
     /**
      * GET  /profiles/:id : get the "id" profile.
@@ -106,11 +113,12 @@ public class ProfileResource {
 
     @GetMapping("/profiles/user/{userId}")
     @Timed
-    public ResponseEntity<ProfileDTO> getProfileByUserId(@PathVariable  Long userId) {
+    public ResponseEntity<ProfileDTO> getProfileByUserId(@PathVariable Long userId) {
         log.debug("REST request to get Profile : {}", userId);
         ProfileDTO profileDTO = profileService.findOneByUserId(userId);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(profileDTO));
     }
+
     /**
      * DELETE  /profiles/:id : delete the "id" profile.
      *
