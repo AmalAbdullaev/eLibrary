@@ -15,6 +15,14 @@ public interface FavoriteBookMapper extends EntityMapper<FavoriteBookDTO, Favori
     @Mapping(source = "book.title", target = "bookTitle")
     @Mapping(source = "book.coverPath", target = "bookCoverPath")
     @Mapping(source = "profile.id", target = "profileId")
+    @Mapping(source = "book.authorFirstName", target = "bookAuthorFirstName")
+    @Mapping(source = "book.authorLastName", target = "bookAuthorLastName")
+    @Mapping(source = "book.genre.name", target = "bookGenreName")
+    @Mapping(source = "book.pages", target = "bookPages")
+    @Mapping(source = "book.description", target = "bookDescription")
+    @Mapping(source = "book.path", target = "bookPath")
+    @Mapping(source = "book.yearOfPublishing", target = "bookYearOfPublishing")
+    @Mapping(source = "book.createdBy", target = "bookCreatedBy")
     FavoriteBookDTO toDto(FavoriteBook favoriteBook);
 
     @Mapping(source = "bookId", target = "book")
