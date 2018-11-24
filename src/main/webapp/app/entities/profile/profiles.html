@@ -4,7 +4,8 @@
     </h2>
     <jhi-alert></jhi-alert>
     <div class="userSearchList">
-        <input class="form-control" ng-keyup="vm.keyPress($event)" ng-model="vm.searchText" placeholder="Для поиска пользователя: введите логин или email">
+        <input class="form-control" ng-keyup="vm.keyPress($event)" ng-model = "vm.searchText" ng-change="vm.search()" placeholder="Для поиска пользователя: введите логин или email">
+
     </div>
     <div>
         <div class="userManagementList">

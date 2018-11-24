@@ -66,6 +66,7 @@
             reset();
         };
 
+
         function loadAll() {
             Book.query({
                 page: vm.page,
@@ -74,8 +75,16 @@
                 'profileId.equals': vm.profile.id,
                 'approved.equals': true
             }, onSuccess, onError);
-            Book.query({'approved.equals': false}, function (data) {
-                vm.unconfirmedBooks = data;
+            Book.query({'approved.equals': false, 'profileId.equals': vm.profile.id}, function (data) {
+                if(vm.profile.id===3){
+                    Book.query({'approved.equals': false}, function (data) {
+                        vm.unconfirmedBooks = data;
+                    });
+                }
+                else {
+                    vm.unconfirmedBooks = data;
+                }
+
             });
 
             function sort() {

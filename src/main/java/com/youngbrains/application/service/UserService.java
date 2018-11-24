@@ -5,6 +5,7 @@ import com.youngbrains.application.domain.Profile;
 import com.youngbrains.application.domain.User;
 import com.youngbrains.application.repository.AuthorityRepository;
 import com.youngbrains.application.config.Constants;
+import com.youngbrains.application.repository.BookRepository;
 import com.youngbrains.application.repository.ProfileRepository;
 import com.youngbrains.application.repository.UserRepository;
 import com.youngbrains.application.security.AuthoritiesConstants;
@@ -47,6 +48,7 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
+
     public UserService(UserRepository userRepository, ProfileRepository profileRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
         this.userRepository = userRepository;
         this.profileRepository = profileRepository;
@@ -54,6 +56,7 @@ public class UserService {
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
     }
+
 
     public Optional<User> activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);

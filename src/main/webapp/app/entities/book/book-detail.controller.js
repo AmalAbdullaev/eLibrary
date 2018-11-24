@@ -89,12 +89,14 @@
                         'bookId.equals': vm.book.id,
                         'profileId.equals': vm.profile.id
                     }, function (response) {
-                        ReadBook.save({
-                            bookId: vm.book.id,
-                            profileId: vm.profile.id
-                        });
+                        if(response.length===0){
+                            ReadBook.save({
+                                bookId: vm.book.id,
+                                profileId: vm.profile.id
+                            });
+                            vm.isRead = true;
+                        }
                     });
-                    vm.isRead = true;
                 }
             }
 

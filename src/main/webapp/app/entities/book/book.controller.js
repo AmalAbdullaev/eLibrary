@@ -185,13 +185,15 @@
                         page: vm.page,
                         size: vm.itemsPerPage,
                         sort: sort(),
-                        'genreId.equals': vm.currentGenre
+                        'genreId.equals': vm.currentGenre,
+                        'approved.equals':true
                     }, onSuccess, onError);
                 else
                     Book.query({
                         page: vm.page,
                         size: vm.itemsPerPage,
-                        sort: sort()
+                        sort: sort(),
+                        'approved.equals':true
                     }, onSuccess, onError);
 
                 $http.get('/api/genres').success(function (data) {

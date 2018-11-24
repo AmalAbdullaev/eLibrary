@@ -15,7 +15,7 @@
         if (previousState.name === 'book-detail')
             $scope.bookId = previousState.params.id;
 
-        Book.query({'profileId.equals':vm.profile.id},onSuccess);
+        Book.query({'profileId.equals':vm.profile.id,'approved.equals':true},onSuccess);
 
         function onSuccess(result){
             vm.books = result;

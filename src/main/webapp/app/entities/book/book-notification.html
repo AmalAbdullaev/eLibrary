@@ -29,7 +29,7 @@
                 </div>
                 <div class="nBookText">
                     <div class="nBookBText1">Предложил:</div>
-                    <div class="nBookBText2">{{book.createdBy}}</div>
+                    <div class="nBookBText2" ui-sref="profile-detail({id:book.profileId})" ><a>{{book.createdBy}}</a></div>
                 </div>
             </div>
             <div class="nBookDescription">
@@ -38,7 +38,7 @@
             </div>
             <div class="nButtons">
                 <button class="nBtnRead" ui-sref="book-detail({id:book.id})">
-                    <span class="glyphicon glyphicon-book"></span> Читать
+                    <span class="glyphicon glyphicon-book"></span> Просмотр
                 </button>
                 <button class="nBtnPublish" ng-click="publish(book, $index)">
                     <span class="glyphicon glyphicon-ok"></span> Опубликовать

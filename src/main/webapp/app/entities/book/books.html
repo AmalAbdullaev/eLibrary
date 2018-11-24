@@ -50,7 +50,7 @@
                 </div>
                     
                 <div class="libraryAllBooks">
-                    <div class="col-md-3 col-sm-6" ng-repeat="book in vm.books track by book.id" | ng-if="book.approved===true">
+                    <div class="col-md-3 col-sm-6" ng-repeat="book in vm.books track by book.id" >
                         <div class="libBook">
                             <div class="libBookCover"><img data-ng-src="/api/books/downloadCover/{{book.id}}"  width="100%" height="100%" style="border-radius:5px"></div>
                             <div class="libBookInfo">
