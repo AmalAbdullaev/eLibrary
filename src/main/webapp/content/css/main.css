@@ -521,6 +521,7 @@ input[type='file'] {
 }
 
 .bookSection {
+    overflow: auto;
     width: 98%;
     border-radius: 5px;
     margin: 1%;

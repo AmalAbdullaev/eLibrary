@@ -11,15 +11,19 @@
 
         var vm = this;
 
+        vm.page = 0;
+        vm.busy = false;
         vm.book = entity;
         vm.profile = null;
-        vm.clear = clear;
+        vm.itemsPerPage = 20;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
+        vm.maxPage = Number.POSITIVE_INFINITY;
         vm.save = save;
         vm.reset = reset;
+        vm.loadAll = loadAll;
         vm.predicate = 'id';
         vm.genres = Genre.query();
 
@@ -66,8 +70,10 @@
             reset();
         };
 
-
         function loadAll() {
+            if (vm.busy) return;
+            vm.busy = true;
+
             Book.query({
                 page: vm.page,
                 size: vm.itemsPerPage,
@@ -75,17 +81,6 @@
                 'profileId.equals': vm.profile.id,
                 'approved.equals': true
             }, onSuccess, onError);
-            Book.query({'approved.equals': false, 'profileId.equals': vm.profile.id}, function (data) {
-                if(vm.profile.id===3){
-                    Book.query({'approved.equals': false}, function (data) {
-                        vm.unconfirmedBooks = data;
-                    });
-                }
-                else {
-                    vm.unconfirmedBooks = data;
-                }
-
-            });
 
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
@@ -98,9 +93,13 @@
             function onSuccess(data, headers) {
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
+                vm.maxPage = vm.totalItems / vm.itemsPerPage;
+                console.log(vm.maxPage);
                 for (var i = 0; i < data.length; i++) {
                     vm.books.push(data[i]);
                 }
+                vm.page++;
+                vm.busy = false;
             }
 
             function onError(error) {
@@ -133,9 +132,6 @@
             }, 2000);
         }
 
-        function clear() {
-            //  $uibModalInstance.dismiss('cancel');
-        }
 
         Principal.identity().then(function (user) {
             Profile.getProfile({userId: user.id}, onSuccess);
@@ -145,7 +141,16 @@
             vm.profile = result;
             vm.book.profileId = result.id;
             disableUploadIfBanned(vm.profile);
-            loadAll();
+            if (vm.profile.id === 3) {
+                Book.query({'approved.equals': false}, function (data) {
+                    vm.unconfirmedBooks = data;
+                });
+            }
+            else {
+                Book.query({'approved.equals': false, 'profileId.equals': vm.profile.id}, function (data) {
+                    vm.unconfirmedBooks = data;
+                });
+            }
         }
 
         function disableUploadIfBanned(profile) {
