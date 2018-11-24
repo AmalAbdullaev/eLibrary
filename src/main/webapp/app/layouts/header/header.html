@@ -10,11 +10,12 @@
             <span uib-dropdown is-open="searchBarOpen" dropdown-append-to-body >
                 <button id="simple-dropdown" type="search-submit" uib-dropdown-toggle ng-click="toggled()" ></button>
                 <input id="search-dropdown" ng-keypress="keyPressed($event)" type="search" placeholder="Поиск по книгам" ng-model="searchText" >
-                <ul class="dropdown-menu" style="width: 37%" uib-dropdown-menu>
-                    <li  ng-repeat="book in vm.foundBooks">
+                <ul class="dropdown-menu" style="width: 37%" uib-dropdown-menu >
+                    <li  ng-repeat="book in vm.foundBooks" ng-if="vm.foundBooks!==0">
                         <a ui-sref="book-detail({id: book.id})">{{book.title}}
                             | {{book.authorFirstName}} {{book.authorLastName}}</a>
                     </li>
+                    <li ng-if="vm.foundBooks.length===0"><a>По запросу ничего не найдено</a></li>
                 </ul>
             </span>
         </div>

@@ -129,6 +129,9 @@
                 queueRenderPage(vm.pdfBook.pageNum);
             };
 
+
+
+
             $scope.zoomIn = function () {
                 vm.pdfBook.scale += vm.zoomDelta;
                 vm.pdfBook.scale.toString().substring(0, 3);

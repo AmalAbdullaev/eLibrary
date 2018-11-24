@@ -45,8 +45,6 @@
 
         function search() {
             vm.foundBooks = [];
-
-
             $http({
                 method: 'GET',
                 url: '/api/books?search=' + $scope.searchText
