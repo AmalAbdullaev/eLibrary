@@ -183,8 +183,6 @@
                 if (vm.busy) return;
                 vm.busy = true;
 
-                console.log(vm.page);
-
                 load();
 
                 if (vm.currentGenre != null)

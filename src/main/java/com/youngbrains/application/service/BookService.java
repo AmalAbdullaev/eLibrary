@@ -231,4 +231,8 @@ public class BookService {
         else
             throw new MalformedURLException("File not found: " + path);
     }
+
+    public void deleteAllByProfileId(Long profileId) {
+        bookRepository.deleteAllByProfileId(profileId);
+    }
 }

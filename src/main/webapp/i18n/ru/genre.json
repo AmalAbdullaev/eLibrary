@@ -3,20 +3,20 @@
     "eLibraryApp": {
         "genre" : {
             "home": {
-                "title": "Genres",
-                "createLabel": "Создать новый Genre",
-                "createOrEditLabel": "Создать или отредактировать Genre"
+                "title": "Жанры",
+                "createLabel": "Добавить новый жанр",
+                "createOrEditLabel": "Создать или отредактировать жанр"
             },
-            "created": "Новый Genre создан с идентификатором {{ param }}",
-            "updated": "Genre обновлен с идентификатором {{ param }}",
-            "deleted": "Genre удален с идентификатором {{ param }}",
+            "created": "Жанр с идентификатором {{ param }} создан",
+            "updated": "Жанр с идентификатором {{ param }} обновлен",
+            "deleted": "Жанр с идентификатором {{ param }} удален",
             "delete": {
-                "question": "Вы уверены что хотите удалить Genre {{ id }}?"
+                "question": "Вы уверены что хотите удалить жанр {{ id }}?"
             },
             "detail": {
-                "title": "Genre"
+                "title": "Жанры"
             },
-            "name": "Name"
+            "name": "Название жанра"
         }
     }
 }
