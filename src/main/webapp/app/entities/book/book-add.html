@@ -1,9 +1,10 @@
 <div class="container">
+    <div class="row">
     <h2>Предложить книгу</h2>
     <div class="addBook">
         <div uib-alert ng-show="isAlertVisible">{{alert.message}}</div>
         <!-- Добавление книги/обложки/отправка -->
-        <div class="col-md-3">
+        <div class="homeColR col-md-3">
             <div class="addBookCover">
                 <!-- Обложка -->
                 <div class="file_upload_cover" ngf-background="vm.coverFile || '/content/images/ico/addcover.png'" for="file_upload_cover">
@@ -16,44 +17,62 @@
                                      type="success"><b>{{coverProgressPercentage}}%</b></uib-progressbar>
                 </div>
                 <!-- Загрузка книги -->
-                <div class="file_upload_book" for="field_bookFile">
+                <button class="file_publication" for="field_bookFile"
+                    type='file' ngf-select ng-model="vm.bookFile" ng-disabled="vm.profile.banned" required>
+                    <span class="glyphicon glyphicon-book"></span> Добавить книгу
+                </button>
+               
+                <!-- <div class="file_upload_book" for="field_bookFile">
                     <input type='file' ngf-select ng-model="vm.bookFile" ng-disabled="vm.profile.banned" required>
-                </div>
+                </div> -->
                 <uib-progressbar animate="false" value="bookProgressPercentage" ng-show="isBookUploading"
-                                 type="success"><b>{{bookProgressPercentage}}%</b></uib-progressbar>
+                                 type="warning"><b>{{bookProgressPercentage}}%</b></uib-progressbar>
                 <!-- Кнопка "Публикации" -->
-                <button class="file_publication" type="submit" ng-disabled="editForm.$invalid || vm.isSaving"
-                        ng-click="vm.save()" ng-hide="vm.profile.banned"></button>
-                <button uib-popover-html="bannedPopover" class="file_publication" ng-show="vm.profile.banned"
-                        ng-disabled="vm.profile.banned" popover-is-open="vm.profile.banned"></button>
+                <button class="file_publication"  type="submit" ng-disabled="editForm.$invalid || vm.isSaving"
+                        ng-click="vm.save()" ng-hide="vm.profile.banned">
+                    Предложить
+                </button>
+
+                <button class="file_publication" uib-popover-html="bannedPopover" ng-show="vm.profile.banned"
+                        ng-disabled="vm.profile.banned" popover-is-open="vm.profile.banned">
+                    Предложить
+                </button>
+                
+                <!-- <button class="file_publication" type="submit" ng-disabled="editForm.$invalid || vm.isSaving"
+                        ng-click="vm.save()" ng-hide="vm.profile.banned"></button> -->
+                <!-- <button uib-popover-html="bannedPopover" class="file_publication" ng-show="vm.profile.banned"
+                        ng-disabled="vm.profile.banned" popover-is-open="vm.profile.banned"></button> -->
+                
             </div>
         </div>
 
         <!-- Поля ввода информации о книге -->
-        <div class="col-md-6">
+        <div class="homeRow col-md-6">
             <div class="addBookView">
-                <input type="addBookName" placeholder="Название книги"
+                <input type="addBookName" placeholder="* Название книги"
                        ng-model="vm.book.title" ng-disabled="vm.profile.banned" required>
-                <input type="addBookAuthorName" placeholder="Имя автора"
+                <input type="addBookAuthorName" placeholder="* Имя автора"
                        ng-disabled="vm.profile.banned" ng-model="vm.book.authorFirstName" required>
-                <input type="addBookAuthorSurname" placeholder="Фамилия"
+                <input type="addBookAuthorSurname" placeholder="* Фамилия"
                        ng-disabled="vm.profile.banned" ng-model="vm.book.authorLastName" required>
 
-                <select type="addBookGenre" class="browser-default custom-select" placeholder="Автор книги"
+                <select type="addBookGenre" class="browser-default custom-select"
                         ng-model="vm.book.genreId" ng-disabled="vm.profile.banned"
-                        ng-options="genre.id as genre.name for genre in vm.genres"></select>
+                        ng-options="genre.id as genre.name for genre in vm.genres" required>
+                        <option value="" disabled selected>* Жанр</option>
+                </select>
 
-                <input type="addBookOther" placeholder="Год" ng-disabled="vm.profile.banned"
+                <input type="addBookOther" placeholder="* Год" ng-disabled="vm.profile.banned"
                        ng-model="vm.book.yearOfPublishing" required>
-                <input type="addBookOther" ng-disabled="vm.profile.banned" placeholder="Стр" ng-model="vm.book.pages" required>
+                <input type="addBookOther" ng-disabled="vm.profile.banned" placeholder="* Стр" ng-model="vm.book.pages" required>
 
-                <textarea name="addBookDescription" placeholder="Описание" ng-disabled="vm.profile.banned"
+                <textarea name="addBookDescription" placeholder="* Описание" ng-disabled="vm.profile.banned"
                           ng-model="vm.book.description" required></textarea>
             </div>
         </div>
 
         <!-- Книги, ожидающие проверки -->
-        <div class="col-md-3">
+        <div class="homeColL col-md-3">
             <div class="addWaitBook">
 
                 <div class="waitBooksTitle">
@@ -103,6 +122,7 @@
             </div>
 
         </div>
+    </div>
     </div>
 </div>
 
