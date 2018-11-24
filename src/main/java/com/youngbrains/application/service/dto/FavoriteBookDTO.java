@@ -21,6 +21,22 @@ public class FavoriteBookDTO implements Serializable {
 
     private String bookTitle;
 
+    private String bookAuthorFirstName;
+
+    private String bookAuthorLastName;
+
+    private String bookGenreName;
+
+    private Integer bookPages;
+
+    private String bookDescription;
+
+    private String bookPath;
+
+    private Integer bookYearOfPublishing;
+
+    private String bookCreatedBy;
+
 
     public void setBookTitle(String bookTitle){
         this.bookTitle = bookTitle;
@@ -62,6 +78,70 @@ public class FavoriteBookDTO implements Serializable {
         this.profileId = profileId;
     }
 
+    public String getBookAuthorFirstName() {
+        return bookAuthorFirstName;
+    }
+
+    public void setBookAuthorFirstName(String bookAuthorFirstName) {
+        this.bookAuthorFirstName = bookAuthorFirstName;
+    }
+
+    public String getBookAuthorLastName() {
+        return bookAuthorLastName;
+    }
+
+    public void setBookAuthorLastName(String bookAuthorLastName) {
+        this.bookAuthorLastName = bookAuthorLastName;
+    }
+
+    public String getBookGenreName() {
+        return bookGenreName;
+    }
+
+    public void setBookGenreName(String bookGenreName) {
+        this.bookGenreName = bookGenreName;
+    }
+
+    public Integer getBookPages() {
+        return bookPages;
+    }
+
+    public void setBookPages(Integer bookPages) {
+        this.bookPages = bookPages;
+    }
+
+    public String getBookDescription() {
+        return bookDescription;
+    }
+
+    public void setBookDescription(String bookDescription) {
+        this.bookDescription = bookDescription;
+    }
+
+    public String getBookPath() {
+        return bookPath;
+    }
+
+    public void setBookPath(String bookPath) {
+        this.bookPath = bookPath;
+    }
+
+    public Integer getBookYearOfPublishing() {
+        return bookYearOfPublishing;
+    }
+
+    public void setBookYearOfPublishing(Integer bookYearOfPublishing) {
+        this.bookYearOfPublishing = bookYearOfPublishing;
+    }
+
+    public String getBookCreatedBy() {
+        return bookCreatedBy;
+    }
+
+    public void setBookCreatedBy(String bookCreatedBy) {
+        this.bookCreatedBy = bookCreatedBy;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -86,7 +166,19 @@ public class FavoriteBookDTO implements Serializable {
     @Override
     public String toString() {
         return "FavoriteBookDTO{" +
-            "id=" + getId() +
-            "}";
+            "id=" + id +
+            ", bookId=" + bookId +
+            ", profileId=" + profileId +
+            ", bookCoverPath='" + bookCoverPath + '\'' +
+            ", bookTitle='" + bookTitle + '\'' +
+            ", bookAuthorFirstName='" + bookAuthorFirstName + '\'' +
+            ", bookAuthorLastName='" + bookAuthorLastName + '\'' +
+            ", bookGenreName='" + bookGenreName + '\'' +
+            ", bookPages=" + bookPages +
+            ", bookDescription='" + bookDescription + '\'' +
+            ", bookPath='" + bookPath + '\'' +
+            ", bookYearOfPublishing=" + bookYearOfPublishing +
+            ", bookCreatedBy='" + bookCreatedBy + '\'' +
+            '}';
     }
 }

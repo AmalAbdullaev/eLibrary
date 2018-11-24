@@ -16,6 +16,12 @@ public interface ReadBookMapper extends EntityMapper<ReadBookDTO, ReadBook> {
     @Mapping(source = "book.authorFirstName", target = "bookAuthorFirstName")
     @Mapping(source = "book.authorLastName", target = "bookAuthorLastName")
     @Mapping(source = "book.coverPath", target = "bookCoverPath")
+    @Mapping(source = "book.genre.name", target = "bookGenreName")
+    @Mapping(source = "book.pages", target = "bookPages")
+    @Mapping(source = "book.description", target = "bookDescription")
+    @Mapping(source = "book.path", target = "bookPath")
+    @Mapping(source = "book.yearOfPublishing", target = "bookYearOfPublishing")
+    @Mapping(source = "book.createdBy", target = "bookCreatedBy")
     @Mapping(source = "profile.id", target = "profileId")
     ReadBookDTO toDto(ReadBook readBook);
 
