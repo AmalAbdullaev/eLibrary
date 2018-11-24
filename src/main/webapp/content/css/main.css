@@ -1687,11 +1687,6 @@ input:checked + label {
 header search area form
 ========================================================================== */
 
-.dropdown-menu {
-    width: 25%;
-    background-color: #fff;
-}
-
 form {
     width: 100%;
     display: inline-block;
@@ -1750,6 +1745,47 @@ button[type="search-submit"]:hover {
     border-radius: 5px;
     background-color: #fff;
     padding: 1%;
+    float: left;
+    padding: 15px;
+}
+
+.genre-all {
+    width: 100%;
+    background-color: #fff;
+    float: left;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.genre-list {
+    width: 100%;
+    float: left;
+    padding-bottom: 5px;
+}
+
+.genre-single {
+    width: 100%;
+    font-size: 150%;
+    border-radius: 5px;
+    padding: 15px;
+    float: left;
+}
+
+.genre-single:hover {
+    box-shadow: 0 0 2px 2px rgb(0, 0, 0, 0.2);
+}
+
+.genre-add {
+    margin-bottom: 15px;
+}
+
+.genre-btns {
+    width: 100%;
+}
+
+.genre-name {
+    width:100%;
+    float: left;
 }
 
 .registration-form {
