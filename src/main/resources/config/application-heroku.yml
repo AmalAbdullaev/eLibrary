@@ -45,3 +45,4 @@ jhipster:
     mail: # specific JHipster mail property, for standard properties see MailProperties
         from: eLibrary@localhost
         base-url: https://elibrary-app.herokuapp.com
+

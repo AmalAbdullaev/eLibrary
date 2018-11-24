@@ -19,10 +19,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -203,6 +201,29 @@ public class BookResource {
         BookDTO bookDTO = bookService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(bookDTO));
     }
+
+    @GetMapping("/books/downloadCover/{bookId}")
+    public HttpEntity<?> downloadCover(@PathVariable Long bookId) {
+        log.debug("REST request to get Book : {}", bookId);
+        File cover = bookService.getCover(bookId);
+
+        byte[] document;
+
+        try {
+            document = FileCopyUtils.copyToByteArray(cover);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new HttpEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(new MediaType("application", "octet-stream"));
+        header.set("Content-Disposition", "inline; filename=" + cover.getName());
+        header.setContentLength(document.length);
+
+        return new HttpEntity<>(document, header);
+    }
+
 
     /**
      * GET /books/:id/download : download the "id" book

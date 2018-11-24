@@ -62,7 +62,7 @@
                         <div class="profileDetailMyBook" >
                             <div class="homeRBookSingle">
                                 <!-- Обложка -->
-                                <div class="homeABookCover" ><img ng-src="{{book.coverPath}}" width="100%" style="border-radius:5px"></div>
+                                <div class="homeABookCover" ><img data-ng-src="/api/books/downloadCover/{{book.id}}"width="100%" style="border-radius:5px"></div>
                                 <!-- Инфа о книге -->
                                 <div class="homeABookInfo">
                                     <div class="homeRBookTitle">{{book.title}}</div>
@@ -85,7 +85,7 @@
                         <div class="profileDetailMyBook" >
                             <div class="homeRBookSingle">
                                 <!-- Обложка -->
-                                <div class="homeABookCover"><img ng-src="{{book.bookCoverPath}}" width="100%" height="100%" style="border-radius:5px"></div>
+                                <div class="homeABookCover"><img data-ng-src="/api/books/downloadCover/{{book.bookId}}" width="100%" height="100%" style="border-radius:5px"></div>
                                 <!-- Инфа о книге -->
                                 <div class="homeABookInfo">
                                     <div class="homeRBookTitle">{{book.bookTitle}}</div>

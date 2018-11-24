@@ -80,15 +80,17 @@
         <!-- Обложка книги -->
         <div class="bookDetailCover">
             <div class="bookCover">
-                <img ng-src="{{vm.book.coverPath}}" width="100%" height="100%">
+                <img data-ng-src="/api/books/downloadCover/{{vm.book.id}}" width="100%" height="100%" style="border-radius:5px">
             </div>
 
-            <button type="button" class="btn btn-primary" ng-click="download()" has-authority="ROLE_USER">
-                <span class="hidden-sm-down" data-translate="entity.action.download">Download</span>
+            <button type="button" class="btn btn-success" ng-click="download()" has-authority="ROLE_USER">
+                <span class="glyphicon glyphicon-download-alt"></span>
+                <span class="hidden-sm-down"> Загрузить</span>
             </button>
 
-            <button type="button" class="btn btn-primary" ng-click="read()" ng-show="vm.book.path.endsWith('.pdf')">
-                <span class="hidden-sm-down" data-translate="entity.action.read">Read</span>
+            <button type="button" class="btn btn-warning" ng-click="read()" ng-show="vm.book.path.endsWith('.pdf')">
+                <span class="glyphicon glyphicon-book"></span>
+                <span class="hidden-sm-down"> Читать</span>
             </button>
 
         </div>

@@ -27,7 +27,7 @@
                 }
             });
 
-            pdfjsLib.GlobalWorkerOptions.workerSrc = '/build/pdf.worker.js';
+            pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
             var unsubscribe = $rootScope.$on('eLibraryApp:bookUpdate', function (event, result) {
                 vm.book = result;
