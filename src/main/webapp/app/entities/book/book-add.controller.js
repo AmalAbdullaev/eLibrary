@@ -61,7 +61,7 @@
                     reverse: true
                 }
             ],
-            selected: {name: "По возрастанию", predicate: "title", reverse: false}
+            selected: {name: "По возрастанию", predicate: "title", reverse: true}
         };
 
         $scope.reloadAll = function () {
@@ -73,6 +73,11 @@
         function loadAll() {
             if (vm.busy) return;
             vm.busy = true;
+
+            if (vm.page === 0) {
+                vm.predicate = $scope.options.selected.predicate;
+                vm.reverse = $scope.options.selected.reverse;
+            }
 
             Book.query({
                 page: vm.page,

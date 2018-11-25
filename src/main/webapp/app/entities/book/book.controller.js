@@ -168,7 +168,7 @@
                         reverse: true
                     }
                 ],
-                selected: {name: "По возрастанию", predicate: "title", reverse: false}
+                selected: {name: "По возрастанию", predicate: "title", reverse: true}
             };
 
             $scope.reloadAll = function () {
@@ -180,6 +180,18 @@
             function loadAll() {
                 if (vm.busy) return;
                 vm.busy = true;
+
+                if (vm.page === 0) {
+                    vm.predicate = $scope.options.selected.predicate;
+                    vm.reverse = $scope.options.selected.reverse;
+
+                    $http.get('/api/genres').success(function (data) {
+                        vm.genres = data;
+                    });
+                    $http.get('/api/favorite-books/top').success(function (data) {
+                        vm.recommendedBooks = data;
+                    });
+                }
 
                 load();
 
@@ -200,15 +212,6 @@
                         'approved.equals':true
 
                     }, onSuccess, onError);
-
-                if (vm.page === 0) {
-                    $http.get('/api/genres').success(function (data) {
-                        vm.genres = data;
-                    });
-                    $http.get('/api/favorite-books/top').success(function (data) {
-                        vm.recommendedBooks = data;
-                    });
-                }
 
                 function sort() {
                     var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
