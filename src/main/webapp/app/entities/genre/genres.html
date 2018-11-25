@@ -1,4 +1,59 @@
-<div>
+<div class="container">
+    <h2>Жанры</h2>
+    <jhi-alert></jhi-alert>
+
+    <div class="homeRow col-md-8">
+        <!-- Добавление нового жанра -->
+        <div class="genre-add">
+            <button class="btn btn-primary" ui-sref="genre.new" >
+                <span class="glyphicon glyphicon-plus"></span>
+                <span>Добавить новый жанр</span>
+            </button>
+        </div>
+        
+        <!-- Все жанры -->
+        <div class="genre-all">
+            <!-- Список жанров -->
+            <div class="genre-list" ng-repeat="genre in vm.genres track by genre.id">
+                <!-- Один жанр -->
+                <div class="genre-single">
+                    <!-- Название жанра -->
+                    <div class="col-md-8">
+                        <div class="genre-name">{{genre.name}}</div>
+                    </div>
+                    <!-- Кнопки -->
+                    <div class="col-md-4">
+                        <div class="genre-btns">
+                            <!-- Удалить жанр -->
+                            <button type="submit" style="float:right"
+                                ui-sref="genre.delete({id:genre.id})"
+                                class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-trash"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                            <!-- Изменить жанр -->
+                            <button type="submit" style="float:right"
+                                ui-sref="genre.edit({id:genre.id})"
+                                class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <!-- Детали -->
+                            <button type="submit" style="float:right"
+                                ui-sref="genre-detail({id:genre.id})"
+                                class="btn btn-success btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div>
     <h2>Жанры</h2>
     <div class="container-fluid">
         <div class="row">
@@ -53,4 +108,4 @@
             </table>
         </div>
     </div>
-</div>
+</div> -->
