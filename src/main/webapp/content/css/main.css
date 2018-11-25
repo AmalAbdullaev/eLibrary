@@ -916,6 +916,7 @@ select[type="myBookLibSort"] {
 
 .libBook:hover {
     box-shadow: 0 0 2px 2px rgb(0, 0, 0, 0.1);
+    margin-bottom: 5%;
 }
 
 .libBookCover {
