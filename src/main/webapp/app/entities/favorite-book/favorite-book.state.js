@@ -28,8 +28,15 @@
                     $translatePartialLoader.addPart('favoriteBook');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
-                }]
-            }
+                }],
+                currentProfile: function (Principal, Profile) {
+                    return Principal.identity().then(function (user) {
+                        return Profile.getProfile({userId: user.id}, function (profile) {
+                            return profile;
+                        });
+                    })
+                }
+    }
         })
         .state('favorite-book-detail', {
             parent: 'favorite-book',

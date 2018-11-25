@@ -112,9 +112,10 @@
         <select type="myBookSort" ng-options="opt.name for opt in options.data track by opt.name"
                 ng-model="options.selected" ng-change="reloadAll()"></select>
 
-        <div class="bookSection">
+        <div class="bookSection" infinite-scroll-disabled="vm.busy || vm.page > vm.maxPage"
+             infinite-scroll="vm.loadAll()">
 
-            <div class="singleBook" ng-repeat="book in vm.books">
+            <div class="singleBook" ng-repeat="book in vm.books track by book.id">
                 <div class="singleBookCover">
                     <img data-ng-src="/api/books/downloadCover/{{book.id}}" width="100%" height="100%" style="border-radius:5px">
                 </div>
@@ -131,6 +132,3 @@
     </div>
     <!-- </div> -->
 </div>
-
-
-

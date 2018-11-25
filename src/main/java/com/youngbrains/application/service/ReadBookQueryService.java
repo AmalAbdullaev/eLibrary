@@ -10,6 +10,8 @@ import com.youngbrains.application.service.mapper.ReadBookMapper;
 import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,10 +34,11 @@ public class ReadBookQueryService extends QueryService<ReadBook> {
     }
 
     @Transactional(readOnly = true)
-    public List<ReadBookDTO> findByCriteria(ReadBookCriteria criteria) {
+    public Page<ReadBookDTO> findByCriteria(ReadBookCriteria criteria, Pageable page) {
         log.debug("find by criteria : {}", criteria);
         final Specifications<ReadBook> specification = createSpecification(criteria);
-        return readBookMapper.toDto(readBookRepository.findAll(specification));
+        final Page<ReadBook> result = readBookRepository.findAll(specification, page);
+        return result.map(readBookMapper::toDto);
     }
 
     private Specifications<ReadBook> createSpecification(ReadBookCriteria criteria) {

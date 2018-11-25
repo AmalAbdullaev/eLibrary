@@ -8,13 +8,17 @@ import com.youngbrains.application.service.dto.FavoriteBookCriteria;
 import com.youngbrains.application.web.rest.errors.BadRequestAlertException;
 import com.youngbrains.application.web.rest.util.HeaderUtil;
 import com.youngbrains.application.service.dto.FavoriteBookDTO;
+import com.youngbrains.application.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Pageable;
 import java.math.BigInteger;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -91,9 +95,11 @@ public class FavoriteBookResource {
      */
     @GetMapping("/favorite-books")
     @Timed
-    public List<FavoriteBookDTO> getAllFavoriteBooks(FavoriteBookCriteria criteria) {
+    public ResponseEntity<List<FavoriteBookDTO>> getAllFavoriteBooks(FavoriteBookCriteria criteria, Pageable pageable) {
         log.debug("REST request to get all FavoriteBooks");
-        return favoriteBookQueryService.findByCriteria(criteria);
+        Page<FavoriteBookDTO> page = favoriteBookQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/favorite-books");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     @GetMapping("/favorite-books/top")

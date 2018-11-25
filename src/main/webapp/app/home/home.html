@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-9 col-sm-12">
+        <div class="homeRow col-md-9 col-sm-12">
             
             <!-- Баннер с переходом на библиотеку -->
             <a ui-sref="book" ng-click="vm.collapseNavbar()">
@@ -38,7 +38,7 @@
         </div>
 
         <!-- БЛОК Топ 10 пользователей -->
-        <div class="col-md-3 col-sm-12">
+        <div class="homeRow col-md-3 col-sm-12">
             <div class="topTenUsers">
                 <div class="topTenTitle">Топ 10 Пользователей<br> по загрузке книг</div>
                 <div class="topUsers" ng-repeat="profile in vm.topProfiles track by profile.id">
@@ -50,7 +50,7 @@
 
     <!-- БЛОК Новое поступление книг -->
     <div class="row">
-        <div class="col-md-12 col-sm-12">
+        <div class="homeRow col-md-12 col-sm-12">
             <h3>Новое поступление</h3>
             <div class="newArrival">
                 <div class="row">

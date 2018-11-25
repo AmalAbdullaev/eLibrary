@@ -18,7 +18,7 @@
             vm.loadPage = loadPage;
             vm.sendFeedback = sendFeedback;
             vm.loadAll = loadAll;
-            vm.itemsPerPage = 8;
+            vm.itemsPerPage = 16;
             vm.page = 0;
             vm.maxPage = Number.POSITIVE_INFINITY;
             vm.busy = false;
@@ -168,10 +168,8 @@
                         reverse: true
                     }
                 ],
-                selected: {name: "По возрастанию", predicate: "title", reverse: false}
+                selected: {name: "По возрастанию", predicate: "title", reverse: true}
             };
-
-            loadAll();
 
             $scope.reloadAll = function () {
                 vm.predicate = $scope.options.selected.predicate;
@@ -182,6 +180,18 @@
             function loadAll() {
                 if (vm.busy) return;
                 vm.busy = true;
+
+                if (vm.page === 0) {
+                    vm.predicate = $scope.options.selected.predicate;
+                    vm.reverse = $scope.options.selected.reverse;
+
+                    $http.get('/api/genres').success(function (data) {
+                        vm.genres = data;
+                    });
+                    $http.get('/api/favorite-books/top').success(function (data) {
+                        vm.recommendedBooks = data;
+                    });
+                }
 
                 load();
 
@@ -203,15 +213,6 @@
 
                     }, onSuccess, onError);
 
-                if (vm.page === 0) {
-                    $http.get('/api/genres').success(function (data) {
-                        vm.genres = data;
-                    });
-                    $http.get('/api/favorite-books/top').success(function (data) {
-                        vm.recommendedBooks = data;
-                    });
-                }
-
                 function sort() {
                     var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
                     if (vm.predicate !== 'id') {
@@ -224,9 +225,8 @@
                     vm.links = ParseLinks.parse(headers('link'));
                     vm.totalItems = headers('X-Total-Count');
                     vm.maxPage = vm.totalItems / vm.itemsPerPage;
-                    for (var i = 0; i < data.length; i++) {
+                    for (var i = 0; i < data.length; i++)
                         vm.books.push(data[i]);
-                    }
                     vm.page++;
                     vm.busy = false;
                 }
