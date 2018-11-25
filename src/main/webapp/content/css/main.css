@@ -2104,3 +2104,16 @@ ui bootstrap tweaks
 
 
 /* jhipster-needle-css-add-main JHipster will add new css style */
+
+/* Юлий */
+.background-img{
+
+    background:url('/content/images/logo-jhipster.png');
+    background-repeat: no-repeat;
+    width:100%;
+    height:100%; 
+    background-position: bottom right; 
+    position:absolute;
+    right:0px;
+    bottom: 0px 
+}
