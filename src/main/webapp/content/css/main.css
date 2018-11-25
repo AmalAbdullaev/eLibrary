@@ -898,7 +898,7 @@ select[type="myBookLibSort"] {
 }
 
 .libraryAllBooks {
-    width: 100%;
+    width: 98%;
     height: 100%;
     overflow: auto;
     border-radius: 5px;
@@ -911,6 +911,7 @@ select[type="myBookLibSort"] {
     height:100%;
     margin-left: 1%;
     border-radius: 5px;
+    margin-top: 5%;
     margin-bottom: 5%;
     background-color: rgb(253, 253, 253);
 }
