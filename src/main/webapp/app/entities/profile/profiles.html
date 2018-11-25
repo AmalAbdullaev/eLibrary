@@ -2,14 +2,14 @@
     <h2>
         Пользователи
     </h2>
-    <jhi-alert></jhi-alert>
     <div class="userSearchList">
-        <input class="form-control" ng-keyup="vm.keyPress($event)" ng-model = "vm.searchText" ng-change="vm.search()" placeholder="Для поиска пользователя: введите логин или email">
-
+        <!--ng-keyup="vm.keyPress($event)"-->
+        <input class="form-control" ng-model="vm.searchText" ng-change="vm.onChange()"
+               placeholder="Для поиска пользователя: введите логин или email">
     </div>
     <div>
-        <div class="userManagementList" infinite-scroll-disabled="vm.busy || vm.page > vm.maxPage"
-             infinite-scroll="vm.loadAll()">
+        <div class="userManagementList" infinite-scroll-disabled="vm.busy || vm.page > vm.maxPage
+        || vm.pageInSearch > vm.maxPageInSearch" infinite-scroll="vm.loadAll()">
             <div class="userManagementViewUser" ng-repeat="profile in vm.profiles track by profile.id">
                 <div class="userManagementPhoto"><div class="userManagementAvatar"></div></div>
 
@@ -30,20 +30,20 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="AllBookCounter" has-authority="ROLE_ADMIN">
             <img class="AllImgCenter" src="/content/images/ico/AllBookCounter.png" width="70%">
-            <div class="counterNum">{{vm.books.length}}</div>
+            <div class="counterNum">{{vm.bookCount}}</div>
             <div class="counterName">Книг</div>
         </div>
 
         <div class="AllUserCounter" has-authority="ROLE_ADMIN">
             <img class="AllImgCenter" src="/content/images/ico/AllUserCounter.png" width="70%">
-            <div class="counterNum">{{vm.profiles.length}}</div>
+            <div class="counterNum">{{vm.totalItems}}</div>
             <div class="counterName">Пользователей</div>
         </div>
     </div>
-    
+
 </div>
 
 
