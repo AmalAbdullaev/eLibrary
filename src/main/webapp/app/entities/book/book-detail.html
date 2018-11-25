@@ -1,80 +1,116 @@
-<p>
-    <button type="button" class="btn btn-primary" ng-click="firstPage()" ng-show="isReading">
-        <span class="hidden-sm-down" data-translate="entity.action.firstPage">First page</span>
-    </button>
+<div class=container>
+    <p>
+        <!-- Вернутся к деталям книги -->
+        <button type="button" class="btn btn-primary" ng-click="isReading = false" ng-show="isReading">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="hidden-sm-down">Назад</span>
+        </button>
+                        
+        <!-- Уменьшить масштаб -->
+        <button type="button" class="btn btn-primary" ng-click="zoomOut()" ng-show="isReading">
+            <span class="hidden-sm-down"></span>
+            <span class="glyphicon glyphicon-minus"></span>
+        </button>
 
-    <button type="button" class="btn btn-primary" ng-click="prevPage()" ng-show="isReading">
-        <span class="hidden-sm-down" data-translate="entity.action.prevPage">Previous page</span>
-    </button>
+        <!-- Масштаб -->
+        <span class="hidden-sm-down" ng-show="isReading">Масштаб {{(vm.pdfBook.scale * 100.0).toFixed(0)}}%</span>
 
-    <span class="hidden-sm-down" ng-show="isReading">
-        Страница <input id="page_top" type="text" style="width: 5%; display: inline; text-align: center"
-                        ng-keypress="changePage($event)">
-        <span id="pages_top"> / </span>
-    </span>
+        <!-- Увеличить масштаб -->
+        <button type="button" class="btn btn-primary" ng-click="zoomIn()" ng-show="isReading">
+            <span class="hidden-sm-down"></span>
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
+        
+        <!-- Первая страница -->
+        <button type="button" class="btn btn-danger" ng-click="firstPage()" ng-show="isReading">
+            <span class="hidden-sm-down"></span>
+            <span class="glyphicon glyphicon-step-backward"></span>
+        </button>
 
-    <button type="button" class="btn btn-primary" ng-click="zoomOut()" ng-show="isReading">
-        <span class="hidden-sm-down">-</span>
-    </button>
+        <!-- Страница влево -->
+        <button type="button" class="btn btn-warning" ng-click="prevPage()" ng-show="isReading">
+            <span class="hidden-sm-down"></span>
+            <span class="glyphicon glyphicon-arrow-left"></span>
+        </button>
 
-    <span class="hidden-sm-down" ng-show="isReading">Масштаб {{(vm.pdfBook.scale * 100.0).toFixed(0)}}%</span>
+        <!-- Страница -->
+        <span class="hidden-sm-down" ng-show="isReading">
+            <input id="page_top" type="text" style="width: 3%; display: inline; text-align: center"
+                    ng-keypress="changePage($event)">
+            <span id="pages_top"> / </span>
+        </span>
 
-    <button type="button" class="btn btn-primary" ng-click="zoomIn()" ng-show="isReading">
-        <span class="hidden-sm-down">+</span>
-    </button>
+        <!-- Страница вправо -->
+        <button type="button" class="btn btn-warning" ng-click="nextPage()" ng-show="isReading">
+            <span class="hidden-sm-down"></span>
+            <span class="glyphicon glyphicon-arrow-right"></span>
+        </button>
 
-    <button type="button" class="btn btn-primary" ng-click="nextPage()" ng-show="isReading">
-        <span class="hidden-sm-down" data-translate="entity.action.nextPage">Next page</span>
-    </button>
+        <!-- Последняя страница -->
+        <button type="button" class="btn btn-danger" ng-click="lastPage()" ng-show="isReading">
+            <span class="hidden-sm-down"></span>
+            <span class="glyphicon glyphicon-step-forward"></span>
+        </button>
+    </p>
 
-    <button type="button" class="btn btn-primary" ng-click="lastPage()" ng-show="isReading">
-        <span class="hidden-sm-down" data-translate="entity.action.lastPage">Last page</span>
-    </button>
+    <!-- Читаемая книга -->
+    <canvas id="book-canvas" ng-show="isReading" style="border-radius:5px"></canvas>
 
-    <button type="button" class="btn btn-primary" ng-click="isReading = false" ng-show="isReading">
-        <span class="hidden-sm-down" data-translate="entity.action.back">Back</span>
-    </button>
-</p>
+    <p>
+        <!-- Вернутся к деталям книги -->
+        <button type="button" class="btn btn-primary" ng-click="isReading = false" ng-show="isReading">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="hidden-sm-down">Назад</span>
+        </button>
 
-<canvas id="book-canvas" ng-show="isReading"></canvas>
+        <!-- Уменьшить масштаб -->
+        <button type="button" class="btn btn-primary" ng-click="zoomOut()" ng-show="isReading">
+            <span class="hidden-sm-down"></span>
+            <span class="glyphicon glyphicon-minus"></span>
+        </button>
 
-<p>
-    <button type="button" class="btn btn-primary" ng-click="firstPage()" ng-show="isReading">
-        <span class="hidden-sm-down" data-translate="entity.action.firstPage">First page</span>
-    </button>
+        <!-- Масштаб -->
+        <span class="hidden-sm-down" ng-show="isReading">Масштаб {{(vm.pdfBook.scale * 100.0).toFixed(0)}}%</span>
 
-    <button type="button" class="btn btn-primary" ng-click="prevPage()" ng-show="isReading">
-        <span class="hidden-sm-down" data-translate="entity.action.prevPage">Previous page</span>
-    </button>
+        <!-- Увеличить масштаб -->
+        <button type="button" class="btn btn-primary" ng-click="zoomIn()" ng-show="isReading">
+            <span class="hidden-sm-down"></span>
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
+        
+        <!-- Первая страница -->
+        <button type="button" class="btn btn-danger" ng-click="firstPage()" ng-show="isReading">
+            <span class="hidden-sm-down"></span>
+            <span class="glyphicon glyphicon-step-backward"></span>
+        </button>
 
-    <span class="hidden-sm-down" ng-show="isReading">
-        Страница <input id="page_bot" type="text" style="width: 5%; display: inline; text-align: center"
-                        ng-model="vm.pdfBook.pageNum">
-        <span id="pages_bot"> / {{vm.pdfBook.pdfDoc.numPages}}</span>
-    </span>
+        <!-- Страница влево -->
+        <button type="button" class="btn btn-warning" ng-click="prevPage()" ng-show="isReading">
+            <span class="hidden-sm-down"></span>
+            <span class="glyphicon glyphicon-arrow-left"></span>
+        </button>
 
-    <button type="button" class="btn btn-primary" ng-click="zoomOut()" ng-show="isReading">
-        <span class="hidden-sm-down">-</span>
-    </button>
+        <!-- Страница -->
+        <span class="hidden-sm-down" ng-show="isReading">
+            <input id="page_bot" type="text" style="width: 3%; display: inline; text-align: center"
+                ng-model="vm.pdfBook.pageNum">
+            <span id="pages_bot"> / {{vm.pdfBook.pdfDoc.numPages}}</span>
+        </span>
 
-    <span class="hidden-sm-down" ng-show="isReading">Масштаб {{(vm.pdfBook.scale * 100.0).toFixed(0)}}%</span>
+        <!-- Страница вправо -->
+        <button type="button" class="btn btn-warning" ng-click="nextPage()" ng-show="isReading">
+            <span class="hidden-sm-down"></span>
+            <span class="glyphicon glyphicon-arrow-right"></span>
+        </button>
 
-    <button type="button" class="btn btn-primary" ng-click="zoomIn()" ng-show="isReading">
-        <span class="hidden-sm-down">+</span>
-    </button>
+        <!-- Последняя страница -->
+        <button type="button" class="btn btn-danger" ng-click="lastPage()" ng-show="isReading">
+            <span class="hidden-sm-down"></span>
+            <span class="glyphicon glyphicon-step-forward"></span>
+        </button>
+    </p>
+</div>
 
-    <button type="button" class="btn btn-primary" ng-click="nextPage()" ng-show="isReading">
-        <span class="hidden-sm-down" data-translate="entity.action.nextPage">Next page</span>
-    </button>
-
-    <button type="button" class="btn btn-primary" ng-click="lastPage()" ng-show="isReading">
-        <span class="hidden-sm-down" data-translate="entity.action.lastPage">Last page</span>
-    </button>
-
-    <button type="button" class="btn btn-primary" ng-click="isReading = false" ng-show="isReading">
-        <span class="hidden-sm-down" data-translate="entity.action.back">Back</span>
-    </button>
-</p>
 <div class="container" ng-hide="isReading">
     <div>
         <!-- Обложка книги -->
@@ -88,11 +124,10 @@
                 <span class="hidden-sm-down"> Загрузить</span>
             </button>
 
-            <button type="button" class="btn btn-warning" ng-click="read()" ng-show="vm.book.path.endsWith('.pdf')">
+            <button type="button" class="btn btn-danger" ng-click="read()" ng-show="vm.book.path.endsWith('.pdf')">
                 <span class="glyphicon glyphicon-book"></span>
                 <span class="hidden-sm-down"> Читать</span>
             </button>
-
         </div>
 
         <!-- Название и автор книги -->
@@ -155,58 +190,63 @@
                     <span>{{vm.book.description}}</span>
                 </div>
             </div>
-        </div>
 
-        <!-- Админ: дополнительная информация -->
-        <div class="bookDetailAdmin" has-authority="ROLE_ADMIN">
-            <div class="bookDetailTextBreakAll">
-                <span>
-                    <b>ID Книги:</b>
-                    {{vm.book.id}}
-                </span>
+            <!-- Админ: дополнительная информация -->
+            <div class="bookDetailAdmin" has-authority="ROLE_ADMIN">
+                <div class="bookDetailInfoText">
+                    <span>
+                        <b>ID Книги:</b>
+                        {{vm.book.id}}
+                    </span>
+                </div>
+                <div class="bookDetailInfoText">
+                    <span>
+                        <b>Жанр:</b>
+                        {{vm.book.genreName}}
+                    </span>
+                </div>
+                <div class="bookDetailInfoText">
+                    <span>
+                        <b>Одобрена:</b>
+                        {{vm.book.approved}}
+                    </span>
+                </div>
+                <div class="bookDetailInfoText">
+                    <span>
+                        <b>Добавил:</b>
+                        {{vm.book.createdBy}}
+                    </span>
+                </div>
+    
+                <div class="bookDetailInfoText">
+                    <span>
+                        <b>Дата добавления:</b>
+                        {{vm.book.createdDate | date:'medium'}}
+                    </span>
+                </div>
+    
+                <div class="bookDetailInfoText">
+                    <span>
+                        <b>Изменения внес:</b>
+                        {{vm.book.lastModifiedBy}}
+                    </span>
+                </div>
+    
+                <div class="bookDetailInfoText">
+                    <span>
+                        <b>Дата изменения:</b>
+                        {{vm.book.lastModifiedDate | date:'medium'}}
+                    </span>
+                </div>
+    
+                <div class="bookDetailInfoText">
+                    <span>
+                        <b>Владелец:</b>
+                        {{vm.book.profileId}}
+                    </span>
+                </div>
             </div>
-            <div class="bookDetailTextBreakAll">
-                <span>
-                    <b>Жанр:</b>
-                    {{vm.book.genreName}}
-                </span>
-            </div>
-            <div class="bookDetailTextBreakAll">
-                <span>
-                    <b>Одобрена:</b>
-                    {{vm.book.approved}}
-                </span>
-            </div>
-            <div class="bookDetailTextBreakAll">
-                <span>
-                    <b>Добавил:</b>
-                    {{vm.book.createdBy}}
-                </span>
-            </div>
-            <div class="bookDetailTextBreakAll">
-                <span>
-                    <b>Дата добавления:</b>
-                    {{vm.book.createdDate | date:'medium'}}
-                </span>
-            </div>
-            <div class="bookDetailTextBreakAll">
-                <span>
-                    <b>Изменения внес:</b>
-                    {{vm.book.lastModifiedBy}}
-                </span>
-            </div>
-            <div class="bookDetailTextBreakAll">
-                <span>
-                    <b>Дата изменения:</b>
-                    {{vm.book.lastModifiedDate | date:'medium'}}
-                </span>
-            </div>
-            <div class="bookDetailTextBreakAll">
-                <span>
-                    <b>Владелец:</b>
-                    {{vm.book.profileId}}
-                </span>
-            </div>
-        </div>
+
+        </div>  
     </div>
 </div>
