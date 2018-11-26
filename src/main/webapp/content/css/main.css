@@ -844,7 +844,6 @@ h3 {
     border-radius: 5px;
     padding-left: 1%;
     padding-bottom: 1%; 
-
     overflow: hidden;
     overflow-x: scroll;
     white-space:nowrap;
@@ -997,7 +996,7 @@ select[type="myBookLibSort"] {
     float: left;
     margin-bottom: 2%;
     color: #000;
-    font-size: 100%;
+    font-size: 115%;
     font-weight: bold;
     width: 100%;
     white-space: nowrap;
@@ -1875,6 +1874,42 @@ button[type="search-submit"]:hover {
 .help-about-us-logo:hover {
     background-image: url(/content/images/ico/aboutUsHover.png);
 }
+
+/* ==========================================================================
+ScrollBar
+========================================================================== */
+
+::-webkit-scrollbar-button {
+    background-image:url('');
+    background-repeat:no-repeat;
+    width:0px;
+    height:0px
+    }
+    
+    ::-webkit-scrollbar-track {
+    background-color:#f3f3f3
+    }
+    
+    ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    background-color:#fdd4b8;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover{
+    background-color:#ffbe92;
+    }
+    
+    ::-webkit-resizer{
+    background-image:url('');
+    background-repeat:no-repeat;
+    width:2px;
+    height:0px
+    }
+    
+    ::-webkit-scrollbar{
+    width: 10px;
+    }
 
 /* ==========================================================================
 Hide ng-cloak on page load, https://docs.angularjs.org/api/ng/directive/ngCloak

@@ -19,8 +19,14 @@
 
         <div class="col-md-1">
             <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()" ng-click="vm.getAccount()">
+                <a href="" ng-click="vm.login()" id="login" ui-sref-active="active" ng-switch-when="false">
+                    <img src="/content/images/ico/auth.png" style="float:right">
+                </a>
+            </div>
+
+            <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()" ng-click="vm.getAccount()">
                 <!-- Иконка аккаунта пользователя -->
-                <div uib-dropdown class="dropdown pointer">
+                <div uib-dropdown class="dropdown pointer"  has-authority="ROLE_USER">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu" >
                         <img src="/content/images/ico/profile.png">
                     </a>
