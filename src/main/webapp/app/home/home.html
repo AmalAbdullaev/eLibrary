@@ -9,9 +9,9 @@
 
             <!-- БЛОК рекомендации -->
             <div class="homeRecommendedBooks">
-                <h3>Рекомендации</h3>
+                <h3>Популярное</h3>
                 <div class="homeRow">
-                    <div class="homeCol col-md-4" ng-repeat="book in vm.recommendedBooks | limitTo:3 track by book.id">
+                    <div class="homeCol col-md-4" ng-repeat="book in vm.popularBooks | limitTo:3 track by book.id">
                         <div class="homeRBook">
                             <!-- Рекомендуемая книга 1 -->
                             <div class="homeRBookSingle">
@@ -76,13 +76,11 @@
                             </div>
                         </div>   
                     </div>
-                </div>
+                </div>  
             </div>
         </div>
     </div>  
-    
 </div>
- 
 
 
  <!--<div ng-cloak>

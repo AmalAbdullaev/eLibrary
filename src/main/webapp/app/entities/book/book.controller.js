@@ -13,7 +13,7 @@
 
             vm.books = [];
             vm.genres = [];
-            vm.recommendedBooks = [];
+            vm.popularBooks = [];
             vm.currentGenre = null;
             vm.loadPage = loadPage;
             vm.sendFeedback = sendFeedback;
@@ -189,7 +189,7 @@
                         vm.genres = data;
                     });
                     $http.get('/api/favorite-books/top').success(function (data) {
-                        vm.recommendedBooks = data;
+                        vm.popularBooks = data;
                     });
                 }
 

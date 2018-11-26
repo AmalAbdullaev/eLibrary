@@ -5,29 +5,27 @@
         .module('eLibraryApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$http', '$scope', 'Principal', 'LoginService', '$state','Profile','ReadBook', 'FavoriteBook'];
+    HomeController.$inject = ['$http', '$scope', 'Principal', 'LoginService', '$state','Profile','ReadBook', 'FavoriteBook','$timeout'];
 
-    function HomeController($http, $scope, Principal, LoginService, $state,Profile,ReadBook, FavoriteBook) {
+    function HomeController($http, $scope, Principal, LoginService, $state,Profile,ReadBook, FavoriteBook,$timeout) {
         var vm = this;
 
         vm.newBooks = [];
-        vm.recommendedBooks = [];
+        vm.popularBooks = [];
         vm.topProfiles = [];
         vm.account = null;
         vm.isAuthenticated = null;
         vm.login = LoginService.open;
         vm.register = register;
         $scope.$on('authenticationSuccess', function () {
+            $state.reload();
             getAccount();
         });
 
-
-
+        
         vm.favoriteBook = null;
         vm.readBook = null;
-
-         vm.user = null;
-
+        vm.user = null;
 
 
         $scope.isRead = function(bookId){
@@ -46,32 +44,34 @@
             return bool;
         }
 
+
+        
         function load(){
             
-                Principal.identity().then(function (user) {
+            Principal.identity().then(function (user) {
 
-                    if(user===null){
-                        console.log('user is  unauthorized');
-                        return;
-                    }
-                    Profile.getProfile({userId: user.id},onSuccess);
+                if(user===null){
+                    console.log('user is  unauthorized');
+                    return;
+                }
+                Profile.getProfile({userId: user.id},onSuccess);
+                
+                function onSuccess(result){
+                    vm.profile = result;
                     
+                    FavoriteBook.query({'profileId.equals': vm.profile.id},onSuccess);
                     function onSuccess(result){
-                        vm.profile = result;
-                        
-                        FavoriteBook.query({'profileId.equals': vm.profile.id},onSuccess);
-                        function onSuccess(result){
-                            vm.favoriteBook = result;
-                        }
+                        vm.favoriteBook = result;
+                    }
 
-                                    
-                        ReadBook.query({'profileId.equals': vm.profile.id},onReadSuccess);
-                        function onReadSuccess(result){
-                            vm.readBook = result;
-                        }
+                                
+                    ReadBook.query({'profileId.equals': vm.profile.id},onReadSuccess);
+                    function onReadSuccess(result){
+                        vm.readBook = result;
+                    }
 
-                    }                
-                })
+                }                
+            })
         };
 
         $scope.isFavorite = function(bookId){
@@ -116,7 +116,7 @@
 
         function loadAll() {
             $http.get('/api/favorite-books/top').success(function (data) {
-                vm.recommendedBooks = data;
+                vm.popularBooks = data;
             });
             var oneWeekAgo = new Date();
             oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
