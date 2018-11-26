@@ -11,7 +11,7 @@
         var vm = this;
 
         vm.newBooks = [];
-        vm.recommendedBooks = [];
+        vm.popularBooks = [];
         vm.topProfiles = [];
         vm.account = null;
         vm.isAuthenticated = null;
@@ -116,7 +116,7 @@
 
         function loadAll() {
             $http.get('/api/favorite-books/top').success(function (data) {
-                vm.recommendedBooks = data;
+                vm.popularBooks = data;
             });
             var oneWeekAgo = new Date();
             oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
