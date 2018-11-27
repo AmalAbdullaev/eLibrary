@@ -1,6 +1,6 @@
 <div class="container">
     <!-- <div class="row"> -->
-    <h2>Предложить книгу</h2>
+    <h2><b>Предложить книгу</b></h2>
     <div class="addBook">
         <div uib-alert ng-show="isAlertVisible">{{alert.message}}</div>
         <div uib-alert ng-show="!vm.book.authorFirstName || !vm.book.authorLastName || !vm.book.title ||
@@ -82,7 +82,7 @@
             <div class="addWaitBook">
 
                 <div class="waitBooksTitle">
-                    <h3>Ожидают проверки</h3>
+                    <h3><b>Ожидают проверки</b></h3>
                 </div>
 
                 <div class="waitBooksScroll">
@@ -106,7 +106,7 @@
     <!-- Мои книги -->
     <div class="myBooks">
         <div class="myBooksTitle">
-            <h3>Мои книги</h3>
+            <h3><b>Мои книги</b></h3>
         </div>
 
         <select type="myBookSort" ng-options="opt.name for opt in options.data track by opt.name"

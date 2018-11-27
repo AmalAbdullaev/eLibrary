@@ -23,7 +23,7 @@
                     <div class="bookTitle">{{book.title}}</div>
                     <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                     <div class="bookRButtons" >
-                        <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
+                        <a ui-sref="book-detail({id:book.id})"><button class="btnLibRBook">Читать</button></a>
                         <button has-authority="ROLE_USER"  ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [isFavorite(book.id) ] " ng-click="getFavorite(book.id)"></button>
                     </div>
                 </div>
