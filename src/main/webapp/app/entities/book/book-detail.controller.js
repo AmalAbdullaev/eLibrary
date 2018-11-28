@@ -44,7 +44,7 @@
                 pageNum: 1,
                 pageRendering: false,
                 pageNumPending: null,
-                scale: 1
+                scale: 2.5,
             };
 
             function renderPage(num) {
@@ -128,9 +128,6 @@
                     markAsRead();
                 queueRenderPage(vm.pdfBook.pageNum);
             };
-
-
-
 
             $scope.zoomIn = function () {
                 vm.pdfBook.scale += vm.zoomDelta;

@@ -1,114 +1,136 @@
-<div class=container>
-    <p>
-        <!-- Вернутся к деталям книги -->
-        <button type="button" class="btn btn-primary" ng-click="isReading = false" ng-show="isReading">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-            <span class="hidden-sm-down">Назад</span>
-        </button>
-                        
-        <!-- Уменьшить масштаб -->
-        <button type="button" class="btn btn-primary" ng-click="zoomOut()" ng-show="isReading">
-            <span class="hidden-sm-down"></span>
-            <span class="glyphicon glyphicon-minus"></span>
-        </button>
-
-        <!-- Масштаб -->
-        <span class="hidden-sm-down" ng-show="isReading">Масштаб {{(vm.pdfBook.scale * 100.0).toFixed(0)}}%</span>
-
-        <!-- Увеличить масштаб -->
-        <button type="button" class="btn btn-primary" ng-click="zoomIn()" ng-show="isReading">
-            <span class="hidden-sm-down"></span>
-            <span class="glyphicon glyphicon-plus"></span>
-        </button>
+<div class="container">
+    <div class="col-md-12" ng-show="isReading">
         
-        <!-- Первая страница -->
-        <button type="button" class="btn btn-danger" ng-click="firstPage()" ng-show="isReading">
-            <span class="hidden-sm-down"></span>
-            <span class="glyphicon glyphicon-step-backward"></span>
-        </button>
-
-        <!-- Страница влево -->
-        <button type="button" class="btn btn-warning" ng-click="prevPage()" ng-show="isReading">
-            <span class="hidden-sm-down"></span>
-            <span class="glyphicon glyphicon-arrow-left"></span>
-        </button>
-
-        <!-- Страница -->
-        <span class="hidden-sm-down" ng-show="isReading">
-            <input id="page_top" type="text" style="width: 3%; display: inline; text-align: center"
-                    ng-keypress="changePage($event)">
-            <span id="pages_top"> / </span>
-        </span>
-
-        <!-- Страница вправо -->
-        <button type="button" class="btn btn-warning" ng-click="nextPage()" ng-show="isReading">
-            <span class="hidden-sm-down"></span>
-            <span class="glyphicon glyphicon-arrow-right"></span>
-        </button>
-
-        <!-- Последняя страница -->
-        <button type="button" class="btn btn-danger" ng-click="lastPage()" ng-show="isReading">
-            <span class="hidden-sm-down"></span>
-            <span class="glyphicon glyphicon-step-forward"></span>
-        </button>
-    </p>
-
-    <!-- Читаемая книга -->
-    <canvas id="book-canvas" ng-show="isReading" style="border-radius:5px"></canvas>
-
-    <p>
-        <!-- Вернутся к деталям книги -->
-        <button type="button" class="btn btn-primary" ng-click="isReading = false" ng-show="isReading">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-            <span class="hidden-sm-down">Назад</span>
-        </button>
-
-        <!-- Уменьшить масштаб -->
-        <button type="button" class="btn btn-primary" ng-click="zoomOut()" ng-show="isReading">
-            <span class="hidden-sm-down"></span>
-            <span class="glyphicon glyphicon-minus"></span>
-        </button>
-
-        <!-- Масштаб -->
-        <span class="hidden-sm-down" ng-show="isReading">Масштаб {{(vm.pdfBook.scale * 100.0).toFixed(0)}}%</span>
-
-        <!-- Увеличить масштаб -->
-        <button type="button" class="btn btn-primary" ng-click="zoomIn()" ng-show="isReading">
-            <span class="hidden-sm-down"></span>
-            <span class="glyphicon glyphicon-plus"></span>
-        </button>
+        <div class="col-md-2"></div>
         
-        <!-- Первая страница -->
-        <button type="button" class="btn btn-danger" ng-click="firstPage()" ng-show="isReading">
-            <span class="hidden-sm-down"></span>
-            <span class="glyphicon glyphicon-step-backward"></span>
-        </button>
+        <!-- Читаемая книга -->
+        <div class="col-md-8">
+            <div class="pdff">
+                <!-- Вернутся к деталям книги -->
+                <button type="button" class="btn btn-primary" ng-click="isReading = false" ng-show="isReading">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="hidden-sm-down">Назад</span>
+                </button>
+                                
+                <!-- Уменьшить масштаб -->
+                <!-- <button type="button" class="btn btn-primary" ng-click="zoomOut()" ng-show="isReading">
+                    <span class="hidden-sm-down"></span>
+                    <span class="glyphicon glyphicon-minus"></span>
+                </button> -->
+        
+                <!-- Масштаб -->
+                <!-- <span class="hidden-sm-down" ng-show="isReading">Масштаб {{(vm.pdfBook.scale * 100.0).toFixed(0)}}%</span> -->
+        
+                <!-- Увеличить масштаб -->
+                <!-- <button type="button" class="btn btn-primary" ng-click="zoomIn()" ng-show="isReading">
+                    <span class="hidden-sm-down"></span>
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button> -->
+                
+                <!-- Первая страница -->
+                <button type="button" class="btn btn-danger" ng-click="firstPage()" ng-show="isReading">
+                    <span class="hidden-sm-down"></span>
+                    <span class="glyphicon glyphicon-step-backward"></span>
+                </button>
+        
+                <!-- Страница влево -->
+                <button type="button" class="btn btn-warning" ng-click="prevPage()" ng-show="isReading">
+                    <span class="hidden-sm-down"></span>
+                    <span class="glyphicon glyphicon-arrow-left"></span>
+                </button>
+        
+                <!-- Страница -->
+                <span class="hidden-sm-down" ng-show="isReading">
+                    <input id="page_top" type="text" style="width: 3%; display: inline; text-align: center"
+                            ng-keypress="changePage($event)">
+                    <span id="pages_top"> / </span>
+                </span>
+        
+                <!-- Страница вправо -->
+                <button type="button" class="btn btn-warning" ng-click="nextPage()" ng-show="isReading">
+                    <span class="hidden-sm-down"></span>
+                    <span class="glyphicon glyphicon-arrow-right"></span>
+                </button>
+        
+                <!-- Последняя страница -->
+                <button type="button" class="btn btn-danger" ng-click="lastPage()" ng-show="isReading">
+                    <span class="hidden-sm-down"></span>
+                    <span class="glyphicon glyphicon-step-forward"></span>
+                </button>
 
-        <!-- Страница влево -->
-        <button type="button" class="btn btn-warning" ng-click="prevPage()" ng-show="isReading">
-            <span class="hidden-sm-down"></span>
-            <span class="glyphicon glyphicon-arrow-left"></span>
-        </button>
+                <!-- Скачать -->
+                <button type="button" class="btn btn-primary" ng-show="isReading" ng-click="download()">
+                    <span class="glyphicon glyphicon-download-alt"></span>
+                    <span class="hidden-sm-down">Скачать</span>
+                </button>
+            </div>
 
-        <!-- Страница -->
-        <span class="hidden-sm-down" ng-show="isReading">
-            <input id="page_bot" type="text" style="width: 3%; display: inline; text-align: center"
-                ng-model="vm.pdfBook.pageNum">
-            <span id="pages_bot"> / {{vm.pdfBook.pdfDoc.numPages}}</span>
-        </span>
+            <canvas class="pdf" id="book-canvas" ng-show="isReading"></canvas>
 
-        <!-- Страница вправо -->
-        <button type="button" class="btn btn-warning" ng-click="nextPage()" ng-show="isReading">
-            <span class="hidden-sm-down"></span>
-            <span class="glyphicon glyphicon-arrow-right"></span>
-        </button>
+            <div class="pdff">
+            <!-- Вернутся к деталям книги -->
+            <button type="button" class="btn btn-primary" ng-click="isReading = false" ng-show="isReading">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="hidden-sm-down">Назад</span>
+            </button>
+    
+            <!-- Уменьшить масштаб -->
+            <!-- <button type="button" class="btn btn-primary" ng-click="zoomOut()" ng-show="isReading">
+                <span class="hidden-sm-down"></span>
+                <span class="glyphicon glyphicon-minus"></span>
+            </button> -->
+    
+            <!-- Масштаб -->
+            <!-- <span class="hidden-sm-down" ng-show="isReading">Масштаб {{(vm.pdfBook.scale * 100.0).toFixed(0)}}%</span> -->
+    
+            <!-- Увеличить масштаб -->
+            <!-- <button type="button" class="btn btn-primary" ng-click="zoomIn()" ng-show="isReading">
+                <span class="hidden-sm-down"></span>
+                <span class="glyphicon glyphicon-plus"></span>
+            </button> -->
+            
+            <!-- Первая страница -->
+            <button type="button" class="btn btn-danger" ng-click="firstPage()" ng-show="isReading">
+                <span class="hidden-sm-down"></span>
+                <span class="glyphicon glyphicon-step-backward"></span>
+            </button>
+    
+            <!-- Страница влево -->
+            <button type="button" class="btn btn-warning" ng-click="prevPage()" ng-show="isReading">
+                <span class="hidden-sm-down"></span>
+                <span class="glyphicon glyphicon-arrow-left"></span>
+            </button>
+    
+            <!-- Страница -->
+            <span class="hidden-sm-down" ng-show="isReading">
+                <input id="page_bot" type="text" style="width: 3%; display: inline; text-align: center"
+                    ng-model="vm.pdfBook.pageNum">
+                <span id="pages_bot"> / {{vm.pdfBook.pdfDoc.numPages}}</span>
+            </span>
+    
+            <!-- Страница вправо -->
+            <button type="button" class="btn btn-warning" ng-click="nextPage()" ng-show="isReading">
+                <span class="hidden-sm-down"></span>
+                <span class="glyphicon glyphicon-arrow-right"></span>
+            </button>
+    
+            <!-- Последняя страница -->
+            <button type="button" class="btn btn-danger" ng-click="lastPage()" ng-show="isReading">
+                <span class="hidden-sm-down"></span>
+                <span class="glyphicon glyphicon-step-forward"></span>
+            </button>
 
-        <!-- Последняя страница -->
-        <button type="button" class="btn btn-danger" ng-click="lastPage()" ng-show="isReading">
-            <span class="hidden-sm-down"></span>
-            <span class="glyphicon glyphicon-step-forward"></span>
-        </button>
-    </p>
+            <!-- Скачать -->
+            <button type="button" class="btn btn-primary" ng-show="isReading" ng-click="download()">
+                <span class="glyphicon glyphicon-download-alt"></span>
+                <span class="hidden-sm-down">Скачать</span>
+            </button>
+            </div>
+
+            <div class="col-md-2"></div>
+
+        </div>    
+    </div>
 </div>
 
 <div class="container" ng-hide="isReading">
