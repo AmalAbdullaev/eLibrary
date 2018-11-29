@@ -20,15 +20,14 @@ body {
     background-color: #d65600;
     width: 65px;
     min-height:100vh;
-    float: left;
     position: fixed;
 	top: 0;
     left: 0;
     z-index: 9;
 }
 #header {
-    padding-top: 12px;
-    height: 70px;
+    padding-top: 9px;
+    height: 65px;
     width: 100%;
     background: #f5f5f5;
     box-shadow: 0 2px 2px rgba(0, 0, 0, .1);
@@ -67,8 +66,12 @@ body {
 
 .icobox:hover::after { 
     content: attr(data-title); 
-    padding-left: 65px;
+    margin-left: 65px;
     font-size: 12pt;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    padding: 15px;
 }
 
 .container {
@@ -116,6 +119,93 @@ a:hover {
     color: #ec3f3f;
 }
 
+/* ==========================================================================
+Меню
+========================================================================== */
+
+ul, li {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#sidebar-menu {
+    position: fixed; /* фиксируем наше меню */
+    top: 0; /* положение меню относительно верхнего края браузера */
+    left: 0; /* прилипили меню к левому краю */
+    background: #d65600;
+    color: #FFF;
+    min-height:100vh;
+}
+#sidebar-menu li {
+    position: relative;
+    cursor: pointer;
+}
+#sidebar-menu li i {
+/* Задаем иконкам фиксированный размер, height и line-height должны быть одинаковыми */
+width: 65px;
+height: 65px;
+line-height: 65px;
+text-align: center;
+font-size: 150%;
+}
+
+.navhover:hover {
+    background-color:#e49159;
+}
+
+#sidebar-menu b {
+    display: none;
+    position: absolute;
+    /* позиция относительно левого края равна ширине эл-та li */
+    left: 4px;
+    top: 0;
+    height: 65px;
+    /* ширина равна зазору между блоком меню и подменю */
+    width: 65px;
+    line-height: 65px;
+    background: transparent;
+    /* color: #323A45; */
+    color: #ff7a22;
+    /* саму иконку позиционируем вправо, чтобы визуально она смотрелась вместе с блоком подменю */
+    text-align: right;
+}
+
+#sidebar-menu li > ul {
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 69px;
+    width: 120px;
+    padding: 10px;
+    /* background: #323A45; */
+    background: #ff7a22;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+}
+#sidebar-menu li:hover b,
+#sidebar-menu li:hover ul {display: block;}
+#sidebar-menu li a {
+    display: block;
+    padding: 4px 8px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #FFF;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+        -ms-transition: all .2s;
+        -o-transition: all .2s;
+            transition: all .2s;
+}
+#sidebar-menu li a:hover {
+    display: block;
+    background: #fc761c;
+}
+
+li:active, 
+li:focus {
+    outline: none;
+}
 
 /* ==========================================================================
 Главная страница

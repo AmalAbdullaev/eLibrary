@@ -1,127 +1,77 @@
-<nav class="navmenu navmenu-default" role="navigation">
-        <div class="sidebar">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" ng-click="vm.toggleNavbar()">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            
-            <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">   
-                <ul class="nav navmenu-nav">
-                    
-                    <!-- Главная -->
-                    <li class="icobox-logo" data-title="Главная страница"><a href="#"><img src="content/images/ico/logo.png"></a></li>
-                    
-                    <!-- Библиотека -->
-                    <li class="icobox" data-title="Библиотека">
-                        <a ui-sref="book" ng-click="vm.collapseNavbar()">
-                            <img src="content/images/ico/library.png">
-                        </a>
-                    </li>
-
-                    <!-- Избранное -->
-                    <li class="icobox" data-title="Избранное" ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" has-authority="ROLE_USER">
-                        <a ui-sref="favorite-book" ng-click="vm.collapseNavbar()">
-                            <img src="content/images/ico/favorites.png">
-                        </a>
-                    </li>
-
-                    <!-- Форма добавления книги -->
-                    <li class="icobox" data-title="Добавить" has-authority="ROLE_USER">
-                        <a ui-sref="book.new" ng-click="vm.collapseNavbar()">
-                            <img src="content/images/ico/addbook.png">
-                        </a>
-                    </li>
-                    
-                    <!-- Админ: Управление пользователями -->
-                    <li class="icobox" data-title="Пользователи" ng-class="{active: vm.$state.includes('entity')}"  ng-switch-when="true" has-authority="ROLE_USER">
-                        <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu" ui-sref="profile" ng-click="vm.collapseNavbar()">
-                            <img src="content/images/ico/user.png">
-                        </a>
-                    </li>
-                    
-                    <!-- Админ: Уведомления -->
-                    <li class="icobox" data-title="Уведомления" ng-class="{active: vm.$state.includes('entity')}"  ng-switch-when="true" has-authority="ROLE_ADMIN">
-                        <a ui-sref="notification" ng-click="vm.collapseNavbar()">
-                            <img src="content/images/ico/notice.png">
-                        </a>
-                    </li>
-
-                    <!-- Админ: Статистика -->
-                    <li class="icobox" data-title="Администрирование" ng-class="{active: vm.$state.includes('admin')}" ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown class="dropdown pointer">
-                        <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
-                            <img src="content/images/ico/admin.png">
-                        </a>
-                        <ul class="dropdown-menu" uib-dropdown-menu>
-                            <li ui-sref-active="active">
-                                <a ui-sref="user-management" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-user"></span>&nbsp;
-                                    <span>Управление пользователями</span>
-                                </a>
-                            </li>
-                            <li ui-sref-active="active">
-                                <a ui-sref="genre" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-tags"></span>&nbsp;
-                                    <span>Жанры</span>
-                                </a>
-                            </li>
-                            <li ui-sref-active="active">
-                                <a ui-sref="read-book" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
-                                    <span>Прочитанные книги</span>
-                                </a>
-                            </li>
-                            <li ui-sref-active="active">
-                                <a ui-sref="jhi-metrics" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-dashboard"></span>&nbsp;
-                                    <span>Метрики</span>
-                                </a>
-                            </li>
-                            <li ui-sref-active="active">
-                                <a ui-sref="jhi-health" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-heart"></span>&nbsp;
-                                    <span>Состояние</span>
-                                </a>
-                            </li>
-                            <li ui-sref-active="active">
-                                <a ui-sref="jhi-configuration" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
-                                    <span>Настройки</span>
-                                </a>
-                            </li>
-                            <li ui-sref-active="active">
-                                <a ui-sref="audits" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-bell"></span>&nbsp;
-                                    <span>Аудит</span>
-                                </a>
-                            </li>
-                            <li ui-sref-active="active">
-                                <a ui-sref="logs" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-tasks"></span>&nbsp;
-                                    <span>Логи</span>
-                                </a>
-                            </li>
-                            <li ng-show="vm.swaggerEnabled" ui-sref-active="active">
-                                <a ui-sref="docs" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-book"></span>&nbsp;
-                                    <span>API</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-    
-                    <!-- Справка -->
-                    <li class="icobox" data-title="Справка">
-                        <a ui-sref="help" ng-click="vm.collapseNavbar()">
-                            <img src="content/images/ico/help.png">
-                        </a>
-                    </li>
-
+<nav id="sidebar-menu">
+    <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()"> 
+        <ul>
+            <!-- Главная -->
+            <li class="navhover" ui-sref="home">
+                <i class="fa fa-book-open"></i>
+            </li>
+            <!-- Библиотека -->
+            <li class="navhover" ui-sref="book" ng-click="vm.collapseNavbar()">
+                <i class="fa fa-book"></i>
+                <b class="fa fa-caret-left"></b>
+                <ul>
+                    <li><a ui-sref="book">Библиотека</a></li>
                 </ul>
-            </div>
-        </div>
-      </nav>
+            </li>
+            <!-- Избранное -->
+            <!-- <li class="navhover" ui-sref="favorite-book" ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" has-authority="ROLE_USER"> -->
+            <li class="navhover" ui-sref="favorite-book" ng-class="{active: vm.$state.includes('entity')}" has-authority="ROLE_USER">
+                <i class="fa fa-heart"></i>
+                <b class="fa fa-caret-left"></b>
+                <ul>
+                    <li><a ui-sref="favorite-book">Избранное</a></li>
+                </ul>
+            </li>
+            <!-- Форма добавления книги -->
+            <li class="navhover" ui-sref="book.new" has-authority="ROLE_USER">
+                <!-- <i class="fa fa-folder-plus"></i> -->
+                <i class="fa fa-plus-square"></i>
+                <b class="fa fa-caret-left"></b>
+                <ul>
+                    <li><a ui-sref="book.new">Добавить книгу</a></li>
+                </ul>
+            </li>
+            <!-- Админ: Управление пользователями -->
+            <li class="navhover" ui-sref="profile" ng-class="{active: vm.$state.includes('entity')}" has-authority="ROLE_USER">
+                <i class="fa fa-user-cog"></i>
+                <b class="fa fa-caret-left"></b>
+                <ul>
+                    <li><a ui-sref="profile">Пользователи</a></li>
+                </ul>
+            </li>
+            <!-- Админ: Уведомления -->
+            <li class="navhover" ui-sref="notification" ng-class="{active: vm.$state.includes('entity')}" has-authority="ROLE_ADMIN">
+                <i class="fa fa-bell"></i>
+                <b class="fa fa-caret-left"></b>
+                <ul>
+                    <li><a ui-sref="notification">Уведомления</a></li>
+                </ul>
+            </li>
+            <!-- Админ: Статистика -->
+            <li class="navhover"  ng-class="{active: vm.$state.includes('admin')}" has-authority="ROLE_ADMIN">
+                <i class="fa fa-chart-line"></i>
+                <b class="fa fa-caret-left"></b>
+                <ul>
+                    <li><a ui-sref="user-management">Управление пользователями</a></li>
+                    <li><a ui-sref="genre">Жанры</a></li>
+                    <!-- <li><ui-sref="read-book" >Прочитанные книги</a></li> -->
+                    <li><a ui-sref="jhi-metrics">Метрики</a></li>
+                    <li><a ui-sref="jhi-health">Состояние</a></li>
+                    <li><a ui-sref="jhi-configuration">Настройки</a></li>
+                    <li><a ui-sref="audits">Аудит</a></li>
+                    <li><a ui-sref="logs">Логи</a></li>
+                    <li><a ui-sref="docs">API</a></li>
+                </ul>
+            </li>
+            <!-- Справка -->
+            <li class="navhover" ui-sref="help">
+                <i class="fa fa-question-circle"></i>
+                <b class="fa fa-caret-left"></b>
+                <ul>
+                    <li><a ui-sref="help">Справка</a></li>
+                </ul>
+            </li>
 
+        </ul>
+    </div>
+</nav>

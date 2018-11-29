@@ -14,24 +14,31 @@
                     <div class="homeCol col-md-4" ng-repeat="book in vm.popularBooks | limitTo:3 track by book.id">
                         <div class="homeRBook">
                             <!-- Рекомендуемая книга 1 -->
-                            <a ui-sref="book-detail({id:book.id})"><div class="homeRBookSingle">
-                                <!-- Обложка книги -->
-                                <div class="homeRBookCover"><img data-ng-src="/api/books/downloadCover/{{book.id}}"width="100%" height="100%" style="border-radius:5px"></div>
-                                <!-- Информация о книге -->
-                                <div class="homeRBookInfo">
-                                    <div class="homeRBookReadedH">&nbsp;
-                                        <div class="homeRBookReaded"ng-if="isRead(book.id)" has-authority="ROLE_USER">Прочитано</div>
+                            <div class="homeRBookSingle">
+                                <a ui-sref="book-detail({id:book.id})">
+                                    <!-- Обложка книги -->
+                                    <div class="homeRBookCover" ui-sref="book-detail({id:book.id})"><img data-ng-src="/api/books/downloadCover/{{book.id}}"width="100%" height="100%" style="border-radius:5px"></div>
+                                    <!-- Информация о книге -->
+                                    <div class="homeRBookInfo">
+                                        <div class="homeRBookReadedH">&nbsp;
+                                            <div class="homeRBookReaded"ng-if="isRead(book.id)" has-authority="ROLE_USER">Прочитано</div>
+                                        </div>
+                                        <div class="homeRBookTitle">{{book.title}}</div>
+                                        <div class="homeRBookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                                     </div>
-                                    <div class="homeRBookTitle">{{book.title}}</div>
-                                    <div class="homeRBookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
-                                </div>
+                                </a>
                                 <!-- Кнопки -->
                                 <div class="homeRBookBtns">
                                     <!-- <a ui-sref="book-detail({id:book.id})"><button class="btnLibRBook">Читать</button></a> -->
-                                    <button class="btnLibRBook">Читать</button>
-                                    <button has-authority="ROLE_USER" ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [isFavorite(book.id)]" ng-click="getFavorite(book.id)"></button>
+                                    <a ui-sref="book-detail({id:book.id})">
+                                        <button class="btnLibRBook">Читать</button>
+                                    </a>
+                                    <button has-authority="ROLE_USER" 
+                                            ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [isFavorite(book.id)]" 
+                                            ng-click="getFavorite(book.id)">
+                                    </button>
                                 </div>
-                            </div></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -58,24 +65,31 @@
                     <!-- Книга 1 -->
                     <div class="col-md-3" ng-repeat="book in vm.newBooks | limitTo:10 track by book.id">
                         <div class="homeNewArrivalBook">
-                            <a ui-sref="book-detail({id:book.id})"><div class="homeABookSingle">
-                                <!-- Обложка -->
-                                <div class="homeABookCover"><img data-ng-src="/api/books/downloadCover/{{book.id}}" width="100%" height="100%" style="border-radius:5px"></div>
-                                <!-- Инфа о книге -->
-                                <div class="homeABookInfo">
-                                    <div class="homeRBookReadedH">&nbsp;
-                                        <div class="homeRBookReaded" ng-if="isRead(book.id)" has-authority="ROLE_USER">Прочитано</div>
+                            <div class="homeABookSingle">
+                                <a ui-sref="book-detail({id:book.id})">
+                                    <!-- Обложка -->
+                                    <div class="homeABookCover"><img data-ng-src="/api/books/downloadCover/{{book.id}}" width="100%" height="100%" style="border-radius:5px"></div>
+                                    <!-- Инфа о книге -->
+                                    <div class="homeABookInfo">
+                                        <div class="homeRBookReadedH">&nbsp;
+                                            <div class="homeRBookReaded" ng-if="isRead(book.id)" has-authority="ROLE_USER">Прочитано</div>
+                                        </div>
+                                        <div class="homeRBookTitle">{{book.title}}</div>
+                                        <div class="homeRBookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                                     </div>
-                                    <div class="homeRBookTitle">{{book.title}}</div>
-                                    <div class="homeRBookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
-                                </div>
+                                </a>
                                 <!-- Кнопки -->
                                 <div class="homeABookBtns">
                                     <!-- <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a> -->
-                                    <button class="btnLibReadBook2">Читать</button>
-                                    <button has-authority="ROLE_USER" ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [isFavorite(book.id)]" ng-click="getFavorite(book.id)"></button>
+                                    <a ui-sref="book-detail({id:book.id})">
+                                        <button class="btnLibReadBook2">Читать</button>
+                                    </a>
+                                    <button has-authority="ROLE_USER" 
+                                            ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [isFavorite(book.id)]" 
+                                            ng-click="getFavorite(book.id)">
+                                    </button>
                                 </div>
-                            </div></a>
+                            </div>
                         </div>   
                     </div>
                 </div>  
