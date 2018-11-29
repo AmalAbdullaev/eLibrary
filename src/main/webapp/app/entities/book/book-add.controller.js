@@ -27,6 +27,7 @@
         vm.predicate = 'id';
         vm.genres = Genre.query();
 
+
         vm.books = [];
         vm.unconfirmedBooks = [];
 
@@ -70,45 +71,57 @@
             reset();
         };
 
+
         function loadAll() {
-            if (vm.busy) return;
-            vm.busy = true;
 
-            if (vm.page === 0) {
-                vm.predicate = $scope.options.selected.predicate;
-                vm.reverse = $scope.options.selected.reverse;
-            }
+            Principal.identity().then(function (user) {
+                Profile.getProfile({userId: user.id}, onSuccess);
+            });
+    
+            function onSuccess(result) {
+                vm.profile = result;
 
-            Book.query({
-                page: vm.page,
-                size: vm.itemsPerPage,
-                sort: sort(),
-                'profileId.equals': vm.profile.id,
-                'approved.equals': true
-            }, onSuccess, onError);
 
-            function sort() {
-                var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
-                if (vm.predicate !== 'id') {
-                    result.push('id');
+
+                if (vm.busy) return;
+                vm.busy = true;
+
+                if (vm.page === 0) {
+                    vm.predicate = $scope.options.selected.predicate;
+                    vm.reverse = $scope.options.selected.reverse;
                 }
-                return result;
-            }
 
-            function onSuccess(data, headers) {
-                vm.links = ParseLinks.parse(headers('link'));
-                vm.totalItems = headers('X-Total-Count');
-                vm.maxPage = vm.totalItems / vm.itemsPerPage;
-                console.log(vm.maxPage);
-                for (var i = 0; i < data.length; i++) {
-                    vm.books.push(data[i]);
+                Book.query({
+                    page: vm.page,
+                    size: vm.itemsPerPage,
+                    sort: sort(),
+                    'profileId.equals': vm.profile.id,
+                    'approved.equals': true
+                }, onSuccess, onError);
+
+                function sort() {
+                    var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
+                    if (vm.predicate !== 'id') {
+                        result.push('id');
+                    }
+                    return result;
                 }
-                vm.page++;
-                vm.busy = false;
-            }
 
-            function onError(error) {
-                AlertService.error(error.data.message);
+                function onSuccess(data, headers) {
+                    vm.links = ParseLinks.parse(headers('link'));
+                    vm.totalItems = headers('X-Total-Count');
+                    vm.maxPage = vm.totalItems / vm.itemsPerPage;
+                    console.log(vm.maxPage);
+                    for (var i = 0; i < data.length; i++) {
+                        vm.books.push(data[i]);
+                    }
+                    vm.page++;
+                    vm.busy = false;
+                }
+
+                function onError(error) {
+                    AlertService.error(error.data.message);
+                }
             }
         }
 
@@ -129,12 +142,14 @@
         });
 
         function showAlert(type, message) {
+
+
             $scope.alert.type = type;
             $scope.alert.message = message;
             $scope.isAlertVisible = true;
             $timeout(function () {
                 $state.reload();
-            }, 2000);
+            },500);
         }
 
 
@@ -177,6 +192,7 @@
         }
 
         function onSaveSuccess(result) {
+            
             $scope.$emit('eLibraryApp:bookUpdate', result);
             vm.book.id = result.id;
             Upload.upload({
@@ -189,6 +205,7 @@
                 Upload.upload({
                     url: '/api/books/upload',
                     data: {file: vm.coverFile, id: vm.book.id, type: 'cover'}
+
                 }).then(function (resp) {
                     $scope.isCoverUploading = false;
                     console.log('Success ' + resp.config.data.file.name + ' uploaded');
@@ -203,6 +220,7 @@
                     $scope.isCoverUploading = true;
                     $scope.coverProgressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                 });
+
             }, function (resp) {
                 showAlert('success', 'Не удалось загрузить книгу '
                     + vm.book.title + '. Статус: ' + resp.status);
