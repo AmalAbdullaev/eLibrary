@@ -227,6 +227,11 @@ li:focus {
     padding-right: 1%;
 }
 
+.homeColFB {
+    padding-left: 10px; 
+    padding-right: 10px;
+}
+
 .homeColL {
     padding-left: 1%; 
     padding-right: 0;
@@ -862,10 +867,10 @@ h3 {
     padding: 25px;
     box-shadow: 0 0 10px rgba(201, 201, 201, 0.514);
 
-    background: #FFBF50;
-    background: -webkit-linear-gradient(top left, #FFBF50, #FFF7D5);
-    background: -moz-linear-gradient(top left, #FFBF50, #FFF7D5);
-    background: linear-gradient(top left, #FFBF50, #FFF7D5);
+    background: rgb(255, 206, 123);
+    background: -webkit-linear-gradient(top left, rgb(255, 222, 165), #FFF7D5);
+    background: -moz-linear-gradient(top left, rgb(255, 223, 167), #FFF7D5);
+    background: linear-gradient(top left, rgb(255, 218, 155), #FFF7D5);
 }
 
 .bookCover {
