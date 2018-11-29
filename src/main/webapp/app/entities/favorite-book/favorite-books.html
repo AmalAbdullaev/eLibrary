@@ -10,17 +10,15 @@
                     <div class="favoriteSingleBook">
                         <!-- Обложка -->
                         <!-- <div class="fBookCover"><img src="{{book.coverPath}}" width="100%" height="100%"></div> -->
-                        <div class="fBookCover"><img data-ng-src="/api/books/downloadCover/{{favoriteBook.bookId}}" width="100%" height="100%" style="border-radius:5px"></div>
+                        <div class="fBookCover" ui-sref="book-detail({id:favoriteBook.bookId})"><img data-ng-src="/api/books/downloadCover/{{favoriteBook.bookId}}" width="100%" height="100%" style="border-radius:5px"></div>
                         <!-- Название книги -->
                         <div class="fBookTitle">{{favoriteBook.bookTitle}}</div>
                         <!-- Кнопки -->
                         <div class="fBookBtnsOuter">
                             <!-- Читать книгу -->
-                            <a ui-sref="book-detail({id:favoriteBook.bookId})">
-                                <button class="btnFavoriteBookRead">
-                                    <span class="glyphicon glyphicon-book"></span> Читать
-                                </button>
-                            </a>
+                            <button class="btnFavoriteBookRead" ui-sref="book-detail({id:favoriteBook.bookId})">
+                                <span class="glyphicon glyphicon-book"></span> Читать
+                            </button>
                             <!-- Удалить из избранного -->
                             <button class="btnFavoriteBookDelete" ng-click="vm.bookDelete($index, favoriteBook.id)">
                                 <span class="glyphicon glyphicon-trash"></span>

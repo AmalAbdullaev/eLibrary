@@ -62,19 +62,21 @@
                         
                         <!-- Книга 1 -->
                         <div class="profileDetailMyBook">
-                            <div class="homePDBookSingle">
-                                <!-- Обложка -->
-                                <div class="homeABookCover" ><img data-ng-src="/api/books/downloadCover/{{book.id}}"width="100%" style="border-radius:5px"></div>
-                                <!-- Инфа о книге -->
-                                <div class="homeABookInfo">
-                                    <div class="homeRBookTitle">{{book.title}}</div>
-                                    <div class="homeRBookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
+                            <a ui-sref="book-detail({id:book.id})">
+                                <div class="homePDBookSingle">
+                                    <!-- Обложка -->
+                                    <div class="homeABookCover" ><img data-ng-src="/api/books/downloadCover/{{book.id}}"width="100%" style="border-radius:5px"></div>
+                                    <!-- Инфа о книге -->
+                                    <div class="homeABookInfo">
+                                        <div class="homeRBookTitle">{{book.title}}</div>
+                                        <div class="homeRBookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
+                                    </div>
+                                    <!-- Кнопки -->
+                                    <div class="homePBookBtns">
+                                        <button class="btnProfileBookDetail">Подробнее</button>
+                                    </div>
                                 </div>
-                                <!-- Кнопки -->
-                                <div class="homePBookBtns">
-                                    <a ui-sref="book-detail({id:book.id})"><button class="btnProfileBookDetail">Подробнее</button></a>
-                                </div>
-                            </div>
+                            </a>
                         </div>   
                     </div>
                 </section>
@@ -86,19 +88,21 @@
                     
                         <!-- Книга 1 -->
                         <div class="profileDetailMyBook" >
-                            <div class="homePDBookSingle">
-                                <!-- Обложка -->
-                                <div class="homeABookCover"><img data-ng-src="/api/books/downloadCover/{{book.bookId}}" width="100%" height="100%" style="border-radius:5px"></div>
-                                <!-- Инфа о книге -->
-                                <div class="homeABookInfo">
-                                    <div class="homeRBookTitle">{{book.bookTitle}}</div>
-                                    <div class="homeRBookAuthor">{{book.bookAuthorFirstName}} {{book.bookAuthorLastName}}</div>
+                            <a ui-sref="book-detail({id:book.bookId})">
+                                <div class="homePDBookSingle">
+                                    <!-- Обложка -->
+                                    <div class="homeABookCover"><img data-ng-src="/api/books/downloadCover/{{book.bookId}}" width="100%" height="100%" style="border-radius:5px"></div>
+                                    <!-- Инфа о книге -->
+                                    <div class="homeABookInfo">
+                                        <div class="homeRBookTitle">{{book.bookTitle}}</div>
+                                        <div class="homeRBookAuthor">{{book.bookAuthorFirstName}} {{book.bookAuthorLastName}}</div>
+                                    </div>
+                                    <!-- Кнопки -->
+                                    <div class="homePBookBtns">
+                                        <button class="btnProfileBookDetail">Подробнее</button>
+                                    </div>
                                 </div>
-                                <!-- Кнопки -->
-                                <div class="homePBookBtns">
-                                    <a ui-sref="book-detail({id:book.bookId})"><button class="btnProfileBookDetail">Подробнее</button></a>
-                                </div>
-                            </div>
+                            </a>
                         </div>   
                     </div>
                 </section>

@@ -116,15 +116,17 @@
              infinite-scroll="vm.loadAll()">
 
             <div class="singleBook" ng-repeat="book in vm.books track by book.id">
-                <div class="singleBookCover">
-                    <img data-ng-src="/api/books/downloadCover/{{book.id}}" width="100%" height="100%" style="border-radius:5px">
-                </div>
-                <div class="singleBookInfo">
-                    <div class="bookTitle">{{book.title}}</div>
-                    <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
-                    <div class="bookRButtons">
-                        <button class="btnDetail" ui-sref="book-detail({id:book.id})">Подробнее</button>
+                <a ui-sref="book-detail({id:book.id})">
+                    <div class="singleBookCover">
+                        <img data-ng-src="/api/books/downloadCover/{{book.id}}" width="100%" height="100%" style="border-radius:5px">
                     </div>
+                    <div class="singleBookInfo">
+                        <div class="bookTitle">{{book.title}}</div>
+                        <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
+                    </div>
+                </a>
+                <div class="bookRButtons">
+                    <button class="btnDetail" ui-sref="book-detail({id:book.id})">Подробнее</button>
                 </div>
             </div>
 

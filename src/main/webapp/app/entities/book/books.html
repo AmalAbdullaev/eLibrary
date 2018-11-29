@@ -15,17 +15,22 @@
 
         <div class="recommendationBooks">
             <div class="rBook" ng-repeat="book in vm.popularBooks track by book.id">
-                <div class="libBookCover"><img data-ng-src="/api/books/downloadCover/{{book.id}}" width="100%" height="100%" style="border-radius: 5px"></div>
-                <div class="libRecommendBookInfo">
-                    <div class="bookReadedH">
-                        <div class="bookReaded" ng-if="isRead(book.id)">Прочитано</div>
+                <a ui-sref="book-detail({id:book.id})">
+                    <div class="libBookCover"><img data-ng-src="/api/books/downloadCover/{{book.id}}" width="100%" height="100%" style="border-radius: 5px"></div>
+                    <div class="libRecommendBookInfo">
+                        <div class="bookReadedH">
+                            <div class="bookReaded" ng-if="isRead(book.id)">Прочитано</div>
+                        </div>
+                        <div class="bookTitle">{{book.title}}</div>
+                        <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                     </div>
-                    <div class="bookTitle">{{book.title}}</div>
-                    <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
-                    <div class="bookRButtons" >
-                        <a ui-sref="book-detail({id:book.id})"><button class="btnLibRBook">Читать</button></a>
-                        <button has-authority="ROLE_USER"  ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [isFavorite(book.id) ] " ng-click="getFavorite(book.id)"></button>
-                    </div>
+                </a>
+                <div class="bookRButtons" >
+                    <button class="btnLibRBook" ui-sref="book-detail({id:book.id})">Читать</button>
+                    <button has-authority="ROLE_USER"  
+                            ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [isFavorite(book.id) ] " 
+                            ng-click="getFavorite(book.id)">
+                    </button>
                 </div>
             </div>
         </div>
@@ -53,18 +58,23 @@
                      infinite-scroll="vm.loadAll()">
                     <div class="col-md-3 col-sm-6" ng-repeat="book in vm.books track by book.id" >
                         <div class="libBook">
-                            <div class="libBookCover"><img data-ng-src="/api/books/downloadCover/{{book.id}}"  width="100%" height="100%" style="border-radius:5px"></div>
-                            <div class="libBookInfo">
-                                <div class="bookReadedH">&nbsp;
-                                    <div class="bookReaded2" ng-if="isRead(book.id)">Прочитано</div>
+                            <a ui-sref="book-detail({id:book.id})">
+                                <div class="libBookCover"><img data-ng-src="/api/books/downloadCover/{{book.id}}"  width="100%" height="100%" style="border-radius:5px"></div>
+                                <div class="libBookInfo">
+                                    <div class="bookReadedH">
+                                        <div class="bookReaded2" ng-if="isRead(book.id)">Прочитано</div>
+                                    </div>
+                                    <div class="bookTitle">{{book.title}}</div>
+                                    <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
+                                    <div class="bookAuthor" ui-sref="profile-detail({id:book.profileId})"><a>{{book.createdBy}}</a></div>
                                 </div>
-                                <div class="bookTitle">{{book.title}}</div>
-                                <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
-                                <div class="bookAuthor" ui-sref="profile-detail({id:book.profileId})"><a>{{book.createdBy}}</a></div>
-                                <div class="bookButtons">
-                                    <a ui-sref="book-detail({id:book.id})"><button class="btnLibReadBook2">Читать</button></a>
-                                    <button has-authority="ROLE_USER" ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [isFavorite(book.id)]" ng-click="getFavorite(book.id)"></button>
-                                </div>
+                            </a>
+                            <div class="bookButtons">
+                                <button class="btnLibReadBook2" ui-sref="book-detail({id:book.id})">Читать</button>
+                                <button has-authority="ROLE_USER" 
+                                        ng-class="{false:'btnLibFavoriteBook', true:'btnLibFavoriteBookChecked ' } [isFavorite(book.id)]" 
+                                        ng-click="getFavorite(book.id)">
+                                </button>
                             </div>
                         </div>
                     </div>
