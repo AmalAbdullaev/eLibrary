@@ -137,18 +137,18 @@
     <div>
         <!-- Обложка книги -->
         <div class="bookDetailCover">
-            <div class="bookCover">
+            <div class="bookCover" ng-click="read()">
                 <img data-ng-src="/api/books/downloadCover/{{vm.book.id}}" width="100%" height="100%" style="border-radius:5px">
             </div>
 
-            <button type="button" class="btn btn-success" ng-click="download()" has-authority="ROLE_USER">
-                <span class="glyphicon glyphicon-download-alt"></span>
-                <span class="hidden-sm-down"> Загрузить</span>
-            </button>
-
-            <button type="button" class="btn btn-danger" ng-click="read()" ng-show="vm.book.path.endsWith('.pdf')">
+            <button type="button" class="bookDetailRBtn btn" ng-click="read()" ng-show="vm.book.path.endsWith('.pdf')">
                 <span class="glyphicon glyphicon-book"></span>
                 <span class="hidden-sm-down"> Читать</span>
+            </button>
+
+            <button type="button" class="bookDetailDBtn btn" ng-click="download()" has-authority="ROLE_USER">
+                <span class="glyphicon glyphicon-download-alt"></span>
+                <span class="hidden-sm-down"> Загрузить</span>
             </button>
         </div>
 
