@@ -5,9 +5,9 @@
             .module('eLibraryApp')
             .controller('BookController', BookController);
 
-        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants', 'Principal', 'Profile', 'ReadBook'];
+        BookController.$inject = ['$scope', '$http', 'DataUtils', 'Book', 'FavoriteBook', 'ParseLinks', 'AlertService', 'paginationConstants', 'Principal', 'Profile', 'ReadBook','$state'];
 
-        function BookController($scope, $http, DataUtils, Book, FavoriteBook, ParseLinks, AlertService, paginationConstants, Principal, Profile, ReadBook) {
+        function BookController($scope, $http, DataUtils, Book, FavoriteBook, ParseLinks, AlertService, paginationConstants, Principal, Profile, ReadBook,$state) {
 
             var vm = this;
 
@@ -176,6 +176,11 @@
                 vm.reverse = $scope.options.selected.reverse;
                 reset();
             };
+
+
+            $scope.getAll =  function(){
+                $state.reload();
+            }
 
             function loadAll() {
                 if (vm.busy) return;
