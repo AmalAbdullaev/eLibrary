@@ -4,7 +4,7 @@
     <!-- Жанры -->
     <div class="libraryGenreList">
         <h4 class="libraryGenreTitle">Жанры</h4>
-        <div ng-click="getAll()" class="libraryGenre"  ">
+        <div ng-click="getAll()" class="libraryGenre">
             Все
         </div>
         <div ng-click="selectGenre(genre.id)" class="libraryGenre" ng-repeat="genre in vm.genres  | orderBy:'name' ">
