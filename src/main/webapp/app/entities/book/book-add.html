@@ -2,11 +2,6 @@
     <!-- <div class="row"> -->
     <h2><b>Предложить книгу</b></h2>
     <div class="addBook">
-        <div uib-alert ng-show="isAlertVisible">{{alert.message}}</div>
-        <div uib-alert ng-show="!vm.book.authorFirstName || !vm.book.authorLastName || !vm.book.title ||
-        !vm.book.yearOfPublishing || !vm.book.genreId || !vm.coverFile || !vm.bookFile">
-            Необходимо добавить книгу, обложку и заполнить все обязательные поля (поля, помеченные *)
-        </div>
         <!-- Добавление книги/обложки/отправка -->
         <div class="homeColR col-md-3">
             <div class="addBookCover">
@@ -96,11 +91,19 @@
                             <div class="bookAuthor">{{book.authorFirstName}} {{book.authorLastName}}</div>
                         </div>
                     </div>
-
                 </div>
+
             </div>
         </div>
 
+    </div>
+
+    <div class="my-books-alert">
+        <div uib-alert ng-show="isAlertVisible">{{alert.message}}</div>
+        <div uib-alert ng-show="!vm.book.authorFirstName || !vm.book.authorLastName || !vm.book.title ||
+        !vm.book.yearOfPublishing || !vm.book.genreId || !vm.coverFile || !vm.bookFile" style="margin-top: 1%; margin-bottom:0;">
+            Необходимо добавить книгу, обложку и заполнить все обязательные поля (поля, помеченные *)
+        </div>
     </div>
 
     <!-- Мои книги -->
