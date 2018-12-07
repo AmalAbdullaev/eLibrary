@@ -1006,6 +1006,21 @@ h3 {
     font-size: 100%;
 }
 
+.libraryGenreSelected {
+    outline: none;
+    width: 88%;
+    float: left;
+    padding: 5px 5px 15px 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 15px;
+    border-bottom: 1px solid rgb(223, 223, 223);
+    word-break: break-all;
+    color: #702d00;
+    font-size: 100%;
+    font-weight: bold;
+}
+
 .libraryGenreList {
     width: 18%;
     float: right;

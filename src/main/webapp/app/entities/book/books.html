@@ -4,10 +4,10 @@
     <!-- Жанры -->
     <div class="libraryGenreList">
         <h4 class="libraryGenreTitle">Жанры</h4>
-        <div ng-click="getAll()" class="libraryGenre">
+        <div ng-click="getAll()" ng-class="{false: 'libraryGenre', true: 'libraryGenreSelected'} [vm.currentGenre === genre.id]">
             Все
         </div>
-        <div ng-click="selectGenre(genre.id)" class="libraryGenre" ng-repeat="genre in vm.genres  | orderBy:'name' ">
+        <div ng-click="selectGenre(genre.id)" ng-class="{false: 'libraryGenre', true: 'libraryGenreSelected'} [vm.currentGenre === genre.id]" ng-repeat="genre in vm.genres  | orderBy:'name' ">
             {{genre.name}}
         </div>
     </div>
